@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    Settings hr view   -->
+        <record id="res_config_settings_view_form_inherit_hr_extend" model="ir.ui.view">
+            <field name="name">res_config_settings_view_form_inherit_hr_extend</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+            <field name="priority" eval="75" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='employee_rights_setting_container']" position="after">
+                    <h2>Approvals Information</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="hhrr_manager_id"/>
+                                <span class="fa fa-lg fa-building-o" title="HHRR Manager." role="img" aria-label="HHRR Manager." groups="base.group_multi_company"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-8">
+                                        This field selects the human resources manager responsible for approvals in the system.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="hhrr_manager_id" required="1" class="o_light_label" domain="[('company_id', '=', company_id)]" context="{'default_company_id': company_id}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Approvals Sign</h2>
+                    <div class="row mt16 o_settings_container" name="work_organization_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_company_schedule_setting">
+                            <div class="o_setting_right_pane">
+                                <label for="hhrr_sign"/>
+                                <span class="fa fa-lg fa-building-o" title="HR manager signature." role="img" aria-label="HR manager signature." groups="base.group_multi_company"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="hhrr_sign" required="1" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

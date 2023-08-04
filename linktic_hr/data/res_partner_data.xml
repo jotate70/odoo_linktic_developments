@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        #Creation of new contact Tags EPS/ARL/PENSION
+        <record id="res_partner_cat_eps" model="res.partner.category">
+            <field name="name">EPS</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="res_partner_cat_layoffs" model="res.partner.category">
+            <field name="name">LAYOFFS</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="res_partner_cat_pension" model="res.partner.category">
+            <field name="name">PENSION</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="res_partner_cat_arl" model="res.partner.category">
+            <field name="name">ARL</field>
+            <field name="color">2</field>
+        </record>
+
+    </data>
+</odoo>

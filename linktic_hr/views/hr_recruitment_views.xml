@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_applicant_form_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit.linktic.fields</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']" position="before">
+                <field name="services_provided"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="project_id"/>
+            </xpath>
+            <xpath expr="//field[@name='source_id']" position="after">
+                <field name="helpdesk_ticket_id"/>
+            </xpath>
+<!--            <xpath expr="//button[@name='create_employee_from_applicant']" position="attributes">-->
+<!--                <attribute name="attrs">{'invisible': ['|','|',('emp_id', '!=', False),('active', '=',-->
+<!--                    False),('services_provided', '=', True)]}-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//button[@name='create_employee_from_applicant']" position="after">-->
+<!--                <button string="Create Contact" name="create_contact_from_applicant" type="object" data-hotkey="v"-->
+<!--                        class="oe_highlight o_create_employee"-->
+<!--                        attrs="{'invisible': ['|','|',('partner_id', '!=', False),('active', '=', False),('services_provided', '=', False)]}"/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="hr_kanban_view_applicant_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">hr.kanban.view.applicant.inherit.linktic.fields</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_kanban_record_bottom mt4']" position="before">
+                <t t-if="record.project_id.raw_value">Project: <label for="project_id" string="project"/><field name="project_id"/><br/></t>
+                <t t-if="record.helpdesk_ticket_id.raw_value">Ticket: <field name="helpdesk_ticket_id"/><br/></t>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_tree_view_applicant_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">hr.tree.view.applicant.inherit.linktic.fields</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_name']" position="before">
+                <field name="helpdesk_ticket_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

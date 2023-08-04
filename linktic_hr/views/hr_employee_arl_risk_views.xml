@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_employee_arl_risk_form" model="ir.ui.view">
+            <field name="name">hr.employee.arl.risk.form</field>
+            <field name="model">hr.employee.arl.risk</field>
+            <field name="arch" type="xml">
+                <form string="ARL Risk">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="contribution_percentage" widget="percentage" digits="[12, 5]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

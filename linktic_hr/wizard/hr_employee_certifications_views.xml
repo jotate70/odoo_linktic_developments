@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="hr_employee_certification_wizard_form">
+        <field name="name">wizard.hr.employee.certification.form</field>
+        <field name="model">hr.employee.certifications.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Employee Certification">
+                <group>
+                    <group>
+                        <field name="employee_ids" widget="many2many_tags" options="{'no_create':True}" required="True"
+                               attrs="{'readonly': [('own_employee', '=', True)]}" force_save="1"/>
+                        <field name="addressed_to" required="1" widget="radio" options="{'horizontal': true}"/>
+                        <field name="addressee"
+                               attrs="{'invisible': [('addressed_to', '!=', 'addressee')], 'required': [('addressed_to', '=', 'addressee')]}"/>
+                        <field name="with_salary" widget="boolean_toggle"/>
+                        <field name="own_employee" invisible="1"/>
+                    </group>
+                </group>
+                <group class="alert alert-warning" role="alert" attrs="{'invisible': [('own_employee', '!=', True)]}">
+                    <div style="padding:5px;" name="info_group">
+                        <h5 style="color:#7d5a29;">
+                            <b>
+                                <u>Important Information:</u>
+                            </b>
+                        </h5>
+                        <b>
+                            <ul>
+                                If you need an employee certification with functions information, please send an Email
+                                to talento@linktic.com
+                            </ul>
+                        </b>
+                    </div>
+                </group>
+                <footer>
+                    <button name="generate_certificates" string="Generate Certificates" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_employee_own_certificate_action" model="ir.actions.act_window">
+        <field name="name">My Employee Certificate</field>
+        <field name="res_model">hr.employee.certifications.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'employee_user': True, 'default_own_employee': True}</field>
+    </record>
+
+    <record id="hr_employee_multiple_certificate_action" model="ir.actions.act_window">
+        <field name="name">Employee Certificates</field>
+        <field name="res_model">hr.employee.certifications.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'employee_user': False, 'default_own_employee': False, 'active_test': False}</field>
+    </record>
+
+    <menuitem id="hr_employee_certifications_menu"
+              name="Certifications"
+              sequence="80"
+              parent="hr.menu_hr_root"
+              groups="hr_attendance.group_hr_attendance_kiosk"
+    />
+
+    <menuitem id="hr_own_employee_certifications_menu"
+              name="My Certification"
+              sequence="10"
+              action="hr_employee_own_certificate_action"
+              parent="hr_employee_certifications_menu"/>
+
+    <menuitem id="hr_employee_multiple_certifications_menu"
+              name="Employee Certifications"
+              sequence="20"
+              action="hr_employee_multiple_certificate_action"
+              parent="hr_employee_certifications_menu"
+              groups="hr.group_hr_manager"
+    />
+
+</odoo>

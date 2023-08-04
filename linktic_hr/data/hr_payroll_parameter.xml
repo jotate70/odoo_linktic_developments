@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="hr_payroll_parameter_SMLV" model="hr.payroll.parameter">
+            <field name="name">SMLV</field>
+            <field name="code">SMLV</field>
+        </record>
+
+        <record id="hr_payroll_parameter_SMLV_value" model="hr.payroll.parameter.line">
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="value">1160000</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_SMLV"/>
+        </record>
+
+        <record id="hr_payroll_parameter_transport_aid" model="hr.payroll.parameter">
+            <field name="name">Transport Aid</field>
+            <field name="code">Trans</field>
+        </record>
+
+        <record id="hr_payroll_parameter_transport_value" model="hr.payroll.parameter.line">
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="value">140606</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_transport_aid"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_employee_view_form_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.linktic.fields</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_title']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='address_home_id']" position="after">
+                <field name="contact_neighborhood" class="o_address_street"/>
+                <field name="contact_locality" class="o_address_street"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="observations"/>
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="age" attrs="{'invisible' : [('birthday', '=', False)]}"/>
+                <field name="rh"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="worked_months"
+                       attrs="{'invisible' : ['|', ('employee_type', 'not in', ['employee', 'student', 'trainee', 'contractor']), ('first_contract_date', '=', False)]}"
+                       readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='passport_id']" position="after">
+                <field name="expedition_place_id"/>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="contract_welfare_aid"/>
+                <field name="contract_food_aid"/>
+                <field name="contract_transport_aid"/>
+                <field name="contract_bearing_aid"/>
+                <field name="contract_total_income"/>
+                <field name="seniority"/>
+                <field name="entrance_ticket"/>
+                <field name="applied_computer"/>
+            </xpath>
+            <xpath expr="//div[@name='div_km_home_work']" position="after">
+                <field name="eps"/>
+                <field name="layoffs"/>
+                <field name="pension"/>
+                <field name="arl"/>
+                <field name="arl_risk_id"/>
+                <field name="arl_contribution_percentage" widget="percentage" digits="[12, 5]"/>
+            </xpath>
+            <xpath expr="//field[@name='identification_id']" position="before">
+                <field name="l10n_latam_identification_type_id"/>
+            </xpath>
+            <xpath expr="//field[@name='certificate']" position="after">
+                <field name="recruitment_degree_id"/>
+            </xpath>
+            <xpath expr="//field[@name='certificate']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emergency_phone']" position="after">
+                <field name="emergency_kinship"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">True</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mobile_phone']" position="before">
+                <field name="first_name" required="1"/>
+                <field name="first_last_name" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="second_name"/>
+                <field name="second_last_name"/>
+            </xpath>
+            <!--                        New views              -->
+            <xpath expr="//group[@name='managers']" position="inside">
+                <field name="hhrr_manager_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_hr_employee_view_form2_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">hr.hr.employee.view.form2.inherit.linktic.fields</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_contract_history']" position="attributes">
+                <attribute name="attrs">{'invisible' : [('employee_type', 'not in', ['employee', 'student', 'trainee',
+                    'contractor'])]}
+                </attribute>
+            </xpath>
+            <xpath expr="(//field[@name='first_contract_date'])[3]" position="attributes">
+                <attribute name="attrs">{'invisible' : ['|', ('employee_type', 'not in', ['employee',
+                    'student','trainee', 'contractor']), ('first_contract_date', '=', False)]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
