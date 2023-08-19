@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="helpdesk_mgmt.helpdesk_ticket_dashboard_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('helpdesk_mgmt.group_helpdesk_user_team'))]"/>
+    </record>
+
+    <record id="helpdesk_mgmt.helpdesk_ticket_reporting_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4,ref('helpdesk_mgmt.group_helpdesk_user_team'))]"/>
+    </record>
+
+    <record id="helpdesk_mgmt.helpdesk_ticket_dashboard_action" model="ir.actions.act_window">
+<!--        <field name="domain">['|',('user_ids', 'in', uid),('user_is_admin', '=', True)]</field>-->
+        <field name="domain">[('user_ids', 'in', uid)]</field>
+    </record>
+
+</odoo>

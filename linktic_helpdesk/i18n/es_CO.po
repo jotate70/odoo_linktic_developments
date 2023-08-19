@@ -1,0 +1,672 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_helpdesk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-17 16:56+0000\n"
+"PO-Revision-Date: 2023-07-17 16:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid ""
+"<b>\n"
+"                                <u>Important Information:</u>\n"
+"                            </b>"
+msgstr ""
+"<b>\n"
+"                                <u>Información Importante:</u>\n"
+"                            </b>"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid ""
+"<b>\n"
+"                            Remember to schedule a meeting with Human Resources Manager to Review this ticket request\n"
+"                        </b>"
+msgstr ""
+"<b>\n"
+"                            POR FAVOR RECUERDE AGENDAR REUNION CON GERENTE DE TALENTO HUMANO PARA REVISAR LA SOLICITUD\n"
+"                        </b>"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__category_activity_type
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_category__activity_type
+msgid "Activity Type"
+msgstr "Tipo Actividad"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Actual Contract Info"
+msgstr "Info. Actual Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__actual_value
+msgid "Actual Value"
+msgstr "Valor Actual"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__analytic_account_id
+msgid "Analytic Account"
+msgstr "Centro de Costos"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Applicants"
+msgstr "Aplicantes"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__recruitment_applicant_count
+msgid "Applicants Count"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Approve Changes"
+msgstr "Aprobar Cambios"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__approver_user_ids
+msgid "Approver Users"
+msgstr "Usuarios Aprobadores"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__user_id
+msgid "Assigned user"
+msgstr "Usuario asignado"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_bearing_aid
+msgid "Bearing Assistance"
+msgstr "Subsidio de Rodamiento"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__budget_value
+msgid "Budget Value"
+msgstr "Valor Presupuesto"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__budget_post_id
+msgid "Budgetary Position"
+msgstr "Item de presupuesto en donde se encuentra atada la contratación"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__can_edit_user_id
+msgid "Can Edit Assigned to"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_ticket_stage_transition_wizard_form
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_update_contract_info_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: linktic_helpdesk
+#: code:addons/linktic_helpdesk/models/helpdesk_ticket.py:0
+#, python-format
+msgid "Cannot End this stage without the needed approval"
+msgstr "No'se puede Cerrar esta Etapa sin la aprobación necesaria"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__career
+msgid "Career"
+msgstr "Carrera"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__category_id
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_stage_category_relation_search
+msgid "Category"
+msgstr "Categoría"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__change_datetime
+msgid "Change Date"
+msgstr "Fecha Cambio"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_info_log_ids
+msgid "Change Info History"
+msgstr "Historial Cambios"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_update_justification
+msgid "Change Justification"
+msgstr "Justificacion Cambio"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Contact Info History"
+msgstr "Historial Info Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__hr_contract_id
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_duration
+msgid "Contract Duration"
+msgstr "Duración del contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_date_end
+msgid "Contract End Date"
+msgstr "Fecha Finalización Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_info_log_count
+msgid "Contract Info Logs Count"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_update_contract_info_wizard_form
+msgid "Contract Info Update"
+msgstr "Info. Contrato Actualiada"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_date_start
+msgid "Contract Start Date"
+msgstr "Fecha Inicio Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_type_id
+msgid "Contract Type"
+msgstr "Tipo Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_wage
+msgid "Contract Wage"
+msgstr "Salario"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_wage_rise
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__wizard_contract_wage_rise
+msgid "Contract Wage Rise"
+msgstr "Aumento Ingresos"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__create_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__create_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__create_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__create_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__create_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__create_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__create_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__create_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__currency_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__current_time
+msgid "Current Time"
+msgstr "Tiempo Transcurrido"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__current_log
+msgid "Current log"
+msgstr "Log Actual"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_time__deliverables
+msgid "Defined by deliverables"
+msgstr "Tiempo definido en el contrato por entregables"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__display_name
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__display_name
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__display_name
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__display_name
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket_category__activity_type__hr_recruitment
+msgid "Employee Recruitment"
+msgstr "Reclutamiento Empleados"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket__contract_wage
+msgid "Employee's monthly gross wage."
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_ticket_stage_transition_wizard_form
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "End Stage"
+msgstr "Finalizar Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket__contract_date_end
+msgid "End date of the contract (if it's a fixed-term contract)."
+msgstr "Fecha de finalización de contrato."
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__field_name
+msgid "Field Name"
+msgstr "Nombre Campo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket__stage_approve
+msgid "Field that shows if the assigned person approve when it is defined"
+msgstr ""
+"Campo que muestra si la persona asignada aprobó la etapa, cuando es definido"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_food_aid
+msgid "Food Assistance"
+msgstr "Auxilio no Salarial Alimentación"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_time__full
+msgid "Full Time"
+msgstr "Tiempo Completo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__recruitment_degree_id
+msgid "Grade"
+msgstr "Nivel Estudios Requerido"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_stage_category_relation_search
+msgid "Group By..."
+msgstr "Agrupar..."
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_time__half
+msgid "Half Time"
+msgstr "Medio Tiempo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__has_profile
+msgid "Has profile"
+msgstr "Se cuenta con algun perfil a recomendar"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__stage_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__stage_id
+msgid "Helpdesk Stage"
+msgstr "Etapa Mesa Ayuda"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_stage_category_relation
+msgid "Helpdesk Stage Category Relation"
+msgstr "Relación Etapa-Categoria Helpdesk"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_category__helpdesk_team
+msgid "Helpdesk Team"
+msgstr "Equipo"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_ticket
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__helpdesk_ticket_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__helpdesk_ticket_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__helpdesk_ticket_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__helpdesk_ticket_id
+msgid "Helpdesk Ticket"
+msgstr "Ticket Helpdesk"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_ticket_category
+msgid "Helpdesk Ticket Category"
+msgstr "Categoría de ticket Helpdesk"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_ticket_stage_transition_wizard
+msgid "Helpdesk Ticket Change Stage Wizard"
+msgstr "Wizar Cambio Etapa Helpdesk"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_ticket_team
+msgid "Helpdesk Ticket Team"
+msgstr "Equipo de ticket Helpdesk"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_update_contract_info_wizard
+msgid "Helpdesk Update Contract Info Wizard"
+msgstr "Wizard Actualización Info Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_modality__in_person
+msgid "In Person"
+msgstr "Presencial"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__job_title
+msgid "Job"
+msgstr "Cargo a ocupar"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_job_id
+msgid "Job Position"
+msgstr "Cargo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log____last_update
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation____last_update
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log____last_update
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard____last_update
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__write_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__write_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__write_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__write_uid
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__write_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__write_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__write_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__write_date
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_modality__mixed
+msgid "Mixed"
+msgstr "Mixto"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__updated_contract_date_end
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__wizard_updated_contract_date_end
+msgid "New Contract End Date"
+msgstr "Nueva Fecha Finalización"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__updated_contract_type_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__wizard_updated_contract_type_id
+msgid "New Contract Type"
+msgstr "Nuevo Tipo de Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__updated_job
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_update_contract_info_wizard__wizard_updated_job
+msgid "New Job Position"
+msgstr "Nuevo Cargo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__updated_contract_total_income
+msgid "New Total Income"
+msgstr "Nuevo Total Ingresos"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__next_stage_id
+msgid "Next Stage"
+msgstr "Siguiente Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__no_hours
+msgid "No. Hours"
+msgstr "No. Horas"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__origin_value
+msgid "Original Value"
+msgstr "Valor Original"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket_category__activity_type__other
+msgid "Other"
+msgstr "Otro"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__profile_attachments
+msgid "Profile Attachments"
+msgstr "Adjuntos Perfiles"
+
+#. module: linktic_helpdesk
+#: code:addons/linktic_helpdesk/models/helpdesk_ticket.py:0
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__recruitment_applicant_ids
+#, python-format
+msgid "Recruitment Applicants"
+msgstr "Aplicantes Reclutamiento"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Recruitment Fields"
+msgstr "Campos de Reclutamiento"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket__working_modality__remote
+msgid "Remote"
+msgstr "Remoto"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_stage_category_relation_search
+msgid "Search Purchase Request"
+msgstr ""
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_stage_category_relation__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket__stage_sequence
+msgid "Sequence in which the ticket flow is in the moment"
+msgstr "Secuencian en la cual el ticket se encuentra dentro del proceso"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__stage_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__ticket_actual_stage_id
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_stage_category_relation_search
+msgid "Stage"
+msgstr "Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__stage_approve
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__stage_needs_approval
+msgid "Stage Approved"
+msgstr "Etapa Aprobada"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__user_stage_approver
+msgid "Stage Approver User"
+msgstr "Usuario Aprobador de Etapa"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_stage_category_relation_form
+msgid "Stage Category Relation"
+msgstr "Relación Etapa-Categoria"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__ticket_stage_log_ids
+msgid "Stage Logs"
+msgstr "Logs Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_category__stage_relation_ids
+msgid "Stage Process Flow"
+msgstr "Flujo Etapas"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Stage Report"
+msgstr "Reporte Etapas"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__stage_result
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__stage_result
+msgid "Stage Results"
+msgstr "Resultados Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__stage_sequence
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__stage_sequence
+msgid "Stage Sequence"
+msgstr "Secuencia Etapa"
+
+#. module: linktic_helpdesk
+#: code:addons/linktic_helpdesk/models/helpdesk_ticket.py:0
+#, python-format
+msgid "Stage Transition"
+msgstr "Transición Etapa"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__date_start
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__datetime_start
+msgid "Start Date"
+msgstr "Fecha Inicio"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket__contract_date_start
+msgid "Start date of the contract."
+msgstr "Fecha de inicio del contrato."
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_contract_info_log
+msgid "Ticket Contract Info Log"
+msgstr "Log Info. Contrato"
+
+#. module: linktic_helpdesk
+#: model:ir.model,name:linktic_helpdesk.model_helpdesk_ticket_stage_log
+msgid "Ticket Stage Log"
+msgstr "Log Etapas"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.view_helpdesk_category_form_inherit_linktic_fields
+msgid "Ticket Stage Report"
+msgstr "Reporte Etapas Ticket"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_ticket_stage_transition_wizard_form
+msgid "Ticket Stage Transition"
+msgstr "Transición Etapas Ticket"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_total_income
+msgid "Total Income"
+msgstr "Total Ingresos"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_transport_aid
+msgid "Transport Assistance"
+msgstr "Auxilio de Transporte"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__experience
+msgid "Type and experience time - Specific skills"
+msgstr ""
+"Tipo y tiempo de experiencia - habilidades especificas del candidato "
+"(Perfil)"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Update Contract Changes"
+msgstr "Cambio Condiciones Laborales"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Update Contract Fields"
+msgstr "Cambio Condiciones Laborales"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields.selection,name:linktic_helpdesk.selection__helpdesk_ticket_category__activity_type__update_contract
+msgid "Update Contract Info"
+msgstr "Cambio Condiciones Laborales"
+
+#. module: linktic_helpdesk
+#: code:addons/linktic_helpdesk/models/helpdesk_ticket.py:0
+#, python-format
+msgid "Update Contract Info."
+msgstr "Actualizar Info. Contrato"
+
+#. module: linktic_helpdesk
+#: code:addons/linktic_helpdesk/models/helpdesk_ticket.py:0
+#, python-format
+msgid "Update Contract Info. %s"
+msgstr "Cambio Condiciones Laborales. %s"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.ticket_view_form_inherit_linktic_fields
+msgid "Update Info"
+msgstr "Actualizar Info"
+
+#. module: linktic_helpdesk
+#: model_terms:ir.ui.view,arch_db:linktic_helpdesk.helpdesk_update_contract_info_wizard_form
+msgid "Update Info."
+msgstr "Actualizar Info."
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_contract_info_log__user_id
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_log__user_id
+msgid "User"
+msgstr "Usuario"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_stage_category_relation__approver_user_ids
+msgid "Users that makes validation or approval processes on the stage"
+msgstr "Usuarios que hace la aprobacion de Etapa."
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_stage_transition_wizard__valid_ticket_stage_ids
+msgid "Valid Stages"
+msgstr "Etapas Validas"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__contract_welfare_aid
+msgid "Welfare Assistance"
+msgstr "Auxilio no Salarial Transporte"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket_team__resource_calendar_id
+msgid "Working Hours"
+msgstr "Horario Laboral"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__working_modality
+msgid "Working Modality"
+msgstr "Modalidad de trabajo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,field_description:linktic_helpdesk.field_helpdesk_ticket__working_time
+msgid "Working Time"
+msgstr "Tiempo de Trabajo"
+
+#. module: linktic_helpdesk
+#: model:ir.model.fields,help:linktic_helpdesk.field_helpdesk_ticket_team__resource_calendar_id
+msgid "Working hours used to determine the deadline of SLA Policies."
+msgstr "Horario Laboral utilizado para politicas de SLA."
