@@ -30,6 +30,7 @@ class RecruitmentRequisition(models.Model):
     color = fields.Integer(string="Color Index", default=0)
     state = fields.Many2one(comodel_name="hr_requisition_state", string="Stage", group_expand="_read_group_state_ids",
                             default=_get_default_state_id, tracking=True, ondelete="restrict", index=True, copy=False)
+    state_after = fields.Many2one(comodel_name="hr_requisition_state", string="Stage After")
     state_blanket_order = fields.Many2one(comodel_name="hr_requisition_state", compute='_set_state')
     employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee', required=True,
                                   default=lambda self: self.env.user.employee_id)
@@ -240,6 +241,12 @@ class RecruitmentRequisition(models.Model):
             self.manager_id2 = self.state.optional_manager_id
             self.department_id = self.employee_id.department_id
 
+    # next stage check
+    def _compute_state_after(self):
+        vat = self.state.sequence + 1
+        self.state_after = self.env['hr_requisition_state'].search([('sequence', '=', vat)], limit=1)
+
+    # Action confirm
     def button_action_confirm(self):
         if self.recruitment_requisition_line:
             if self.state_type == 'draft':
@@ -287,10 +294,11 @@ class RecruitmentRequisition(models.Model):
         else:
             raise UserError('No heciste una linea de orden de reclutamiento')
 
+    # Action on approbation
     def button_action_on_aprobation(self):
         if self.recruitment_requisition_line:
             if self.manager_before.user_id == self.env.user:
-                if self.ceo == 'no' and (self.recruitment_type_id.recruitment_type in ['0', '2'] or (self.recruitment_type_id.recruitment_type == '1' and self.manager_id2.department_id.ceo == 'no')):
+                if self.state.requires_approval == True:
                     #  Marca actividad como hecha de forma automatica
                     new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
                     new_activity.action_feedback(feedback='Es Aprobado')
