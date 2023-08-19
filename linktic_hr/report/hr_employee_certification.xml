@@ -15,7 +15,27 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
 <!--            <t t-call="linktic_hr.employee_certification_layout">-->
+
+                <style>
+                    .watermark { position: absolute;
+                                top: 50%; left: 50%;
+                                transform:
+                                translate(-50%, -50%);
+                                opacity: 0.5;
+                                }
+                </style>
+                <div class="watermark">
+                    <!-- Watermark container -->
+                    <div class="watermark_inner">
+                        <!-- The watermark -->
+                        <img t-if="payroll_contracts.employee_id.company_id.certificate_template"
+                             t-att-src="image_data_uri(payroll_contracts.employee_id.company_id.certificate_template)"
+                             style="max-height: 35cm; max-width: 35cm;"/>
+                    </div>
+                </div>
+
                 <div class="page" style="font-size:15px;text-align:justify">
+                    <!-- background color -->
                     <div class="oe_structure"/>
                     <div>
                         Bogotá, D.C.
@@ -56,10 +76,10 @@
                     <br/>
 
                     <table t-if="no_payroll_contracts > 0" class="table table-sm" style="font-size:12px">
-                        <!--   Condition show or hide header               -->
+                        <!-- ///////////  NEW CODE/Condition show or hide header /////////        -->
                         <tr t-foreach="payroll_contracts" t-as="x_lines">
-                            <t t-set="has_welfare_aid" t-value="False"/>
-                            <t t-set="has_welfare_aid" t-value="x_lines.welfare_aid"/>
+                            <t t-set="has_total_aid" t-value="False"/>
+                            <t t-set="has_total_aid" t-value="x_lines.total_aid"/>
                             <t t-set="has_transport_aid" t-value="False"/>
                             <t t-set="has_transport_aid" t-value="x_lines.transport_aid"/>
                             <t t-set="has_bearing_aid" t-value="False"/>
@@ -130,7 +150,8 @@
                                         </td>
                                         <td >
                                             <center>
-                                                <span t-field="payroll_contract.welfare_aid"/> <span t-field="payroll_contract.payment_period"/>
+<!--                                                <span t-field="payroll_contract.welfare_aid"/> <span t-field="payroll_contract.payment_period"/>-->
+                                                <span t-field="payroll_contract.total_aid"/> <span t-field="payroll_contract.payment_period"/>
                                             </center>
                                         </td>
                                         <td >
@@ -207,7 +228,8 @@
                                         </td>
                                         <td>
                                             <center>
-                                                <span t-field="service_contract.welfare_aid"/> <span t-field="service_contract.payment_period"/>
+<!--                                                <span t-field="service_contract.welfare_aid"/> <span t-field="service_contract.payment_period"/>-->
+                                                <span t-field="service_contract.total_aid"/> <span t-field="service_contract.payment_period"/>
                                             </center>
                                         </td>
                                     </t>
@@ -308,23 +330,36 @@
                             <br/>
                             Sincerely,
                             <br/>
-                            <img src='/linktic_hr/static/images/signature.png' alt="Failed to Upload" width="250"
-                                 height="150"/>
-                            <t t-if="is_linktic">
-                                <img src='/linktic_hr/static/images/stamp.png' alt="Failed to Upload" width="100"
-                                     height="150"/>
-                            </t>
                         </div>
                     </div>
 
-                    <table>
-                        <tr style="font-weight:bold;border-top: 1pt solid black;">
-                            <td style="min-width: 230px;">Paula Alejandra Moreno Andrade
-                                <br/>
-                                Human Talent Manager
-                            </td>
-                        </tr>
-                    </table>
+                    <!--    //////////////////  NEW CODE  ////////////////////////////////////////           -->
+                    <br/>
+                    <tbody>
+                        <td t-if="payroll_contracts.employee_id.hr_manager_id.user_id.hhrr_sign">
+                            <div class="mt32 ml64 mr4" name="signature_delivery">
+                                <div>
+                                    <div>
+                                        <img t-if="payroll_contracts.employee_id.hr_manager_id.user_id.hhrr_sign"
+                                             t-att-src="image_data_uri(payroll_contracts.employee_id.hr_manager_id.user_id.hhrr_sign)"
+                                             style="max-height: 15cm; max-width: 15cm; margin-left:-15%;"/>
+                                        <img t-if="payroll_contracts.company_id.certificate_stamp"
+                                             t-att-src="image_data_uri(payroll_contracts.company_id.certificate_stamp)"
+                                             style="max-height: 5cm; max-width: 5cm;"/>
+                                    </div>
+                                    <br/>
+                                    <p t-if="payroll_contracts.employee_id.hr_manager_id.name">
+                                        <strong>Name: </strong>
+                                        <span t-field="payroll_contracts.employee_id.hr_manager_id.name"/>
+                                    </p>
+                                    <p t-if="payroll_contracts.employee_id.hr_manager_id.job_title">
+                                        <strong>Job title: </strong>
+                                        <span t-field="payroll_contracts.employee_id.hr_manager_id.job_title"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                    </tbody>
 
                 </div>
             </t>

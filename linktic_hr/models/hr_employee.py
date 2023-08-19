@@ -97,7 +97,7 @@ class HrEmployee(models.Model):
     identification_id = fields.Char(groups="hr_attendance.group_hr_attendance_kiosk")
 
     # Fields New
-    hhrr_manager_id = fields.Many2one(comodel_name='hr.employee', string='HHRR Manager')
+    hr_manager_id = fields.Many2one(comodel_name='hr.employee', string='HHRR Manager', related='company_id.hr_manager_id')
 
     def get_spreadsheet_integration_dates(self):
         for employee in self:

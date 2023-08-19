@@ -5,14 +5,15 @@ from odoo import fields, models, api, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    hhrr_manager_id = fields.Many2one(comodel_name='hr.employee', string='HHRR Manager')
-    hhrr_sign = fields.Binary(string='HHRR Sign')
+    hr_manager_id = fields.Many2one(comodel_name='hr.employee', string='HHRR Manager',
+                                    related='user_id.employee_id', readonly=False)
+    enable_certificate_stamp = fields.Boolean(string='Enable Certificate Stamp')
 
     # Allows to save value in transient model
     def set_values(self):
         res = super(ResConfigSettings, self).set_values()
-        self.env['ir.config_parameter'].set_param('l10n_co_contacts_constraint.hhrr_manager_id', self.hhrr_manager_id)
-        self.env['ir.config_parameter'].set_param('l10n_co_contacts_constraint.hhrr_sign', self.hhrr_sign)
+        self.env['ir.config_parameter'].set_param('HrContract.hr_manager_id', self.hr_manager_id)
+        self.env['ir.config_parameter'].set_param('HrContract.enable_certificate_stamp', self.enable_certificate_stamp)
         return res
 
     # Allows to obtain values in transient model
@@ -20,11 +21,11 @@ class ResConfigSettings(models.TransientModel):
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         ICPSudo = self.env['ir.config_parameter'].sudo()
-        hr_parameter_hhrr_manager_id = ICPSudo.get_param('l10n_co_contacts_constraint.hhrr_manager_id')
-        hr_parameter_hhrr_sign = ICPSudo.get_param('l10n_co_contacts_constraint.hhrr_sign')
+        hr_parameter_hr_manager_id = ICPSudo.get_param('HrContract.hr_manager_id.ids')
+        hr_parameter_enable_certificate_stamp = ICPSudo.get_param('HrContract.enable_certificate_stamp')
 
         res.update(
-            check_vat=hr_parameter_hhrr_manager_id,
-            check_phone=hr_parameter_hhrr_sign,
+            hr_manager_id=hr_parameter_hr_manager_id,
+            enable_certificate_stamp=hr_parameter_enable_certificate_stamp,
         )
         return res

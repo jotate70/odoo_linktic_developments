@@ -3,7 +3,11 @@
 {
     "name": "Linktic HR Customization",
     'summary': 'Customization to HR module',
-    "version": "15.0.1.0.0",
+    'description': """This module will allow you to manage travel of your employees and expense advance and submit expense claim. 
+    15.1.0
+    15.2.0 Configurable fields are added for signatures, logos, HR managers and error correction..
+    """,
+    "version": "15.0.2.0.0",
     'category': 'Human Resources/Employees',
     "author": "Omar Amaya, By update: Julián Toscano",
     "license": "AGPL-3",
@@ -11,7 +15,8 @@
                 'hr_holidays',
                 'l10n_latam_base',
                 'om_hr_payroll_account',
-                'hr_attendance'
+                'hr_attendance',
+                'hr',
                 ],
 
     'data': [
@@ -28,7 +33,9 @@
         'views/hr_parameter_views.xml',
         'views/hr_employee_arl_risk_views.xml',
         'views/hr_contract_type_views.xml',
-        'views/res_config_settings_views_extend.xml',
+        # 'views/res_config_settings_views_extend.xml',
+        'views/res_users_views_extend.xml',
+        'views/res_company_views_extend.xml',
         'wizard/hr_employee_certifications_views.xml',
         'report/paperformat.xml',
         'report/templates.xml',

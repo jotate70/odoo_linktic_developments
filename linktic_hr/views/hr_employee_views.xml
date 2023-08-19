@@ -74,7 +74,7 @@
             </xpath>
             <!--                        New views              -->
             <xpath expr="//group[@name='managers']" position="inside">
-                <field name="hhrr_manager_id"/>
+                <field name="hr_manager_id"/>
             </xpath>
         </field>
     </record>

@@ -17,15 +17,14 @@
                     </div>
                 </group>
             </xpath>
-
             <xpath expr="//div[@name='wage']" position="after">
                 <field name="welfare_aid"/>
                 <field name="food_aid"/>
+                <field name="total_aid" invisible="1"/>
                 <field name="transport_aid"/>
                 <field name="bearing_aid"/>
                 <field name="total_income"/>
             </xpath>
-
         </field>
     </record>
 
