@@ -1,0 +1,362 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Smart button applicants -->
+        <record model="ir.actions.act_window" id="action_hr_applicant_to_so_pt">
+            <field name="name">Postulaciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('hr_requisition_id', '=', active_id)]</field>
+            <field name="context">{
+                "default_hr_requisition_id": active_id,
+                "default_user_id": False,
+                }
+            </field>
+        </record>
+
+        <!-- Smart button attachments -->
+        <record model="ir.actions.act_window" id="action_hr_attachments_to_so_pt">
+            <field name="name">Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.attachment</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('hr_recruitment_requisition_id', '=', active_id)]</field>
+            <field name="context">{
+                "default_hr_recruitment_requisition_id": active_id,
+                "default_user_id": False,
+                }
+            </field>
+        </record>
+
+        <!-- Recruitment Requisition tree view -->
+        <record model="ir.ui.view" id="recruitment_requisition_tree_view">
+            <field name="name">Recruitment Requisition</field>
+            <field name="model">hr_recruitment_requisition</field>
+            <field name="arch" type="xml">
+                <tree string="Applicants" multi_edit="1" sample="1">
+                    <field name="id" invisible="1"/>
+                    <field name="name" readonly="1" decoration-bf="1"/>
+                    <field name="recruitment_type_id"/>
+                    <field name="employee_id"/>
+                    <field name="department_id" optional="show"/>
+                    <field name="manager_id"/>
+                    <field name="assigned_id" placeholder="HHRR Employee" widget="many2one_avatar_user"
+                           groups="hr_recruitment.group_hr_recruitment_manager"/>
+                    <field name="estimated_date_admission" widget="remaining_days" optional="show"/>
+                    <field name="analytic_account_id" optional="show"/>
+                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="priority" widget="priority" optional="show"/>
+                    <field name="state_type" invisible="1"/>
+                    <field name="state" optional="show" widget="badge" decoration-success="state_type == 'done'" decoration-info="state_type not in ('done', 'refused', 'draft')" decoration-muted="state_type == 'draft'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Recruitment Requisition form view -->
+        <record model="ir.ui.view" id="recruitment_requisition_form_view">
+            <field name="name">Recruitment Requisition</field>
+            <field name="model">hr_recruitment_requisition</field>
+            <field name="arch" type="xml">
+                <form string="Applicants" multi_edit="1" sample="1">
+                    <header>
+                        <!--         draft state           -->
+                        <button name="button_action_confirm" string="Confirm" type="object" class="btn-primary"
+                                confirm="¿Desea confirmar la solicitud"
+                                attrs="{'invisible': [['state_type', '!=', 'draft']]}"/>
+                        <button name="button_action_draft" string="Draft" type="object"
+                                confirm="¿Desea establecer a borrador?"
+                                attrs="{'invisible': [['state_type', '!=', 'refused']]}"/>
+                        <button name="button_action_on_aprobation" string="Approve" type="object" class="btn-primary"
+                                confirm="¿Desea aprobar la solicitud?"
+                                attrs="{'invisible': ['|', ['state_aprove', '!=', 1], ['state_type', '=', 'in_progress']]}"/>
+                        <button name="button_action_on_aprobation" string="Approve ⁽2⁾" type="object" class="btn-primary"
+                                confirm="¿Desea aprobar la solicitud?"
+                                attrs="{'invisible': ['|', ['state_aprove', '!=', 2], ['state_type', '=', 'in_progress']]}"/>
+                        <button name="button_action_on_aprobation" string="Approve ⁽3⁾" type="object" class="btn-primary"
+                                confirm="¿Desea aprobar la solicitud?"
+                                attrs="{'invisible': ['|', ['state_aprove', '!=', 3], ['state_type', '=', 'in_progress']]}"/>
+                        <button name="button_action_on_aprobation" string="Approve ⁽4⁾" type="object" class="btn-primary"
+                                confirm="¿Desea aprobar la solicitud?"
+                                attrs="{'invisible': ['|', ['state_aprove', '!=', 4], ['state_type', '=', 'in_progress']]}"/>
+                        <button name="button_action_on_aprobation" string="Approve ⁽5⁾" type="object" class="btn-primary"
+                                confirm="¿Desea aprobar la solicitud?"
+                                attrs="{'invisible': ['|', ['state_aprove', '!=', 5], ['state_type', '=', 'in_progress']]}"/>
+                        <button name="button_action_cancel" string="Cancel" type="object"
+                                confirm="¿Desea cancelar la solicitud?"
+                                attrs="{'invisible': [['state_type', 'in', ['draft', 'refused']]]}"/>
+                        <button name="open_stage_transition_wizard" string="End Stage" type="object" class="btn-primary"/>
+                        <field name="state_type" invisible="1"/>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(action_hr_applicant_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-pencil"
+                                    groups="hr_recruitment.group_hr_recruitment_manager">
+                                <field name="count_applicant" widget="statinfo" string="Applicants"/>
+                            </button>
+                            <button name="%(action_hr_attachments_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-archive">
+                                <field name="count_attachments" widget="statinfo" string="Attachments Profile"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','1')]}">Personnel selection</span>
+                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','0')]}">Modification of working conditions</span>
+                            <h1>
+                                <field name="priority" widget="priority" class="mr-3"/>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="responsible">
+                                <field name="id" invisible="1"/>
+                                <field name="activity_id" invisible="1"/>
+                                <field name="activity_assigned_id" invisible="1"/>
+                                <field name="assigned_id" placeholder="HHRR Employee" widget="many2one_avatar_user"
+                                       options="{'no_create':true, 'no_open':true}"
+                                       groups="hr_recruitment.group_hr_recruitment_manager"
+                                       attrs="{'invisible': [['state_type', '=', 'draft']]}"/>
+                                <field name="employee_id" placeholder="Employee" options="{'no_create':true, 'no_open':true}"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                <field name="department_id" options="{'no_create':true, 'no_open':true}"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                <field name="state_aprove" invisible="1"/>
+                                <field name="time_off_related" invisible="1"/>
+                                <label for="manager_id" string="Manager"/>
+                                <div>
+                                    <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
+                                           attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                    <span class="oe_read_only"> - </span>
+                                    <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                           attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
+                                    <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                           attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)]}"/>
+                                </div>
+                                <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
+                                       attrs="{'invisible': [('time_off_related', '=', False)]}"/>
+                                <field name="manager_before" invisible="1"/>
+                                <field name="ceo" invisible="1"/>
+                                <field name="company_id" invisible="" groups="base.group_multi_company"/>
+                            </group>
+                            <group string="records">
+                                <field name="estimated_date_admission" options="{'no_create':true, 'no_open':true}"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                <field name="create_date"/>
+                                <field name="write_date"/>
+                                <field name="write_uid"/>
+                                <field name="recruitment_type_id" options="{'no_create':true, 'no_open':true}"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}" required="True"/>
+                                <field name="recruitment_type" invisible="1"/>
+                                <field name="requisition_type" invisible="1"/>
+                                <field name="state_type" invisible="1"/>
+                                <field name="profile_attachments_ids" invisible="1"/>
+                            </group>
+                            <group string="budget">
+                                <field name="budget_post_id"/>
+                                <label for="budget_value" string="Budget Value"/>
+                                <div>
+                                    <field name="budget_value" placeholder="5.000.000,00" class="oe_inline"/>
+                                    <field name="currency_id" placeholder="COP" class="oe_inline"
+                                           options="{'no_open':True, 'no_create':True}"/>
+                                </div>
+                                <field name="analytic_account_id"/>
+                            </group>
+                            <group string="conditions">
+                                <field name="contract_type_id"/>
+                                <label for="contract_duration_qty" string="Contract Duration"/>
+                                <div>
+                                    <field name="contract_duration_qty" placeholder="12" class="oe_inline"/>
+                                    <span class="oe_read_only"> - </span>
+                                    <field name="contract_duration_sel" placeholder="Month" class="oe_inline"/>
+                                </div>
+                                <field name="working_time"/>
+                                <field name="working_modality"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Recruitment Order" name="recruitment">
+                                <field id="recruitment_requisition_line_1" name="recruitment_requisition_line" widget="section_and_note_one2many" mode="tree,kanban"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['1'])]}">
+                                    <tree string="Purchase Order Lines" editable="bottom">
+                                        <control>
+                                            <create name="add_recruitment_control" string="Add a recruitment"/>
+                                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                        </control>
+                                        <field name="job_positions_domain" invisible="1"/>
+                                        <field name="job_positions" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="no_of_recruitment"/>
+                                        <field name="count_recruited" optional="show"/>
+                                        <field name="estimated_date_admission" optional="hide"/>
+                                        <field name="recruited" style="color: green"/>
+                                        <field name="state_type" invisible="1"/>
+                                        <field name="state" widget="badge" options="{'color_field': 'color'}" invisible="1"/>
+                                        <field name="observations"/>
+                                    </tree>
+                                </field>
+                                <field id="recruitment_requisition_line_2" name="recruitment_requisition_line_2" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_no_of_recruitment': 1}"
+                                       attrs="{'readonly': [('state_type', 'in', ['in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['0'])]}">
+                                    <tree string="Purchase Order Lines" editable="bottom">
+                                        <control>
+                                            <create name="add_recruitment_control" string="Add a recruitment"/>
+                                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                        </control>
+                                        <field name="job_positions_domain" invisible="1"/>
+                                        <field name="job_positions" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="employee_domain" invisible="1"/>
+                                        <field name="employee_id" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="job_positions_after" options="{'no_create':true, 'no_open':true}" required="1"/>
+                                        <field name="wage" readonly=""/>
+                                        <field name="contract_id" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="state_contract" readonly=""/>
+                                        <field name="recruitment_type" invisible="1"/>
+                                        <field name="estimated_date_admission" optional="hide"/>
+                                        <field name="recruited" style="color: green" invisible=""/>
+                                        <field name="contract_addendum" style="color: green"/>
+                                        <field name="state_type" invisible="1"/>
+                                        <field name="state" widget="badge" options="{'color_field': 'color'}" invisible="1"/>
+                                        <field name="observations"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Stage Report" name="stage_report">
+                                <field name="ticket_stage_log_ids" mode="tree" nolabel="1" readonly="1">
+                                    <tree string="Ticket Stage Report" default_order="datetime_start desc">
+                                        <field name="stage_id"/>
+                                        <field name="user_id" widget="many2one_avatar_user"/>
+                                        <field name="datetime_start"/>
+                                        <field name="datetime_end"/>
+                                        <field name="no_hours" widget="float_time"/>
+                                        <field name="current_time" widget="float_time"/>
+                                        <field name="stage_result" style="max-width: 200px"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'open_attachments': True}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Recruitment Requisition kanban view -->
+        <record model="ir.ui.view" id="recruitment_requisition_kanban_view">
+            <field name="name">Hr Recruitment Requisition Kanban</field>
+            <field name="model">hr_recruitment_requisition</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_applicant">
+                    <field name="state_type" invisible="1"/>
+                    <field name="state" options='{"group_by_tooltip": {"requirements": "Requirements"}}' sample="1"/>
+                    <field name="id" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="estimated_date_admission"/>
+                    <field name="recruitment_type"/>
+                    <field name="color"/>
+                    <field name="priority"/>
+                    <field name="attachment_number"/>
+                    <field name="activity_state" />
+                    <progressbar field="activity_state" colors='{"planned": "success", "overdue": "danger", "today": "warning"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="{{!selection_mode ? 'oe_kanban_color_' + kanban_getcolor(record.color.raw_value) : ''}} oe_kanban_global_click">
+                                <field name="time_off_related" invisible="1"/>
+                                <div class="oe_kanban_details">
+                                    <div class="oe_kanban_record_top">
+                                        <div class="oe_kanban_record_headings">
+                                            <b class="oe_kanban_record_title oe_kanban_partner_headings">
+                                                <field name="name"/>
+                                            </b>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <div class="o_kanban_record_subtitle">
+                                                <field name="department_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_top">
+                                        <label for="manager_id" string="Manager"/>
+                                        <div>
+                                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
+                                                   attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                            <span class="oe_read_only"> - </span>
+                                            <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                                   attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
+                                            <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                                   attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)]}"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <div class="o_kanban_record_subtitle">
+                                                <field name="recruitment_type_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_left">
+                                        <div class="float-left mr4" groups="base.group_user">
+                                            <field name="priority" widget="priority"/>
+                                        </div>
+                                        <div class="o_kanban_inline_block mr8">
+                                            <field name="activity_ids" widget="kanban_activity"/>
+                                        </div>
+                                        <span title='Documents'><i class='fa fa-paperclip' role="img" aria-label="Documents"/>
+                                            <t t-esc="record.attachment_number.raw_value"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--   actions opening views on models   -->
+        <record model="ir.actions.act_window" id="action_window_recruitment_my_requisition_tree_view">
+          <field name="name">My recruitment/promotion</field>
+          <field name="res_model">hr_recruitment_requisition</field>
+          <field name="view_mode">list,form,kanban</field>
+            <field name="domain">[('create_uid', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_window_recruitment_requisition_tree_view">
+          <field name="name">recruitment/promotion</field>
+          <field name="res_model">hr_recruitment_requisition</field>
+          <field name="view_mode">list,form,kanban</field>
+        </record>
+
+        <!-- Top menu item -->
+        <menuitem name="recruitment/promotion"
+                  id="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  parent="hr_recruitment.menu_hr_recruitment_root"
+                  sequence="80"
+                  groups="hr.group_hr_user"/>
+
+        <menuitem name="my recruitment/promotion"
+                  id="recruitment_requisition_my_tree_view_menu"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  action="action_window_recruitment_my_requisition_tree_view"
+                  sequence="1"/>
+
+        <menuitem name="recruitment/promotion"
+                  id="recruitment_requisition_tree_view_menu_2"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  action="action_window_recruitment_requisition_tree_view"
+                  sequence="2"/>
+
+        <!--     /////////////////    Menu de ajustes     /////////////////////////   -->
+        <menuitem
+                id="menu_hr_recruitment_requisition_configuration"
+                name="Recruitment configuration"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                groups="hr_recruitment.group_hr_recruitment_manager"
+                sequence="19"/>
+    </data>
+</odoo>

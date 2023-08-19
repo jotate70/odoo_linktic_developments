@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+      <record id="hr_applicant_form_extend_view" model="ir.ui.view">
+          <field name="name">hhr_applicant_form_extend_view</field>
+          <field name="model">hr.applicant</field>
+          <field name="inherit_id" ref='hr_recruitment.hr_applicant_view_form'/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='job_id']" position="after">
+                  <field name="hr_requisition_domain" invisible="1"/>
+                <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"/>
+              </xpath>
+          </field>
+      </record>
+  </data>
+</odoo>
+

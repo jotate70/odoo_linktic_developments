@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_recruitment_requisition,hr_recruitment_requisition,model_hr_recruitment_requisition,hr.group_hr_user,1,1,1,1
+access_hr_recruitment_requisition_line,hr_recruitment_requisition_line,model_hr_recruitment_requisition_line,hr.group_hr_user,1,1,1,1
+access_hr_recruitment_type,hr_recruitment_type,model_hr_recruitment_type,hr.group_hr_user,1,1,1,1
+access_hr_requisition_state,hr_requisition_state,model_hr_requisition_state,hr.group_hr_user,1,1,1,1
+access_hr_recruitment_stage_log,hr_recruitment_stage_log,model_hr_recruitment_stage_log,hr.group_hr_user,1,1,1,1
+access_hr_recruitment_requisition_stage_transition_wizard,hr_recruitment_requisition_stage_transition_wizard,model_hr_recruitment_requisition_stage_transition_wizard,hr.group_hr_user,1,1,1,1
+
+
+
+

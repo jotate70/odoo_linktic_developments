@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ///////////////////////// default staffing stages //////////////////////////////////////// -->
+
+        <record id="hr_requisition_state_draft" model="hr_requisition_state">
+            <field name="name">Draft</field>
+            <field name="color">1</field>
+            <field name="sequence">1</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">draft</field>
+            <field name="description">In the draft stage, is a state where the request has not been confirmed, this allows us to modify fields when desired.</field>
+        </record>
+
+        <record id="hr_requisition_state_confirm" model="hr_requisition_state">
+            <field name="name">Confirm</field>
+            <field name="color">2</field>
+            <field name="sequence">2</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">confirm</field>
+            <field name="description">In the confirmed stage, goes to review by human talent, which is in charge of verifying the information of the application.</field>
+        </record>
+
+        <record id="hr_requisition_state_validation" model="hr_requisition_state">
+            <field name="name">Validation</field>
+            <field name="color">3</field>
+            <field name="sequence">3</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In the validation stage, the planning manager must verify if he has the resource available in the company.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_recruitment" model="hr_requisition_state">
+            <field name="name">In recruitment</field>
+            <field name="color">4</field>
+            <field name="sequence">4</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">The recruitment stage is where the selection and hiring of requested personnel begins.</field>
+        </record>
+
+        <record id="hr_requisition_state_hired" model="hr_requisition_state">
+            <field name="name">hired</field>
+            <field name="color">5</field>
+            <field name="sequence">5</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">True</field>
+            <field name="state_type">done</field>
+            <field name="description">The contracted stage indicates that the required personnel have been hired by human resources, in the recruitment module.</field>
+        </record>
+
+        <record id="hr_requisition_state_refused" model="hr_requisition_state">
+            <field name="name">Refused</field>
+            <field name="color">6</field>
+            <field name="sequence">6</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">True</field>
+            <field name="state_type">refused</field>
+            <field name="description">The rejected stage indicates that the request has been canceled by the applicant, or rejected by the approvers of some stage of the process.</field>
+        </record>
+
+        <!-- ///////////////////////   default staffing recruitment requisition type ///////////////////////////// -->
+        <record id="recruitment_type_recruitment" model="hr_recruitment_type">
+            <field name="name">Recruitment</field>
+            <field name="recruitment_type">0</field>
+            <field name="requisition_type">single_requisition</field>
+            <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),
+            (4, ref('hr_requisition_state_validation')), (4, ref('hr_requisition_state_in_recruitment')),
+            (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
+            <field name="description">The type of recruitment: Staff Request allows you to recruit new staff.</field>
+        </record>
+
+        <record id="recruitment_type_modifications_working_conditions" model="hr_recruitment_type">
+            <field name="name">Modifications of working conditions</field>
+            <field name="recruitment_type">1</field>
+            <field name="requisition_type">single_requisition</field>
+            <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),
+            (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
+            <field name="description">The type of recruitment: modification of working conditions allows for promotions and transfers in the company..</field>
+        </record>
+
+        <!-- default staffing recruitment requisition type -->
+
+    <!--    &lt;!&ndash; Report Filter &ndash;&gt;-->
+    <!--    <record id="helpdesk_sla_report_analysis_filter_status_per_deadline" model="ir.filters">-->
+    <!--        <field name="name">Status Per Deadline</field>-->
+    <!--        <field name="model_id">helpdesk.sla.report.analysis</field>-->
+    <!--        <field name="context">{-->
+    <!--            'pivot_column_groupby': ['sla_deadline:day'],-->
+    <!--            'pivot_row_groupby': ['team_id', 'ticket_id', 'sla_id']-->
+    <!--        }</field>-->
+    <!--        <field name="domain">[]</field>-->
+    <!--        <field name="user_id" eval="False"/>-->
+    <!--        <field name="active" eval="True"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="helpdesk_sla_report_analysis_filter_stage_failed" model="ir.filters">-->
+    <!--        <field name="name">Failed SLA Stage per Month</field>-->
+    <!--        <field name="model_id">helpdesk.sla.report.analysis</field>-->
+    <!--        <field name="context">{-->
+    <!--            'pivot_measures': ['__count'],-->
+    <!--            'pivot_column_groupby': ['create_date:month'],-->
+    <!--            'pivot_row_groupby': ['team_id', 'sla_stage_id']-->
+    <!--        }</field>-->
+    <!--        <field name="domain">[]</field>-->
+    <!--        <field name="user_id" eval="False"/>-->
+    <!--        <field name="active" eval="True"/>-->
+    <!--    </record>-->
+    </data>
+</odoo>
