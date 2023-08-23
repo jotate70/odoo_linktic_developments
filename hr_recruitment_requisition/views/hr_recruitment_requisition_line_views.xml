@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Recruitment Requisition form view -->
+        <record model="ir.ui.view" id="recruitment_requisition_line_form_view">
+            <field name="name">Recruitment Requisition Line</field>
+            <field name="model">hr_recruitment_requisition_line</field>
+            <field name="arch" type="xml">
+                <form string="Applicants" multi_edit="1" sample="1">
+                    <sheet>
+                        <group>
+                            <group string="current information">
+                                <field name="id" invisible="1"/>
+                                <field name="job_positions" options="{'no_create':true, 'no_open':true}"/>
+                                <field name="employee_domain" invisible="1"/>
+                                <field name="employee_id" domain="employee_domain" options="{'no_create':true, 'no_open':true}"/>
+                                <field name="contract_id" options="{'no_create':true, 'no_open':true}"/>
+                                <field name="contract_type_id" readonly="1"/>
+                                <field name="state_contract" readonly="1"/>
+                                <label for="date_start" string="Contract Date"/>
+                                <div>
+                                    <field name="date_start" placeholder="01-02-2018" class="oe_inline" readonly="1"/>
+                                    <span class="oe_read_only"> - </span>
+                                    <field name="date_end" placeholder="Present" class="oe_inline" readonly="1"/>
+                                </div>
+                                <field name="wage" widget="monetary" readonly="1"/>
+                                <field name="contract_welfare_aid" widget="monetary"/>
+                                <field name="contract_food_aid" widget="monetary"/>
+                                <field name="contract_transport_aid" widget="monetary"/>
+                                <field name="contract_bearing_aid" widget="monetary"/>
+                                <label for="contract_total_income" string="Total Income"/>
+                                <div>
+                                    <field name="contract_total_income" widget="monetary" placeholder="5.000.000,00" class="oe_inline"/>
+                                    <span class="oe_read_only"> - </span>
+                                    <field name="currency_id" placeholder="COP" class="oe_inline" readonly="1"/>
+                                </div>
+                            </group>
+                            <group string="update information">
+                                <field name="contract_addendum"/>
+                                <field name="job_positions_after" options="{'no_create':true, 'no_open':true}"/>
+                                <field name="updated_contract_type_id" options="{'no_create':true, 'no_open':true}"/>
+                                <field name="updated_contract_date_end"/>
+                                <field name="contract_wage_rise" widget="monetary"/>
+                                <label for="updated_contract_total_income" string="New Total Income"/>
+                                <div>
+                                    <field name="updated_contract_total_income" widget="monetary" placeholder="8.000.000,00" class="oe_inline"/>
+                                    <span class="oe_read_only"> - </span>
+                                    <field name="currency_id" placeholder="COP" class="oe_inline" readonly="1"/>
+                                </div>
+                                <field name="observations"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

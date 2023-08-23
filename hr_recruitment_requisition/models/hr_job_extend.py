@@ -18,7 +18,7 @@ class Job(models.Model):
         for rec in self:
             c = 0
             for rec2 in rec.hr_recruitment_requisition_ids:
-                if rec2.state == 'approved':
+                if rec2.state_type == 'in_progress':
                     c = c + 1
             if c > 0:
                 rec.state_requisition = True
@@ -28,17 +28,17 @@ class Job(models.Model):
     # Valida si existe requisición asociada en curso
     @api.depends('hr_recruitment_requisition_ids')
     def _compute_recruitment_requisition_id(self):
-        data = self.env['hr_recruitment_requisition_line'].search([('id','in',self.hr_recruitment_requisition_ids.ids),('state','=','approved')], limit=1)
+        data = self.env['hr_recruitment_requisition_line'].search([('id','in',self.hr_recruitment_requisition_ids.ids),('state_type','=','in_progress')], limit=1)
         if data:
             self.hr_recruitment_requisition_id = data.recruitment_requisition_id
         else:
             self.hr_recruitment_requisition_id = False
 
-    # Actualiza cantidad a reclutar
+    # Actualiza cantidad a reclutar (suma)
     def update_no_of_recruitment(self,vat):
         self.no_of_recruitment += vat
 
-    # Actualiza cantidad a reclutar
+    # Actualiza cantidad a reclutar (resta)
     def reset_no_of_recruitment(self,vat):
         self.no_of_recruitment -= vat
 

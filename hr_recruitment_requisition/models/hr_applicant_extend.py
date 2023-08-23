@@ -19,7 +19,7 @@ class Applicant(models.Model):
     def _domain_employee_id(self):
         for rec in self:
             if rec.job_id:
-                rec.hr_requisition_domain = json.dumps([('id', 'in', rec.job_id.hr_recruitment_requisition_ids.recruitment_requisition_id.ids),('state','=','approved')])
+                rec.hr_requisition_domain = json.dumps([('id', 'in', rec.job_id.hr_recruitment_requisition_ids.recruitment_requisition_id.ids),('state_type','=','in_progress')])
             else:
                 rec.hr_requisition_domain = json.dumps([()])
 

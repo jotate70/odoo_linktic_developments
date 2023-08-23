@@ -39,7 +39,7 @@
                             <group name="main_left">
                                 <field name="sequence" invisible="1"/>
                                 <field name="requires_approval"/>
-                                <field name="manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                                <field name="manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
                                 <field name="optional_manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
                                 <field name="state_type"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
