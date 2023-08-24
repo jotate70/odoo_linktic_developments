@@ -5,9 +5,71 @@
           <field name="model">hr.applicant</field>
           <field name="inherit_id" ref='hr_recruitment.hr_applicant_view_form'/>
           <field name="arch" type="xml">
-              <xpath expr="//field[@name='job_id']" position="after">
+              <xpath expr="//header" position="replace">
+                  <header>
+                      <button string="Create Employee" name="create_employee_from_applicant" type="object"
+                              data-hotkey="v" class="oe_highlight o_create_employee"
+                              attrs="{'invisible': ['|','|',('emp_id', '!=', False),('active', '=', False),('hired_stage', '=', False)]}"/>
+                      <button string="Refuse" name="archive_applicant" type="object"
+                              attrs="{'invisible': [('active', '=', False)]}" data-hotkey="x"/>
+                      <button string="Restore" name="toggle_active" type="object"
+                              attrs="{'invisible': [('active', '=', True)]}" data-hotkey="z"/>
+                      <button name="compute_next_stage" string="Next Stage" type="object" class="btn-primary"
+                              confirm="¿Desea aprobar la solicitud?"
+                              attrs="{'invisible': ['|',('requires_approval', '=', 'yes'),('hired_stage', '=', True)]}"/>
+                      <button name="open_stage_transition_wizard" string="Approve" type="object" class="btn-primary"
+                              confirm="¿Desea aprobar la solicitud?"
+                              attrs="{'invisible': ['|',('requires_approval', '=', 'no'),('hired_stage', '=', True)]}"/>
+                      <field name="stage_id" widget="statusbar" options="{'fold_field': 'fold'}"
+                             attrs="{'invisible': [('active', '=', False),('emp_id', '=', False)]}"/>
+                  </header>
+              </xpath>
+              <xpath expr="//field[@name='source_id']" position="after">
+                  <field name="state_after" invisible="1"/>
+                  <field name="state_level" invisible="1"/>
+                  <field name="state_aprove" invisible="1"/>
+                  <field name="hired_stage" invisible="1"/>
+                  <field name="requires_approval" invisible="1"/>
                   <field name="hr_requisition_domain" invisible="1"/>
-                <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"/>
+                  <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"/>
+              </xpath>
+              <xpath expr="//group" position="inside">
+                  <group string="responsible" >
+                      <field name="time_off_related" invisible="1"/>
+                      <label for="manager_id" string="Manager"/>
+                      <div>
+                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"/>
+                          <span class="oe_read_only"> - </span>
+                          <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                 attrs="{'invisible': ['|',('time_off_related', '=', True),('manager_id', '=', False)]}"/>
+                          <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                 attrs="{'invisible': ['|',('time_off_related', '=', False),('manager_id', '=', False)]}"/>
+                      </div>
+                      <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
+                             attrs="{'invisible': [('time_off_related', '=', False)]}"/>
+                      <field name="manager_before" invisible="1"/>
+                  </group>
+                  <group string="Uncapped Manager">
+                      <field name="uncapped_manager_id"/>
+                  </group>
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Stage Report" name="stage_report">
+                      <field name="hr_applicant_stage_log_ids" mode="tree" nolabel="1" readonly="">
+                          <tree string="RRHH Ticket Report" default_order="datetime_start desc">
+                              <field name="stage_id"/>
+                              <field name="user_id" widget="many2one_avatar_user"/>
+                              <field name="datetime_start"/>
+                              <field name="datetime_end"/>
+                              <field name="no_hours" widget="float_time"/>
+                              <field name="stage_result" style="max-width: 200px"/>
+                          </tree>
+                      </field>
+                  </page>
+              </xpath>
+              <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="required">1</attribute>
               </xpath>
           </field>
       </record>

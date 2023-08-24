@@ -32,7 +32,8 @@ class RecruitmentRequisition(models.Model):
     state_type = fields.Selection([('draft', 'Draft'),
                                    ('confirm', 'Confirm'),
                                    ('in_progress', 'In Progress'),
-                                   ('done', 'Done') ,
+                                   ('recruitment', 'Recruitment'),
+                                   ('done', 'Done'),
                                    ('refused', 'Refused')],
                                   string='State Type', store=True, default='in_progress', required=True,
                                   help='classifies the type of stage, important for the behavior of the approval for personnel request.')

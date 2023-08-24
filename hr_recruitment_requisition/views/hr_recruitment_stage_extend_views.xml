@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_recruitment_stage_form_inherit" model="ir.ui.view">
+        <field name="name">hr_recruitment_stage_form_inherit</field>
+        <field name="model">hr.recruitment.stage</field>
+        <field name="inherit_id" ref='hr_recruitment.hr_recruitment_stage_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='stage_definition']" position="inside">
+                <group string="validations">
+                    <field name="requires_approval"/>
+                    <field name="manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
+                    <field name="optional_manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                    <field name="requires_budget_approval"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                    <label for="budget_amount" string="Budget amount" attrs="{'invisible': ['|', ('requires_approval', '=', 'no'), ('requires_budget_approval','=',False)]}"/>
+                    <div attrs="{'invisible': ['|', ('requires_approval', '=', 'no'), ('requires_budget_approval','=',False)]}">
+                        <field name="budget_amount" placeholder="5.000.000,00" class="oe_inline"/>
+                        <field name="currency_id" placeholder="COP" class="oe_inline"
+                               options="{'no_open':True, 'no_create':True}"/>
+                    </div>
+                    <field name="uncapped_manager_id" attrs="{'invisible': ['|', ('requires_approval', '=', 'no'), ('requires_budget_approval','=',False)]}"/>
+                </group>
+                <group string="Recruitment type">
+                    <field name="recruitment_type_id" widget="many2many_tags"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_recruitment_stage_tree_inherit" model="ir.ui.view">
+        <field name="name">hr_recruitment_stage_tree_inherit</field>
+        <field name="model">hr.recruitment.stage</field>
+        <field name="inherit_id" ref='hr_recruitment.hr_recruitment_stage_tree'/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="manager_id" optional="show"/>
+                <field name="optional_manager_id" optional="show"/>
+                <field name="recruitment_type_id" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

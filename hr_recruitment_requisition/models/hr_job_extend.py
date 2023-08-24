@@ -18,7 +18,7 @@ class Job(models.Model):
         for rec in self:
             c = 0
             for rec2 in rec.hr_recruitment_requisition_ids:
-                if rec2.state_type == 'in_progress':
+                if rec2.state_type in ['confirm','in_progress','recruitment']:
                     c = c + 1
             if c > 0:
                 rec.state_requisition = True

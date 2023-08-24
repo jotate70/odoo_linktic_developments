@@ -5,13 +5,14 @@ class RecruitmentRequisition(models.Model):
     _name = 'hr_recruitment_type'
     _description = "Recruitment Type"
 
-    company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True, readonly=True,
-                                 states={'draft': [('readonly', False)]}, default=lambda self: self.env.company)
+    company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True,
+                                 default=lambda self: self.env.company)
     name = fields.Char(string='Recruitment Type', required=True)
-    recruitment_type = fields.Selection(
-        [('0', 'recruitment'),
-         ('1', 'modifications of working conditions')],
-        string=r'Recruitment Type', default='0', index=True, required=True)
+    recruitment_type = fields.Selection([('0', 'recruitment'),
+                                         ('1', 'modifications of working conditions'),
+                                         ('2', 'Labor dismissal'),
+                                         ('3', 'Disciplinary Process')],
+                                        string=r'Recruitment Type', default='0', index=True, required=True)
     requisition_type = fields.Selection([('single_requisition', 'Single Requisition'),
                                          ('multiple_requisition', 'Multiple Requisition')],
                                         string=r'Requisition Type', default='single_requisition', index=True)

@@ -8,6 +8,7 @@ from . import hr_requisition_state
 from . import hr_recruitment_stage_log
 from . import hr_ir_attachments
 from . import hr_employee_extend
-
+from . import hr_recruitment_stage_extend
+from . import hr_applicant_stage_log
 
 

@@ -6,7 +6,7 @@
             <field name="name">Secuence recruitment requisition</field>
             <field name="code">recruitment.ifpv</field>
             <field name="active">TRUE</field>
-            <field name="prefix">RH</field>
+            <field name="prefix">RRHH</field>
             <field name="padding">5</field>
             <field name="number_next">1</field>
             <field name="number_increment">1</field>

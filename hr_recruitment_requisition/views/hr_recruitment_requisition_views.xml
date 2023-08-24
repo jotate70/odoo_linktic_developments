@@ -1,7 +1,90 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
-        <!-- Smart button applicants -->
+        <!--  /////////////////////////  Action menu ///////////////////////////  -->
+        <record model="ir.actions.act_window" id="action_window_recruitment_requisition">
+            <field name="name">RRHH Ticket</field>
+            <field name="res_model">hr_recruitment_requisition</field>
+            <field name="view_mode">list,form,kanban</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_window_recruitment_my_requisition_view">
+            <field name="name">My requests</field>
+            <field name="res_model">hr_recruitment_requisition</field>
+            <field name="view_mode">list,form,kanban</field>
+            <field name="domain">[('create_uid', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_window_recruitment_my_assigned_requisition_view">
+            <field name="name">My assigned requests</field>
+            <field name="res_model">hr_recruitment_requisition</field>
+            <field name="view_mode">list,form,kanban</field>
+            <field name="domain">[('assigned_id', '=', uid)]</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_window_recruitment_all_requisition_view">
+            <field name="name">All requests</field>
+            <field name="res_model">hr_recruitment_requisition</field>
+            <field name="view_mode">list,form,kanban</field>
+        </record>
+
+        <!-- /////////////////////////////  menu main  //////////////////////////// -->
+        <menuitem name="RRHH Ticket"
+                  id="menu_recruitment_requisition_root"
+                  groups="base.group_user"
+                  web_icon="hr_recruitment_requisition,static/description/icon.png"
+                  action="action_window_recruitment_requisition" sequence="100"/>
+
+        <!-- ///////////////////////////// Top menu item   //////////////////////////   -->
+        <menuitem name="Requests"
+                  id="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  parent="menu_recruitment_requisition_root"
+                  sequence="1"
+                  groups="hr.group_hr_user"/>
+
+        <menuitem name="Settings"
+                  id="menu_recruitment_requisition_setting"
+                  parent="menu_recruitment_requisition_root"
+                  groups="hr.group_hr_user"
+                  sequence="2"/>
+
+        <!--  /////////////////////// Sub Top menu /////////////////////////////////////// -->
+        <menuitem id="menu_hr_recruitment_requisition_configuration"
+                  name="RRHH Ticket configuration"
+                  parent="menu_recruitment_requisition_setting"
+                  groups="hr_recruitment.group_hr_recruitment_user"
+                  sequence="11"/>
+
+        <menuitem id="menu_hr_recruitment_configuration"
+                  name="Recruitment configuration"
+                  parent="menu_recruitment_requisition_setting"
+                  groups="hr_recruitment.group_hr_recruitment_user"
+                  sequence="22"/>
+
+        <!--  /////////////////////// Supplier menu  /////////////////////////////////////// -->
+        <menuitem name="My requests"
+                  id="recruitment_requisition_my_tree_view_menu"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  action="action_window_recruitment_my_requisition_view"
+                  sequence="12"/>
+
+        <menuitem name="My assigned requests"
+                  id="recruitment_requisition_tree_view_menu_2"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  action="action_window_recruitment_my_assigned_requisition_view"
+                  sequence="13"/>
+
+        <menuitem name="All requests"
+                  id="recruitment_requisition_tree_view_menu_3"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
+                  action="action_window_recruitment_all_requisition_view"
+                  sequence="14"/>
+
+        <menuitem name="Recruitment Stage" id="hr_recruitment_requisition.hr_recruitment_stage2_view_menu"
+                  parent="hr_recruitment_requisition.menu_hr_recruitment_configuration"
+                  action="hr_recruitment.hr_recruitment_stage_act" sequence="23"/>
+
+        <!-- ///////////////////////////// Smart button applicants ////////////////////////  -->
         <record model="ir.actions.act_window" id="action_hr_applicant_to_so_pt">
             <field name="name">Postulaciones</field>
             <field name="type">ir.actions.act_window</field>
@@ -68,32 +151,33 @@
                         <button name="button_action_draft" string="Draft" type="object"
                                 confirm="¿Desea establecer a borrador?"
                                 attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
-                        <button name="button_action_on_aprobation" string="Approve" type="object" class="btn-primary"
+<!--                        <button name="button_action_on_aprobation" string="Approve" type="object" class="btn-primary"-->
+<!--                                confirm="¿Desea aprobar la solicitud?"-->
+                        <button name="open_stage_transition_wizard" string="Approve" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
                                 attrs="{'invisible': ['|','|', ('state_aprove', '!=', 1), ('state_type', '!=', 'confirm'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="button_action_on_aprobation" string="Approve ⁽2⁾" type="object" class="btn-primary"
+                        <button name="open_stage_transition_wizard" string="Approve ⁽2⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
                                 attrs="{'invisible': ['|','|', ('state_aprove', '!=', 2), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="button_action_on_aprobation" string="Approve ⁽3⁾" type="object" class="btn-primary"
+                        <button name="open_stage_transition_wizard" string="Approve ⁽3⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
                                 attrs="{'invisible': ['|','|', ('state_aprove', '!=', 3), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="button_action_on_aprobation" string="Approve ⁽4⁾" type="object" class="btn-primary"
+                        <button name="open_stage_transition_wizard" string="Approve ⁽4⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
                                 attrs="{'invisible': ['|','|', ('state_aprove', '!=', 4), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="button_action_on_aprobation" string="Approve ⁽5⁾" type="object" class="btn-primary"
+                        <button name="open_stage_transition_wizard" string="Approve ⁽5⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
                                 attrs="{'invisible': ['|','|', ('state_aprove', '!=', 5), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
                         <button name="button_action_cancel" string="Cancel" type="object"
                                 confirm="¿Desea cancelar la solicitud?"
                                 attrs="{'invisible': [('state_type', 'in', ('draft', 'refused'))]}"/>
-                        <button name="open_stage_transition_wizard" string="End Stage" type="object" class="btn-primary"/>
                         <field name="state_type" invisible="1"/>
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="%(action_hr_applicant_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-pencil"
-                                    groups="hr_recruitment.group_hr_recruitment_user">
+                                    groups="hr_recruitment.group_hr_recruitment_user" attrs="{'invisible': ['|',('state_type','in',['draft','confirm','refused']),('recruitment_type','!=','0')]}">
                                 <field name="count_applicant" widget="statinfo" string="Applicants"/>
                             </button>
                             <button name="%(action_hr_attachments_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-archive">
@@ -105,8 +189,7 @@
                             <widget name="web_ribbon" title="Refused" bg_color="bg-danger"  attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
                         </div>
                         <div class="oe_title">
-                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','1')]}">Personnel selection</span>
-                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','0')]}">Modification of working conditions</span>
+                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','1')]}"><field name="recruitment_type" readonly="1"/></span>>
                             <h1>
                                 <field name="priority" widget="priority" class="mr-3"/>
                                 <field name="name" readonly="1"/>
@@ -173,11 +256,12 @@
                             </group>
                             <group string="Account Analytic">
                                 <field name="analytic_account_id" attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                <field name="job_id" invisible="1"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Recruitment Order" name="recruitment">
-                                <field id="recruitment_requisition_line_1" name="recruitment_requisition_line" widget="section_and_note_one2many" mode="tree,kanban"
+                                <field id="recruitment_requisition_line" name="recruitment_requisition_line" widget="section_and_note_one2many" mode="tree,kanban"
                                        attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['1'])]}">
                                     <tree string="Purchase Order Lines" editable="bottom" default_order="sequence, id">
                                         <control>
@@ -205,6 +289,7 @@
                                         <field name="state" widget="badge" options="{'color_field': 'color'}" invisible="1"/>
                                         <field name="observations"/>
                                     </tree>
+                                    <field name="description"/>
                                 </field>
                                 <field id="recruitment_requisition_line_2" name="recruitment_requisition_line_2" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_no_of_recruitment': 1}"
                                        attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['0'])]}">
@@ -240,17 +325,17 @@
                                 </field>
                             </page>
                             <page string="Stage Report" name="stage_report">
-                                <field name="ticket_stage_log_ids" mode="tree" nolabel="1" readonly="1">
-                                    <tree string="Ticket Stage Report" default_order="datetime_start desc">
+                                <field name="hr_recruitment_stage_log_ids" mode="tree" nolabel="1" readonly="">
+                                    <tree string="RRHH Ticket Report" default_order="datetime_start desc">
                                         <field name="stage_id"/>
                                         <field name="user_id" widget="many2one_avatar_user"/>
                                         <field name="datetime_start"/>
                                         <field name="datetime_end"/>
                                         <field name="no_hours" widget="float_time"/>
-                                        <field name="current_time" widget="float_time"/>
                                         <field name="stage_result" style="max-width: 200px"/>
                                     </tree>
                                 </field>
+                                <field name="hr_applicant_ids" invisible=""/>
                             </page>
                         </notebook>
                     </sheet>
@@ -337,45 +422,45 @@
             </field>
         </record>
 
-        <!--   actions opening views on models   -->
-        <record model="ir.actions.act_window" id="action_window_recruitment_my_requisition_tree_view">
-          <field name="name">My recruitment/promotion</field>
-          <field name="res_model">hr_recruitment_requisition</field>
-          <field name="view_mode">list,form,kanban</field>
-            <field name="domain">[('create_uid', '=', uid)]</field>
-        </record>
+<!--        &lt;!&ndash;   actions opening views on models   &ndash;&gt;-->
+<!--        <record model="ir.actions.act_window" id="action_window_recruitment_my_requisition_tree_view">-->
+<!--          <field name="name">My recruitment/promotion</field>-->
+<!--          <field name="res_model">hr_recruitment_requisition</field>-->
+<!--          <field name="view_mode">list,form,kanban</field>-->
+<!--            <field name="domain">[('create_uid', '=', uid)]</field>-->
+<!--        </record>-->
 
-        <record model="ir.actions.act_window" id="action_window_recruitment_requisition_tree_view">
-          <field name="name">recruitment/promotion</field>
-          <field name="res_model">hr_recruitment_requisition</field>
-          <field name="view_mode">list,form,kanban</field>
-        </record>
+<!--        <record model="ir.actions.act_window" id="action_window_recruitment_requisition_tree_view">-->
+<!--          <field name="name">recruitment/promotion</field>-->
+<!--          <field name="res_model">hr_recruitment_requisition</field>-->
+<!--          <field name="view_mode">list,form,kanban</field>-->
+<!--        </record>-->
 
-        <!-- Top menu item -->
-        <menuitem name="recruitment/promotion"
-                  id="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  parent="hr_recruitment.menu_hr_recruitment_root"
-                  sequence="80"
-                  groups="hr.group_hr_user"/>
+<!--        &lt;!&ndash; Top menu item &ndash;&gt;-->
+<!--        <menuitem name="recruitment/promotion"-->
+<!--                  id="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"-->
+<!--                  parent="hr_recruitment.menu_hr_recruitment_root"-->
+<!--                  sequence="80"-->
+<!--                  groups="hr.group_hr_user"/>-->
 
-        <menuitem name="my recruitment/promotion"
-                  id="recruitment_requisition_my_tree_view_menu"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  action="action_window_recruitment_my_requisition_tree_view"
-                  sequence="1"/>
+<!--        <menuitem name="my recruitment/promotion"-->
+<!--                  id="recruitment_requisition_my_tree_view_menu"-->
+<!--                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"-->
+<!--                  action="action_window_recruitment_my_requisition_tree_view"-->
+<!--                  sequence="1"/>-->
 
-        <menuitem name="recruitment/promotion"
-                  id="recruitment_requisition_tree_view_menu_2"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  action="action_window_recruitment_requisition_tree_view"
-                  sequence="2"/>
+<!--        <menuitem name="recruitment/promotion"-->
+<!--                  id="recruitment_requisition_tree_view_menu_2"-->
+<!--                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"-->
+<!--                  action="action_window_recruitment_requisition_tree_view"-->
+<!--                  sequence="2"/>-->
 
-        <!--     /////////////////    Menu de ajustes     /////////////////////////   -->
-        <menuitem
-                id="menu_hr_recruitment_requisition_configuration"
-                name="Recruitment configuration"
-                parent="hr_recruitment.menu_hr_recruitment_configuration"
-                groups="hr_recruitment.group_hr_recruitment_user"
-                sequence="19"/>
+<!--        &lt;!&ndash;     /////////////////    Menu de ajustes     /////////////////////////   &ndash;&gt;-->
+<!--        <menuitem-->
+<!--                id="menu_hr_recruitment_requisition_configuration"-->
+<!--                name="Recruitment configuration"-->
+<!--                parent="hr_recruitment.menu_hr_recruitment_configuration"-->
+<!--                groups="hr_recruitment.group_hr_recruitment_user"-->
+<!--                sequence="19"/>-->
     </data>
 </odoo>

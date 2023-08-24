@@ -1,11 +1,12 @@
 from odoo import fields, models, api, _
 from datetime import datetime
 
-class HrRecruitmentRequisitionTicketStageLog(models.Model):
-    _name = "hr_recruitment_stage_log"
-    _description = "Recruitment Stage Log"
+class HrApplicantStageLog(models.Model):
+    _name = "hr_applicant_stage_log"
+    _description = "Applicant Stage Log"
 
-    hr_recruitment_requisition_id = fields.Many2one(comodel_name="hr_recruitment_requisition", string="Recruitment Requisition", ondelete='cascade')
+    hr_applicant_id = fields.Many2one(comodel_name='hr.applicant', string='Applicant')
+    hr_recruitment_requisition_id = fields.Many2one(comodel_name="hr_recruitment_requisition", string="Recruitment Requisition")
     stage_id = fields.Many2one(comodel_name="hr_requisition_state", string="Order Stage", ondelete='restrict')
     user_id = fields.Many2one(comodel_name="res.users", string="Manager_id")
     datetime_start = fields.Datetime(string='Start Date')
