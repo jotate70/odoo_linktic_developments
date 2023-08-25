@@ -177,7 +177,7 @@
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="%(action_hr_applicant_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-pencil"
-                                    groups="hr_recruitment.group_hr_recruitment_user" attrs="{'invisible': ['|',('state_type','in',['draft','confirm','refused']),('recruitment_type','!=','0')]}">
+                                    groups="hr_recruitment.group_hr_recruitment_user" attrs="{'invisible': ['|',('state_type','in',['draft','confirm','in_progress','refused']),('recruitment_type','!=','0')]}">
                                 <field name="count_applicant" widget="statinfo" string="Applicants"/>
                             </button>
                             <button name="%(action_hr_attachments_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-archive">
@@ -189,7 +189,7 @@
                             <widget name="web_ribbon" title="Refused" bg_color="bg-danger"  attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
                         </div>
                         <div class="oe_title">
-                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','1')]}"><field name="recruitment_type" readonly="1"/></span>>
+                            <span class="o_form_label" attrs="{'invisible': [('recruitment_type','=','1')]}"><field name="recruitment_type" readonly="1"/></span>
                             <h1>
                                 <field name="priority" widget="priority" class="mr-3"/>
                                 <field name="name" readonly="1"/>
@@ -206,17 +206,17 @@
                                 <field name="assigned_id" placeholder="HHRR Employee" widget="many2one_avatar_user"
                                        options="{'no_create':true, 'no_open':true}"
                                        groups="hr_recruitment.group_hr_recruitment_user"
-                                       attrs="{'invisible': [['state_type', '=', 'draft']], 'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                       attrs="{'invisible': [['state_type', '=', 'draft']], 'readonly': [('state_type', 'in', ['in_progress','recruitment','done','refused'])]}"/>
                                 <field name="employee_id" placeholder="Employee" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                       attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 <field name="department_id" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                       attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 <field name="state_aprove" invisible="1"/>
                                 <field name="time_off_related" invisible="1"/>
                                 <label for="manager_id" string="Manager"/>
                                 <div>
                                     <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
-                                           attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                           attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                     <span class="oe_read_only"> - </span>
                                     <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                            attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
@@ -224,19 +224,19 @@
                                            attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)]}"/>
                                 </div>
                                 <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'invisible': [('time_off_related', '=', False)], 'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                       attrs="{'invisible': [('time_off_related','=',False)], 'readonly': [('state_type','in',['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 <field name="manager_before" invisible="1"/>
                                 <field name="ceo" invisible="1"/>
                                 <field name="company_id" invisible="" groups="base.group_multi_company"/>
                             </group>
                             <group string="records">
                                 <field name="estimated_date_admission" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                       attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 <field name="create_date"/>
                                 <field name="write_date"/>
                                 <field name="write_uid"/>
                                 <field name="recruitment_type_id" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}" required="True"/>
+                                       attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}" required="True"/>
                                 <field name="recruitment_type" invisible="1"/>
                                 <field name="requisition_type" invisible="1"/>
                                 <field name="state_type" invisible="1"/>
@@ -244,25 +244,24 @@
                                 <field name="requires_approval" invisible="1"/>
                             </group>
                             <group string="budget">
-                                <field name="budget_post_id" attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                <field name="budget_post_id" attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 <label for="budget_value" string="Budget Value"/>
                                 <div>
                                     <field name="budget_value" placeholder="5.000.000,00" class="oe_inline"
-                                           attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                           attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                     <field name="currency_id" placeholder="COP" class="oe_inline"
                                            options="{'no_open':True, 'no_create':True}"
-                                           attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
+                                           attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                 </div>
                             </group>
                             <group string="Account Analytic">
-                                <field name="analytic_account_id" attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress', 'done', 'refused'])]}"/>
-                                <field name="job_id" invisible="1"/>
+                                <field name="analytic_account_id" attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Recruitment Order" name="recruitment">
                                 <field id="recruitment_requisition_line" name="recruitment_requisition_line" widget="section_and_note_one2many" mode="tree,kanban"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['1'])]}">
+                                       attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])], 'invisible': [('recruitment_type','!=','0')]}">
                                     <tree string="Purchase Order Lines" editable="bottom" default_order="sequence, id">
                                         <control>
                                             <create name="add_recruitment_control" string="Add a recruitment"/>
@@ -274,7 +273,6 @@
                                         <field name="display_type" force_save="1" invisible="1"/>
                                         <field name="recruitment_requisition_id" invisible="1"/>
                                         <field name="requisition_type" invisible="1"/>
-                                        <field name="job_positions_domain" invisible="1"/>
                                         <field name="job_positions" options="{'no_create':true, 'no_open':true}"/>
                                         <field name="no_of_recruitment" optional="hide"/>
                                         <field name="count_recruited" optional="hide"/>
@@ -289,40 +287,49 @@
                                         <field name="state" widget="badge" options="{'color_field': 'color'}" invisible="1"/>
                                         <field name="observations"/>
                                     </tree>
-                                    <field name="description"/>
                                 </field>
-                                <field id="recruitment_requisition_line_2" name="recruitment_requisition_line_2" widget="section_and_note_one2many" mode="tree,kanban" context="{'default_no_of_recruitment': 1}"
-                                       attrs="{'readonly': [('state_type', 'in', ['confirm', 'in_progress','done','refused'])], 'invisible': [('recruitment_type', 'in', ['0'])]}">
-                                    <tree string="Purchase Order Lines" default_order="sequence, id">
-                                        <control>
-                                            <create name="add_recruitment_control" string="Add a recruitment"/>
-                                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
-                                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
-                                        </control>
+                            </page>
+                            <page attrs="{'invisible': [('recruitment_type','!=','1')]}">
+                                <group>
+                                    <group string="current information">
                                         <field name="id" invisible="1"/>
-                                        <field name="sequence" widget="handle"/>
-                                        <field name="display_type" force_save="1" invisible="1"/>
-                                        <field name="job_positions_domain" invisible="1"/>
                                         <field name="job_positions" options="{'no_create':true, 'no_open':true}"/>
                                         <field name="employee_domain" invisible="1"/>
-                                        <field name="employee_id" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="employee_id" domain="employee_domain" options="{'no_create':true, 'no_open':true}"/>
                                         <field name="contract_id" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="contract_type_id" optional="hide"/>
-                                        <field name="state_contract" optional="hide"/>
+                                        <field name="contract_type_id" readonly="1"/>
+                                        <field name="state_contract" readonly="1"/>
+                                        <label for="date_start" string="Contract Date"/>
+                                        <div>
+                                            <field name="date_start" placeholder="01-02-2018" class="oe_inline" readonly="1"/>
+                                            <span class="oe_read_only"> - </span>
+                                            <field name="date_end" placeholder="Present" class="oe_inline" readonly="1"/>
+                                        </div>
+                                        <field name="wage" widget="monetary" readonly="1"/>
+                                        <field name="contract_welfare_aid" widget="monetary"/>
+                                        <field name="contract_food_aid" widget="monetary"/>
+                                        <field name="contract_transport_aid" widget="monetary"/>
+                                        <field name="contract_bearing_aid" widget="monetary"/>
+                                        <label for="contract_total_income" string="Total Income"/>
+                                        <div>
+                                            <field name="contract_total_income" widget="monetary" placeholder="5.000.000,00" class="oe_inline"/>
+                                            <span class="oe_read_only"> - </span>
+                                            <field name="currency_id" placeholder="COP" class="oe_inline" readonly="1"/>
+                                        </div>
+                                    </group>
+                                    <group string="update information">
                                         <field name="job_positions_after" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="updated_contract_type_id" optional="hide"/>
-                                        <field name="updated_contract_date_end" optional="hide"/>
-                                        <field name="contract_total_income" widget="monetary" placeholder="5.000.000,00"/>
-                                        <field name="updated_contract_total_income" widget="monetary" placeholder="8.000.000,00"/>
-                                        <field name="recruitment_type" invisible="1"/>
-                                        <field name="estimated_date_admission" optional="hide"/>
-                                        <field name="recruited" style="color: green" invisible="1"/>
-                                        <field name="contract_addendum" style="color: green"/>
-                                        <field name="state_type" invisible="1"/>
-                                        <field name="state" widget="badge" options="{'color_field': 'color'}" invisible="1"/>
-                                        <field name="observations"/>
-                                    </tree>
-                                </field>
+                                        <field name="updated_contract_type_id" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="updated_contract_date_end"/>
+                                        <field name="contract_wage_rise" widget="monetary"/>
+                                        <label for="updated_contract_total_income" string="New Total Income"/>
+                                        <div>
+                                            <field name="updated_contract_total_income" widget="monetary" placeholder="8.000.000,00" class="oe_inline"/>
+                                            <span class="oe_read_only"> - </span>
+                                            <field name="currency_id" placeholder="COP" class="oe_inline" readonly="1"/>
+                                        </div>
+                                    </group>
+                                </group>
                             </page>
                             <page string="Stage Report" name="stage_report">
                                 <field name="hr_recruitment_stage_log_ids" mode="tree" nolabel="1" readonly="">
@@ -338,6 +345,8 @@
                                 <field name="hr_applicant_ids" invisible=""/>
                             </page>
                         </notebook>
+                        <span><b>Job functions</b></span>
+                        <field name="description"/>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
@@ -388,7 +397,7 @@
                                         <label for="manager_id" string="Manager"/>
                                         <div>
                                             <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
-                                                   attrs="{'readonly': [('state_type', 'in', ['in_progress', 'done', 'refused'])]}"/>
+                                                   attrs="{'readonly': [('state_type', 'in', ['in_progress','recruitment','done','refused'])]}"/>
                                             <span class="oe_read_only"> - </span>
                                             <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                                    attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>

@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
+from random import randint
 
 class RecruitmentStage(models.Model):
     _inherit = 'hr.recruitment.stage'
     _description = "Recruitment Stages"
     _order = 'sequence'
 
+    def _get_default_color(self):
+        return randint(1, 11)
+
+    color = fields.Integer(string='Color', default=_get_default_color)
     requires_approval = fields.Selection([('yes', 'Yes'), ('no', 'No')], string='Requires Approval',
                                          help='Indicates if this stage requires approval in the personnel request.',
                                          store=True, default='no', required=True)

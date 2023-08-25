@@ -19,11 +19,20 @@ class RecruitmentRequisition(models.Model):
     state_id = fields.Many2many(comodel_name='hr_requisition_state', relation='x_hr_recruitment_stage_rel',
                                 column1='recruitment_type_id', column2='recruitment_state_id', string='Stages',
                                 help='List the visible stages for this type of personnel request.')
-    resource_calendar_id = fields.Many2one('resource.calendar', 'Working Hours',
+    stage_id = fields.Many2many(comodel_name='hr.recruitment.stage', relation='x_hr_recruitment_stage',
+                                column1='recruitment_type_id', column2='recruitment_stage_id',
+                                string='Recruitment Stage',
+                                help='Match the stages with the types of personnel request.')
+    resource_calendar_id = fields.Many2one(comodel_name='resource.calendar', string='Working Hours',
                                            default=lambda self: self.env.company.resource_calendar_id,
                                            domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
                                            help="Working hours used to determine the deadline of SLA Policies.")
     description = fields.Html(string='Description', translate=True, sanitize_style=True)
+
+    # Stage reset
+    @api.onchange('recruitment_type')
+    def _reset_stage_id(self):
+        self.stage_id = False
 
 
 

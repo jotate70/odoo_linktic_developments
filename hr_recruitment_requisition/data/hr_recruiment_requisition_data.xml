@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- ///////////////////////// default staffing stages //////////////////////////////////////// -->
+        <!-- ///////////////////////// Default staffing stages requisition recruitment /////////////////////////// -->
 
+        <!-- ///////////////////////////////////////// General stages //////////////////////////////////////////// -->
         <record id="hr_requisition_state_draft" model="hr_requisition_state">
             <field name="name">Draft</field>
             <field name="color">1</field>
@@ -33,20 +34,10 @@
             <field name="description">In the validation stage, the planning manager must verify if he has the resource available in the company.</field>
         </record>
 
-        <record id="hr_requisition_state_in_recruitment" model="hr_requisition_state">
-            <field name="name">In recruitment</field>
-            <field name="color">4</field>
-            <field name="sequence">4</field>
-            <field name="requires_approval">no</field>
-            <field name="fold">False</field>
-            <field name="state_type">in_progress</field>
-            <field name="description">The recruitment stage is where the selection and hiring of requested personnel begins.</field>
-        </record>
-
         <record id="hr_requisition_state_hired" model="hr_requisition_state">
             <field name="name">hired</field>
-            <field name="color">5</field>
-            <field name="sequence">5</field>
+            <field name="color">10</field>
+            <field name="sequence">20</field>
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
             <field name="state_type">done</field>
@@ -55,15 +46,189 @@
 
         <record id="hr_requisition_state_refused" model="hr_requisition_state">
             <field name="name">Refused</field>
-            <field name="color">6</field>
-            <field name="sequence">6</field>
+            <field name="color">9</field>
+            <field name="sequence">21</field>
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
             <field name="state_type">refused</field>
             <field name="description">The rejected stage indicates that the request has been canceled by the applicant, or rejected by the approvers of some stage of the process.</field>
         </record>
 
-        <!-- ///////////////////////   default staffing recruitment requisition type ///////////////////////////// -->
+        <!-- ////////////////////////////////////// Recruitment stages /////////////////////////////////////////// -->
+
+        <record id="hr_requisition_state_in_recruitment" model="hr_requisition_state">
+            <field name="name">In recruitment</field>
+            <field name="color">4</field>
+            <field name="sequence">4</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">recruitment</field>
+            <field name="description">The recruitment stage is where the selection and hiring of requested personnel begins.</field>
+        </record>
+
+        <!-- ///////////////////////////// Modifications of working conditions /////////////////////////////////// -->
+
+        <record id="hr_requisition_state_in_approval" model="hr_requisition_state">
+            <field name="name">Approval</field>
+            <field name="color">3</field>
+            <field name="sequence">5</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">Stage in which the Vice President reviews, adjusts (if required) and approves the working conditions.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_notification" model="hr_requisition_state">
+            <field name="name">Notification</field>
+            <field name="color">3</field>
+            <field name="sequence">6</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">At this stage, a record is left that the worker was notified of the new conditions.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_contract_addendum" model="hr_requisition_state">
+            <field name="name">Contract Addendum</field>
+            <field name="color">3</field>
+            <field name="sequence">7</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">At this stage, the realization of the other if of the contract must be managed to formalize the new conditions.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_sign_contract_addendum" model="hr_requisition_state">
+            <field name="name">Sign Addendum</field>
+            <field name="color">3</field>
+            <field name="sequence">8</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this stage the other if is signed by the required people (outside the ERP, in docusing).</field>
+        </record>
+
+        <!-- ///////////////////////////////////////// Labor dismissal ///////////////////////////////////////// -->
+
+        <record id="hr_requisition_state_in_liquidation_completion" model="hr_requisition_state">
+            <field name="name">Liquidation Completion</field>
+            <field name="color">2</field>
+            <field name="sequence">9</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">confirm</field>
+            <field name="description">At this stage, the accounting payroll team performs the settlement and attaches the corresponding settlement format.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_liquidation_approval" model="hr_requisition_state">
+            <field name="name">Liquidation Approval</field>
+            <field name="color">3</field>
+            <field name="sequence">10</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">At this stage, the settlement made must be reviewed and approved by the Administrative and Financial Manager. Subsequently send to register payment in SIFA.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_sifa_registration" model="hr_requisition_state">
+            <field name="name">SIFA registration</field>
+            <field name="color">3</field>
+            <field name="sequence">11</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage, the accounting and registration in SIFA is carried out, with which the settlement is ready for payment.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_liquidation_payment" model="hr_requisition_state">
+            <field name="name">Liquidation Payment</field>
+            <field name="color">3</field>
+            <field name="sequence">12</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage, according to the payment schedule, the payment is transferred to the employee, a screenshot of the payment support is attached.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_send_liquidation" model="hr_requisition_state">
+            <field name="name">send Liquidation</field>
+            <field name="color">3</field>
+            <field name="sequence">13</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage, the human talent team sends the settlement support to the employee via e-mail.</field>
+        </record>
+
+        <record id="hr_requisition_state_in_archive_employee" model="hr_requisition_state">
+            <field name="name">Archive Employee</field>
+            <field name="color">3</field>
+            <field name="sequence">14</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage, human talent must enter the ERP employee module, to File the employee file and cancel the active contract.</field>
+        </record>
+
+        <!-- ////////////////////////////////////// Disciplinary Process ///////////////////////////////////////// -->
+
+        <record id="hr_requisition_state_disciplinary_process" model="hr_requisition_state">
+            <field name="name">Disciplinary Process</field>
+            <field name="color">3</field>
+            <field name="sequence">15</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">At this stage, human talent notifies the worker that a disciplinary process will be opened by mail, and they are summoned to a meeting to present disclaimers. Go to Stage "Presentation of Disclaimers".</field>
+        </record>
+
+        <record id="hr_requisition_state_presentation_disclaimers" model="hr_requisition_state">
+            <field name="name">Presentation Disclaimers</field>
+            <field name="color">3</field>
+            <field name="sequence">16</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage Human talent meets with the employee, records and attaches the information from the employee's defense presentation. It goes to the “First Instance Decision” Stage.</field>
+        </record>
+
+        <record id="hr_requisition_state_first_instance" model="hr_requisition_state">
+            <field name="name">First instance</field>
+            <field name="color">3</field>
+            <field name="sequence">17</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">At this stage, human talent communicates to the worker and records the decision made.
+                If a sanction is applied, there must be a record of the type of sanction that will be applied to the employee. You must go to the "Closed Process" Stage.
+                If no sanction is applied, it goes to the “Process Cancelled” Stage (attached Format “Formulation of Charges”).
+                If there is an appeal, it goes to the “Replenishment and Appeal” Stage.</field>
+        </record>
+
+        <record id="hr_requisition_state_reinstatement_and_appeal" model="hr_requisition_state">
+            <field name="name">Reinstatement/Appeal</field>
+            <field name="color">3</field>
+            <field name="sequence">18</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this Stage, Human Talent registers and, if applicable, attaches the information on the Employee's Appeal and Reinstatement Appeal. It goes to the “Second Instance Decision” Stage. (3 business days the worker has).</field>
+        </record>
+
+        <record id="hr_requisition_state_second_instance" model="hr_requisition_state">
+            <field name="name">Second instance</field>
+            <field name="color">3</field>
+            <field name="sequence">19</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">En Esta etapa talento humano comunica a trabajador la decisión definitiva tomada según el recurso de reposición y apelación impuesto por el empleado. (5 días tiene Gtes para resolver)
+                Si se mantiene o reduce la sanción se registra la sanción definitiva y la fecha de aplicación. Se debe Pasar a Etapa “Proceso Cerrado”
+                Si se revoca la sanción se pasa a Etapa “Proceso Cancelado” (adjunta Formato “formulación de Cargos).</field>
+        </record>
+
+        <!-- ///////////////////////   Default staffing recruitment requisition type ///////////////////////////// -->
+
         <record id="recruitment_type_recruitment" model="hr_recruitment_type">
             <field name="name">Recruitment</field>
             <field name="recruitment_type">0</field>
@@ -79,8 +244,33 @@
             <field name="recruitment_type">1</field>
             <field name="requisition_type">single_requisition</field>
             <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),
-            (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
-            <field name="description">The type of recruitment: modification of working conditions allows for promotions and transfers in the company..</field>
+            (4, ref('hr_requisition_state_in_approval')), (4, ref('hr_requisition_state_in_notification')),
+            (4, ref('hr_requisition_state_in_contract_addendum')), (4, ref('hr_requisition_state_in_sign_contract_addendum')),
+            (4, ref('hr_requisition_state_validation')), (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
+            <field name="description">The type of recruitment: modification of working conditions allows for promotions and transfers in the company.</field>
+        </record>
+
+        <record id="recruitment_type_labor_dismissal" model="hr_recruitment_type">
+            <field name="name">Labor dismissal</field>
+            <field name="recruitment_type">2</field>
+            <field name="requisition_type">single_requisition</field>
+            <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_in_liquidation_completion')),
+            (4, ref('hr_requisition_state_in_liquidation_approval')), (4, ref('hr_requisition_state_in_sifa_registration')),
+            (4, ref('hr_requisition_state_in_liquidation_payment')), (4, ref('hr_requisition_state_in_send_liquidation')),
+            (4, ref('hr_requisition_state_in_archive_employee')), (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
+            <field name="description">employee termination process, through the tool.</field>
+        </record>
+
+        <record id="recruitment_type_disciplinary_process" model="hr_recruitment_type">
+            <field name="name">Disciplinary Process</field>
+            <field name="recruitment_type">3</field>
+            <field name="requisition_type">single_requisition</field>
+            <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),
+            (4, ref('hr_requisition_state_disciplinary_process')), (4, ref('hr_requisition_state_presentation_disclaimers')),
+            (4, ref('hr_requisition_state_first_instance')), (4, ref('hr_requisition_state_reinstatement_and_appeal')),
+            (4, ref('hr_requisition_state_second_instance')), (4, ref('hr_requisition_state_hired')),
+            (4, ref('hr_requisition_state_refused'))]"/>
+            <field name="description">employee call process, through the tool.</field>
         </record>
 
         <!-- default staffing recruitment requisition type -->

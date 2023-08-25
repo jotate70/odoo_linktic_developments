@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- //////////////////////////////// Default staffing stages recruitment //////////////////////////////// -->
+
+        <record id="hr_recruitment_stage_initial_review" model="hr.recruitment.stage">
+            <field name="name">Initial Review</field>
+            <field name="color">2</field>
+            <field name="sequence">1</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">An initial review of the candidate's profile is carried out.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_rrhh_interview" model="hr.recruitment.stage">
+            <field name="name">RRHH Interview</field>
+            <field name="color">3</field>
+            <field name="sequence">2</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Interview with the candidate.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_psychotechnical_test" model="hr.recruitment.stage">
+            <field name="name">Psychotechnical test</field>
+            <field name="color">3</field>
+            <field name="sequence">3</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">The psychotechnical test is carried out on the participant.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_technical_test" model="hr.recruitment.stage">
+            <field name="name">Technical test</field>
+            <field name="color">3</field>
+            <field name="sequence">4</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">The technical test is carried out on the participant.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_software_factory_interview" model="hr.recruitment.stage">
+            <field name="name">Software Factory Interview</field>
+            <field name="color">3</field>
+            <field name="sequence">5</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">If required by the profile, an interview with Fabrica de Software is scheduled.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_project_manager_interview" model="hr.recruitment.stage">
+            <field name="name">Project Manager Interview</field>
+            <field name="color">3</field>
+            <field name="sequence">6</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Interview with Project Manager to which the resource enters.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_feature_review" model="hr.recruitment.stage">
+            <field name="name">Feature Review</field>
+            <field name="color">3</field>
+            <field name="sequence">7</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">The functions of the position of the participant are reviewed.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_financial_validation" model="hr.recruitment.stage">
+            <field name="name">Financial Validation</field>
+            <field name="color">3</field>
+            <field name="sequence">8</field>
+            <field name="requires_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Stage where the selection team relates the candidate's data that is required to be validated by the financial area, the validation must be carried out and the record must remain.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_negotiation" model="hr.recruitment.stage">
+            <field name="name">Negotiation</field>
+            <field name="color">3</field>
+            <field name="sequence">9</field>
+            <field name="requires_approval">yes</field>
+            <field name="requires_budget_approval">yes</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Negotiation of the conditions according to the form at an amount pre-approved for the manager, if it is exceeded, negotiation with the vice president is requested.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_conditions_and_documentation" model="hr.recruitment.stage">
+            <field name="name">Conditions/Documentation</field>
+            <field name="color">3</field>
+            <field name="sequence">10</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Human Talent Team Confirms labor conditions with the candidate, the entry date is defined, to pass them on to the Vice President's Approval.
+                Human Talent requests the necessary documentation from the worker to hire.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_signed_contract" model="hr.recruitment.stage">
+            <field name="name">Signed contract</field>
+            <field name="color">10</field>
+            <field name="sequence">11</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">True</field>
+            <field name="hired_stage">True</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">Signature of the contract of the people involved in the process.</field>
+        </record>
+
+        <record id="hr_recruitment_stage_signed_refused" model="hr.recruitment.stage">
+            <field name="name">Refused</field>
+            <field name="color">9</field>
+            <field name="sequence">12</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">True</field>
+            <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
+            <field name="requirements">The request is canceled because the employee withdrew, no agreement was reached, or it is no longer required.</field>
+        </record>
+
+
+
+        <!-- ///////////////////////   Default staffing recruitment requisition type ///////////////////////////// -->
+
+<!--        <record id="recruitment_type_recruitment" model="hr_recruitment_type">-->
+<!--            <field name="name">Recruitment</field>-->
+<!--            <field name="recruitment_type">0</field>-->
+<!--            <field name="requisition_type">single_requisition</field>-->
+<!--            <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),-->
+<!--            (4, ref('hr_requisition_state_validation')), (4, ref('hr_requisition_state_in_recruitment')),-->
+<!--            (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>-->
+<!--            <field name="description">The type of recruitment: Staff Request allows you to recruit new staff.</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

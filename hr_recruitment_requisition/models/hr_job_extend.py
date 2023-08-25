@@ -28,7 +28,7 @@ class Job(models.Model):
     # Valida si existe requisición asociada en curso
     @api.depends('hr_recruitment_requisition_ids')
     def _compute_recruitment_requisition_id(self):
-        data = self.env['hr_recruitment_requisition_line'].search([('id','in',self.hr_recruitment_requisition_ids.ids),('state_type','=','in_progress')], limit=1)
+        data = self.env['hr_recruitment_requisition_line'].search([('id','in',self.hr_recruitment_requisition_ids.ids),('state_type','in',['in_progress','recruitment'])], limit=1)
         if data:
             self.hr_recruitment_requisition_id = data.recruitment_requisition_id
         else:

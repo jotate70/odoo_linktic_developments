@@ -36,9 +36,10 @@
 
     # always loaded
     'data': [
+        'data/hr_recruiment_requisition_data.xml',
+        'data/hr_recruiment_data.xml',
         'security/hr_recruitment_requisition_security.xml',
         'security/ir.model.access.csv',
-        'data/hr_recruiment_requisition_data.xml',
         'views/hr_recruitment_requisition_views.xml',
         'views/hr_recruitment_type_views.xml',
         'views/hr_recruitment_requisition_sequence.xml',
@@ -46,7 +47,7 @@
         'views/hr_applicant_extend_view.xml',
         'views/hr_requisition_stage_views.xml',
         'views/hr_recruitment_stage_extend_views.xml',
-        'views/hr_recruitment_requisition_line_views.xml',
+        # 'views/hr_recruitment_requisition_line_views.xml',
         'views/hr_recruitment_stage_extend_views.xml',
         'wizard/hr_recruitment_requisition_stage_transition_wizard_views.xml',
         'wizard/hr_applicant_stage_transition_wizard_views.xml',

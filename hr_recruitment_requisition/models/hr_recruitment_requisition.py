@@ -18,7 +18,7 @@ class RecruitmentRequisition(models.Model):
         stage_ids = self.env["hr_requisition_state"].search([])
         return stage_ids
 
-    # /////////////////////////////////// General fields /////////////////////////////////////////////
+    # ///////////////////////////////////////////// General fields ////////////////////////////////////////////////
 
     company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True, readonly=True,
                                  states={'draft': [('readonly', False)]}, default=lambda self: self.env.company)
@@ -80,6 +80,7 @@ class RecruitmentRequisition(models.Model):
     state_type = fields.Selection([('draft', 'Draft'),
                                    ('confirm', 'Confirm'),
                                    ('in_progress', 'In Progress'),
+                                   ('recruitment', 'Recruitment'),
                                    ('done', 'Done'),
                                    ('refused', 'Refused')],
                                   string='State Type', store=True, related='state.state_type',
@@ -102,21 +103,78 @@ class RecruitmentRequisition(models.Model):
     requires_approval = fields.Selection([('yes', 'Yes'), ('no', 'No')], string='Requires Approval',
                                          help='Indicates if this stage requires approval in the personnel request.',
                                          store=True, related='state.requires_approval')
-    description = fields.Html(string='Terms and Conditions', store=True, translate=True, sanitize_style=True)
-
-    # /////////////////////////////////////////////// Recruitment fields ///////////////////////////////////////////
-
-    job_id = fields.Many2one(comodel_name='hr.job', string='Job')
+    description = fields.Html(string='Description', store=True, translate=True, sanitize_style=True)
 
     # ////////////////////////////////////  modifications of working conditions  ///////////////////////////////////
 
+    job_positions = fields.Many2one(comodel_name='hr.job', string="Job Positions")
+    employee_domain = fields.Char(string='Employee Domain', compute='_domain_employee_id')
+    # employee_domain = fields.Char(string='Employee Domain')
+    employee_id2 = fields.Many2one(comodel_name='hr.employee', string='Employee')
+    contract_id = fields.Many2one(comodel_name='hr.contract', string='Current Contract')
+    contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="Contract Type")
+    state_contract = fields.Selection([('draft', 'New'),
+                                       ('open', 'Running'),
+                                       ('close', 'Expired'),
+                                       ('cancel', 'Cancelled')], string='Status Contract', tracking=True,
+                                      help='Status of the contract')
+    date_start = fields.Date(string='Start Date', tracking=True,
+                             help="Start date of the contract (if it's a fixed-term contract).")
+    date_end = fields.Date(string='End Date', tracking=True,
+                           help="End date of the contract (if it's a fixed-term contract).")
+    wage = fields.Float(string='Wage', tracking=True, help="Employee's monthly gross wage.")
+    contract_welfare_aid = fields.Monetary(string='Welfare Assistance', related='contract_id.welfare_aid')
+    contract_food_aid = fields.Monetary(string='Food Assistance', related='contract_id.food_aid')
+    contract_transport_aid = fields.Monetary(string='Transport Assistance', related='contract_id.transport_aid')
+    contract_bearing_aid = fields.Monetary(string='Bearing Assistance', related='contract_id.bearing_aid')
+    contract_total_income = fields.Monetary(string='Total Income', related='contract_id.total_income')
+
+    job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job")
+    updated_contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="New Contract Type")
+    updated_contract_date_end = fields.Date(string='New Contract End Date')
+    contract_wage_rise = fields.Monetary(string='Contract Wage Rise')
+    updated_contract_total_income = fields.Monetary(string='New Total Income', compute='get_updated_contract_total_income')
 
     # ///////////////////////////////////////////// Functions //////////////////////////////////////////////////////
 
-    # Select job in recruitment requisition line
-    def _select_job_id_recruitment_requisition_line(self):
-        for rec in self.recruitment_requisition_line:
-            self.job_id = rec.job_positions
+    # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    # function domain dynamic
+    @api.onchange('job_positions')
+    @api.depends('job_positions')
+    def _domain_employee_id(self):
+        for rec in self:
+            employee = rec.env['hr.employee'].sudo().search(
+                [('job_id', 'in', rec.job_positions.ids)])
+            if employee:
+                rec.employee_domain = json.dumps(
+                    [('id', 'in', employee.ids)])
+            else:
+                rec.employee_domain = json.dumps([()])
+
+    # auto-select fields contract relation
+    @api.onchange('employee_id')
+    def _compute_contract_wage(self):
+        for rec in self:
+            contract = rec.env['hr.contract'].sudo().search(
+                [('employee_id', '=', rec.employee_id.ids), ('state', 'in', ['cancel', 'close', 'open'])], limit=1)
+            rec.wage = contract.wage
+            rec.contract_id = contract
+            rec.contract_type_id = contract.contract_type_id
+            rec.date_start = contract.date_start
+            rec.date_end = contract.date_end
+            rec.state_contract = contract.state
+
+    # Compute wage rise
+    @api.depends('contract_wage_rise')
+    def get_updated_contract_total_income(self):
+        for ticket in self:
+            if ticket.contract_wage_rise > 0:
+                ticket.updated_contract_total_income = ticket.contract_wage_rise + ticket.contract_total_income
+            else:
+                ticket.updated_contract_total_income = False
+
+    # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     # recruitment type auto select
     @api.onchange('employee_id')
@@ -148,7 +206,9 @@ class RecruitmentRequisition(models.Model):
             if rec.recruited == 'not_recruited':
                 c += 1
         if c == 0:
-            self.write({'state': 'done'})
+            state_id = self.env['hr_requisition_state'].search([('state_type','=','done'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
+                                                               order="id asc", limit=1)
+            self.write({'state': state_id.id})
         else:
             return
 
@@ -218,7 +278,7 @@ class RecruitmentRequisition(models.Model):
                     if c > 1:
                         raise UserError('El tipo de requisición permite una unica orden de reclutamiento')
 
-    # Seleciona los responsables- de aprobaión inicial y departamento
+    # Seleciona los responsables de aprobaión inicial y departamento
     @api.onchange('employee_id')
     def _compute_select_manager_id(self):
         self._compute_state_after()
@@ -238,9 +298,8 @@ class RecruitmentRequisition(models.Model):
         if self.recruitment_requisition_line:
             if self.state_type == 'draft':
                 # Select job in recruitment requisition line
-                self._select_job_id_recruitment_requisition_line()
                 # mapping of stages created
-                state_id = self.env['hr_requisition_state'].search([('state_type','=','confirm')], order="id asc", limit=1)
+                state_id = self.env['hr_requisition_state'].search([('state_type','=','confirm'),('recruitment_type_id','in',self.recruitment_type_id.ids)],order="id asc",limit=1)
                 self.write({'state': state_id.id})
                 self.manager_id = self.state.manager_id
                 self.manager_id2 = self.state.optional_manager_id
@@ -289,7 +348,7 @@ class RecruitmentRequisition(models.Model):
             if self.manager_before.user_id == self.env.user:
                 if self.state_after.requires_approval == 'yes':
                     #  Marca actividad como hecha de forma automatica
-                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity = self.env['mail.activity'].search([('id','=',self.activity_id)],limit=1)
                     new_activity.action_feedback(feedback='Es Aprobado')
                     self.write({'manager_id': self.state_after.manager_id,
                                 'manager_id2': self.state_after.optional_manager_id})
@@ -323,13 +382,15 @@ class RecruitmentRequisition(models.Model):
                     self.write({'activity_id': new_activity})
                     # Contador
                     c = self.state_aprove + 1
+                    # mapping of stages created
+                    state_id = self.env['hr_requisition_state'].search([('state_type','=','in_progress'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
+                                                                       order="id asc", limit=1)
                     self.write({'state_aprove': c,
-                                'state': self.state_after})
+                                'state': state_id.id})
                     self._compute_state_after()  # next stage check
                 else:
-                    self.write({'state': self.state_after})
                     #  Marca actividad como hecha de forma automatica
-                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity = self.env['mail.activity'].search([('id','=',self.activity_id)], limit=1)
                     new_activity.action_feedback(feedback='Es Aprobado')
                     # Llama función actulizar cantidades a reclutar
                     for rec in self.recruitment_requisition_line:
@@ -337,20 +398,24 @@ class RecruitmentRequisition(models.Model):
                     self._compute_state_after()  # next stage check
                     # Contador de niveles de aprobación
                     c = self.state_aprove + 1
-                    self.write({'state_aprove': c})
+                    # mapping of stages created
+                    state_id = self.env['hr_requisition_state'].search([('state_type','=','recruitment'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
+                                                                       order="id asc", limit=1)
+                    self.write({'state_aprove': c,
+                                'state': state_id.id})
             else:
                 raise UserError('El gerente responsable debe aprobar la solicitud.')
         else:
             raise UserError('No existe una linea de orden de reclutamiento')
 
     def button_action_done(self):
-        state_id = self.env['hr_requisition_state'].search([('state_type', '=', 'done')],
+        state_id = self.env['hr_requisition_state'].search([('state_type','=','done'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
                                                            order="id asc", limit=1)
         self.write({'state': state_id.id,
                     'priority': '0'})
 
     def button_action_draft(self):
-        state_id = self.env['hr_requisition_state'].search([('state_type', '=', 'draft')],
+        state_id = self.env['hr_requisition_state'].search([('state_type','=','draft'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
                                                            order="id asc", limit=1)
         self.write({'state': state_id.id,
                     'priority': '0',
@@ -365,7 +430,7 @@ class RecruitmentRequisition(models.Model):
         self._compute_state_after()  # next stage check
 
     def button_action_cancel(self):
-        state_id = self.env['hr_requisition_state'].search([('state_type', '=', 'refused')],
+        state_id = self.env['hr_requisition_state'].search([('state_type','=','refused'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
                                                            order="id asc", limit=1)
         self.write({'state': state_id.id,
                     'priority': '0'})
@@ -375,7 +440,7 @@ class RecruitmentRequisition(models.Model):
         new_activity2 = self.env['mail.activity'].search([('id', '=', self.activity_assigned_id)], limit=1)
         new_activity2.action_feedback(feedback='Is Refuse')
         # Llama función restablecer cantidades a reclutar
-        if self.state_type == 'in_progress':
+        if self.state_type in ['in_progress','recruitment']:
             for rec in self.recruitment_requisition_line:
                 rec.job_positions.reset_no_of_recruitment(rec.no_of_recruitment)
 
@@ -411,17 +476,17 @@ class RecruitmentRequisition(models.Model):
         else:
             return
 
-    # Función que cierra la requición
+    # Función que cierra la requisición
     def _compute_requisition_state_done(self):
         # mapping of stages created
-        state_id = self.env['hr_requisition_state'].search([('state_type', '=', 'done')],
+        state_id = self.env['hr_requisition_state'].search([('state_type','=','done'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
                                                            order="id asc", limit=1)
         c = 0
         for rec in self.recruitment_requisition_line:
             if rec.recruited == 'not_recruited':
                 c += 1
         if c == 0:
-            self.write({'state': state_id})
+            self.write({'state': state_id.id})
 
     #   Wizard Open
     def open_stage_transition_wizard(self):
@@ -466,6 +531,7 @@ class RecruitmentRequisitionLine(models.Model):
     state_type = fields.Selection([('draft', 'Draft'),
                                    ('confirm', 'Confirm'),
                                    ('in_progress', 'In Progress'),
+                                   ('recruitment', 'Recruitment'),
                                    ('done', 'Done'),
                                    ('refused', 'Refused')],
                                   string='State Type', store=True, related='state.state_type',
@@ -484,7 +550,7 @@ class RecruitmentRequisitionLine(models.Model):
 
     # ///////////////////////////////////////  Recruitment  ////////////////////////////////////////////////////////
 
-    job_positions_domain = fields.Char(string='Job Domain', compute='_domain_job_positions_domain')
+    # job_positions_domain = fields.Char(string='Job Domain', compute='_domain_job_positions_domain')
     job_positions = fields.Many2one(comodel_name='hr.job', string="Job Positions", required=True)
     no_of_recruitment = fields.Integer(string='Amount', help='Number of new employees you expect to recruit.', default=1)
     estimated_date_admission = fields.Date(string='Entry date estimated', readonly=False, select=True)
@@ -508,33 +574,33 @@ class RecruitmentRequisitionLine(models.Model):
                                     string="Working Time", tracking=True, copy=False)
     observations = fields.Text(string='Observations')
 
-    # ///////////////////////////////  Modifications of working conditions  //////////////////////////////////////
-
-    employee_domain = fields.Char(string='Employee Domain', compute='_domain_employee_id')
-    # employee_domain = fields.Char(string='Employee Domain')
-    employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee')
-    contract_id = fields.Many2one(comodel_name='hr.contract', string='Current Contract')
-    state_contract = fields.Selection([('draft', 'New'),
-                                       ('open', 'Running'),
-                                       ('close', 'Expired'),
-                                       ('cancel', 'Cancelled')], string='Status Contract', tracking=True,
-                                      help='Status of the contract')
-    date_start = fields.Date(string='Start Date', tracking=True,
-                             help="Start date of the contract (if it's a fixed-term contract).")
-    date_end = fields.Date(string='End Date', tracking=True,
-                           help="End date of the contract (if it's a fixed-term contract).")
-    wage = fields.Float(string='Wage', tracking=True, help="Employee's monthly gross wage.")
-    contract_welfare_aid = fields.Monetary(string='Welfare Assistance', related='contract_id.welfare_aid')
-    contract_food_aid = fields.Monetary(string='Food Assistance', related='contract_id.food_aid')
-    contract_transport_aid = fields.Monetary(string='Transport Assistance', related='contract_id.transport_aid')
-    contract_bearing_aid = fields.Monetary(string='Bearing Assistance', related='contract_id.bearing_aid')
-    contract_total_income = fields.Monetary(string='Total Income', related='contract_id.total_income')
-
-    job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job")
-    updated_contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="New Contract Type")
-    updated_contract_date_end = fields.Date(string='New Contract End Date')
-    contract_wage_rise = fields.Monetary(string='Contract Wage Rise')
-    updated_contract_total_income = fields.Monetary(string='New Total Income', compute='get_updated_contract_total_income')
+    # # ///////////////////////////////  Modifications of working conditions  //////////////////////////////////////
+    #
+    # employee_domain = fields.Char(string='Employee Domain', compute='_domain_employee_id')
+    # # employee_domain = fields.Char(string='Employee Domain')
+    # employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee')
+    # contract_id = fields.Many2one(comodel_name='hr.contract', string='Current Contract')
+    # state_contract = fields.Selection([('draft', 'New'),
+    #                                    ('open', 'Running'),
+    #                                    ('close', 'Expired'),
+    #                                    ('cancel', 'Cancelled')], string='Status Contract', tracking=True,
+    #                                   help='Status of the contract')
+    # date_start = fields.Date(string='Start Date', tracking=True,
+    #                          help="Start date of the contract (if it's a fixed-term contract).")
+    # date_end = fields.Date(string='End Date', tracking=True,
+    #                        help="End date of the contract (if it's a fixed-term contract).")
+    # wage = fields.Float(string='Wage', tracking=True, help="Employee's monthly gross wage.")
+    # contract_welfare_aid = fields.Monetary(string='Welfare Assistance', related='contract_id.welfare_aid')
+    # contract_food_aid = fields.Monetary(string='Food Assistance', related='contract_id.food_aid')
+    # contract_transport_aid = fields.Monetary(string='Transport Assistance', related='contract_id.transport_aid')
+    # contract_bearing_aid = fields.Monetary(string='Bearing Assistance', related='contract_id.bearing_aid')
+    # contract_total_income = fields.Monetary(string='Total Income', related='contract_id.total_income')
+    #
+    # job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job")
+    # updated_contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="New Contract Type")
+    # updated_contract_date_end = fields.Date(string='New Contract End Date')
+    # contract_wage_rise = fields.Monetary(string='Contract Wage Rise')
+    # updated_contract_total_income = fields.Monetary(string='New Total Income', compute='get_updated_contract_total_income')
 
     # ///////////////////////////////////////////// Functions //////////////////////////////////////////////////////
 
@@ -554,19 +620,19 @@ class RecruitmentRequisitionLine(models.Model):
         result = super(RecruitmentRequisitionLine, self).write(values)
         return result
 
-    @api.depends('contract_wage_rise')
-    def get_updated_contract_total_income(self):
-        for ticket in self:
-            if ticket.contract_wage_rise > 0:
-                ticket.updated_contract_total_income = ticket.contract_wage_rise + ticket.contract_total_income
-            else:
-                ticket.updated_contract_total_income = False
+    # @api.depends('contract_wage_rise')
+    # def get_updated_contract_total_income(self):
+    #     for ticket in self:
+    #         if ticket.contract_wage_rise > 0:
+    #             ticket.updated_contract_total_income = ticket.contract_wage_rise + ticket.contract_total_income
+    #         else:
+    #             ticket.updated_contract_total_income = False
 
-    @api.onchange('job_positions')
-    def _compute_employee_select(self):
-        for rec in self:
-            example = rec.env['hr.employee'].sudo().search([('active', '=', False), ('job_title', '=', rec.job_positions.ids)], limit=1, order='departure_date DESC')
-            rec.write({'employee_id': example.id})
+    # @api.onchange('job_positions')
+    # def _compute_employee_select(self):
+    #     for rec in self:
+    #         example = rec.env['hr.employee'].sudo().search([('active', '=', False), ('job_title', '=', rec.job_positions.ids)], limit=1, order='departure_date DESC')
+    #         rec.write({'employee_id': example.id})
 
     @api.onchange('job_positions')
     def _compute_estimated_date_admission(self):
@@ -592,16 +658,16 @@ class RecruitmentRequisitionLine(models.Model):
             else:
                 rec.job_positions_domain = json.dumps([])
 
-    # function domain dynamic
-    @api.onchange('job_positions')
-    @api.depends('job_positions')
-    def _domain_employee_id(self):
-        for rec in self:
-            employee = rec.env['hr.employee'].sudo().search([('job_id', 'in', rec.job_positions.ids), '|', ('active', '=', True), ('active', '=', False)])
-            if employee:
-                rec.employee_domain = json.dumps([('id', 'in', employee.ids), '|', ('active', '=', True), ('active', '=', False)])
-            else:
-                rec.employee_domain = json.dumps([()])
+    # # function domain dynamic
+    # @api.onchange('job_positions')
+    # @api.depends('job_positions')
+    # def _domain_employee_id(self):
+    #     for rec in self:
+    #         employee = rec.env['hr.employee'].sudo().search([('job_id', 'in', rec.job_positions.ids), '|', ('active', '=', True), ('active', '=', False)])
+    #         if employee:
+    #             rec.employee_domain = json.dumps([('id', 'in', employee.ids), '|', ('active', '=', True), ('active', '=', False)])
+    #         else:
+    #             rec.employee_domain = json.dumps([()])
 
     # # function domain dynamic
     # @api.depends('employee_id')
@@ -613,17 +679,17 @@ class RecruitmentRequisitionLine(models.Model):
     #         else:
     #             rec.employee_domain = json.dumps([()])
 
-    @api.onchange('employee_id')
-    def _compute_contract_wage(self):
-        for rec in self:
-            contract = rec.env['hr.contract'].sudo().search(
-                [('employee_id', '=', rec.employee_id.ids), ('state', 'in', ['cancel', 'close', 'open'])], limit=1)
-            rec.wage = contract.wage
-            rec.contract_id = contract
-            rec.contract_type_id = contract.contract_type_id
-            rec.date_start = contract.date_start
-            rec.date_end = contract.date_end
-            rec.state_contract = contract.state
+    # @api.onchange('employee_id')
+    # def _compute_contract_wage(self):
+    #     for rec in self:
+    #         contract = rec.env['hr.contract'].sudo().search(
+    #             [('employee_id', '=', rec.employee_id.ids), ('state', 'in', ['cancel', 'close', 'open'])], limit=1)
+    #         rec.wage = contract.wage
+    #         rec.contract_id = contract
+    #         rec.contract_type_id = contract.contract_type_id
+    #         rec.date_start = contract.date_start
+    #         rec.date_end = contract.date_end
+    #         rec.state_contract = contract.state
 
     def _compute_count_recruited(self):
         for rec in self:

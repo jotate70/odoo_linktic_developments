@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- /////////////////////////////////   Tree View    //////////////////////////////////////////////// -->
+    <record id="hr_recruitment_stage_tree_inherit" model="ir.ui.view">
+        <field name="name">hr_recruitment_stage_tree_inherit</field>
+        <field name="model">hr.recruitment.stage</field>
+        <field name="inherit_id" ref='hr_recruitment.hr_recruitment_stage_tree'/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="requires_approval" optional="show"/>
+                <field name="manager_id" optional="show"/>
+                <field name="optional_manager_id" optional="show"/>
+                <field name="recruitment_type_id" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='hired_stage']" position="after">
+                <field name="color" widget="color_picker" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- /////////////////////////////////   Form View    //////////////////////////////////////////////// -->
     <record id="hr_recruitment_stage_form_inherit" model="ir.ui.view">
         <field name="name">hr_recruitment_stage_form_inherit</field>
         <field name="model">hr.recruitment.stage</field>
@@ -21,20 +40,8 @@
                 </group>
                 <group string="Recruitment type">
                     <field name="recruitment_type_id" widget="many2many_tags"/>
+                    <field name="color" widget="color_picker"/>
                 </group>
-            </xpath>
-        </field>
-    </record>
-
-    <record id="hr_recruitment_stage_tree_inherit" model="ir.ui.view">
-        <field name="name">hr_recruitment_stage_tree_inherit</field>
-        <field name="model">hr.recruitment.stage</field>
-        <field name="inherit_id" ref='hr_recruitment.hr_recruitment_stage_tree'/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='name']" position="after">
-                <field name="manager_id" optional="show"/>
-                <field name="optional_manager_id" optional="show"/>
-                <field name="recruitment_type_id" widget="many2many_tags"/>
             </xpath>
         </field>
     </record>
