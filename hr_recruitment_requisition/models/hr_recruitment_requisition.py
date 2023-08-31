@@ -51,7 +51,7 @@ class RecruitmentRequisition(models.Model):
     activity_id = fields.Integer(string='Activity')
     time_off = fields.Char(string='Disponibilidad', compute='_compute_number_of_days')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
-    estimated_date_admission = fields.Date(string='Entry date estimated', readonly=False, select=True, required=True)
+    estimated_date_admission = fields.Date(string='Entry date estimated', readonly=False, select=True)
     recruitment_type_id = fields.Many2one(comodel_name='hr_recruitment_type', string='Recruitment Type', required=True)
     recruitment_type = fields.Selection([('0', 'recruitment'),
                                          ('1', 'modifications of working conditions'),
@@ -62,12 +62,12 @@ class RecruitmentRequisition(models.Model):
     recruitment_requisition_line = fields.One2many(comodel_name='hr_recruitment_requisition_line',
                                                    inverse_name='recruitment_requisition_id',
                                                    string='Recruitment requisition line')
-    recruitment_requisition_line_2 = fields.One2many(comodel_name='hr_recruitment_requisition_line',
-                                                   inverse_name='recruitment_requisition_id',
-                                                   string='Recruitment requisition line')
-    recruitment_requisition_line_3 = fields.One2many(comodel_name='hr_recruitment_requisition_line',
-                                                     inverse_name='recruitment_requisition_id',
-                                                     string='Recruitment requisition line')
+    # recruitment_requisition_line_2 = fields.One2many(comodel_name='hr_recruitment_requisition_line',
+    #                                                inverse_name='recruitment_requisition_id',
+    #                                                string='Recruitment requisition line')
+    # recruitment_requisition_line_3 = fields.One2many(comodel_name='hr_recruitment_requisition_line',
+    #                                                  inverse_name='recruitment_requisition_id',
+    #                                                  string='Recruitment requisition line')
     hr_applicant_ids = fields.One2many(comodel_name='hr.applicant',
                                        inverse_name='hr_requisition_id',
                                        string='Aplicaciones')
@@ -94,6 +94,9 @@ class RecruitmentRequisition(models.Model):
     budget_post_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position',
                                      domain="[('is_payroll_position', '=', True)]")
     budget_value = fields.Float(string='Budget Value')
+    attachment_profile_attachment_ids = fields.Many2many(comodel_name='ir.attachment', relation='x_profile_attachment_rel',
+                                                         column1='recruitment_requisition_id', column2='attachment_id',
+                                                         string="Attachments", help="Profile Attachments")
     profile_attachments_ids = fields.One2many(comodel_name='ir.attachment', inverse_name='hr_recruitment_requisition_id',
                                            string="Profile Attachments", tracking=True)
     count_attachments = fields.Integer(string='Aplicaciones', compute='_compute_count_attachments')
@@ -104,6 +107,7 @@ class RecruitmentRequisition(models.Model):
                                          help='Indicates if this stage requires approval in the personnel request.',
                                          store=True, related='state.requires_approval')
     description = fields.Html(string='Description', store=True, translate=True, sanitize_style=True)
+
 
     # ////////////////////////////////////  modifications of working conditions  ///////////////////////////////////
 
@@ -135,9 +139,36 @@ class RecruitmentRequisition(models.Model):
     contract_wage_rise = fields.Monetary(string='Contract Wage Rise')
     updated_contract_total_income = fields.Monetary(string='New Total Income', compute='get_updated_contract_total_income')
 
-    # ///////////////////////////////////////////// Functions //////////////////////////////////////////////////////
+    # ///////////////////////////////////////////// Labor dismissal /////////////////////////////////////////////////
+
+    resignation_type = fields.Selection([('dismissal', 'Dismissal'),
+                                       ('resignation', 'Resignation'),
+                                       ('non-renewal', 'Non-renewal')], default='resignation', required=True,
+                                        string='Resignation type', tracking=True)
+
+    # ///////////////////////////////////////////// Disciplinary process //////////////////////////////////////////////////////
+
+    department_id2 = fields.Many2one(comodel_name='hr.department', string='Department', related='employee_id2.department_id')
+    discipline_reason = fields.Many2one('discipline.category', string='Reason',
+                                        help="Choose a disciplinary reason")
+    explanation = fields.Text(string="Explanation by Employee", help='Employee have to give Explanation'
+                                                                     'to manager about the violation of discipline')
+    attachment_ids = fields.Many2many('ir.attachment', string="Attachments",
+                                      help="Employee can submit any documents which supports their explanation")
 
     # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    def related_rrhh_ticteck_to_employee(self):
+        for rec in self.hr_applicant_ids:
+            self.employee_id2 = rec.emp_id
+
+    # Permite concatenar el name y la tipo solicitud
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = rec.name + ' - ' + rec.recruitment_type_id.name
+            result.append((rec.id, name))
+        return result
 
     # function domain dynamic
     @api.onchange('job_positions')
@@ -150,7 +181,7 @@ class RecruitmentRequisition(models.Model):
                 rec.employee_domain = json.dumps(
                     [('id', 'in', employee.ids)])
             else:
-                rec.employee_domain = json.dumps([()])
+                rec.employee_domain = json.dumps([])
 
     # auto-select fields contract relation
     @api.onchange('employee_id')
@@ -196,8 +227,8 @@ class RecruitmentRequisition(models.Model):
     def _compute_reset_recruitment_requisition_line(self):
         if self.recruitment_type_id:
             self.recruitment_requisition_line = False
-            self.recruitment_requisition_line_2 = False
-            self.recruitment_requisition_line_3 = False
+            # self.recruitment_requisition_line_2 = False
+            # self.recruitment_requisition_line_3 = False
 
     # Establece la requisición en estado cerrado
     def _compute_select_state_done(self):
@@ -267,17 +298,6 @@ class RecruitmentRequisition(models.Model):
                     if c > 1:
                         raise UserError('El tipo de requisición permite una unica orden de recutlamiento')
 
-    # validación limite reclutamiento
-    @api.onchange('recruitment_requisition_line_2')
-    def _compute_constrains_recruitment_requisition_line_2(self):
-        c = 0
-        if self.requisition_type == 'single_requisition':
-            if self.recruitment_requisition_line_2:
-                for rec in self.recruitment_requisition_line_2:
-                    c = c + 1
-                    if c > 1:
-                        raise UserError('El tipo de requisición permite una unica orden de reclutamiento')
-
     # Seleciona los responsables de aprobaión inicial y departamento
     @api.onchange('employee_id')
     def _compute_select_manager_id(self):
@@ -295,7 +315,7 @@ class RecruitmentRequisition(models.Model):
 
     # Action confirm
     def button_action_confirm(self):
-        if self.recruitment_requisition_line:
+        if self.recruitment_requisition_line or self.recruitment_type != '0':
             if self.state_type == 'draft':
                 # Select job in recruitment requisition line
                 # mapping of stages created
@@ -344,7 +364,7 @@ class RecruitmentRequisition(models.Model):
 
     # Action on approbation
     def button_action_on_aprobation(self):
-        if self.recruitment_requisition_line:
+        if self.recruitment_requisition_line or self.recruitment_type != '0':
             if self.manager_before.user_id == self.env.user:
                 if self.state_after.requires_approval == 'yes':
                     #  Marca actividad como hecha de forma automatica
@@ -496,9 +516,8 @@ class RecruitmentRequisition(models.Model):
             new_wizard = self.env['hr_recruitment_requisition_stage_transition_wizard'].create({
                 'hr_recruitment_requisition_id': self.id,
                 'stage_id': self.state.id,
-                'manager_id': self.manager_id.id,
-                'manager_id2': self.manager_id2.id,
-                'manager_before': self.manager_before.id,
+                'manager_id': self.manager_before.id,
+                'recruitment_type_id': self.recruitment_type_id.id,
                 'time_off': self.time_off,
                 'time_off_related': self.time_off_related,
                 'datetime_start': fields.datetime.now(),
@@ -550,8 +569,7 @@ class RecruitmentRequisitionLine(models.Model):
 
     # ///////////////////////////////////////  Recruitment  ////////////////////////////////////////////////////////
 
-    # job_positions_domain = fields.Char(string='Job Domain', compute='_domain_job_positions_domain')
-    job_positions = fields.Many2one(comodel_name='hr.job', string="Job Positions", required=True)
+    job_positions = fields.Many2one(comodel_name='hr.job', string="Job Positions")
     no_of_recruitment = fields.Integer(string='Amount', help='Number of new employees you expect to recruit.', default=1)
     estimated_date_admission = fields.Date(string='Entry date estimated', readonly=False, select=True)
     count_recruited = fields.Integer(string='Amount recruit', compute='_compute_count_recruited')
@@ -574,41 +592,12 @@ class RecruitmentRequisitionLine(models.Model):
                                     string="Working Time", tracking=True, copy=False)
     observations = fields.Text(string='Observations')
 
-    # # ///////////////////////////////  Modifications of working conditions  //////////////////////////////////////
-    #
-    # employee_domain = fields.Char(string='Employee Domain', compute='_domain_employee_id')
-    # # employee_domain = fields.Char(string='Employee Domain')
-    # employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee')
-    # contract_id = fields.Many2one(comodel_name='hr.contract', string='Current Contract')
-    # state_contract = fields.Selection([('draft', 'New'),
-    #                                    ('open', 'Running'),
-    #                                    ('close', 'Expired'),
-    #                                    ('cancel', 'Cancelled')], string='Status Contract', tracking=True,
-    #                                   help='Status of the contract')
-    # date_start = fields.Date(string='Start Date', tracking=True,
-    #                          help="Start date of the contract (if it's a fixed-term contract).")
-    # date_end = fields.Date(string='End Date', tracking=True,
-    #                        help="End date of the contract (if it's a fixed-term contract).")
-    # wage = fields.Float(string='Wage', tracking=True, help="Employee's monthly gross wage.")
-    # contract_welfare_aid = fields.Monetary(string='Welfare Assistance', related='contract_id.welfare_aid')
-    # contract_food_aid = fields.Monetary(string='Food Assistance', related='contract_id.food_aid')
-    # contract_transport_aid = fields.Monetary(string='Transport Assistance', related='contract_id.transport_aid')
-    # contract_bearing_aid = fields.Monetary(string='Bearing Assistance', related='contract_id.bearing_aid')
-    # contract_total_income = fields.Monetary(string='Total Income', related='contract_id.total_income')
-    #
-    # job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job")
-    # updated_contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="New Contract Type")
-    # updated_contract_date_end = fields.Date(string='New Contract End Date')
-    # contract_wage_rise = fields.Monetary(string='Contract Wage Rise')
-    # updated_contract_total_income = fields.Monetary(string='New Total Income', compute='get_updated_contract_total_income')
-
-    # ///////////////////////////////////////////// Functions //////////////////////////////////////////////////////
-
     # Creation function to write sections and notes
     @api.model
     def create(self, values):
         if values.get('display_type', self.default_get(['display_type'])['display_type']):
-            values.update(job_positions=False)
+            values.update(job_positions=False, estimated_date_admission=False, recruited=False,
+                          contract_type_id=False, contract_duration_qty=0)
         line = super(RecruitmentRequisitionLine, self).create(values)
         return line
 
@@ -620,76 +609,10 @@ class RecruitmentRequisitionLine(models.Model):
         result = super(RecruitmentRequisitionLine, self).write(values)
         return result
 
-    # @api.depends('contract_wage_rise')
-    # def get_updated_contract_total_income(self):
-    #     for ticket in self:
-    #         if ticket.contract_wage_rise > 0:
-    #             ticket.updated_contract_total_income = ticket.contract_wage_rise + ticket.contract_total_income
-    #         else:
-    #             ticket.updated_contract_total_income = False
-
-    # @api.onchange('job_positions')
-    # def _compute_employee_select(self):
-    #     for rec in self:
-    #         example = rec.env['hr.employee'].sudo().search([('active', '=', False), ('job_title', '=', rec.job_positions.ids)], limit=1, order='departure_date DESC')
-    #         rec.write({'employee_id': example.id})
-
     @api.onchange('job_positions')
     def _compute_estimated_date_admission(self):
         for rec in self:
             rec.estimated_date_admission = rec.recruitment_requisition_id.estimated_date_admission
-
-    #function domain dynamic
-    @api.depends('job_positions')
-    def _domain_job_positions_domain(self):
-        a = []
-        for rec in self:
-            for rec2 in rec.env.user.employee_id.child_ids:
-                a.append(rec2.job_id.id)
-                for rec3 in rec2.child_ids:
-                    a.append(rec3.job_id.id)
-            jon_title = rec.env['hr.employee'].sudo().search(
-                [('active', '=', True), ('active', '=', False), ('job_id', 'in', a)])
-            employee = rec.env['hr.job'].sudo().search(
-                [('id', 'in', jon_title.ids)])
-            if employee:
-                rec.job_positions_domain = json.dumps(['|',('id', 'in', employee.ids),
-                                                       ('id','=',rec.env.user.employee_id.job_id.ids)])
-            else:
-                rec.job_positions_domain = json.dumps([])
-
-    # # function domain dynamic
-    # @api.onchange('job_positions')
-    # @api.depends('job_positions')
-    # def _domain_employee_id(self):
-    #     for rec in self:
-    #         employee = rec.env['hr.employee'].sudo().search([('job_id', 'in', rec.job_positions.ids), '|', ('active', '=', True), ('active', '=', False)])
-    #         if employee:
-    #             rec.employee_domain = json.dumps([('id', 'in', employee.ids), '|', ('active', '=', True), ('active', '=', False)])
-    #         else:
-    #             rec.employee_domain = json.dumps([()])
-
-    # # function domain dynamic
-    # @api.depends('employee_id')
-    # def _domain_contract_id(self):
-    #     for rec in self:
-    #         employee = rec.env['hr.contract'].sudo().search([('job_id', 'in', rec.job_positions.ids), '|', ('active', '=', True), ('active', '=', False)])
-    #         if employee:
-    #             rec.employee_domain = json.dumps([('id', 'in', employee.ids), '|', ('active', '=', True), ('active', '=', False)])
-    #         else:
-    #             rec.employee_domain = json.dumps([()])
-
-    # @api.onchange('employee_id')
-    # def _compute_contract_wage(self):
-    #     for rec in self:
-    #         contract = rec.env['hr.contract'].sudo().search(
-    #             [('employee_id', '=', rec.employee_id.ids), ('state', 'in', ['cancel', 'close', 'open'])], limit=1)
-    #         rec.wage = contract.wage
-    #         rec.contract_id = contract
-    #         rec.contract_type_id = contract.contract_type_id
-    #         rec.date_start = contract.date_start
-    #         rec.date_end = contract.date_end
-    #         rec.state_contract = contract.state
 
     def _compute_count_recruited(self):
         for rec in self:

@@ -9,6 +9,7 @@
             <field name="sequence">1</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">new</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">An initial review of the candidate's profile is carried out.</field>
         </record>
@@ -19,6 +20,7 @@
             <field name="sequence">2</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Interview with the candidate.</field>
         </record>
@@ -29,6 +31,7 @@
             <field name="sequence">3</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">The psychotechnical test is carried out on the participant.</field>
         </record>
@@ -39,6 +42,7 @@
             <field name="sequence">4</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">The technical test is carried out on the participant.</field>
         </record>
@@ -49,6 +53,7 @@
             <field name="sequence">5</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">If required by the profile, an interview with Fabrica de Software is scheduled.</field>
         </record>
@@ -59,6 +64,7 @@
             <field name="sequence">6</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Interview with Project Manager to which the resource enters.</field>
         </record>
@@ -69,6 +75,7 @@
             <field name="sequence">7</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">The functions of the position of the participant are reviewed.</field>
         </record>
@@ -79,6 +86,7 @@
             <field name="sequence">8</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Stage where the selection team relates the candidate's data that is required to be validated by the financial area, the validation must be carried out and the record must remain.</field>
         </record>
@@ -90,6 +98,7 @@
             <field name="requires_approval">yes</field>
             <field name="requires_budget_approval">yes</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Negotiation of the conditions according to the form at an amount pre-approved for the manager, if it is exceeded, negotiation with the vice president is requested.</field>
         </record>
@@ -100,6 +109,7 @@
             <field name="sequence">10</field>
             <field name="requires_approval">no</field>
             <field name="fold">False</field>
+            <field name="stage_type">in_progress</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Human Talent Team Confirms labor conditions with the candidate, the entry date is defined, to pass them on to the Vice President's Approval.
                 Human Talent requests the necessary documentation from the worker to hire.</field>
@@ -112,6 +122,7 @@
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
             <field name="hired_stage">True</field>
+            <field name="stage_type">done</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">Signature of the contract of the people involved in the process.</field>
         </record>
@@ -122,6 +133,7 @@
             <field name="sequence">12</field>
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
+            <field name="stage_type">refused</field>
             <field name="recruitment_type_id" eval="[(4, ref('recruitment_type_recruitment'))]"/>
             <field name="requirements">The request is canceled because the employee withdrew, no agreement was reached, or it is no longer required.</field>
         </record>

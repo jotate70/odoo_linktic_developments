@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record model="ir.ui.view" id="helpdesk_ticket_stage_transition_wizard_form">
+    <record model="ir.ui.view" id="hr_recruitment_requisition_stage_transition_wizard_form">
         <field name="name">helpdesk.ticket.stage.transition.wizard.form</field>
         <field name="model">hr_recruitment_requisition_stage_transition_wizard</field>
         <field name="arch" type="xml">
             <form string="Recruitment Stage Transition">
                 <header>
-                    <field name="stage_id" widget="statusbar" readonly="1"/>
+                    <field name="state_domain" invisible="1"/>
+                    <field name="stage_id" widget="statusbar" readonly="1" domain="state_domain"/>
                 </header>
                 <sheet>
                     <group>
+                        <field name="recruitment_type_id" invisible="1"/>
                         <field name="hr_recruitment_requisition_id" invisible="1"/>
                         <field name="time_off" invisible="1"/>
                         <field name="time_off_related" invisible="1"/>
-                        <label for="manager_id" string="Manager"/>
+                        <label for="manager_id" string="Approve By"/>
                         <div>
                             <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" readonly="True"/>
                             <span class="oe_read_only"> - </span>
@@ -23,8 +25,8 @@
                             <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
                                    attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)], 'readonly': True}"/>
                         </div>
-                        <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
-                                       attrs="{'invisible': [('time_off_related', '=', False)], 'readonly': True}"/>
+<!--                        <field name="manager_id2" options="{'no_create':true, 'no_open':true}"-->
+<!--                                       attrs="{'invisible': [('time_off_related', '=', False)], 'readonly': True}"/>-->
                         <field name="stage_result" required="True"/>
                     </group>
                 </sheet>

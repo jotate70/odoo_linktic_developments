@@ -27,6 +27,12 @@ class RecruitmentStage(models.Model):
                                   default=lambda self: self.env.company.currency_id)
     uncapped_manager_id = fields.Many2one(comodel_name='hr.employee', string='Uncapped manager',
                                        help='responsible for the stage that does not have a limit on the amount to be approved.')
+    stage_type = fields.Selection([('new', 'New'),
+                                   ('in_progress', 'In progress'),
+                                   ('done', 'Done'),
+                                   ('refused', 'Refused')],
+                                  string='State Type', store=True, default='new', required=True,
+                                  help='classifies the type of stage, important for the behavior of the approval for personnel request.')
 
     @api.onchange('requires_approval')
     def _reset_requires_approval(self):

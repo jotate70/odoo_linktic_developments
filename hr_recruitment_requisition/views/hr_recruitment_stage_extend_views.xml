@@ -11,6 +11,7 @@
                 <field name="manager_id" optional="show"/>
                 <field name="optional_manager_id" optional="show"/>
                 <field name="recruitment_type_id" widget="many2many_tags"/>
+                <field name="stage_type" optional="show"/>
             </xpath>
             <xpath expr="//field[@name='hired_stage']" position="after">
                 <field name="color" widget="color_picker" optional="show"/>
@@ -42,6 +43,9 @@
                     <field name="recruitment_type_id" widget="many2many_tags"/>
                     <field name="color" widget="color_picker"/>
                 </group>
+            </xpath>
+            <xpath expr="//field[@name='job_ids']" position="after">
+                <field name="stage_type"/>
             </xpath>
         </field>
     </record>

@@ -12,6 +12,6 @@ class HrRecruitmentRequisitionTicketStageLog(models.Model):
     datetime_end = fields.Datetime(string='End Date')
     no_hours = fields.Float(string='No. Hours')
     stage_result = fields.Text(string='Stage Results')
-    current_time = fields.Float(string='Current Time', compute='_get_time_current_stage', store=False)
+    current_time = fields.Float(string='Current Time', store=False)
 
 

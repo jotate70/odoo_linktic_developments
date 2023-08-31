@@ -49,6 +49,8 @@
         'views/hr_recruitment_stage_extend_views.xml',
         # 'views/hr_recruitment_requisition_line_views.xml',
         'views/hr_recruitment_stage_extend_views.xml',
+        'views/discipline_reason_category.xml',
+        'views/hr_employee_views_extend.xml',
         'wizard/hr_recruitment_requisition_stage_transition_wizard_views.xml',
         'wizard/hr_applicant_stage_transition_wizard_views.xml',
     ],
