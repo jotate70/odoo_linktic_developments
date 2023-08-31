@@ -3,11 +3,13 @@ from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 import json
 
+
 class Applicant(models.Model):
     _inherit = "hr.applicant"
     _description = "Applicant"
 
-    name = fields.Char(string="Subject / Application Name", required=False, help="Email subject for applications sent via email")
+    name = fields.Char(string="Subject / Application Name", required=False,
+                       help="Email subject for applications sent via email")
     partner_name = fields.Char(string="Applicant's Name", required=True)
     stage_domain = fields.Char(string='Stage Domain', compute='_compute_stage_domain')
     stage_id = fields.Many2one(comodel_name='hr.recruitment.stage', string='Stage', ondelete='restrict', tracking=True,
@@ -21,8 +23,9 @@ class Applicant(models.Model):
                                    ('refused', 'Refused')],
                                   string='State Type', store=True, related='stage_id.stage_type',
                                   help='classifies the type of stage, important for the behavior of the approval for personnel request.')
-    hr_applicant_stage_log_ids = fields.One2many(comodel_name='hr_applicant_stage_log', inverse_name='hr_applicant_id', string='Stage Logs',
-                                           copy=False)
+    hr_applicant_stage_log_ids = fields.One2many(comodel_name='hr_applicant_stage_log', inverse_name='hr_applicant_id',
+                                                 string='Stage Logs',
+                                                 copy=False)
     hired_stage = fields.Boolean(string='Hired Stage', related='stage_id.hired_stage',
                                  help="If checked, this stage is used to determine the hire date of an applicant")
     stage_after = fields.Many2one(comodel_name="hr.recruitment.stage", string="Stage After")
@@ -39,7 +42,8 @@ class Applicant(models.Model):
     manager_id2 = fields.Many2one(comodel_name='hr.employee', string='Alternative Approval',
                                   help='When the immediate boss is absent, the next person in charge must approve.')
     manager_before = fields.Many2one(comodel_name='hr.employee', string='Approval')
-    requires_budget_approval = fields.Boolean(string='Requires budget approval', related='stage_id.requires_budget_approval')
+    requires_budget_approval = fields.Boolean(string='Requires budget approval',
+                                              related='stage_id.requires_budget_approval')
     budget_amount = fields.Monetary(string='Budget amount', help='maximum amount you can approve.',
                                     related='stage_id.budget_amount')
     currency_id = fields.Many2one(comodel_name='res.currency', string='Currency',
@@ -138,7 +142,7 @@ class Applicant(models.Model):
 
     def button_action_on_aprobation(self):
         if self.stage_after.requires_approval == 'yes' and self.requires_budget_approval == False:
-            user = self.manager_before.user_id
+            user = self.stage_after.manager_id.user_id
             note = 'Ha sido asignado para aprobar la aplicación de personal.'
             c = self.state_aprove + 1
             self.write({'state_aprove': c})
@@ -151,7 +155,7 @@ class Applicant(models.Model):
                            'date_deadline': fields.datetime.now(),
                            'res_model_id': model_id,
                            'res_id': self.id,
-                            'user_id': user.id,
+                           'user_id': user.id,
                            }
             new_activity = self.env['mail.activity'].create(create_vals)
             # Escribe el id de la actividad en un campo
@@ -189,11 +193,11 @@ class Applicant(models.Model):
         new_activity.action_feedback(feedback='Es Aprobado')
 
         self.write({'stage_id': self.stage_after.id})
-        self._compute_stage_after()
         self.button_action_on_aprobation()
+        self._compute_stage_after()
 
     def open_stage_transition_wizard(self):
-        if self.stage_after.requires_approval == 'yes' and self.requires_budget_approval == False:
+        if self.stage_id.requires_approval == 'yes' and self.requires_budget_approval == False:
             approved = self.manager_before
         elif self.requires_budget_approval == True:
             approved = self.uncapped_manager_id
@@ -272,8 +276,9 @@ class Applicant(models.Model):
         self.write({'state_aprove': c})
 
     def action_button_draft(self):
-        state_id = self.env['hr.recruitment.stage'].search([('state_type','=','new'),('recruitment_type_id','in',self.stage_id.recruitment_type_id.ids)],
-                                                           order="id asc", limit=1)
+        state_id = self.env['hr.recruitment.stage'].search(
+            [('state_type', '=', 'new'), ('recruitment_type_id', 'in', self.stage_id.recruitment_type_id.ids)],
+            order="id asc", limit=1)
         self.write({'state': state_id.id,
                     'state_aprove': 0,
                     'state_level': 0,
@@ -308,15 +313,16 @@ class Applicant(models.Model):
         for job_id in self.mapped('job_id'):
             default_stage[job_id.id] = self.env['hr.recruitment.stage'].search(
                 ['|',
-                    ('job_ids', '=', False),
-                    ('job_ids', '=', job_id.id),
-                    ('fold', '=', False)
-                ], order='sequence asc', limit=1).id
+                 ('job_ids', '=', False),
+                 ('job_ids', '=', job_id.id),
+                 ('fold', '=', False)
+                 ], order='sequence asc', limit=1).id
         for applicant in self:
             applicant.write(
                 {'stage_id': applicant.job_id.id and default_stage[applicant.job_id.id],
                  'refuse_reason_id': False})
             self._compute_select_manager_id()
+
     # Inherit
     def create_employee_from_applicant(self):
         """ Create an hr.employee from the hr.applicants """
@@ -353,9 +359,10 @@ class Applicant(models.Model):
                     'default_work_phone': applicant.department_id.company_id.phone,
                     'form_view_initial_mode': 'edit',
                     'default_applicant_id': applicant.ids,
-                    'rrhh_ticket_ids': (4, applicant.hr_requisition_id.id),
+                    'rrhh_tickets_ids': applicant.hr_requisition_id.ids,
                 }
 
         dict_act_window = self.env['ir.actions.act_window']._for_xml_id('hr.open_view_employee_list')
         dict_act_window['context'] = employee_data
         return dict_act_window
+

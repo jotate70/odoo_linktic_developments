@@ -18,7 +18,7 @@
                         <field name="time_off_related" invisible="1"/>
                         <label for="manager_id" string="Approve By"/>
                         <div>
-                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" readonly="True"/>
+                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" readonly="False"/>
                             <span class="oe_read_only"> - </span>
                             <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                    attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)], 'readonly': True}"/>

@@ -7,10 +7,10 @@
             <field name="name">RRHH Ticket</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr_recruitment_requisition</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('employee_id2', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_ids', '=', active_id)]</field>
             <field name="context">{
-                "default_employee_id2": active_id,
+                "default_employee_ids": active_id,
                 }
             </field>
         </record>
@@ -29,6 +29,7 @@
                 </xpath>
                 <xpath expr="//field[@name='coach_id']" position="after">
                     <field name="rrhh_ticket_ids" invisible="1"/>
+                    <field name="rrhh_tickets_ids" invisible=""/>
                 </xpath>
             </field>
         </record>

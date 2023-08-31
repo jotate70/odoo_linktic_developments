@@ -151,7 +151,7 @@
                                 attrs="{'invisible': [('state_type', '!=', 'draft')]}"/>
                         <button name="button_action_draft" string="Draft" type="object"
                                 confirm="¿Desea establecer a borrador?" groups="hr_recruitment.group_hr_recruitment_user"
-                                attrs="{'invisible': [('state_type', 'in', ['refused','draft','recruitment','done'])]}"/>
+                                attrs="{'invisible': ['|',('state_type', 'in', ['refused','draft','recruitment','done']),('recruitment_type','!=','0')]}"/>
                         <button name="button_action_draft" string="Draft" type="object"
                                 confirm="¿Desea establecer a borrador?"
                                 attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
@@ -201,6 +201,7 @@
                         </div>
                         <group>
                             <group string="responsible">
+                                <field name="employee_ids" invisible="1"/>
                                 <field name="id" invisible="1"/>
                                 <field name="state_domain" invisible="1"/>
                                 <field name="state_after" invisible="1"/>
@@ -302,19 +303,20 @@
                                 <group>
                                     <group string="Current information">
                                         <field name="id" invisible="1"/>
+                                        <field name="employee_id2" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','1')]}"/>
                                         <field name="job_positions" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','1')]}"/>
-                                        <field name="employee_domain" invisible="1"/>
-                                        <field name="employee_id2" domain="employee_domain" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="contract_id" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="contract_type_id" readonly="1"/>
-                                        <field name="state_contract" readonly="1"/>
+                                        <field name="contract_id" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','1')]}"/>
+                                        <field name="contract_type_id"/>
+                                        <field name="state_contract"/>
                                         <label for="date_start" string="Contract Date"/>
                                         <div>
-                                            <field name="date_start" placeholder="01-02-2018" class="oe_inline" readonly="1"/>
+                                            <field name="date_start" placeholder="01-02-2018" class="oe_inline"/>
                                             <span class="oe_read_only"> - </span>
-                                            <field name="date_end" placeholder="Present" class="oe_inline" readonly="1"/>
+                                            <field name="date_end" placeholder="Present" class="oe_inline"/>
                                         </div>
-                                        <field name="wage" widget="monetary" readonly="1"/>
+                                        <field name="company_id2"/>
+                                        <field name="department_id2" />
+                                        <field name="wage" widget="monetary"/>
                                         <field name="contract_welfare_aid" widget="monetary"/>
                                         <field name="contract_food_aid" widget="monetary"/>
                                         <field name="contract_transport_aid" widget="monetary"/>
@@ -327,11 +329,11 @@
                                         </div>
                                     </group>
                                     <group string="Update information">
-                                        <field name="job_positions_after" options="{'no_create':true, 'no_open':true}"
-                                               attrs="{'required': [('recruitment_type','=','1')]}"/>
-                                        <field name="updated_contract_type_id" options="{'no_create':true, 'no_open':true}"
-                                               attrs="{'required': [('recruitment_type','=','1')]}"/>
-                                        <field name="updated_contract_date_end" attrs="{'required': [('recruitment_type','=','1')]}"/>
+                                        <field name="job_positions_after" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="updated_contract_type_id" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="company_id3" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="department_id3" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="updated_contract_date_end" />
                                         <field name="contract_wage_rise" widget="monetary"/>
                                         <label for="updated_contract_total_income" string="New Total Income"/>
                                         <div>
@@ -346,19 +348,20 @@
                                 <group>
                                     <group string="Current information">
                                         <field name="id" invisible="1"/>
+                                        <field name="employee_id2" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','2')]}"/>
                                         <field name="job_positions" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','2')]}"/>
-                                        <field name="employee_domain" invisible="1"/>
-                                        <field name="employee_id2" domain="employee_domain" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="contract_id" options="{'no_create':true, 'no_open':true}"/>
-                                        <field name="contract_type_id" readonly="1"/>
-                                        <field name="state_contract" readonly="1"/>
+                                        <field name="contract_id" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','2')]}"/>
+                                        <field name="contract_type_id"/>
+                                        <field name="state_contract"/>
                                         <label for="date_start" string="Contract Date"/>
                                         <div>
-                                            <field name="date_start" placeholder="01-02-2018" class="oe_inline" readonly="1"/>
+                                            <field name="date_start" placeholder="01-02-2018" class="oe_inline"/>
                                             <span class="oe_read_only"> - </span>
-                                            <field name="date_end" placeholder="Present" class="oe_inline" readonly="1"/>
+                                            <field name="date_end" placeholder="Present" class="oe_inline"/>
                                         </div>
-                                        <field name="wage" widget="monetary" readonly="1"/>
+                                        <field name="company_id2"/>
+                                        <field name="department_id2" />
+                                        <field name="wage" widget="monetary"/>
                                         <field name="contract_welfare_aid" widget="monetary"/>
                                         <field name="contract_food_aid" widget="monetary"/>
                                         <field name="contract_transport_aid" widget="monetary"/>
@@ -379,9 +382,9 @@
                                 <group>
                                     <group string="Employee information">
                                         <field name="id" invisible="1"/>
-                                        <field name="job_positions" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','2')]}"/>
                                         <field name="employee_domain" invisible="1"/>
-                                        <field name="employee_id2" domain="employee_domain" options="{'no_create':true, 'no_open':true}"/>
+                                        <field name="employee_id2" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','3')]}"/>
+                                        <field name="job_positions" options="{'no_create':true, 'no_open':true}" attrs="{'required': [('recruitment_type','=','3')]}"/>
                                         <field name="department_id2" options="{'no_create':true, 'no_open':true}" readonly="1"/>
                                     </group>
                                     <group string="Disciplinary information">
