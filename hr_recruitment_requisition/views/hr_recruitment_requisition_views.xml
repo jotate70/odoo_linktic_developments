@@ -89,7 +89,7 @@
             <field name="name">Postulaciones</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr.applicant</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,form</field>
             <field name="domain">[('hr_requisition_id', '=', active_id)]</field>
             <field name="context">{
                 "default_hr_requisition_id": active_id,
@@ -155,26 +155,27 @@
                         <button name="button_action_draft" string="Draft" type="object"
                                 confirm="¿Desea establecer a borrador?"
                                 attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
-<!--                        <button name="button_action_on_aprobation" string="Approve" type="object" class="btn-primary"-->
-<!--                                confirm="¿Desea aprobar la solicitud?"-->
-                        <button name="open_stage_transition_wizard" string="Approve" type="object" class="btn-primary"
+                        <button name="open_stage_transition_wizard2" string="Next Stage" type="object" class="btn-primary"
+                                confirm="¿Desea finalizar etapa?" attrs="{'invisible': ['|',('state_type','!=','in_progress'),('requires_approval','=','yes')]}"/>
+
+                        <button name="open_stage_transition_wizard2" string="Approve" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove', '!=', 1), ('state_type', '!=', 'confirm'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="open_stage_transition_wizard" string="Approve ⁽2⁾" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|','|', ('state_aprove','!=',1),('state_type','!=','confirm'),('requires_approval','=','no')]}"/>
+                        <button name="open_stage_transition_wizard2" string="Approve ⁽2⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove', '!=', 2), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="open_stage_transition_wizard" string="Approve ⁽3⁾" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|','|', ('state_aprove','!=',2),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
+                        <button name="open_stage_transition_wizard2" string="Approve ⁽3⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove', '!=', 3), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="open_stage_transition_wizard" string="Approve ⁽4⁾" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|','|', ('state_aprove','!=',3),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
+                        <button name="open_stage_transition_wizard2" string="Approve ⁽4⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove', '!=', 4), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
-                        <button name="open_stage_transition_wizard" string="Approve ⁽5⁾" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|','|', ('state_aprove','!=',4),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
+                        <button name="open_stage_transition_wizard2" string="Approve ⁽5⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove', '!=', 5), ('state_type', '!=', 'in_progress'), ('requires_approval', '=', 'no')]}"/>
+                                attrs="{'invisible': ['|','|', ('state_aprove','!=',5),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="button_action_cancel" string="Cancel" type="object"
                                 confirm="¿Desea cancelar la solicitud?"
-                                attrs="{'invisible': [('state_type', 'in', ('draft', 'refused'))]}"/>
+                                attrs="{'invisible': [('state_type','in',('draft','refused'))]}"/>
                         <field name="state_type" invisible="1"/>
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
@@ -219,7 +220,7 @@
                                 <field name="time_off_related" invisible="1"/>
                                 <label for="manager_id" string="Approve By"/>
                                 <div>
-                                    <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
+                                    <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"
                                            attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                     <span class="oe_read_only"> - </span>
                                     <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
@@ -460,7 +461,7 @@
                                     <div class="o_kanban_record_top">
                                         <label for="manager_id" string="Manager"/>
                                         <div>
-                                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" required="True"
+                                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"
                                                    attrs="{'readonly': [('state_type', 'in', ['in_progress','recruitment','done','refused'])]}"/>
                                             <span class="oe_read_only"> - </span>
                                             <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"

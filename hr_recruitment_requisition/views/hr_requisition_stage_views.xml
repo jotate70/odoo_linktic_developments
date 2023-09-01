@@ -39,7 +39,7 @@
                         </div>
                         <group name="main">
                             <group name="main_left">
-                                <field name="sequence" invisible="1"/>
+                                <field name="sequence" invisible=""/>
                                 <field name="requires_approval"/>
                                 <field name="manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
                                 <field name="optional_manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>

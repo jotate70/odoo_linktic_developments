@@ -361,7 +361,6 @@ class Applicant(models.Model):
                     'default_applicant_id': applicant.ids,
                     'rrhh_tickets_ids': applicant.hr_requisition_id.ids,
                 }
-
         dict_act_window = self.env['ir.actions.act_window']._for_xml_id('hr.open_view_employee_list')
         dict_act_window['context'] = employee_data
         return dict_act_window

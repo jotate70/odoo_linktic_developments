@@ -11,9 +11,6 @@ class HrRecruitmentRequisitionStageTransitionWizard(models.TransientModel):
     stage_id = fields.Many2one(comodel_name="hr_requisition_state", string="Stage")
     manager_id = fields.Many2one(comodel_name='hr.employee', string='Approve By',
                                  help='Jefe inmediato respondable de su aprobación')
-    # manager_id2 = fields.Many2one(comodel_name='hr.employee', string='Alternative Approval',
-    #                               help='Cuando el jefe inmediato se encuentra ausente, debe aprobar el siguiente respondable')
-    # manager_before = fields.Many2one(comodel_name='hr.employee', string='Approval Before')
     recruitment_type_id = fields.Many2one(comodel_name='hr_recruitment_type', string='Recruitment Type')
     time_off = fields.Char(string='Disponibilidad')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
@@ -25,7 +22,7 @@ class HrRecruitmentRequisitionStageTransitionWizard(models.TransientModel):
     def do_action(self):
         if self.hr_recruitment_requisition_id:
             for rec in self.hr_recruitment_requisition_id:
-                rec.button_action_on_aprobation()
+                # rec.button_action_on_aprobation()
                 create_vals = {'hr_recruitment_requisition_id': self.hr_recruitment_requisition_id.id,
                                'stage_id': self.stage_id.id,
                                'user_id': self.manager_id.user_id.id,
@@ -35,6 +32,7 @@ class HrRecruitmentRequisitionStageTransitionWizard(models.TransientModel):
                                'stage_result': self.stage_result,
                                }
                 self.env['hr_recruitment_stage_log'].create(create_vals)
+                rec.compute_next_stage2()
 
     # function domain dynamic
     @api.depends('recruitment_type_id')
