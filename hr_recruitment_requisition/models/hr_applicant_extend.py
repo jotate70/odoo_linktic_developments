@@ -42,6 +42,8 @@ class Applicant(models.Model):
     manager_id2 = fields.Many2one(comodel_name='hr.employee', string='Alternative Approval',
                                   help='When the immediate boss is absent, the next person in charge must approve.')
     manager_before = fields.Many2one(comodel_name='hr.employee', string='Approval')
+    manager_after_id = fields.Many2one(comodel_name='hr.employee', string='Manager next stage',
+                                       help='Jefe inmediato respondable de su aprobación')
     requires_budget_approval = fields.Boolean(string='Requires budget approval',
                                               related='stage_id.requires_budget_approval')
     budget_amount = fields.Monetary(string='Budget amount', help='maximum amount you can approve.',
@@ -64,6 +66,42 @@ class Applicant(models.Model):
                                            column1='recruitment_stage_id', column2='recruitment_type_id',
                                            string='Recruitment Type', related='stage_id.recruitment_type_id',
                                            help='Match the stages with the types of personnel request.')
+
+    # //////////////////////////////////////////////  Labor conditions  //////////////////////////////////////////////
+
+    identification_type_id = fields.Many2one(comodel_name='l10n_latam.identification.type', string='ID Type', tracking=True)
+    vat = fields.Char(string='No Document', tracking=True)
+    contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="Contract Type", tracking=True)
+    negotiated_salary = fields.Monetary(string='Negotiated salary', tracking=True,
+                                        help='Salary negotiated and agreed by the company and the candidate.')
+    date_start = fields.Date(string='Start Date', tracking=True,
+                             help="Start date of the contract (if it's a fixed-term contract).")
+    contract_duration_qty = fields.Integer(string='Duration', tracking=True)
+    contract_duration_sel = fields.Selection(selection=[('weekly', 'Weekly'),
+                                                        ('month', 'Month'),
+                                                        ('annual', 'Annual'),
+                                                        ('undefined', 'Undefined')],
+                                             string="To", default='month', tracking=True)
+    analytic_account_id = fields.Many2one(comodel_name='account.analytic.account', string='Account Analytic',
+                                          check_company=True, tracking=True)
+    required_mail = fields.Selection([('yes', 'Yes'),
+                                         ('no', 'No'),],
+                                        string='Required Mail', default='yes')
+    mail_domain = fields.Char(string='Mail domain')
+    computer_equipment = fields.Selection([('yes', 'Yes'),
+                                         ('no', 'No'),],
+                                        string='Computer Equipment', default='yes', tracking=True)
+    os = fields.Selection([('windows', 'Windows'),
+                           ('macos', 'MacOS'),
+                           ('linux', 'Linux')],
+                          string='OS', default='windows', tracking=True)
+    tools = fields.Char(string='Tools', tracking=True)
+    supervisor = fields.Many2one(comodel_name='hr.employee', string='Supervisor', tracking=True)
+    contractor_company = fields.Many2one(comodel_name='res.partner', string='Contractor company', tracking=True)
+    prepaid = fields.Text(string='Prepaid', tracking=True)
+
+    # //////////////////////////////////////////////////  Funtions  //////////////////////////////////////////////////
+
 
     # Permite concatenar el name y la tipo solicitud
     def name_get(self):
@@ -128,8 +166,12 @@ class Applicant(models.Model):
         vat = self.stage_after.sequence + 1
         self.state_level = vat
         self.stage_after = self.env['hr.recruitment.stage'].search([('sequence', '=', vat)], limit=1)
-        self.manager_id = self.stage_id.manager_id
-        self.manager_before = self.stage_id.manager_id
+        if self.manager_after_id:
+            self.manager_id = self.manager_after_id
+            self.manager_before = self.manager_after_id
+        else:
+            self.manager_id = self.stage_id.manager_id
+            self.manager_before = self.stage_id.manager_id
         self.uncapped_manager_id = self.stage_id.uncapped_manager_id
         if self.time_off == 'Ausente':
             self.manager_id2 = self.stage_id.optional_manager_id
@@ -142,7 +184,10 @@ class Applicant(models.Model):
 
     def button_action_on_aprobation(self):
         if self.stage_after.requires_approval == 'yes' and self.requires_budget_approval == False:
-            user = self.stage_after.manager_id.user_id
+            if self.manager_after_id:
+                user = self.manager_after_id.user_id
+            else:
+                user = self.stage_after.manager_id.user_id
             note = 'Ha sido asignado para aprobar la aplicación de personal.'
             c = self.state_aprove + 1
             self.write({'state_aprove': c})
@@ -163,10 +208,13 @@ class Applicant(models.Model):
             c = self.state_aprove + 1
             self.write({'state_aprove': c})
         elif self.requires_budget_approval == True:
-            if self.budget_amount < self.salary_proposed:
-                user = self.uncapped_manager_id.user_id
+            if self.budget_amount < self.salary_expected:
+                user = self.stage_after.uncapped_manager_id.user_id
             else:
-                user = self.manager_before.user_id
+                if self.manager_after_id:
+                    user = self.manager_after_id.user_id
+                else:
+                    user = self.manager_before.user_id
             note = 'Ha sido asignado para validar negociación salarial del aplicante al cargo.'
             c = self.state_aprove + 1
             self.write({'state_aprove': c})
@@ -208,7 +256,9 @@ class Applicant(models.Model):
             'recruitment_type_id': self.recruitment_type_id.ids,
             'hr_recruitment_requisition_id': self.hr_requisition_id.id,
             'stage_id': self.stage_id.id,
+            'requires_approval': self.stage_after.requires_approval,
             'manager_id': approved.id,
+            'manager_after_id': self.stage_after.manager_id.id,
             'time_off': self.time_off,
             'time_off_related': self.time_off_related,
             'datetime_start': fields.datetime.now(),
@@ -323,45 +373,5 @@ class Applicant(models.Model):
                  'refuse_reason_id': False})
             self._compute_select_manager_id()
 
-    # Inherit
-    def create_employee_from_applicant(self):
-        """ Create an hr.employee from the hr.applicants """
-        employee = False
-        for applicant in self:
-            contact_name = False
-            if applicant.partner_id:
-                address_id = applicant.partner_id.address_get(['contact'])['contact']
-                contact_name = applicant.partner_id.display_name
-            else:
-                if not applicant.partner_name:
-                    raise UserError(_('You must define a Contact Name for this applicant.'))
-                new_partner_id = self.env['res.partner'].create({
-                    'is_company': False,
-                    'type': 'private',
-                    'name': applicant.partner_name,
-                    'email': applicant.email_from,
-                    'phone': applicant.partner_phone,
-                    'mobile': applicant.partner_mobile
-                })
-                applicant.partner_id = new_partner_id
-                address_id = new_partner_id.address_get(['contact'])['contact']
-            if applicant.partner_name or contact_name:
-                employee_data = {
-                    'default_name': applicant.partner_name or contact_name,
-                    'default_job_id': applicant.job_id.id,
-                    'default_job_title': applicant.job_id.name,
-                    'default_address_home_id': address_id,
-                    'default_department_id': applicant.department_id.id or False,
-                    'default_address_id': applicant.company_id and applicant.company_id.partner_id
-                                          and applicant.company_id.partner_id.id or False,
-                    'default_work_email': applicant.department_id and applicant.department_id.company_id
-                                          and applicant.department_id.company_id.email or False,
-                    'default_work_phone': applicant.department_id.company_id.phone,
-                    'form_view_initial_mode': 'edit',
-                    'default_applicant_id': applicant.ids,
-                    'rrhh_tickets_ids': applicant.hr_requisition_id.ids,
-                }
-        dict_act_window = self.env['ir.actions.act_window']._for_xml_id('hr.open_view_employee_list')
-        dict_act_window['context'] = employee_data
-        return dict_act_window
+
 

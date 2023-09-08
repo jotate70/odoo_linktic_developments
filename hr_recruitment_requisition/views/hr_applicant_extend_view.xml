@@ -43,7 +43,16 @@
                   <field name="requires_approval" invisible="1"/>
                   <field name="stage_type" invisible="1"/>
                   <field name="hr_requisition_domain" invisible="1"/>
-                  <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"/>
+                  <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"
+                         options="{'no_create': True}"/>
+              </xpath>
+              <xpath expr="//field[@name='email_from']" position="before">
+                  <label for="identification_type_id" string="Identification number"/>
+                  <div>
+                      <field name="identification_type_id" options="{'no_open': True, 'no_create': True}" placeholder="Cédula de ciudadania" class="oe_inline"/>
+                      <span class="oe_read_only"> - </span>
+                      <field name="vat" placeholder="Number" class="oe_inline"/>
+                  </div>
               </xpath>
               <xpath expr="//group" position="inside">
                   <group string="responsible" >
@@ -60,14 +69,62 @@
                       <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
                              attrs="{'invisible': [('time_off_related', '=', False)]}"/>
                       <field name="manager_before" invisible="1"/>
+                      <field name="manager_after_id" invisible="1"/>
                   </group>
                   <group string="Uncapped Manager">
                       <field name="uncapped_manager_id"/>
                       <field name="requires_budget_approval" invisible="1"/>
-                      <field name="budget_amount" invisible=""/>
+                      <field name="budget_amount" invisible="1"/>
                   </group>
               </xpath>
+              <xpath expr="//field[@name='project_id']" position="after">
+                  <field name="analytic_account_id"/>
+              </xpath>
               <xpath expr="//notebook" position="inside">
+                  <page string="Labor conditions" name="labor_conditions">
+                      <group>
+                          <field name="partner_name"/>
+                          <label for="identification_type_id" string="Identification number"/>
+                          <div>
+                              <field name="identification_type_id" options="{'no_open': True, 'no_create': True}" placeholder="Cédula de ciudadania" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="vat" placeholder="Number" class="oe_inline"/>
+                          </div>
+                          <field name="job_id" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="contract_type_id" options="{'no_open': True, 'no_create': True}"/>
+                          <label for="negotiated_salary" string="Negotiated salary"/>
+                          <div>
+                              <field name="negotiated_salary" placeholder="6.000.0000" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="currency_id" placeholder="COP" class="oe_inline"
+                                     options="{'no_open': True, 'no_create': True}"/>
+                          </div>
+                          <field name="date_start"/>
+                          <label for="contract_duration_qty" string="Contract duration"/>
+                          <div>
+                              <field name="contract_duration_qty" placeholder="12" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="contract_duration_sel" placeholder="Month" class="oe_inline"/>
+                          </div>
+                          <field name="analytic_account_id" options="{'no_open': True, 'no_create': True}"/>
+                          <label for="required_mail" string="Mail"/>
+                          <div>
+                              <field name="required_mail" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="mail_domain" placeholder="linktic.com" class="oe_inline"/>
+                          </div>
+                          <label for="computer_equipment" string="Computer Equipment"/>
+                          <div>
+                              <field name="computer_equipment" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="os" class="oe_inline"/>
+                          </div>
+                          <field name="tools" placeholder="Otban/OSTicket..."/>
+                          <field name="supervisor" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="contractor_company" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="prepaid"/>
+                      </group>
+                  </page>
                   <page string="Stage Report" name="stage_report">
                       <field name="hr_applicant_stage_log_ids" mode="tree" nolabel="1" readonly="1">
                           <tree string="RRHH Ticket Report" default_order="datetime_start desc">

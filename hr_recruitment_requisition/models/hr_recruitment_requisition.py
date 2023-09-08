@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 import json
 
 class RecruitmentRequisition(models.Model):
@@ -28,7 +28,7 @@ class RecruitmentRequisition(models.Model):
         [('0', 'All'),
          ('1', 'Low priority'),
          ('2', 'High priority'),
-         ('3', 'Urgent')], string='Priority', default='0', index=True)
+         ('3', 'Urgent')], string='Priority', tracking=True, default='0', index=True)
     color = fields.Integer(string="Color Index", default=0)
     state_domain = fields.Char(string='State Domain', compute='_compute_state_domain')
     state = fields.Many2one(comodel_name="hr_requisition_state", string="Stage", group_expand="_read_group_state_ids",
@@ -48,6 +48,8 @@ class RecruitmentRequisition(models.Model):
                            default='no', help="Indica si el jefe principal de compañia, necesario para aprobaciones")
     manager_id2 = fields.Many2one(comodel_name='hr.employee', string='Alternative Approval',
                                       help='Cuando el jefe inmediato se encuentra ausente, debe aprobar el siguiente respondable')
+    manager_after_id = fields.Many2one(comodel_name='hr.employee', string='Manager next stage',
+                                       help='Jefe inmediato respondable de su aprobación desde ventana emergente')
     activity_id = fields.Integer(string='Activity')
     time_off = fields.Char(string='Disponibilidad', compute='_compute_number_of_days')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
@@ -90,7 +92,7 @@ class RecruitmentRequisition(models.Model):
     budget_value = fields.Float(string='Budget Value')
     attachment_profile_attachment_ids = fields.Many2many(comodel_name='ir.attachment', relation='x_profile_attachment_rel',
                                                          column1='recruitment_requisition_id', column2='attachment_id',
-                                                         string="Attachments", help="Profile Attachments")
+                                                         string="Attachments", help="Profile Attachments", tracking=True)
     profile_attachments_ids = fields.One2many(comodel_name='ir.attachment', inverse_name='hr_recruitment_requisition_id',
                                            string="Profile Attachments", tracking=True)
     count_attachments = fields.Integer(string='Aplicaciones', compute='_compute_count_attachments')
@@ -105,13 +107,14 @@ class RecruitmentRequisition(models.Model):
                                    column1='rrhh_ticket_id', column2='hr_employee_id', string='Employee',
                                    help='')
 
-    # ////////////////////////////////////  modifications of working conditions  ///////////////////////////////////
-
+    # ////////////////////////////////////  Modifications of working conditions  ///////////////////////////////////
 
     employee_domain = fields.Char(string='Domain Employee')
     employee_id2 = fields.Many2one(comodel_name='hr.employee', string='Employee')
-    job_positions = fields.Many2one(comodel_name='hr.job', string="Job Positions")
-    contract_id = fields.Many2one(comodel_name='hr.contract', string='Current Contract')
+    job_positions_domain = fields.Char(string='Job positions domain', compute='_domain_domain_job_positions_id')
+    job_positions = fields.Many2one(comodel_name='hr.job', domain='job_positions_domain', string="Job Positions")
+    contract_domain = fields.Char(string='Contract Domain', compute='_contract_domain')
+    contract_id = fields.Many2one(comodel_name='hr.contract', domain='contract_domain', string='Current Contract')
     contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="Contract Type",
                                        related='contract_id.contract_type_id')
     state_contract = fields.Selection([('draft', 'New'),
@@ -124,18 +127,16 @@ class RecruitmentRequisition(models.Model):
     date_end = fields.Date(string='End Date', tracking=True, related='contract_id.date_start',
                            help="End date of the contract (if it's a fixed-term contract).")
     company_id2 = fields.Many2one(comodel_name='res.company', string='Company', related='contract_id.company_id')
-
     department_id2 = fields.Many2one(comodel_name='hr.department', string='Department',
                                      related='contract_id.department_id')
-
     wage = fields.Monetary(string='Wage', help="Employee's monthly gross wage.", related='contract_id.wage')
     contract_welfare_aid = fields.Monetary(string='Welfare Assistance', related='contract_id.welfare_aid')
     contract_food_aid = fields.Monetary(string='Food Assistance', related='contract_id.food_aid')
     contract_transport_aid = fields.Monetary(string='Transport Assistance', related='contract_id.transport_aid')
     contract_bearing_aid = fields.Monetary(string='Bearing Assistance', related='contract_id.bearing_aid')
     contract_total_income = fields.Monetary(string='Total Income', related='contract_id.total_income')
-
-    job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job",  tracking=True)
+    job_positions_after = fields.Many2one(comodel_name='hr.job', string="New job select",  tracking=True)
+    job_positions_after_text = fields.Char(string='New job')
     company_id3 = fields.Many2one(comodel_name='res.company', string='Company',  tracking=True)
     department_id3 = fields.Many2one(comodel_name='hr.department', string='Department',  tracking=True)
     updated_contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="New Contract Type",  tracking=True)
@@ -152,26 +153,32 @@ class RecruitmentRequisition(models.Model):
 
     # ///////////////////////////////////////////// Disciplinary process //////////////////////////////////////////////////////
 
-    discipline_reason = fields.Many2one('discipline.category', string='Reason',
+    discipline_reason = fields.Many2one(comodel_name='discipline.category', string='Reason', tracking=True,
                                         help="Choose a disciplinary reason")
-    explanation = fields.Text(string="Explanation by Employee", help='Employee have to give Explanation'
-                                                                     'to manager about the violation of discipline')
-    attachment_ids = fields.Many2many('ir.attachment', string="Attachments",
+    explanation = fields.Text(string="Explanation by Employee", tracking=True,
+                              help='Employee have to give Explanation to manager about the violation of discipline')
+    attachment_ids = fields.Many2many(comodel_name='ir.attachment', string="Attachments",
                                       help="Employee can submit any documents which supports their explanation")
 
     # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    # Validación de puesto de trabajo en reclutamiento
+    def compute_constraints_job_id(self):
+        if self.state_type == 'in_progress'and self.recruitment_type == '0':
+            for rec in self.recruitment_requisition_line:
+                if rec.job_positions:
+                    return
+                else:
+                    raise UserError('Debes agregar un puesto de trabajo en la orden de reclutamiento para poder continuar.')
 
     # auto-select fields contract relation
     @api.onchange('employee_id2')
     def _compute_contract_wage(self):
         for rec in self:
-            rec.write({'employee_ids': (4, rec.employee_id2.id)})   # Related employee
-            contract = rec.env['hr.contract'].sudo().search(
-                [('employee_id', '=', rec.employee_id2.ids), ('state', 'in', ['cancel', 'close', 'open'])], limit=1)
-            rec.job_positions = False
-            rec.contract_id = False
-            rec.job_positions = contract.job_id
-            rec.contract_id = contract
+            if rec.employee_id2:
+                rec.employee_ids = rec.employee_id2 # Related employee
+                rec.job_positions = rec.employee_id2.job_id
+                rec.contract_id = rec.env['hr.contract'].sudo().search([('employee_id', '=', rec.employee_id2.ids)], limit=1)
 
     # validación limite reclutamiento
     @api.onchange('recruitment_requisition_line')
@@ -192,9 +199,6 @@ class RecruitmentRequisition(models.Model):
             self.manager_id = self.state_after.manager_id
             self.manager_id2 = self.state_after.optional_manager_id
             self.department_id = self.employee_id.department_id
-        # recruitment type auto select
-        data = self.env['hr_recruitment_type'].search([('recruitment_type', '=', '0')], limit=1)
-        self.recruitment_type_id = data.id
 
     #  recruitment type reset to recruitment_requisition_line
     @api.onchange('recruitment_type_id')
@@ -202,6 +206,8 @@ class RecruitmentRequisition(models.Model):
         if self.recruitment_type_id:
             self.recruitment_requisition_line = False
             self.employee_id2 = False
+            self.job_positions = False
+            self.contract_id = False
             self.job_positions_after = False
             self.updated_contract_type_id = False
             self.company_id3 = False
@@ -211,14 +217,36 @@ class RecruitmentRequisition(models.Model):
 
     # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    # function domain dynamic
+    # function domain dynamic job position
+    @api.depends('employee_id2')
+    def _domain_domain_job_positions_id(self):
+        for rec in self:
+            job = rec.env['hr.job'].sudo().search(
+                [('employee_ids', 'in', rec.employee_id2.ids)], limit=1)
+            if job:
+                rec.job_positions_domain = json.dumps([('id', '=', job.ids)])
+            else:
+                rec.job_positions_domain = json.dumps([('id','=',False)])
+
+    # function domain dynamic state
     @api.depends('recruitment_type_id')
     def _compute_state_domain(self):
         for rec in self:
             if rec.recruitment_type_id:
                 rec.state_domain = json.dumps([('id', 'in', rec.recruitment_type_id.state_id.ids)])
             else:
-                rec.state_domain = json.dumps([()])
+                rec.state_domain = json.dumps([('id','=',False)])
+
+    # function domain dynamic contract
+    @api.depends('contract_id')
+    def _contract_domain(self):
+        for rec in self:
+            contract = rec.env['hr.contract'].sudo().search(
+                [('employee_id', '=', rec.employee_id2.ids)])
+            if contract:
+                rec.contract_domain = json.dumps([('id', 'in', contract.ids)])
+            else:
+                rec.contract_domain = json.dumps([('id','=',False)])
 
     # Permite concatenar el name y la tipo solicitud
     def name_get(self):
@@ -227,18 +255,6 @@ class RecruitmentRequisition(models.Model):
             name = rec.name + ' - ' + rec.recruitment_type_id.name
             result.append((rec.id, name))
         return result
-
-    # # function domain dynamic
-    # @api.depends('employee_id2')
-    # def _domain__domain_job_positions_id(self):
-    #     for rec in self:
-    #         employee = rec.env['hr.job'].sudo().search(
-    #             [('employee_ids', 'in', rec.employee_id2.ids)])
-    #         if employee:
-    #             rec.employee_domain = json.dumps(
-    #                 [('id', 'in', employee.ids)])
-    #         else:
-    #             rec.employee_domain = json.dumps([])
 
     # Establece la requisición en estado cerrado
     def _compute_select_state_done(self):
@@ -361,72 +377,6 @@ class RecruitmentRequisition(models.Model):
         else:
             raise UserError('No existe una linea de orden de reclutamiento')
 
-    # # Action on approbation
-    # def button_action_on_aprobation(self):
-    #     if self.recruitment_requisition_line or self.recruitment_type != '0':
-    #         if self.manager_before.user_id == self.env.user:
-    #             if self.state_after.requires_approval == 'yes':
-    #                 #  Marca actividad como hecha de forma automatica
-    #                 new_activity = self.env['mail.activity'].search([('id','=',self.activity_id)],limit=1)
-    #                 new_activity.action_feedback(feedback='Es Aprobado')
-    #                 self.write({'manager_id': self.state_after.manager_id,
-    #                             'manager_id2': self.state_after.optional_manager_id})
-    #                 note = ''; summary = ''
-    #                 if self.recruitment_type == '0':
-    #                     summary = 'Solicitud de seleccion y contratacion de personal'
-    #                 elif self.recruitment_type == '1':
-    #                     summary = 'Solicitud modificacion de condiciones laborales'
-    #                 # Validación de disponibilidad de manager_id
-    #                 if self.time_off == 'Ausente':
-    #                     user = self.state_after.optional_manager_id.user_id
-    #                     note = 'Ha sido asignado para aprobar la siguiente solicitud, El gerente responable se encuentra ausente'
-    #                     self.write({'manager_before': self.state_after.optional_manager_id})
-    #                 elif self.time_off == 'Disponible':
-    #                     user = self.state_after.manager_id.user_id
-    #                     note = 'Ha sido asignado para aprobar la siguiente solicitud'
-    #                     self.write({'manager_before': self.state_after.manager_id})
-    #                 # Código que crea una nueva actividad
-    #                 model_id = self.env['ir.model']._get(self._name).id
-    #                 create_vals = {'activity_type_id': 4,
-    #                                'summary': summary,
-    #                                'automated': True,
-    #                                'note': note,
-    #                                'date_deadline': fields.datetime.now(),
-    #                                'res_model_id': model_id,
-    #                                'res_id': self.id,
-    #                                'user_id': user.id,
-    #                                }
-    #                 new_activity = self.env['mail.activity'].create(create_vals)
-    #                 # Escribe el id de la actividad en un campo
-    #                 self.write({'activity_id': new_activity})
-    #                 # Contador
-    #                 c = self.state_aprove + 1
-    #                 # mapping of stages created
-    #                 state_id = self.env['hr_requisition_state'].search([('state_type','=','in_progress'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
-    #                                                                    order="id asc", limit=1)
-    #                 self.write({'state_aprove': c,
-    #                             'state': state_id.id})
-    #                 self._compute_state_after()  # next stage check
-    #             else:
-    #                 #  Marca actividad como hecha de forma automatica
-    #                 new_activity = self.env['mail.activity'].search([('id','=',self.activity_id)], limit=1)
-    #                 new_activity.action_feedback(feedback='Es Aprobado')
-    #                 # Llama función actulizar cantidades a reclutar
-    #                 for rec in self.recruitment_requisition_line:
-    #                     rec.job_positions.update_no_of_recruitment(rec.no_of_recruitment)
-    #                 self._compute_state_after()  # next stage check
-    #                 # Contador de niveles de aprobación
-    #                 c = self.state_aprove + 1
-    #                 # mapping of stages created
-    #                 state_id = self.env['hr_requisition_state'].search([('state_type','=','recruitment'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
-    #                                                                    order="id asc", limit=1)
-    #                 self.write({'state_aprove': c,
-    #                             'state': state_id.id})
-    #         else:
-    #             raise UserError('El gerente responsable debe aprobar la solicitud.')
-    #     else:
-    #         raise UserError('No existe una linea de orden de reclutamiento')
-
     def button_action_done(self):
         state_id = self.env['hr_requisition_state'].search([('state_type','=','done'),('recruitment_type_id','in',self.recruitment_type_id.ids)],
                                                            order="id asc", limit=1)
@@ -441,7 +391,6 @@ class RecruitmentRequisition(models.Model):
                     'state_aprove': 0,
                     'state_level': 0,
                     'activity_assigned_id': False,
-                    'assigned_id': False,
                     'hr_recruitment_stage_log_ids': False,
                     'manager_before': False})
         # Responsables iniciales
@@ -507,31 +456,6 @@ class RecruitmentRequisition(models.Model):
         if c == 0:
             self.write({'state': state_id.id})
 
-    # #   Wizard Open
-    # def open_stage_transition_wizard(self):
-    #     if self.manager_before == self.env.user.employee_id:
-    #         # Function that creates assignee activity to track the request
-    #         self._action_state_assigned()
-    #         new_wizard = self.env['hr_recruitment_requisition_stage_transition_wizard'].create({
-    #             'hr_recruitment_requisition_id': self.id,
-    #             'stage_id': self.state.id,
-    #             'manager_id': self.manager_before.id,
-    #             'recruitment_type_id': self.recruitment_type_id.id,
-    #             'time_off': self.time_off,
-    #             'time_off_related': self.time_off_related,
-    #             'datetime_start': fields.datetime.now(),
-    #         })
-    #         return {
-    #             'name': _('Stage Transition'),
-    #             'view_mode': 'form',
-    #             'res_model': 'hr_recruitment_requisition_stage_transition_wizard',
-    #             'type': 'ir.actions.act_window',
-    #             'target': 'new',
-    #             'res_id': new_wizard.id,
-    #         }
-    #     else:
-    #         raise UserError('El gerente responsable debe aprobar la solicitud.')
-
 # /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #   Conteo de etapas
@@ -542,8 +466,11 @@ class RecruitmentRequisition(models.Model):
             range = len(stage_lines)
         if int(range)-1 > self.state_level:
             self.state_level = self.state_level + 1
-        self.state_after = self.env['hr_requisition_state'].search([('sequence','=',stage_lines[self.state_level])])
-        self.manager_id = self.state.manager_id
+        self.state_after = self.env['hr_requisition_state'].search([('sequence','=',stage_lines[self.state_level])], limit=1)
+        if self.manager_after_id:
+            self.manager_id = self.manager_after_id
+        else:
+            self.manager_id = self.state.manager_id
         if self.time_off == 'Ausente':
             self.manager_id2 = self.state.optional_manager_id
             self.manager_before = self.state.optional_manager_id
@@ -553,7 +480,10 @@ class RecruitmentRequisition(models.Model):
 
     def button_action_on_aprobation2(self):
         if self.state_after.requires_approval == 'yes':
-            user = self.state.manager_id.user_id
+            if self.manager_after_id:
+                user = self.manager_after_id.user_id
+            else:
+                user = self.state.manager_id.user_id
             note = 'Ha sido asignado para validar la siguiente solicitud.'
             # Código que crea una nueva actividad
             model_id = self.env['ir.model']._get(self._name).id
@@ -580,13 +510,26 @@ class RecruitmentRequisition(models.Model):
         new_activity.action_feedback(feedback='Es Aprobado')
         self.button_action_on_aprobation2()
         self._compute_stage_after2()
+        # Validación de puesto de trabajo en reclutamiento
+        self.compute_constraints_job_id()
+
+    def button_action_confirm2(self):
+        if self.recruitment_requisition_line or self.recruitment_type != '0':
+            if self.state_type == 'draft':
+                self.compute_next_stage2()
+            else:
+                raise UserError('Debe estar en una etapa de estado borrador para poder confirmar.')
+        else:
+            raise UserError('No existe una linea de orden de reclutamiento')
 
 #   Wizard Open
     def open_stage_transition_wizard2(self):
         new_wizard = self.env['hr_recruitment_requisition_stage_transition_wizard'].create({
             'hr_recruitment_requisition_id': self.id,
             'stage_id': self.state.id,
+            'requires_approval': self.state_after.requires_approval,
             'manager_id': self.manager_before.id,
+            'manager_after_id': self.state_after.manager_id.id,
             'recruitment_type_id': self.recruitment_type_id.id,
             'time_off': self.time_off,
             'time_off_related': self.time_off_related,
@@ -600,19 +543,6 @@ class RecruitmentRequisition(models.Model):
             'target': 'new',
             'res_id': new_wizard.id,
         }
-
-    #   constrains buttons
-    def constrains_approved_hhrr_ticket(self):
-        if self.requires_approval == 'yes':
-            if self.manager_before.user_id == self.env.user:
-                self.open_stage_transition_wizard2()
-            else:
-                raise UserError('No eres responsable para aprobar esta etapa, por favor comunicarse con el administrador si existen dudas.')
-        else:
-            if self.assigned_id == self.env.user:
-                self.open_stage_transition_wizard2()
-            else:
-                raise UserError('No estas asignado para gestionar este proceso.')
 
 class RecruitmentRequisitionLine(models.Model):
     _name = "hr_recruitment_requisition_line"

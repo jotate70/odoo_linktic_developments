@@ -37,7 +37,7 @@
         <record id="hr_requisition_state_hired" model="hr_requisition_state">
             <field name="name">hired</field>
             <field name="color">10</field>
-            <field name="sequence">20</field>
+            <field name="sequence">30</field>
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
             <field name="state_type">done</field>
@@ -47,7 +47,7 @@
         <record id="hr_requisition_state_refused" model="hr_requisition_state">
             <field name="name">Refused</field>
             <field name="color">9</field>
-            <field name="sequence">21</field>
+            <field name="sequence">31</field>
             <field name="requires_approval">no</field>
             <field name="fold">True</field>
             <field name="state_type">refused</field>
@@ -108,12 +108,32 @@
             <field name="description">In this stage the other if is signed by the required people (outside the ERP, in docusing).</field>
         </record>
 
+        <record id="hr_requisition_state_in_generation_contract_addendum" model="hr_requisition_state">
+            <field name="name">Generation Addendum</field>
+            <field name="color">3</field>
+            <field name="sequence">9</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this stage the other if is generation by the required people (outside the ERP, in docusing).</field>
+        </record>
+
+        <record id="hr_requisition_state_employee_update" model="hr_requisition_state">
+            <field name="name">Employee Update</field>
+            <field name="color">3</field>
+            <field name="sequence">10</field>
+            <field name="requires_approval">no</field>
+            <field name="fold">False</field>
+            <field name="state_type">in_progress</field>
+            <field name="description">In this stage the other if is update employee (outside the ERP, in docusing).</field>
+        </record>
+
         <!-- ///////////////////////////////////////// Labor dismissal ///////////////////////////////////////// -->
 
         <record id="hr_requisition_state_in_liquidation_completion" model="hr_requisition_state">
             <field name="name">Liquidation Completion</field>
             <field name="color">2</field>
-            <field name="sequence">9</field>
+            <field name="sequence">11</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">confirm</field>
@@ -123,7 +143,7 @@
         <record id="hr_requisition_state_in_liquidation_approval" model="hr_requisition_state">
             <field name="name">Liquidation Approval</field>
             <field name="color">3</field>
-            <field name="sequence">10</field>
+            <field name="sequence">12</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -133,7 +153,7 @@
         <record id="hr_requisition_state_in_sifa_registration" model="hr_requisition_state">
             <field name="name">SIFA registration</field>
             <field name="color">3</field>
-            <field name="sequence">11</field>
+            <field name="sequence">13</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -143,7 +163,7 @@
         <record id="hr_requisition_state_in_liquidation_payment" model="hr_requisition_state">
             <field name="name">Liquidation Payment</field>
             <field name="color">3</field>
-            <field name="sequence">12</field>
+            <field name="sequence">14</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -153,7 +173,7 @@
         <record id="hr_requisition_state_in_send_liquidation" model="hr_requisition_state">
             <field name="name">send Liquidation</field>
             <field name="color">3</field>
-            <field name="sequence">13</field>
+            <field name="sequence">15</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -163,7 +183,7 @@
         <record id="hr_requisition_state_in_archive_employee" model="hr_requisition_state">
             <field name="name">Archive Employee</field>
             <field name="color">3</field>
-            <field name="sequence">14</field>
+            <field name="sequence">16</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -175,7 +195,7 @@
         <record id="hr_requisition_state_disciplinary_process" model="hr_requisition_state">
             <field name="name">Disciplinary Process</field>
             <field name="color">3</field>
-            <field name="sequence">15</field>
+            <field name="sequence">17</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -185,7 +205,7 @@
         <record id="hr_requisition_state_presentation_disclaimers" model="hr_requisition_state">
             <field name="name">Presentation Disclaimers</field>
             <field name="color">3</field>
-            <field name="sequence">16</field>
+            <field name="sequence">18</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -195,7 +215,7 @@
         <record id="hr_requisition_state_first_instance" model="hr_requisition_state">
             <field name="name">First instance</field>
             <field name="color">3</field>
-            <field name="sequence">17</field>
+            <field name="sequence">19</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -208,7 +228,7 @@
         <record id="hr_requisition_state_reinstatement_and_appeal" model="hr_requisition_state">
             <field name="name">Reinstatement/Appeal</field>
             <field name="color">3</field>
-            <field name="sequence">18</field>
+            <field name="sequence">20</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -218,7 +238,7 @@
         <record id="hr_requisition_state_second_instance" model="hr_requisition_state">
             <field name="name">Second instance</field>
             <field name="color">3</field>
-            <field name="sequence">19</field>
+            <field name="sequence">21</field>
             <field name="requires_approval">yes</field>
             <field name="fold">False</field>
             <field name="state_type">in_progress</field>
@@ -244,9 +264,11 @@
             <field name="recruitment_type">1</field>
             <field name="requisition_type">single_requisition</field>
             <field name="state_id" eval="[(4, ref('hr_requisition_state_draft')), (4, ref('hr_requisition_state_confirm')),
-            (4, ref('hr_requisition_state_in_approval')), (4, ref('hr_requisition_state_in_notification')),
+            (4, ref('hr_requisition_state_validation')), (4, ref('hr_requisition_state_in_approval')),
+            (4, ref('hr_requisition_state_in_notification')),
             (4, ref('hr_requisition_state_in_contract_addendum')), (4, ref('hr_requisition_state_in_sign_contract_addendum')),
-            (4, ref('hr_requisition_state_validation')), (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
+            (4, ref('hr_requisition_state_in_generation_contract_addendum')),(4, ref('hr_requisition_state_employee_update')),
+            (4, ref('hr_requisition_state_hired')), (4, ref('hr_requisition_state_refused'))]"/>
             <field name="description">The type of recruitment: modification of working conditions allows for promotions and transfers in the company.</field>
         </record>
 

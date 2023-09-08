@@ -28,8 +28,8 @@
                         </button>
                 </xpath>
                 <xpath expr="//field[@name='coach_id']" position="after">
-                    <field name="rrhh_ticket_ids" invisible="1"/>
-                    <field name="rrhh_tickets_ids" invisible=""/>
+<!--                    <field name="rrhh_ticket_ids" invisible="1"/>-->
+                    <field name="rrhh_tickets_ids" invisible="1"/>
                 </xpath>
             </field>
         </record>

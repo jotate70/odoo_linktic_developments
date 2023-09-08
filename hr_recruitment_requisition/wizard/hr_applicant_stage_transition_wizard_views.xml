@@ -12,26 +12,32 @@
                 </header>
                 <sheet>
                     <group>
-                        <field name="recruitment_type_id" invisible="1"/>
-                        <field name="hr_recruitment_requisition_id" invisible="1"/>
-                        <field name="time_off" invisible="1"/>
-                        <field name="time_off_related" invisible="1"/>
-                        <label for="manager_id" string="Approve By"/>
-                        <div>
-                            <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"/>
-                            <span class="oe_read_only"> - </span>
-                            <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
-                                   attrs="{'invisible': ['|', ('time_off_related', '=', True),('manager_id', '=', False)], 'readonly': True}"/>
-                            <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
-                                   attrs="{'invisible': ['|', ('time_off_related', '=', False),('manager_id', '=', False)], 'readonly': True}"/>
-                        </div>
-<!--                        <field name="manager_id2" options="{'no_create':true, 'no_open':true}"-->
-<!--                                       attrs="{'invisible': [('time_off_related', '=', False)], 'readonly': True}"/>-->
+                        <group>
+                            <field name="recruitment_type_id" invisible="1"/>
+                            <field name="hr_recruitment_requisition_id" invisible="1"/>
+                            <field name="time_off" invisible="1"/>
+                            <field name="time_off_related" invisible="1"/>
+                            <field name="approved_by" widget="many2one_avatar_user" readonly="1"/>
+                            <label for="manager_id" string="Manager"/>
+                            <div>
+                                <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" readonly="1"/>
+                                <span class="oe_read_only"> - </span>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', True),('manager_id', '=', False)], 'readonly': True}"/>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', False),('manager_id', '=', False)], 'readonly': True}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="requires_approval" invisible="1"/>
+                            <field name="manager_after_id" attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                        </group>
                         <field name="stage_result" required="True"/>
                     </group>
                 </sheet>
                 <footer>
                     <button name="do_action" string="Next Stage" type="object" class="btn-primary"/>
+                    <button name="do_action" string="Refuse" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

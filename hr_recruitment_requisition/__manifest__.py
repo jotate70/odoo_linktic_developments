@@ -26,10 +26,15 @@
 
     # any module necessary for this one to work correctly
     'depends': [
+        'base',
         'web_domain_field',
         'hr',
         'hr_recruitment',
         'hr_contract',
+        'l10n_latam_base',
+        'account',
+        'contacts',
+        'om_hr_payroll_account', # Modificar para Odoo enterprise
         'linktic_hr',       # Modificar para Odoo enterprise
         'linktic_budget',   # Reemplazar por account_budget para Odoo enterprise
     ],
