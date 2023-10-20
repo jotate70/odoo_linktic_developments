@@ -44,24 +44,17 @@ class HrApplicantStageTransitionWizard(models.TransientModel):
                 employee.write({'manager_after_id': self.manager_after_id.id})
                 # Movimiento de etapas
                 rec.compute_next_stage()
+                if self.hr_applicant_id.stage_after.hired_stage == True:
+                    create_vals2 = {'hr_recruitment_requisition_id': self.hr_recruitment_requisition_id.id,
+                                    'stage_id': self.hr_recruitment_requisition_id.state.id,
+                                    'user_id': self.approved_by.id,
+                                    'datetime_start': self.hr_recruitment_requisition_id.write_date,
+                                    'datetime_end': fields.datetime.now(),
+                                    'no_hours': self.no_hours,
+                                    'stage_result': self.stage_result,
+                                    }
+                    self.env['hr_recruitment_stage_log'].create(create_vals2)
 
-    def do_action_cancel(self):
-        if self.hr_applicant_id:
-            for rec in self.hr_applicant_id:
-                create_vals = {'hr_applicant_id': rec.id,
-                               'hr_recruitment_requisition_id': self.hr_recruitment_requisition_id.id,
-                               'stage_id': self.stage_id.id,
-                               'user_id': self.approved_by.id,
-                               'datetime_start': self.datetime_start,
-                               'datetime_end': fields.datetime.now(),
-                               'no_hours': self.no_hours,
-                               'stage_result': self.stage_result,
-                               }
-                self.env['hr_applicant_stage_log'].create(create_vals)
-                employee = self.env['hr.applicant'].search([('id', '=', self.hr_applicant_id.ids)], limit=1)
-                employee.write({'manager_after_id': self.manager_after_id.id})
-                # Cancelar postulación
-                rec.archive_applicant()
 
     # function domain dynamic
     @api.depends('recruitment_type_id')

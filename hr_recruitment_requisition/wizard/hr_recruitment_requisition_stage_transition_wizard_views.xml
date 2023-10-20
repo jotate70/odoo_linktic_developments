@@ -13,6 +13,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="button_cancel" invisible="1"/>
                             <field name="recruitment_type_id" invisible="1"/>
                             <field name="hr_recruitment_requisition_id" invisible="1"/>
                             <field name="time_off" invisible="1"/>
@@ -30,15 +31,18 @@
                         </group>
                         <group>
                             <field name="requires_approval" invisible="1"/>
-                            <field name="manager_after_id" attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                            <field name="manager_after_id" attrs="{'invisible': ['|',('requires_approval','=','no'),('button_cancel','=',True)]}"/>
                         </group>
                         <field name="stage_result" required="True"/>
                     </group>
                 </sheet>
                 <footer>
-                    <button name="do_action" string="Next Stage" type="object" class="btn-primary"/>
-                    <button name="do_action_cancel" string="refuse" type="object" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button name="do_action" string="Next Stage" type="object" class="btn-primary"
+                            attrs="{'invisible': [('button_cancel','=',True)]}"/>
+                    <button name="do_action_cancel" string="refuse" type="object" class="btn-primary"
+                            attrs="{'invisible': [('button_cancel','=',False)]}"/>
+<!--                    <button string="Cancel" class="btn-secondary" special="cancel"-->
+<!--                            attrs="{'invisible': [('button_cancel','=',True)]}"/>-->
                 </footer>
             </form>
         </field>

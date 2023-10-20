@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!--              Groups Category            -->
+    <record id="module_category_rrhh_ticket" model="ir.module.category">
+        <field name="name">RRHH Ticket</field>
+        <field name="description">User groups of the RRHH ticket module.</field>
+        <field name="sequence">35</field>
+    </record>
+
+    <!--              Groups Security            -->
+    <record id="group_hr_recruitment_requisition_user_level_1" model="res.groups">
+        <field name="name">User level 1: RRHH Ticket</field>
+        <field name="category_id" ref="hr_recruitment_requisition.module_category_rrhh_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+    </record>
+
+    <record id="group_hr_recruitment_requisition_user" model="res.groups">
+        <field name="name">User level 2: RRHH Ticket</field>
+        <field name="category_id" ref="hr_recruitment_requisition.module_category_rrhh_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment_requisition.group_hr_recruitment_requisition_user_level_1'))]"/>
+    </record>
+
+    <record id="group_hr_recruitment_requisition_official" model="res.groups">
+        <field name="name">Official: RRHH Ticket</field>
+        <field name="category_id" ref="hr_recruitment_requisition.module_category_rrhh_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment_requisition.group_hr_recruitment_requisition_user')),
+        (4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+    </record>
+
+    <record id="group_hr_recruitment_requisition_manager" model="res.groups">
+        <field name="name">Manager: RRHH Ticket</field>
+        <field name="category_id" ref="hr_recruitment_requisition.module_category_rrhh_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment_requisition.group_hr_recruitment_requisition_official')),
+        (4, ref('hr_recruitment.group_hr_recruitment_manager'))]"/>
+    </record>
+
+    <record id="group_hr_recruitment_requisition_settings" model="res.groups">
+        <field name="name">Settings: RRHH Ticket</field>
+        <field name="category_id" ref="hr_recruitment_requisition.module_category_rrhh_ticket"/>
+        <field name="implied_ids" eval="[(4, ref('hr_recruitment_requisition.group_hr_recruitment_requisition_manager'))]"/>
+    </record>
+
+</odoo>

@@ -30,14 +30,13 @@
                         </group>
                         <group>
                             <field name="requires_approval" invisible="1"/>
-                            <field name="manager_after_id" attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                            <field name="manager_after_id" attrs="{'invisible': [('requires_approval','=','no')]}"/>
                         </group>
                         <field name="stage_result" required="True"/>
                     </group>
                 </sheet>
                 <footer>
                     <button name="do_action" string="Next Stage" type="object" class="btn-primary"/>
-                    <button name="do_action" string="Refuse" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

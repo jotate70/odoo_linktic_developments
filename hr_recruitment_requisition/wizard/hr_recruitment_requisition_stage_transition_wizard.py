@@ -24,6 +24,7 @@ class HrRecruitmentRequisitionStageTransitionWizard(models.TransientModel):
     datetime_end = fields.Datetime(string='End Date')
     no_hours = fields.Float(string='No. Hours')
     stage_result = fields.Text(string='Stage Results')
+    button_cancel = fields.Boolean(string='Button cancel')
 
     def do_action(self):
         if self.hr_recruitment_requisition_id:

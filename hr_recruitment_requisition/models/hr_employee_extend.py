@@ -9,9 +9,6 @@ class HrEmployeePrivate(models.Model):
 
     # Campos nuevos en el modelo
     job_title_2 = fields.Many2one(comodel_name='hr.job', string="Job Title", store=True, required=True)
-    # rrhh_ticket_ids = fields.One2many(comodel_name='hr_recruitment_requisition',
-    #                                   inverse_name='employee_id2',
-    #                                   string="RRHH ticket", tracking=True)
     count_rrhh_ticket = fields.Integer(string='RRHH ticket count', compute='_compute_count_rrhh_ticket')
     rrhh_tickets_ids = fields.Many2many(comodel_name='hr_recruitment_requisition', relation='x_hr_employee_rrhh_ticket_rel',
                                         column1='hr_employee_id', column2='rrhh_ticket_id', string='RRHH Ticktes',

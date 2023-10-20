@@ -15,7 +15,9 @@
         """,
 
     'description': """
-        15.0.1 Selection and hiring module and modification of working conditions.
+        15.0.0 Selection and hiring module and modification of working conditions.
+        15.1.0 New fields are added, in HR ticket and in applications.
+        15.1.1 Error correction.
     """,
 
     'author': "Company: Linktic, Author: Julián Toscano, https://www.linkedin.com/in/jotate70/",
@@ -41,23 +43,24 @@
 
     # always loaded
     'data': [
-        'data/hr_recruiment_requisition_data.xml',
-        'data/hr_recruiment_data.xml',
-        'security/hr_recruitment_requisition_security.xml',
+        # 'data/hr_recruiment_requisition_data.xml',
+        'security/hr_recruitment_rule_security.xml',
+        'security/hr_recruitment_groups_security.xml',
         'security/ir.model.access.csv',
+        'views/hr_recruitment_requisition__menus_views.xml',
         'views/hr_recruitment_requisition_views.xml',
         'views/hr_recruitment_type_views.xml',
-        'views/hr_recruitment_requisition_sequence.xml',
-        'views/hr_job_extend_views.xml',
+        # 'views/hr_recruitment_requisition_sequence.xml',
+        # 'views/hr_job_extend_views.xml',
         'views/hr_applicant_extend_view.xml',
         'views/hr_requisition_stage_views.xml',
         'views/hr_recruitment_stage_extend_views.xml',
-        # 'views/hr_recruitment_requisition_line_views.xml',
         'views/hr_recruitment_stage_extend_views.xml',
         'views/discipline_reason_category.xml',
         'views/hr_employee_views_extend.xml',
         'wizard/hr_recruitment_requisition_stage_transition_wizard_views.xml',
         'wizard/hr_applicant_stage_transition_wizard_views.xml',
+        'wizard/applicant_refuse_reason_views_extend.xml'
     ],
     'installable': True,
     'application': True,

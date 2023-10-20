@@ -41,8 +41,10 @@
                             <group name="main_left">
                                 <field name="sequence" invisible=""/>
                                 <field name="requires_approval"/>
-                                <field name="manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
-                                <field name="optional_manager_id"  attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                                <field name="manager_id" options="{'no_create':true}"
+                                       attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
+                                <field name="optional_manager_id"  options="{'no_create':true}"
+                                       attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
                                 <field name="state_type"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                             </group>
@@ -59,17 +61,26 @@
             </field>
         </record>
 
-        <!--   actions opening views on models   -->
-        <record model="ir.actions.act_window" id="action_window_hr_requisition_stage_view">
-          <field name="name">RRHH Ticket Stages</field>
-          <field name="res_model">hr_requisition_state</field>
-          <field name="view_mode">list,form</field>
-        </record>
+        <!--        Control Panel     -->
+        <record id="hr_requisition_stage_view_search" model="ir.ui.view">
+            <field name="name">hr_requisition_stage_view_search</field>
+            <field name="model">hr_requisition_state</field>
+            <field name="arch" type="xml">
+                <search string="Tickets Search">
+                    <field name="name"/>
+                    <field name="requires_approval"/>
+                    <field name="manager_id"/>
+                    <field name="optional_manager_id"/>
+                    <field name="recruitment_type_id"/>
+                    <field name="state_type"/>
 
-        <!--   Supplier menu   -->
-        <menuitem name="RRHH Ticket Stages" id="hr_recruitment_requisition.hr_requisition_stage_view_menu"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_configuration"
-                  action="action_window_hr_requisition_stage_view" sequence="21"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Recruitment Type" name="recruitment_type" context="{'group_by':'recruitment_type_id'}"/>
+                        <filter string="State Type" name="state_type" context="{'group_by':'state_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
 
     </data>
 </odoo>

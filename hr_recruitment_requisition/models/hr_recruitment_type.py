@@ -7,7 +7,7 @@ class RecruitmentRequisition(models.Model):
 
     company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True,
                                  default=lambda self: self.env.company)
-    name = fields.Char(string='Recruitment Type', required=True)
+    name = fields.Char(string='Recruitment Type', required=True, translate=True)
     recruitment_type = fields.Selection([('0', 'recruitment'),
                                          ('1', 'modifications of working conditions'),
                                          ('2', 'Labor dismissal'),

@@ -12,9 +12,13 @@ class Applicant(models.Model):
                        help="Email subject for applications sent via email")
     partner_name = fields.Char(string="Applicant's Name", required=True)
     stage_domain = fields.Char(string='Stage Domain', compute='_compute_stage_domain')
-    stage_id = fields.Many2one(comodel_name='hr.recruitment.stage', string='Stage', ondelete='restrict', tracking=True,
+    # stage_id = fields.Many2one(comodel_name='hr.recruitment.stage', string='Stage', tracking=True,
+    #                            compute='_compute_stage', store=True, readonly=False,
+    #                            domain='stage_domain',
+    #                            copy=False, index=True,
+    #                            group_expand='_read_group_stage_ids')
+    stage_id = fields.Many2one(comodel_name='hr.recruitment.stage', string='Stage', tracking=True,
                                compute='_compute_stage', store=True, readonly=False,
-                               domain='stage_domain',
                                copy=False, index=True,
                                group_expand='_read_group_stage_ids')
     stage_type = fields.Selection([('new', 'New'),
@@ -67,13 +71,28 @@ class Applicant(models.Model):
                                            string='Recruitment Type', related='stage_id.recruitment_type_id',
                                            help='Match the stages with the types of personnel request.')
 
+    # ////////////////////////////////////////////  Fields for contracts  ////////////////////////////////////////////
+
+    reques_specifications = fields.Char(string='Request specifications', tracking=True)
+    professional_card = fields.Char(string='Professional Card', tracking=True)
+    expedition_date = fields.Date(string='Expedition Date', tracking=True)
+    certifications = fields.Char(string='Certifications', tracking=True)
+    academic_training = fields.Text(string='Academic Training', tracking=True)
+    overall_experience = fields.Text(string='Overall Experience', tracking=True)
+    specific_experience = fields.Text(string='Specific Experience', tracking=True)
+    job_skills = fields.Text(string='Job Skills', tracking=True)
+
     # //////////////////////////////////////////////  Labor conditions  //////////////////////////////////////////////
 
     identification_type_id = fields.Many2one(comodel_name='l10n_latam.identification.type', string='ID Type', tracking=True)
     vat = fields.Char(string='No Document', tracking=True)
     contract_type_id = fields.Many2one(comodel_name='hr.contract.type', string="Contract Type", tracking=True)
-    negotiated_salary = fields.Monetary(string='Negotiated salary', tracking=True,
+    negotiated_salary = fields.Monetary(string='Honorarium/Salary', tracking=True,
                                         help='Salary negotiated and agreed by the company and the candidate.')
+    negotiated_food_bond = fields.Monetary(string='Food Bond', tracking=True,
+                                           help='Food bond negotiated and agreed by the company and the candidate.')
+    total_salary = fields.Monetary(string='Total salary', compute='_compoute_total_salary',
+                                   help='Total Salary negotiated and agreed by the company and the candidate.')
     date_start = fields.Date(string='Start Date', tracking=True,
                              help="Start date of the contract (if it's a fixed-term contract).")
     contract_duration_qty = fields.Integer(string='Duration', tracking=True)
@@ -99,9 +118,12 @@ class Applicant(models.Model):
     supervisor = fields.Many2one(comodel_name='hr.employee', string='Supervisor', tracking=True)
     contractor_company = fields.Many2one(comodel_name='res.partner', string='Contractor company', tracking=True)
     prepaid = fields.Text(string='Prepaid', tracking=True)
+    observations = fields.Html(string='observations', tracking=True)
 
     # //////////////////////////////////////////////////  Funtions  //////////////////////////////////////////////////
 
+    def _related_prepaid_observations(self):
+        self.observations = self.prepaid
 
     # Permite concatenar el name y la tipo solicitud
     def name_get(self):
@@ -111,16 +133,27 @@ class Applicant(models.Model):
             result.append((rec.id, name))
         return result
 
-    # function domain dynamic
-    @api.depends('job_id')
-    def _domain_employee_id(self):
-        for rec in self:
-            if rec.job_id:
-                rec.hr_requisition_domain = json.dumps(
-                    [('id', 'in', rec.job_id.hr_recruitment_requisition_ids.recruitment_requisition_id.ids),
-                     ('state_type', '=', ['confirm', 'in_progress', 'recruitment']), ('recruitment_type', '=', '0')])
-            else:
-                rec.hr_requisition_domain = json.dumps([()])
+    #  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @api.onchange('display_name')
+    def _compute_display_name_to_name(self):
+        self.name = self.display_name
+
+    # data inicial
+    @api.onchange('hr_requisition_id')
+    def _compute_select_manager_id(self):
+        if self.hr_requisition_id:
+            vat = self.stage_id.sequence + 2
+            self.state_level = self.stage_id.sequence
+            self.stage_after = self.env['hr.recruitment.stage'].search([('sequence', '=', vat)], limit=1)
+            for rec in self.hr_requisition_id.recruitment_requisition_line:
+                self.write({'job_id': rec.job_positions.id})
+
+    # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @api.depends()
+    def _compoute_total_salary(self):
+        self.total_salary = self.negotiated_salary + self.negotiated_food_bond
 
     # Indica si el jefe inmediato está o no está ausente
     @api.depends('time_off_related')
@@ -143,24 +176,32 @@ class Applicant(models.Model):
             else:
                 rec.stage_domain = json.dumps([()])
 
-    @api.onchange('display_name')
-    def _compute_display_name_to_name(self):
-        self.name = self.display_name
+    # function domain dynamic
+    @api.depends('job_id')
+    def _domain_employee_id(self):
+        for rec in self:
+            if rec.job_id:
+                rec.hr_requisition_domain = json.dumps(
+                    [('id', 'in', rec.job_id.hr_recruitment_requisition_ids.recruitment_requisition_id.ids),
+                     ('state_type', '=', ['confirm', 'in_progress', 'recruitment']),
+                     ('recruitment_type', '=', '0')])
+            else:
+                rec.hr_requisition_domain = json.dumps([()])
 
-    # Select job RRHH Ticket
-    @api.onchange('hr_requisition_id')
-    def _compute_select_job_id(self):
-        for rec in self.hr_requisition_id.recruitment_requisition_line:
-            self.write({
-                'job_id': rec.job_positions.id,
-            })
-
-    # data inicial
-    @api.onchange('hr_requisition_id')
-    def _compute_select_manager_id(self):
-        vat = self.stage_id.sequence + 1
-        self.state_level = self.stage_id.sequence
+    # /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    def compute_stage_before(self):
+        vat = self.stage_after.sequence - 1
         self.stage_after = self.env['hr.recruitment.stage'].search([('sequence', '=', vat)], limit=1)
+        self.state_level = self.stage_after.sequence
+        self.stage_id = self.env['hr.recruitment.stage'].search([('sequence', '=', vat-1)], limit=1)
+        if self.time_off == 'Ausente':
+            self.manager_id2 = self.stage_id.optional_manager_id
+            self.manager_before = self.stage_id.optional_manager_id
+            self.uncapped_manager_id = self.stage_id.uncapped_manager_id
+        elif self.time_off == 'Disponible':
+            self.manager_id2 = self.stage_id.manager_id
+            self.manager_before = self.stage_id.manager_id
+            self.uncapped_manager_id = self.stage_id.uncapped_manager_id
 
     def _compute_stage_after(self):
         vat = self.stage_after.sequence + 1
@@ -178,7 +219,7 @@ class Applicant(models.Model):
             self.manager_before = self.stage_id.optional_manager_id
             self.uncapped_manager_id = self.stage_id.uncapped_manager_id
         elif self.time_off == 'Disponible':
-            self.manager_id2 = self.stage_id.optional_manager_id
+            self.manager_id2 = self.stage_id.manager_id
             self.manager_before = self.stage_id.manager_id
             self.uncapped_manager_id = self.stage_id.uncapped_manager_id
 
@@ -272,6 +313,25 @@ class Applicant(models.Model):
             'res_id': new_wizard.id,
         }
 
+    def archive_applicant(self):
+        new_wizard = self.env['applicant.get.refuse.reason'].create({
+            'hr_recruitment_requisition_id': self.hr_requisition_id.id,
+            'stage_id': self.stage_id.id,
+            'datetime_start': fields.datetime.now(),
+            'applicant_ids': self.ids,
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Refuse Reason'),
+            'res_model': 'applicant.get.refuse.reason',
+            'view_mode': 'form',
+            'target': 'new',
+            # 'context': {'default_applicant_ids': self.ids, 'active_test': False},
+            'context': {'active_test': False},
+            'res_id': new_wizard.id,
+            'views': [[False, 'form']]
+        }
+
     def _action_after_approval(self):
         #  Marca actividad como hecha de forma automatica
         new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
@@ -324,37 +384,6 @@ class Applicant(models.Model):
         self.write({'activity_id': new_activity})
         c = self.state_aprove + 1
         self.write({'state_aprove': c})
-
-    def action_button_draft(self):
-        state_id = self.env['hr.recruitment.stage'].search(
-            [('state_type', '=', 'new'), ('recruitment_type_id', 'in', self.stage_id.recruitment_type_id.ids)],
-            order="id asc", limit=1)
-        self.write({'state': state_id.id,
-                    'state_aprove': 0,
-                    'state_level': 0,
-                    'manager_id': False,
-                    'manager_id2': False,
-                    'manager_before': False,
-                    'requires_budget_approval': False})
-        # Responsables iniciales
-        self._compute_select_manager_id()
-        self._compute_state_after()  # next stage check
-
-    # Inherit
-    @api.depends('job_id')
-    def _compute_stage(self):
-        for applicant in self:
-            if applicant.job_id:
-                if not applicant.stage_id:
-                    stage_ids = self.env['hr.recruitment.stage'].search([
-                        '|',
-                        ('job_ids', '=', False),
-                        ('job_ids', '=', applicant.job_id.id),
-                        ('fold', '=', False)
-                    ], order='sequence asc', limit=1).ids
-                    applicant.stage_id = stage_ids[0] if stage_ids else False
-            else:
-                applicant.stage_id = False
 
     # Inherit
     def reset_applicant(self):

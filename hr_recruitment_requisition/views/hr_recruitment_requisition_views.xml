@@ -1,88 +1,39 @@
-<?xml version="1.0"?>
 <odoo>
     <data>
-        <!--  /////////////////////////  Action menu ///////////////////////////  -->
-        <record model="ir.actions.act_window" id="action_window_recruitment_requisition">
-            <field name="name">RRHH Ticket</field>
-            <field name="res_model">hr_recruitment_requisition</field>
-            <field name="view_mode">list,form,kanban</field>
+
+        <!--        Control Panel     -->
+        <record id="hr_recruitment_requisition_view_search" model="ir.ui.view">
+            <field name="name">hr_recruitment_requisition_view_search</field>
+            <field name="model">hr_recruitment_requisition</field>
+            <field name="arch" type="xml">
+                <search string="Tickets Search">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="employee_id2"/>
+                    <field name="manager_id"/>
+                    <field name="manager_id2"/>
+                    <field name="manager_after_id"/>
+                    <field name="recruitment_type_id"/>
+                    <field name="state_type"/>
+                    <field name="state"/>
+                    <field name="state_after"/>
+
+                    <separator/>
+                    <filter string="Close" domain="[('state_type','=','done')]" name="state_close_filter"/>
+                    <filter string="Open" domain="[('state_type','!=','done')]" name="state_open_filter"/>
+                    <filter string="Refused" domain="[('state_type','=','refused')]" name="state_refused_filter"/>
+                    <filter string="My Assigned" domain="[('assigned_id','=',uid)]" name="assigned_id_filter"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Recruitment Type" name="recruitment_type_id_group" context="{'group_by':'recruitment_type_id'}"/>
+                        <filter string="State Type" name="state_type_group" context="{'group_by':'state_type'}"/>
+                        <filter string="Stage" name="stage_group" context="{'group_by':'state'}"/>
+                        <filter string="Assigned" name="assigned_id_group" context="{'group_by':'assigned_id'}"/>
+                    </group>
+                </search>
+            </field>
         </record>
-
-        <record model="ir.actions.act_window" id="action_window_recruitment_my_requisition_view">
-            <field name="name">My requests</field>
-            <field name="res_model">hr_recruitment_requisition</field>
-            <field name="view_mode">list,form,kanban</field>
-            <field name="domain">[('create_uid', '=', uid)]</field>
-        </record>
-
-        <record model="ir.actions.act_window" id="action_window_recruitment_my_assigned_requisition_view">
-            <field name="name">My assigned requests</field>
-            <field name="res_model">hr_recruitment_requisition</field>
-            <field name="view_mode">list,form,kanban</field>
-            <field name="domain">[('assigned_id', '=', uid)]</field>
-        </record>
-
-        <record model="ir.actions.act_window" id="action_window_recruitment_all_requisition_view">
-            <field name="name">All requests</field>
-            <field name="res_model">hr_recruitment_requisition</field>
-            <field name="view_mode">list,form,kanban</field>
-        </record>
-
-        <!-- /////////////////////////////  menu main  //////////////////////////// -->
-        <menuitem name="RRHH Ticket"
-                  id="menu_recruitment_requisition_root"
-                  groups="hr.group_hr_user"
-                  web_icon="hr_recruitment_requisition,static/description/icon.png"
-                  action="action_window_recruitment_requisition" sequence="100"/>
-
-        <!-- ///////////////////////////// Top menu item   //////////////////////////   -->
-        <menuitem name="Requests"
-                  id="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  parent="menu_recruitment_requisition_root"
-                  sequence="1"
-                  groups="hr.group_hr_user"/>
-
-        <menuitem name="Settings"
-                  id="menu_recruitment_requisition_setting"
-                  parent="menu_recruitment_requisition_root"
-                  groups="hr.group_hr_user"
-                  sequence="2"/>
-
-        <!--  /////////////////////// Sub Top menu /////////////////////////////////////// -->
-        <menuitem id="menu_hr_recruitment_requisition_configuration"
-                  name="RRHH Ticket configuration"
-                  parent="menu_recruitment_requisition_setting"
-                  groups="hr_recruitment.group_hr_recruitment_user"
-                  sequence="11"/>
-
-        <menuitem id="menu_hr_recruitment_configuration"
-                  name="Recruitment configuration"
-                  parent="menu_recruitment_requisition_setting"
-                  groups="hr_recruitment.group_hr_recruitment_user"
-                  sequence="22"/>
-
-        <!--  /////////////////////// Supplier menu  /////////////////////////////////////// -->
-        <menuitem name="My requests"
-                  id="recruitment_requisition_my_tree_view_menu"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  action="action_window_recruitment_my_requisition_view"
-                  sequence="12"/>
-
-        <menuitem name="My assigned requests"
-                  id="recruitment_requisition_tree_view_menu_2"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  action="action_window_recruitment_my_assigned_requisition_view"
-                  sequence="13"/>
-
-        <menuitem name="All requests"
-                  id="recruitment_requisition_tree_view_menu_3"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_requisition_mgt_custom"
-                  action="action_window_recruitment_all_requisition_view"
-                  sequence="14"/>
-
-        <menuitem name="Recruitment Stage" id="hr_recruitment_requisition.hr_recruitment_stage2_view_menu"
-                  parent="hr_recruitment_requisition.menu_hr_recruitment_configuration"
-                  action="hr_recruitment.hr_recruitment_stage_act" sequence="23"/>
 
         <!-- ///////////////////////////// Smart button applicants ////////////////////////  -->
         <record model="ir.actions.act_window" id="action_hr_applicant_to_so_pt">
@@ -125,12 +76,12 @@
                     <field name="department_id" optional="show"/>
                     <field name="manager_id"/>
                     <field name="assigned_id" placeholder="HHRR Employee" widget="many2one_avatar_user"
-                           groups="hr_recruitment.group_hr_recruitment_user"/>
+                           groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"/>
                     <field name="estimated_date_admission" widget="remaining_days"/>
                     <field name="analytic_account_id" optional="show"/>
                     <field name="activity_ids" widget="list_activity" optional="show"/>
                     <field name="priority" widget="priority" optional="show"/>
-                    <field name="requisition_type" optional="show"/>
+                    <field name="requisition_type" optional="hide"/>
                     <field name="state_type" invisible="1"/>
                     <field name="state" optional="show" widget="badge" decoration-success="state_type == 'done'"
                            decoration-info="state_type not in ('done', 'refused', 'draft')" decoration-muted="state_type == 'draft'"/>
@@ -150,44 +101,57 @@
                                 confirm="¿Desea confirmar la solicitud"
                                 attrs="{'invisible': [('state_type', '!=', 'draft')]}"/>
                         <button name="button_action_draft" string="Draft" type="object"
-                                confirm="¿Desea establecer a borrador?" groups="hr_recruitment.group_hr_recruitment_user"
+                                confirm="¿Desea establecer a borrador?" groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|',('state_type', 'in', ['refused','draft','recruitment','done']),('recruitment_type','!=','0')]}"/>
                         <button name="button_action_draft" string="Draft" type="object"
                                 confirm="¿Desea establecer a borrador?"
                                 attrs="{'invisible': [('state_type', '!=', 'refused')]}"/>
                         <button name="open_stage_transition_wizard2" string="Next Stage" type="object" class="btn-primary"
-                                confirm="¿Desea finalizar etapa?" attrs="{'invisible': ['|',('state_type','!=','in_progress'),('requires_approval','=','yes')]}"/>
+                                confirm="¿Desea finalizar etapa?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
+                                attrs="{'invisible': ['|',('state_type','!=','in_progress'),('requires_approval','=','yes')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',1),('state_type','!=','confirm'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve ⁽2⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',2),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve ⁽3⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',3),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve ⁽4⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',4),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve ⁽5⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',5),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" string="Approve ⁽6⁾" type="object" class="btn-primary"
                                 confirm="¿Desea aprobar la solicitud?"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                 attrs="{'invisible': ['|','|', ('state_aprove','!=',6),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
                         <button name="open_stage_transition_wizard2" type="object" string="Approve ⁽extra⁾"
                                 confirm="¿Desea aprobar la solicitud?"
-                                attrs="{'invisible': ['|','|', ('state_aprove','&lt;',6),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
-                        <button name="button_action_cancel" string="Cancel" type="object"
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
+                                attrs="{'invisible': ['|','|', ('state_aprove','&lt;',7),('state_type','!=','in_progress'),('requires_approval','=','no')]}"/>
+                        <button name="open_stage_transition_refused_wizard" string="Cancel" type="object"
                                 confirm="¿Desea cancelar la solicitud?"
-                                attrs="{'invisible': [('state_type','in',('draft','refused'))]}"/>
+                                groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
+                                attrs="{'invisible': [('state_type','in',['draft','confirm','done','refused'])]}"/>
+                        <button name="open_stage_transition_refused_wizard" string="Cancel" type="object"
+                                confirm="¿Desea cancelar la solicitud?"
+                                attrs="{'invisible': [('state_type','!=','confirm')]}"/>
                         <field name="state_type" invisible="1"/>
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="%(action_hr_applicant_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-pencil"
-                                    groups="hr_recruitment.group_hr_recruitment_user" attrs="{'invisible': ['|',('state_type','in',['draft','confirm','in_progress','refused']),('recruitment_type','!=','0')]}">
+                                    groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official" attrs="{'invisible': ['|',('state_type','in',['draft','confirm','in_progress','refused']),('recruitment_type','!=','0')]}">
                                 <field name="count_applicant" widget="statinfo" string="Applicants"/>
                             </button>
 <!--                            <button name="%(action_hr_attachments_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-archive">-->
@@ -207,22 +171,20 @@
                         </div>
                         <group>
                             <group string="responsible">
+                                <field name="active" invisible="1"/>
                                 <field name="employee_ids" invisible="1"/>
                                 <field name="id" invisible="1"/>
                                 <field name="state_domain" invisible="1"/>
-                                <field name="state_after" invisible="1"/>
-                                <field name="state_level" invisible="1"/>
                                 <field name="activity_id" invisible="1"/>
                                 <field name="activity_assigned_id" invisible="1"/>
                                 <field name="assigned_id" placeholder="HHRR Employee" widget="many2one_avatar_user"
                                        options="{'no_create':true, 'no_open':true}"
-                                       groups="hr_recruitment.group_hr_recruitment_user"
+                                       groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
                                        attrs="{'invisible': [['state_type', '=', 'draft']], 'readonly': [('state_type', 'in', ['done','refused'])],
                                        'required': [('state_type', 'in', ['confirm','in_progress','recruitment'])]}"/>
                                 <field name="employee_id" placeholder="Employee" options="{'no_create':true, 'no_open':true}" readonly="1"/>
                                 <field name="department_id" options="{'no_create':true, 'no_open':true}"
                                        attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
-                                <field name="state_aprove" invisible="1"/>
                                 <field name="time_off_related" invisible="1"/>
                                 <label for="manager_id" string="Approve By"/>
                                 <div>
@@ -254,7 +216,6 @@
                                 <field name="write_date"/>
                                 <field name="write_uid" options="{'no_create':true, 'no_open':true}"/>
                                 <field name="profile_attachments_ids" invisible="1"/>
-                                <field name="requires_approval" invisible="1"/>
                             </group>
                             <group string="budget" attrs="{'invisible': [('recruitment_type','in',['1','2','3'])]}">
                                 <field name="budget_post_id" options="{'no_create':true, 'no_open':true}"
@@ -265,6 +226,7 @@
                                            attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
                                     <field name="currency_id" placeholder="COP" class="oe_inline" options="{'no_create':true, 'no_open':true}"
                                            attrs="{'readonly': [('state_type', 'in', ['confirm','in_progress','recruitment','done','refused'])]}"/>
+                                    <span class="oe_read_only"> / mes </span>
                                 </div>
                             </group>
                             <group string="Account Analytic" attrs="{'invisible': [('recruitment_type','in',['1','2','3'])]}">
@@ -280,7 +242,7 @@
                         <notebook>
                             <page string="Recruitment Order" name="recruitment" attrs="{'invisible': [('recruitment_type','!=','0')]}">
                                 <field id="recruitment_requisition_line" name="recruitment_requisition_line" widget="section_and_note_one2many" mode="tree,kanban"
-                                       attrs="{'readonly': [('state_type', 'in', ['done','refused'])]}">
+                                       attrs="{'readonly': [('state_type', 'in', ['recruitment','done','refused'])]}">
                                     <tree string="Purchase Order Lines" editable="bottom">
                                         <control>
                                             <create name="add_recruitment_control" string="Add a recruitment"/>
@@ -297,7 +259,7 @@
                                         <field name="no_of_recruitment" optional="hide"
                                                attrs="{'readonly': [('state_type','in',['confirm','in_progress','recruitment','done','refused'])]}"/>
                                         <field name="count_recruited" optional="hide"/>
-                                        <field name="estimated_date_admission" optional="show"
+                                        <field name="estimated_date_admission" optional="hide"
                                                attrs="{'readonly': [('state_type','in',['confirm','in_progress','recruitment','done','refused'])]}"/>
                                         <field name="recruited" style="color: green"/>
                                         <field name="contract_type_id" required="1"
@@ -353,7 +315,7 @@
                                     <group string="Update information">
                                         <field name="job_positions_after_text" attrs="{'readonly': [('state_type','!=','draft')]}"/>
                                         <field name="job_positions_after" options="{'no_create':true, 'no_open':true}"
-                                               groups="hr_recruitment.group_hr_recruitment_user" attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
+                                               groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official" attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
                                         <field name="updated_contract_type_id" options="{'no_create':true, 'no_open':true}"
                                                attrs="{'readonly': [('state_type','!=','draft')]}"/>
                                         <field name="company_id3" options="{'no_create':true, 'no_open':true}"
@@ -368,6 +330,8 @@
                                             <span class="oe_read_only"> - </span>
                                             <field name="currency_id" placeholder="COP" class="oe_inline" readonly="1"/>
                                         </div>
+                                        <field name="application_date" attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
+                                        <field name="observations_1" attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
                                     </group>
                                 </group>
                             </page>
@@ -405,6 +369,7 @@
                                     </group>
                                     <group string="Reason for separation">
                                         <field name="resignation_type" attrs="{'required': [('recruitment_type','=','2')], 'readonly': [('state_type','!=','draft')]}"/>
+                                        <field name="termination_date" attrs="{'required': [('recruitment_type','=','2')], 'readonly': [('state_type','!=','draft')]}"/>
                                     </group>
                                 </group>
                             </page>
@@ -421,7 +386,8 @@
                                     </group>
                                     <group string="Disciplinary information">
                                         <field name="discipline_reason" options="{'no_create':true, 'no_open':true}"
-                                               attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
+                                               attrs="{'readonly': [('state_type','in',['done','refused'])]}"
+                                               groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"/>
                                         <field name="explanation" attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
                                         <field name="attachment_ids" widget="many2many_binary" class="oe_inline"
                                                attrs="{'readonly': [('state_type','in',['done','refused'])]}"/>
@@ -439,11 +405,19 @@
                                         <field name="stage_result" style="max-width: 200px"/>
                                     </tree>
                                 </field>
-                                <field name="hr_applicant_ids" invisible="1"/>
+                                <field name="hr_applicant_ids" invisible="1" groups="hr_recruitment.group_hr_recruitment_user"/>
+                            </page>
+                            <page string="Control Panel" name="control_panel" groups="hr_recruitment_requisition.group_hr_recruitment_requisition_settings">
+                                <group>
+                                    <field name="state_after" invisible=""/>
+                                    <field name="state_level" invisible=""/>
+                                    <field name="state_aprove" invisible=""/>
+                                    <field name="requires_approval" invisible=""/>
+                                </group>
                             </page>
                         </notebook>
-                        <span><b attrs="{'invisible': [('recruitment_type','!=','0')]}">profile description</b>
-                            <b attrs="{'invisible': [('recruitment_type','=','0')]}">Description</b></span>
+                        <span attrs="{'invisible': [('recruitment_type','!=','0')]}"><b>profile description</b></span>
+                        <span attrs="{'invisible': [('recruitment_type','=','0')]}"><b>Description</b></span>
                         <field name="description" attrs="{'required': [('recruitment_type','=','0')], 'readonly': [('state_type','!=','draft')]}"/>
                     </sheet>
                     <div class="oe_chatter">
@@ -460,16 +434,17 @@
             <field name="name">Hr Recruitment Requisition Kanban</field>
             <field name="model">hr_recruitment_requisition</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="state" class="o_kanban_applicant">
+                <kanban default_group_by="recruitment_type_id" class="o_kanban_applicant">
+                    <field name="recruitment_type_id" sample="1"/>
                     <field name="state_type" invisible="1"/>
-                    <field name="state" sample="1"/>
+                    <field name="state" invisible="1"/>
                     <field name="id" invisible="1"/>
                     <field name="name" invisible="1"/>
                     <field name="estimated_date_admission"/>
                     <field name="recruitment_type"/>
                     <field name="color"/>
                     <field name="priority"/>
-                    <field name="attachment_number"/>
+<!--                    <field name="attachment_number"/>-->
                     <field name="activity_state" />
                     <progressbar field="activity_state" colors='{"planned": "success", "overdue": "danger", "today": "warning"}'/>
                     <templates>
@@ -517,9 +492,9 @@
                                         <div class="o_kanban_inline_block mr8">
                                             <field name="activity_ids" widget="kanban_activity"/>
                                         </div>
-                                        <span title='Documents'><i class='fa fa-paperclip' role="img" aria-label="Documents"/>
-                                            <t t-esc="record.attachment_number.raw_value"/>
-                                        </span>
+<!--                                        <span title='Documents'><i class='fa fa-paperclip' role="img" aria-label="Documents"/>-->
+<!--                                            <t t-esc="record.attachment_number.raw_value"/>-->
+<!--                                        </span>-->
                                     </div>
                                 </div>
                             </div>
@@ -528,5 +503,6 @@
                 </kanban>
             </field>
         </record>
+
     </data>
 </odoo>

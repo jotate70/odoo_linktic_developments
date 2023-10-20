@@ -6,7 +6,7 @@ class HrRecruitmentRequisitionTicketStageLog(models.Model):
     _description = "Recruitment Stage Log"
 
     hr_recruitment_requisition_id = fields.Many2one(comodel_name="hr_recruitment_requisition", string="Recruitment Requisition", ondelete='cascade')
-    stage_id = fields.Many2one(comodel_name="hr_requisition_state", string="Order Stage", ondelete='restrict')
+    stage_id = fields.Many2one(comodel_name="hr_requisition_state", string="Order Stage")
     user_id = fields.Many2one(comodel_name="res.users", string="Approved By")
     datetime_start = fields.Datetime(string='Start Date')
     datetime_end = fields.Datetime(string='End Date')
