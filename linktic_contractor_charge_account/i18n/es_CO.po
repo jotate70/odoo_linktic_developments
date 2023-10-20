@@ -1,0 +1,816 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_contractor_charge_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-07 22:48+0000\n"
+"PO-Revision-Date: 2023-07-07 22:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>\n"
+"                                <i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\" attrs=\"{'invisible': [('date_start', '=', False), ('date_end', '=', False)]}\"/>"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.account_move_form_inherit_contractor_charge_account
+msgid ""
+"<span attrs=\"{'invisible': [('hr_contractor_charge_account_id', '=', False)]}\">Equivalent Document\n"
+"                </span>"
+msgstr ""
+"<span attrs=\"{'invisible': [('hr_contractor_charge_account_id', '=', False)]}\">Documento Equivalente\n"
+"                </span>"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_charge_account_action
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_my_charge_account_action
+msgid ""
+"A Charge Account is used for contractor employees to procure a payment for the services\n"
+"                they have provided to the company."
+msgstr ""
+"Una cuenta de cobro es utilizada por los contratistas para solicitar un pago por los servicios\n"
+"                proporcionados a la compañia."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_employee__address_home_id
+msgid "Address"
+msgstr "Dirección"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__account_analytic_id
+msgid "Analytic Account"
+msgstr "Cuenta Analitica"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__approval_date
+msgid "Approval Date"
+msgstr "Fecha Aprobación"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Approval Request"
+msgstr "Solicitar Aprobación"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Approve Document"
+msgstr "Aprobar Documento"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account__state__approved
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account_line__state__approved
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__invoice_count
+msgid "Bill Count"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__invoice_state
+msgid "Bill State"
+msgstr "Estado Documento Equivalente"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__invoice_ids
+msgid "Bills"
+msgstr "Documentos Equivalentes"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account__state__budget_approval
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.view_contractor_charge_account_search
+msgid "Budget Approval"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid ""
+"Cannot send to approve a charge account with no responsible assigned lines"
+msgstr ""
+"No se puede solicitar aprobación de una cuenta de cobro con lineas sin un responsable asignado."
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid "Cannot send to approve a charge account without attachments set."
+msgstr ""
+"No se puede solicitar aprobación de una cuenta de cobro sin archivos "
+"adjuntos"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid "Cannot send to approve a charge account without reported hours"
+msgstr ""
+"No se puedde solicitar aprobación de una cuentra de cobro sin horas "
+"reportadas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__name
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__contractor_charge_account_id
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Charge Account"
+msgstr "Cuenta de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.contractor_charge_account_lines_approval_action
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_charge_account_lines_approval_act
+msgid "Charge Account Approval"
+msgstr "Aprobación Cuenta de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__charge_account_attachment
+msgid "Charge Account Attachment"
+msgstr "Adjunto Cuenta de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__charge_account_att_name
+msgid "Charge Account Attachment Name"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__journal_id
+msgid "Charge Account Journal"
+msgstr "Diario Contable"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Charge Account Reference"
+msgstr "Referencia Cuenta Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.res_config_settings_view_form_inherit_contractor
+msgid "Charge Account Settings"
+msgstr "Ajustes Cuentas de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__header_state
+msgid "Charge Account State"
+msgstr "Estado Cuenta de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.contractor_charge_account_action
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_charge_account
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_charge_account_act
+msgid "Charge Accounts"
+msgstr "Cuentas de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_charge_account_action
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_my_charge_account_action
+msgid "Click to create a new charge account."
+msgstr "Click para crear una nueva de cobro."
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_reported_hour_action
+msgid "Click to create a new worked hour report."
+msgstr "Click para crear un nuevo reporte de horas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__company_id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_charge_account_settings
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__contract_id
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_hr_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_account_bank_statement_line__hr_contractor_charge_account_id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_account_move__hr_contractor_charge_account_id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_account_payment__hr_contractor_charge_account_id
+#: model:ir.module.category,name:linktic_contractor_charge_account.module_category_contractor_charge_account
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.parent_menu_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.res_config_settings_view_form_inherit_contractor
+msgid "Contractor Charge Account"
+msgstr "Cuenta de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid "Contractor Charge Account Budget Approval"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_hr_contractor_charge_account_line
+msgid "Contractor Charge Account Line"
+msgstr "Linea Cuenta de Cobro Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_charge_approver
+msgid "Contractor Charge Approver"
+msgstr "Aprobador Cuenta de Cobro Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_charge_budget_approver
+msgid "Contractor Charge Budget Approver"
+msgstr "Aprobador Presupuesto Cuenta de Cobro Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_charge_manager
+msgid "Contractor Charge Manager"
+msgstr "Administrador Cuenta de Cobro Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_charge_user
+msgid "Contractor Charge User"
+msgstr "Usuario Cuenta de Cobro Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_hr_contractor_reported_hours
+#: model:ir.module.category,name:linktic_contractor_charge_account.module_category_contractor_report_hours
+msgid "Contractor Reported Hours"
+msgstr "Reporte Horas Contratista"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__account_analytic_code
+msgid "Cost Center"
+msgstr "Centro de Costo"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__create_uid
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__create_uid
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__create_date
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__create_date
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Dates"
+msgstr "Fechas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_company__contractor_charge_default_journal
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_config_settings__contractor_charge_default_journal
+msgid "Default Account Journal"
+msgstr "Diario Contable por Defecto"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_company__contactor_budget_approver
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_config_settings__contactor_budget_approver
+msgid "Default Contractor Budget Approver"
+msgstr "Aprobador de Presupuesto por Defecto"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_res_config_settings__contractor_charge_default_journal
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.res_config_settings_view_form_inherit_contractor
+msgid "Default Journal used on Contractor Charge Accounts"
+msgstr ""
+"Diario contable que se utilizara para las cuentas de cobro de contratistas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_company__contractor_charge_product_id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_res_config_settings__contractor_charge_product_id
+msgid "Default Product"
+msgstr "Producto Predeterminado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__display_name
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__display_name
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account__state__draft
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account_line__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_hr_employee
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__employee_id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__contractor_charge_account_employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Employee Assignation"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__employee_identification
+msgid "Employee Identification"
+msgstr "Identificación Empleado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__employee_name
+msgid "Employee Name"
+msgstr "Nombre Empleado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__date_end
+msgid "End Date"
+msgstr "Fecha Fin"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_employee__address_home_id
+msgid ""
+"Enter here the private address of the employee, not the one linked to your "
+"company."
+msgstr ""
+"Ingresa aquí la dirección privada del empleado, no la asociada a tu empresa."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.view_contractor_charge_account_search
+msgid "Group By..."
+msgstr "Agrupar por.."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.actions.act_window,help:linktic_contractor_charge_account.contractor_reported_hour_action
+msgid ""
+"Here will be listed all the worked hours that all contractors have been "
+"reported."
+msgstr ""
+"Aca se enlistan todas las horas reportadas realizadas por los contratistas."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__hours
+msgid "Hours"
+msgstr "Horas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__id
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_needaction
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_error
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__is_line_approver
+msgid "Is Line Approver"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model,name:linktic_contractor_charge_account.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account____last_update
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line____last_update
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__write_uid
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__write_uid
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__write_date
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__write_date
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_report_hour_manager
+msgid "Manager"
+msgstr "Administrador"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.contractor_my_charge_account_action
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_my_charge_account_act
+msgid "My Charge Accounts"
+msgstr "Mis Cuentas de Cobro"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.contractor_reported_my_hours_action
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_contractor_reported_my_hours_act
+msgid "My Reported Hours"
+msgstr "Mis Horas Reportadas"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__notes
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__parafiscal_attachment
+msgid "Parafiscal Attachment"
+msgstr "Adjunto Parafiscales"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__parafiscal_att_name
+msgid "Parafiscal Attachment Name"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__line_ids
+msgid "Participation Information"
+msgstr "Informacion Participación"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the contractor charge account %s which "
+"needs a budget approval."
+msgstr ""
+"Por favor %s revisar la información de la cuenta de cobro %s la cual "
+"necesita una aprobación de presupuesto."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_res_config_settings__contractor_charge_product_id
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.res_config_settings_view_form_inherit_contractor
+msgid "Product Used on Bills created in this process"
+msgstr "Producto utilizado en los documentos equivalentes."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__rut_attachment
+msgid "RUT Attachment"
+msgstr "Adjunto RUT"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__rut_att_name
+msgid "RUT Attachment Name"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Recalculates all hours reported"
+msgstr "Recalcula las horas reportadas"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Reject Document"
+msgstr "Rechazar Documento"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account__state__rejected
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account_line__state__rejected
+msgid "Rejected"
+msgstr "Rechazado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.contractor_reported_hour_action
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__reported_hours
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_contractor_reported_hour
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_contractor_reported_hours_act
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Reported Hours"
+msgstr "Horas Reportadas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__responsible_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.view_contractor_charge_account_search
+msgid "Search Purchase Request"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.actions.act_window,name:linktic_contractor_charge_account.hr_config_settings_action_contractor
+#: model:ir.ui.menu,name:linktic_contractor_charge_account.menu_purchase_general_settings
+msgid "Settings"
+msgstr "Ajustes"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__date_start
+msgid "Start Date"
+msgstr "Fecha Inicio"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.view_contractor_charge_account_search
+msgid "State"
+msgstr "Estado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__state
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__journal_id
+msgid "The journal used when the Charge Account is done."
+msgstr ""
+"El diario que va a ser utilizado cuando la Cuenta de Cobro se complete"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid ""
+"There is no default budget approver, please set it up in settings menu."
+msgstr ""
+"No se ha especificado un aprobador de presupuesto, por favor configurarlo en"
+" el menu ajustes"
+
+#. module: linktic_contractor_charge_account
+#: code:addons/linktic_contractor_charge_account/models/contractor_charge_account.py:0
+#, python-format
+msgid ""
+"This date range overlaps with another charge account for this contract."
+msgstr ""
+"El rango de fecha utilizado se sobrelapa con las fechas establecidas en otra"
+" cuenta de cobro para este contrato."
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account__state__to_approve
+#: model:ir.model.fields.selection,name:linktic_contractor_charge_account.selection__hr_contractor_charge_account_line__state__to_approve
+msgid "To Approve"
+msgstr "Pendiente Aprobación"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__total_amount
+msgid "Total"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Update Hours"
+msgstr "Actualizar Horas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_reported_hours__user_id
+msgid "User"
+msgstr "Usuario"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_res_config_settings__contactor_budget_approver
+msgid "User that will be assigned with the activity of budget approval"
+msgstr ""
+"Usuario al que se le asignara la actividad de aprobación de presupuesto."
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.res_config_settings_view_form_inherit_contractor
+msgid ""
+"User that will be assigned with the task of budget approval on contractors "
+"charge account."
+msgstr ""
+"Usuario que se le asignara la tarea de aprobación de presupuesto en cuentas "
+"de cobro de contratistas"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account_line__line_total
+msgid "Value"
+msgstr "Valor"
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Vendor Bills"
+msgstr "Documentos Equivalentes"
+
+#. module: linktic_contractor_charge_account
+#: model:res.groups,name:linktic_contractor_charge_account.group_contractor_report_hour_viewer
+msgid "Viewer"
+msgstr "Visor"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,help:linktic_contractor_charge_account.field_hr_contractor_charge_account__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: linktic_contractor_charge_account
+#: model_terms:ir.ui.view,arch_db:linktic_contractor_charge_account.hr_contractor_charge_account_form
+msgid "Write some observations for the document"
+msgstr "Escriba algunas observaciones para el documento"
+
+#. module: linktic_contractor_charge_account
+#: model:ir.model.fields,field_description:linktic_contractor_charge_account.field_hr_contractor_charge_account__is_my_contractor_charges
+msgid "is_my_charges"
+msgstr ""

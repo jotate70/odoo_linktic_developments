@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo noupdate="1">
+    <record id="seq_contractor_charge_account" model="ir.sequence">
+        <field name="name">Contractor Charge Account</field>
+        <field name="code">hr.contractor.charge.account</field>
+        <field name="prefix">CCC</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

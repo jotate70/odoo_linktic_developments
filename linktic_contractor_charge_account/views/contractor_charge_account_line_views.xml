@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_contractor_charge_account_line_tree" model="ir.ui.view">
+        <field name="name">hr.employee.contractor.charge.account.line.tree</field>
+        <field name="model">hr.contractor.charge.account.line</field>
+        <field name="arch" type="xml">
+            <tree create="0" editable="top">
+                <field name="contractor_charge_account_id" readonly="True"/>
+                <field name="contractor_charge_account_employee_id" readonly="True" options="{'no_create':True, 'no_open': True}"/>
+                <field name="header_state" readonly="True"/>
+                <field name="account_analytic_id" readonly="True" options="{'no_create':True, 'no_open': True}"/>
+                <field name="reported_hours" readonly="True"/>
+                <field name="line_total" readonly="True"/>
+                <field name="responsible_id" readonly="True" options="{'no_create':True, 'no_open': True}"/>
+                <field name="state" attrs="{'readonly': [('header_state', '!=', 'to_approve')]}" force_save="1"/>
+                <field name="approval_date" readonly="True" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="contractor_charge_account_lines_approval_action">
+        <field name="name">Charge Account Approval</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.contractor.charge.account.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('responsible_id.id', '=', uid)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem
+            id="menu_charge_account_lines_approval_act"
+            sequence="30"
+            parent="menu_charge_account"
+            action="contractor_charge_account_lines_approval_action"
+            groups="linktic_contractor_charge_account.group_contractor_charge_approver"
+    />
+
+</odoo>

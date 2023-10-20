@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_contractor_reported_hours_tree" model="ir.ui.view">
+        <field name="name">hr.employee.contractor.reported.hours.tree</field>
+        <field name="model">hr.contractor.reported.hours</field>
+        <field name="arch" type="xml">
+            <tree editable="top" delete="1" create="1">
+                <field name="date" readonly="1"/>
+                <field name="employee_name" readonly="1"/>
+                <field name="employee_identification" readonly="1"/>
+                <field name="hours" readonly="1"/>
+                <field name="account_analytic_code" readonly="1"/>
+                <field name="company_id" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_contractor_my_reported_hours_tree" model="ir.ui.view">
+        <field name="name">hr.employee.contractor.my.reported.hours.tree</field>
+        <field name="model">hr.contractor.reported.hours</field>
+        <field name="arch" type="xml">
+            <tree delete="0" create="0">
+                <field name="date" readonly="1"/>
+                <field name="employee_name" readonly="1"/>
+                <field name="employee_identification" readonly="1"/>
+                <field name="hours" readonly="1"/>
+                <field name="account_analytic_code" readonly="1"/>
+                <field name="company_id" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="contractor_reported_hour_action">
+        <field name="name">Reported Hours</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.contractor.reported.hours</field>
+        <field name="view_id" ref="linktic_contractor_charge_account.hr_contractor_reported_hours_tree"/>
+        <field name="view_mode">tree</field>
+        <!--        <field name="search_view_id" ref="view_purchase_request_search" />-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new worked hour report.
+            </p>
+            <p>
+                Here will be listed all the worked hours that all contractors have been reported.
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="contractor_reported_my_hours_action">
+        <field name="name">My Reported Hours</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.contractor.reported.hours</field>
+        <field name="view_id" ref="linktic_contractor_charge_account.hr_contractor_my_reported_hours_tree"/>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <!--        <field name="search_view_id" ref="view_purchase_request_search" />-->
+    </record>
+
+    <menuitem
+            id="menu_contractor_reported_hour"
+            name="Reported Hours"
+            sequence="50"
+            parent="menu_charge_account"
+            groups="linktic_contractor_charge_account.group_contractor_report_hour_viewer"
+    />
+
+    <menuitem
+            id="menu_contractor_reported_my_hours_act"
+            sequence="10"
+            parent="menu_contractor_reported_hour"
+            action="contractor_reported_my_hours_action"
+            groups="linktic_contractor_charge_account.group_contractor_report_hour_viewer"
+    />
+
+    <menuitem
+            id="menu_contractor_reported_hours_act"
+            sequence="20"
+            parent="menu_contractor_reported_hour"
+            action="contractor_reported_hour_action"
+            groups="linktic_contractor_charge_account.group_contractor_report_hour_manager"
+    />
+
+</odoo>
