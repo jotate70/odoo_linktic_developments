@@ -1,0 +1,201 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_payments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-24 16:55+0000\n"
+"PO-Revision-Date: 2023-03-24 16:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Approval State"
+msgstr "Estado Aprobación"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_manager
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_manager
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_manager
+msgid "Approved Manager"
+msgstr "Aprobado Gerente"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "Cannot change the validation state for a paid Bill."
+msgstr "No puede cambiar el estado de aprobación de una factura pagada"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_move
+msgid "Electronic invoicing"
+msgstr "Facturación electrónica"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_journal_form_inherit_linktic_fields
+msgid "Inter Company Payment"
+msgstr "Pago Inter Compañia"
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_journal
+msgid "Journal"
+msgstr "Libro diario"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__loan_entry_account_id
+msgid "Loan Entry Account"
+msgstr "Cuenta de Entrada Prestamo"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__loan_exit_account_id
+msgid "Loan Exit Account"
+msgstr "Cuenta de Salida Prestamo"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__active_move_ids
+msgid "Moves"
+msgstr "Movimientos"
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "Only can change the Approval state of Posted Bills."
+msgstr "Solo se puede cambiar el estado de aprobación de Facturas publicadas"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_journal_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_journal_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_journal_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__payment_journal_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Payment Bank"
+msgstr "Banco Pago"
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_scheduler_action
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Payment Scheduler"
+msgstr "Programador Pagos"
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Pending Approval"
+msgstr "Pendiente Aprobación"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Process"
+msgstr "Procesar"
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__related_company
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_register__journal_related_company
+msgid "Related Company"
+msgstr "Compañia Relacionada"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_register__related_company_journal_id
+msgid "Related Company Payment Bank"
+msgstr "Banco de la compañia relacionada"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__scheduled_payment_day
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Scheduled Payment Date"
+msgstr "Fecha Programada Pago"
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_scheduler
+msgid "Scheduler for bill payments"
+msgstr "Programador de pagos facturas de compra"
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid ""
+"There are documents with different payment bank configured, please all "
+"records should have the same bank"
+msgstr ""
+"Existen documentos con diferentes bancos de pago configurados, todos "
+"los movimientos deben tener el mismo banco"
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "This user doesn't have approval permissions."
+msgstr "Este usuario no tiene permisos de aprobación"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Waiting Schedule"
+msgstr "Esperando Pogramación"
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__company_id
+msgid "company"
+msgstr "Compañia"

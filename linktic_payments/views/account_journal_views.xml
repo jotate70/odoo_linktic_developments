@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="account_journal_form_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.linktic.fields</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='bank_account']" position="inside">
+                <group>
+                    <group name="inter_company_payment" string="Inter Company Payment">
+                        <field name="related_company" attrs="{'invisible': [('type', 'not in', ['bank','cash'])]}"/>
+                        <field name="loan_entry_account_id"
+                               attrs="{'required': [('related_company', '!=', False)], 'invisible': [('related_company', '=', False)]}"/>
+                        <field name="loan_exit_account_id"
+                               attrs="{'required': [('related_company', '!=', False)], 'invisible': [('related_company', '=', False)]}"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

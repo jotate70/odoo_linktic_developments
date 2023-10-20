@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="account_move_form_inherit_scheduled_payment" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.scheduled.payment</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="scheduled_payment_day" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>
+                <field name="payment_journal_id" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>
+                <field name="approved_manager" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_invoice_tree_inherit_payment_scheduled" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit.payment.scheduled</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='to_check']" position="before">
+                <field name="approved_manager" optional="hide" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_invoice_filter_inherits_scheduled_payment" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit.scheduled.payment</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='to_check']" position="after">
+                <filter string="Waiting Schedule" name="waiting_schedule" domain="[('scheduled_payment_day', '=', False), ('payment_journal_id', '=', False), ('state', '=', 'posted'), ('payment_state', '=', 'not_paid')]"/>
+                <filter string="Pending Approval" name="pending_approval" domain="[('approved_manager', '=', False), ('scheduled_payment_day', '!=', False), ('payment_journal_id', '!=', False), ('state', '=', 'posted'), ('payment_state', '=', 'not_paid') ]"/>
+                <filter string="Approved" name="approved" domain="[('approved_manager', '=', True)]"/>
+            </xpath>
+            <xpath expr="//filter[@name='due_date']" position="after">
+                <filter name="scheduled_payment_day" string="Scheduled Payment Date" date="scheduled_payment_day"/>
+            </xpath>
+            <xpath expr="//filter[@name='status']" position="after">
+                <filter name="payment_journal" string="Payment Bank" context="{'group_by':'payment_journal_id'}"/>
+                <filter name="approved_manager" string="Approval State" context="{'group_by':'approved_manager'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_payment_approval_action" model="ir.actions.server">
+        <field name="name">Approve Payments</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">action = model.approve_bills()</field>
+    </record>
+
+</odoo>
