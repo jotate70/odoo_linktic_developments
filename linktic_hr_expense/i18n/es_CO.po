@@ -1,0 +1,641 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_hr_expense
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-31 15:30+0000\n"
+"PO-Revision-Date: 2023-03-31 15:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__account_move_id
+msgid "Account Move Generated"
+msgstr "Movimiento Contable Generado"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_res_config_settings__hr_expense_advance_account
+msgid "Account used in the Expense Advance entries"
+msgstr "Cuenta utilizada en las entradas de anticipos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_res_config_settings__hr_expense_advance_loss_account
+msgid ""
+"Account used when the summation of expenses is greater than the advance"
+msgstr ""
+"Cuenta utilizada cuando la sumatoria de gastos es mayor que el anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_res_config_settings__hr_expense_advance_gain_account
+msgid "Account used when the summation of expenses is lower than the advance"
+msgstr "Cuenta utilizada cuando la sumatoria de gastos es menor que el anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_state
+msgid "Activity State"
+msgstr "Estado Actividad"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense__payment_advance_id
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_sheet__payment_advance_id
+msgid "Advance"
+msgstr "Anticipo"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Advance Approval"
+msgstr "Aprobación Anticipos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__date
+msgid "Advance Date"
+msgstr "Fecha Anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__journal_id
+msgid "Advance Journal"
+msgstr "Entrada Anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__name
+msgid "Advance No."
+msgstr "Anticipo No."
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.res_config_settings_expense_inherit_advance
+msgid "Advances Account"
+msgstr "Cuenta Anticipos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__analytic_account_id
+msgid "Analytic Account"
+msgstr "Cuenta Analitica"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr "Etiquetas Analiticas"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Approve"
+msgstr "Aprobar"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__approved
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__approved_manager
+msgid "Approved Manager"
+msgstr "Aprobado Gerente"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_attachment_count
+msgid "Attachment Count"
+msgstr "No. Adjuntos"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.account_payment_register_form_inherit_expense_advance
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__done
+msgid "Done"
+msgstr "Hecho"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_hr_expense
+msgid "Expense"
+msgstr "Gasto"
+
+#. module: linktic_hr_expense
+#: model:ir.actions.act_window,name:linktic_hr_expense.hr_expense_advance_action
+#: model:ir.ui.menu,name:linktic_hr_expense.menu_hr_expense_advance
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Expense Advance"
+msgstr "Anticipos Gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__account_id
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_company__hr_expense_advance_account
+msgid "Expense Advance Account"
+msgstr "Cuenta Anticipos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_company__hr_expense_advance_gain_account
+msgid "Expense Advance Gain Account"
+msgstr "Cuenta Ganancia Anticipo"
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "Expense Advance Journal Entry"
+msgstr "Diario Contable Anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_company__hr_expense_advance_loss_account
+msgid "Expense Advance Loss Account"
+msgstr "Cuenta Perdida Anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_hr_expense_sheet
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__sheet_id
+msgid "Expense Report"
+msgstr "Informe de gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__is_refused
+msgid "Explicitly Refused by manager or accountant"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_account_payment_register__from_expense_advance
+msgid "From expense advance"
+msgstr "De Anticipo Gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_config_settings__hr_expense_advance_gain_account
+msgid "Gain Account"
+msgstr "Cuenta Ganancia"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_hr_expense_advance
+msgid "HR Expense Advance"
+msgstr "HR Anticipo Gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_needaction
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_has_error
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid ""
+"In this sheet are not listed all the expenses associated to this advance, "
+"please add them or refuse non required expenses."
+msgstr ""
+"En este informe no estan asociados todos los gastos asociados al anticipo, "
+"por favor adicionarlos o rechazar los gastos restantes."
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_config_settings__hr_expense_advance_account
+msgid "Initial Account"
+msgstr "Cuenta Inicial"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__is_editable
+msgid "Is Editable By Current User"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__same_currency
+msgid "Is currency_id different from the company_currency_id"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_sheet_form_inherit_advances
+msgid "Legalize Expenses"
+msgstr "Legalizar Gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_res_config_settings__hr_expense_advance_loss_account
+msgid "Loss Account"
+msgstr "Cuenta Perdida"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "No Home Address found for the employee %s, please configure one."
+msgstr "El empleado %s no tiene dirección configurada, por favor configurar una."
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__description
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Notes..."
+msgstr "Notas..."
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__attachment_number
+msgid "Number of Attachments"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "Only can change the Approval state of approved advances."
+msgstr "Solo se puede cambiar el estado de aprobación de anticipos aprobados."
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense__payment_mode
+msgid "Paid By"
+msgstr "Pagado Por"
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense__payment_mode__payment_advance
+#, python-format
+msgid "Payment Advance"
+msgstr "Pago Anticipo"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__payment_journal_id
+msgid "Payment Bank"
+msgstr "Banco Pago"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__refused
+msgid "Refused"
+msgstr "Rechazado"
+
+#. module: linktic_hr_expense
+#: model:ir.model,name:linktic_hr_expense.model_account_payment_register
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Reject"
+msgstr "Rechazar"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__company_currency_id
+msgid "Report Company Currency"
+msgstr "Reporte Moneda Compañia"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario Responsable"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__scheduled_payment_day
+msgid "Scheduled Payment Date"
+msgstr "Fecha programación pago"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Set to Draft"
+msgstr "Establecer Borrador"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__sheet_count
+msgid "Sheet Count"
+msgstr "Cuenta Informes"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__state
+msgid "Status of the advance."
+msgstr "Estado del anticipo."
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__to_approve
+msgid "Submitted"
+msgstr "Esperando Aprobación"
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid ""
+"The advance used in this expense is in a processed expense sheet, please "
+"revert it to draft if possible and retry"
+msgstr ""
+"El anticipo asociado en este gasto esta siendo utilizado en un informe de gastos aprobado, por favor "
+"revertir el informe a borrador si es posible y volver a intentar."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "The current user has no related employee. Please, create one."
+msgstr "El usuario actual no tiene ningun empleado asociado. Por favor, crear uno."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid ""
+"There are expenses lines associated in this report with a different advance "
+"associated."
+msgstr ""
+"Hay lineas de gasto asociadas en este reporte con un anticipo diferente al asociado en el "
+"reporte de gastos."
+
+#. module: linktic_hr_expense
+#: model_terms:ir.actions.act_window,help:linktic_hr_expense.hr_expense_advance_action
+msgid "There are no expenses advances. Let's create one"
+msgstr "No existen anticipos de gastos. Creemos uno."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "This user doesn't have approval permissions."
+msgstr "Este usuario no tiene permisos aprobados"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__draft
+msgid "To Submit"
+msgstr "A Enviar"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__total_amount_company
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "Total"
+msgstr "Total"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__total_amount
+msgid "Total In Currency"
+msgstr "Total en Moneda Compañia"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid "Value Difference"
+msgstr "Diferencia de Valor"
+
+#. module: linktic_hr_expense
+#: model_terms:ir.ui.view,arch_db:linktic_hr_expense.view_hr_expense_advance_form
+msgid "View Expense Report"
+msgstr "Ver Reporte Gastos"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields.selection,name:linktic_hr_expense.selection__hr_expense_advance__state__to_pay
+msgid "Waiting Legalization"
+msgstr "Esperando Legalización"
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,field_description:linktic_hr_expense.field_hr_expense_advance__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: model:ir.model.fields,help:linktic_hr_expense.field_hr_expense_advance__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid "You can not create report without category."
+msgstr "No se puede crear un reporte sin categoria."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense_advance.py:0
+#, python-format
+msgid "You cannot delete a posted or approved advance."
+msgstr "No se puede suprimir un anticipo aprobado o publicado."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid "You cannot report expenses for different employees in the same report."
+msgstr "No se puede realizar un informe de gastos para diferentes empleados."
+
+#. module: linktic_hr_expense
+#: code:addons/linktic_hr_expense/models/hr_expense.py:0
+#, python-format
+msgid "You cannot report twice the same line!"
+msgstr "No se puede reportar la linea dos veces."

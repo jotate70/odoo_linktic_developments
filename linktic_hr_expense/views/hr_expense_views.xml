@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_expense_view_form_inherit_advances" model="ir.ui.view">
+        <field name="name">hr.expense.view.form.inherit.advances</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='payment_mode']" position="after">
+                <field name="payment_advance_id" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                       attrs="{'invisible': [('payment_mode','!=','payment_advance')], 'required': [('payment_mode','=','payment_advance')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_expense_sheet_form_inherit_advances" model="ir.ui.view">
+        <field name="name">view.hr.expense.sheet.form.inherit.advances</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', '!=', 'approve'), ('payment_mode', '=',
+                    'payment_advance')]}
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_sheet_move_create']" position="after">
+                <button name="action_legalize_advance_expense_sheet" string="Legalize Expenses"
+                        type="object"
+                        class="oe_highlight" groups="account.group_account_invoice"
+                        attrs="{'invisible': ['|', ('payment_mode','!=','payment_advance'), ('state','!=','approve')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_mode']" position="after">
+                <field name="payment_advance_id" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                       readonly="True" force_save="True"
+                       attrs="{'invisible': [('payment_mode','!=','payment_advance')], 'required': [('payment_mode','=','payment_advance')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']" position="attributes">
+                <attribute name="domain">[('state', '=', 'draft'), ('employee_id', '=', employee_id), ('company_id',
+                    '=', company_id), ('payment_advance_id', '=', payment_advance_id)]
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="account_payment_scheduler_form">
+        <field name="name">wizard.account.payment.scheduler.form</field>
+        <field name="model">account.payment.scheduler</field>
+        <field name="arch" type="xml">
+            <form string="Payment Scheduler">
+                <group>
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                        <field name="scheduled_payment_day" required="1"/>
+                        <field name="payment_journal_id" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_schedule_payments" string="Process" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_payment_scheduler_action" model="ir.actions.server">
+        <field name="name">Payment Scheduler</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_schedule_payment()</field>
+    </record>
+
+</odoo>
