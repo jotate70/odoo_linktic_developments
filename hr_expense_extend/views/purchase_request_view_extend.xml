@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="purchase_request_form_inherit_extend" model="ir.ui.view">
+        <field name="name">purchase_request_form_inherit_extend</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <!--                Fields           -->
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

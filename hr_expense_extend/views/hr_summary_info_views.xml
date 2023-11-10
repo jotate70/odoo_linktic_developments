@@ -1,0 +1,39 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+    <record id="hr_travel_info_view_form" model="ir.ui.view">
+        <field name="name">hr_travel_info_view_form</field>
+        <field name="model">hr_travel_info</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Travel Request">
+                <field name="id" invisible="1"/>
+                <field name="company_currency_id" invisible="1"/>
+                <field name="attachment_number" invisible="True"/>
+                <field name="date" optional="show"/>
+                <field name="product_id" optional="show"/>
+                <field name="name"/>
+                <field name="employee_id" widget="many2one_avatar_employee"/>
+                <field name="sheet_id" optional="show" invisible="not context.get('show_report', False)" readonly="1"/>
+                <field name="payment_mode" optional="show"/>
+                <field name="activity_ids" widget="list_activity" optional="show"/>
+                <field name="accounting_date" optional="hide" groups="account.group_account_invoice,account.group_account_readonly" readonly="0"/>
+                <field name="reference" optional="hide" groups="account.group_account_readonly"/>
+                <field name="analytic_account_id" optional="show" groups="analytic.group_analytic_accounting"/>
+                <field name="analytic_tag_ids" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>
+                <field name="account_id" optional="hide" groups="account.group_account_readonly"/>
+                <field name="company_id" optional="show" groups="base.group_multi_company" readonly="1"/>
+                <field name="unit_amount" optional="hide" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="quantity" optional="hide"/>
+                <field name="tax_ids" optional="hide" widget="many2many_tags" groups="account.group_account_invoice,account.group_account_readonly"/>
+                <field name="attachment_number" nolabel="1" class='fa fa-paperclip pr-0' attrs="{'invisible': [('attachment_number', '=', 0)]}"/>
+                <field name="total_amount_company" optional="hide" sum="Total Company Currency" widget='monetary' options="{'currency_field': 'company_currency_id'}" decoration-bf="True"/>
+                <!-- YTI BUTTON TO REMOVE IN MASTER -->
+                <button name="action_get_attachment_view" string="Attachments" type="object" icon="fa-paperclip" invisible="1"/>
+                <field name="total_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>
+                <field name="actual_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>
+                <field name="currency_id" optional="hide" groups="base.group_multi_currency"/>
+                <field name="message_unread" invisible="1"/>
+                <field name="state" optional="show" readonly="1" decoration-info="state == 'draft'" decoration-success="state in ['reported', 'approved', 'done']" decoration-danger="state in 'refused'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

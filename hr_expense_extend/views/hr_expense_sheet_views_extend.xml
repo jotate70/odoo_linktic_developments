@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_expense_sheet_form_extend" model="ir.ui.view">
+            <field name="name">view_hr_expense_sheet_form_extend</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="identification_id"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="attrs">{"readonly": [["state","in",["draft","Submitted","Approve","Posted","Done","Refused"]]]}</attribute>
+                    <attribute name="options">{"no_open":true,"no_create":true}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{"no_open":true,"no_create":true}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='total_amount_company']" position="after">
+                    <field name="supplier_id" optional="show"/>
+                    <field name="supplier_vat" optional="show"/>
+                </xpath>
+                <xpath expr="//page[@name='expenses']" position="after">
+                    <page name="report" string="Resumen de gastos">
+                        <label for="hr_summary_analytic_account_id" string="Agrupación por Items"/>
+                        <field name="hr_summary_items_id" nolabel="1" widget="many2many" attrs="{'readonly':[('state','!=','draft')]}">
+                            <tree editable="bottom">
+                                <field name="expense_sheet_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="travel_request_id" invisible="1"/>
+                                <field name="product_id" />
+                                <field name="employee_id" invisible="1"/>
+                                <field name="supplier_id" invisible="1"/>
+                                <field name="supplier_vat" invisible="1"/>
+                                <field name="analytic_account_id" invisible="1" optional="show" domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]" groups="analytic.group_analytic_accounting"/>
+                                <field name="analytic_tag_ids" invisible="1" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>
+                                <field name="unit_amount" optional="hide"/>
+                                <field name="quantity" optional="hide"/>
+                                <field name="amount_total" widget="monetary"/>
+                                <field name="currency_id" />
+                                <field name="mode" invisible="1"/>
+                           </tree>
+                        </field>
+                        <label for="hr_summary_analytic_account_id" string="Agrupación por Cuenta Analítica"/>
+                        <field name="hr_summary_analytic_account_id" nolabel="1" widget="many2many" attrs="{'readonly':[('state','!=','draft')]}">
+                            <tree editable="bottom">
+                                <field name="expense_sheet_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="travel_request_id" invisible="1"/>
+                                <field name="product_id" invisible="1"/>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="supplier_id" invisible="1"/>
+                                <field name="supplier_vat" invisible="1"/>
+                                <field name="analytic_account_id" optional="show" domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]" groups="analytic.group_analytic_accounting"/>
+                                <field name="analytic_tag_ids" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>
+                                <field name="unit_amount" optional="hide"/>
+                                <field name="quantity" optional="hide"/>
+                                <field name="amount_total" widget="monetary"/>
+                                <field name="currency_id" />
+                                <field name="mode" invisible="1"/>
+                           </tree>
+                        </field>
+                        <label for="hr_summary_contact_id" string="Agrupación por Proveedor"/>
+                        <field name="hr_summary_contact_id" nolabel="1" widget="many2many" options="{'reload_on_button': True}" attrs="{'readonly':[('state','!=','draft')]}">
+                            <tree editable="bottom">
+                                <field name="expense_sheet_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="travel_request_id" invisible="1"/>
+                                <field name="product_id" invisible="1"/>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="supplier_id" optional="show"/>
+                                <field name="supplier_vat" optional="show"/>
+                                <field name="analytic_account_id" invisible="1" optional="show" domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]" groups="analytic.group_analytic_accounting"/>
+                                <field name="analytic_tag_ids" invisible="1" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>
+                                <field name="unit_amount" optional="hide"/>
+                                <field name="quantity" optional="hide"/>
+                                <field name="amount_total" widget="monetary"/>
+                                <field name="currency_id" />
+                                <field name="mode" invisible="1"/>
+                           </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_hr_expense_sheet_tree_extend" model="ir.ui.view">
+            <field name="name">view_hr_expense_sheet_tree_extend</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="identification_id"/>
+                    <field name="payment_mode" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--                                Secuencia              -->
+        <record id="sequence_hr_expense_sheet_ifpv" model="ir.sequence">
+            <field name="name">Secuencias expense sheet</field>
+            <field name="code">expense.ifpv</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">G</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

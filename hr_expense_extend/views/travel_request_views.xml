@@ -1,0 +1,371 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+
+    <!-- ///////////////////////////// Smart button requisition ////////////////////////  -->
+    <record model="ir.actions.act_window" id="action_purchase_request_to_so_pt">
+        <field name="name">Purchase Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('travel_request_id', '=', active_id)]</field>
+        <field name="context">{
+            "default_travel_request_id": active_id,
+            "default_user_id": False,
+            }
+        </field>
+    </record>
+
+    <record id="view_travel_req_tree" model="ir.ui.view">
+        <field name="name">travel.request.tree</field>
+        <field name="model">travel.request</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Travel Request">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="currency_id"/>
+                <field name="request_by"/>
+                <field name="confirm_by"/>
+                <field name="approve_by"/>
+                <field name="state" optional="show" widget="badge" decoration-success="state == 'purchase' or state == 'done'" decoration-warning="state == 'to approve'" decoration-info="state == 'draft' or state == 'sent'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="seq_idea" model="ir.sequence">
+        <field name="name">travel_sequencer</field>
+        <field name="code">travel.request</field>
+        <field name="prefix">TR/</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="view_travel_req_form" model="ir.ui.view">
+        <field name="name">travel.request.form</field>
+        <field name="model">travel.request</field>
+        <field name="arch" type="xml">
+            <form string="Employee Travel Request">
+                <header>
+                    <button name="action_confirm" string="Confirmar"
+                            type="object" states="draft" class="btn-primary"/>
+                    <button name="button_action_on_aprobation" string="Aprobacion ⁽1⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar la solicitud de viaje?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 1], ['state', '!=', 'confirmed']]}"/>
+                    <button name="button_action_on_aprobation" string="Aprobacion ⁽2⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar la solicitud de viaje?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 2], ['state', '!=', 'on_aprobation']]}"/>
+                    <button name="button_action_on_aprobation" string="Aprobacion ⁽3⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar la solicitud de viaje?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 3], ['state', '!=', 'on_aprobation']]}"/>
+                    <button name="button_action_on_aprobation" string="Aprobacion ⁽4⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar la solicitud de viaje?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 4], ['state', '!=', 'on_aprobation']]}"/>
+                    <button name="button_action_on_aprobation" string="Aprobacion ⁽5⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar la solicitud de viaje?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 5], ['state', '!=', 'on_aprobation']]}"/>
+                    <button name="compute_expense_advance_paid" string="Legalizar"
+                            type="object" states="approved" class="btn-primary"/>
+                    <button name="action_create_expense" string="Generar Informe de Gastos"
+                            confirm="¿Desea iniciar legalización de anticipo?"
+                            type="object" states="paid_advance" class="btn-primary"/>
+                    <button name="action_create_expense_refund" string="Generar reembolso de Gastos"
+                            confirm="¿Desea iniciar legalización de reembolso de Gastos?"
+                            type="object" states="paid_advance" class="btn-primary"/>
+                    <button name="action_reject" string="Rechazar"
+                            confirm="¿Esta seguro de rechazar la solicitud de viaje?"
+                            type="object" states="confirmed" class="btn-primary"/>
+                    <button name="action_reject" string="Rechazar" states="on_aprobation"
+                            confirm="¿Esta seguro de rechazar la solicitud de viaje?"
+                            type="object" groups="hr_expense.group_hr_expense_manager"/>
+                    <button name="action_reject" string="Cancelar" states="submitted"
+                            confirm="¿Esta seguro de cancelar la solicitud de viaje?"
+                            type="object" groups="hr_expense_extend.hr_travel_manager_id"/>
+                    <button name="action_draft" string="Restablecer a borrador"
+                            type="object" states="rejected"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_purchase_request_to_so_pt)d" class="oe_stat_button" icon="fa-pencil" type="action"
+                                attrs="{'invisible':[('state','!=','approved')]}">
+                            <field name="count_purchase_request" widget="statinfo" string="Purchase Request"/>
+                        </button>
+                        <button name="action_expence_company_sheet" type="object" class="oe_stat_button" icon="fa-archive"
+                                attrs="{'invisible':[('state','!=','submitted')]}">
+                            <strong>Anticipos</strong>
+                        </button>
+                        <button name="action_expence_sheet" type="object" class="oe_stat_button" icon="fa-archive"
+                                attrs="{'invisible':[('state','!=','submitted')]}">
+                            <strong>Reembolso</strong>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="priority" widget="priority" class="mr-3"/>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="count_approved" invisible="1"/>
+                            <field name="employee_id" attrs="{'readonly':[('state','!=','draft')]}"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   widget="many2one_avatar_employee"/>
+                            <field name="activity_id" invisible="1"/>
+                            <field name="state_aprove" invisible="1"/>
+                            <field name="time_off_related" invisible="1"/>
+                            <label for="manager_id" string="Responsable de aprobación"/>
+                            <div>
+                                <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type"
+                                       class="oe_inline" required="True" readonly="1" widget="many2one_avatar_employee"/>
+                                <span class="oe_read_only" attrs="{'invisible': [('manager_id', '=', False)]}"> - </span>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)]}"/>
+                            </div>
+                            <field name="job_type" invisible="1"/>
+                            <field name="financial_manager" invisible="1"/>
+                            <field name="general_manager" invisible="1"/>
+                            <field name="request_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="confirm_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="approve_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"
+                                   attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
+                            <field name="currency_id" attrs="{'readonly':[('state','!=','draft')]}"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="account_analytic_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="req_date" readonly="1"/>
+                            <field name="confirm_date" readonly="1"/>
+                            <field name="approve_date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <label for="general_budget_id" string="Presupuesto"/>
+                        <div>
+                            <field name="general_budget_id" placeholder="Posición Presupuestaria"
+                                   class="oe_inline" options="{'no_open': True, 'no_create': True}"/>
+                            <span class="oe_read_only"> -- </span>
+                            <span><strong> Segregación: </strong></span>
+                            <field name="budget_line_segregation_id" placeholder="Segregación" class="oe_inline"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <span class="oe_read_only"> -- </span>
+                            <span><strong> Balance: </strong></span>
+                            <field name="segregation_balance"/>
+                        </div>
+                        <field name="demo"/>
+                    </group>
+                    <group attrs="{'invisible':[('state','!=','submitted')]}">
+                        <group>
+                            <field name="expence_sheet_company_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="expence_sheet_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Información del empleado">
+                            <group>
+                                <group string="Información del viaje">
+                                    <field name="travel_mode_id"
+                                           attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <label for="available_departure_date" string="Fecha Planificada"/>
+                                    <div name="available_departure_date" class="o_row" attrs="{'readonly':[('state','!=','draft')]}">
+                                        <field name="available_departure_date" widget="daterange" options='{"related_end_date": "available_return_date"}'/>
+                                        <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                                        <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow"
+                                           attrs="{'invisible': [('available_departure_date', '=', False), ('available_return_date', '=', False)]}"/>
+                                        <field name="available_return_date" widget="daterange" options='{"related_start_date": "available_departure_date"}'/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="days"/>
+                                </group>
+                                <group string="Información del empleado">
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                      <field name="identification_id"
+                                           attrs="{'readonly':[('state','!=','draft')]}"/>
+                                </group>
+                                <group>
+                                    <field name="birthday"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
+                                </group>
+                                <group>
+                                      <field name="gender"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
+                                </group>
+                                <group>
+                                </group>
+                                <group>
+                                    <field name="visa_country_id" options="{'no_open': True, 'no_create': True}"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
+                                           'invisible':[('travel_mode_id','=','0')]}"/>
+                                    <field name="visa_expire" options="{'no_open': True, 'no_create': True}"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
+                                           'invisible':[('travel_mode_id','=','0')]}"/>
+                                    <field name="emergency_contact" options="{'no_open': True, 'no_create': True}"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
+                                </group>
+                                <group>
+                                    <field name="visa_no"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
+                                           'invisible':[('travel_mode_id','=','0')]}"/>
+                                    <field name="passport_id"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
+                                           'invisible':[('travel_mode_id','=','0')]}"/>
+                                    <field name="emergency_phone"
+                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Reserva de viaje">
+                            <field name="hr_travel_info_ids" widget="section_and_note_one2many" mode="tree,kanban"
+                                   attrs="{'readonly':[('state','=','submitted')]}">
+                                <tree string="Ordenes de viaje">
+                                    <field name="id" invisible="1"/>
+                                    <field name="attachment_number" invisible="1"/>
+                                    <field name="product_id"/>
+                                    <field name="name" optional="hide"/>
+                                    <field name="travel_type"/>
+                                    <field name="passengers"/>
+                                    <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                                    <field name="from_city" string="Desde"/>
+                                    <field name="to_city" string="Hacia"/>
+                                    <field name="req_departure_date"/>
+                                    <field name="req_return_date"/>
+                                    <field name="days" optional="hide"/>
+                                    <field name="amount_total" widget="monetary"/>
+                                    <field name="luggage" optional="show"/>
+                                    <field name="attachment_number" nolabel="1" class='fa fa-paperclip pr-0'
+                                           attrs="{'invisible': [('attachment_number', '=', 0)]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Reserva de hospedaje">
+                            <field name="hr_hotel_info_ids" widget="section_and_note_one2many" mode="tree,kanban"
+                                   attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                                <tree string="Reserva de hospedaje">
+                                    <field name="id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="travel_request_id" invisible="1"/>
+                                    <field name="product_id"/>
+                                    <field name="name" optional="hide"/>
+                                    <field name="hotel_type"/>
+                                    <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                                    <field name="street"/>
+                                    <field name="city"/>
+                                    <field name="state_id" optional="hide"/>
+                                    <field name="country_id"/>
+                                    <field name="req_departure_date"/>
+                                    <field name="req_return_date" optional="hide"/>
+                                    <field name="days"  optional="hide"/>
+                                    <field name="amount_total" widget="monetary"/>
+                                    <field name="currency_id" optional="show"/>
+                                    <field name="attachment_number" nolabel="1" class='fa fa-paperclip pr-0'
+                                           attrs="{'invisible': [('attachment_number', '=', 0)]}"/>
+                                    <field name="state" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Anticipo">
+                            <field name="expense_advance_ids" attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                            </field>
+                        </page>
+                        <page string="Reporte de gastos" attrs="{'invisible':[('state','in',['draft','confirmed','on_aprobation','approved'])]}">
+                            <field name="advance_payment_ids" widget="section_and_note_one2many" mode="tree,kanban"
+                                   attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+<!--                                <tree string="Ordenes de viaticos" editable="bottom">-->
+<!--                                    <control>-->
+<!--                                        <create name="add_recruitment_control" string="Add a recruitment"/>-->
+<!--                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>-->
+<!--                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>4b m-->
+<!--                                    </control>-->
+<!--                                    <field name="id" invisible="1"/>-->
+<!--                                    <field name="company_currency_id" invisible="1"/>-->
+<!--                                    <field name="attachment_number" invisible="1"/>-->
+<!--                                    <field name="of_refunded" invisible="1"/>-->
+<!--                                    <field name="date" optional="show"/>-->
+<!--                                    <field name="product_id" optional="show"/>-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="employee_id" widget="many2one_avatar_employee"/>-->
+<!--                                    <field name="sheet_id" optional="show" invisible="not context.get('show_report', False)" readonly="1"/>-->
+<!--                                    <field name="payment_mode" optional="show"/>-->
+<!--                                    <field name="activity_ids" widget="list_activity" optional="show"/>-->
+<!--                                    <field name="accounting_date" optional="hide" groups="account.group_account_invoice,account.group_account_readonly" readonly="0"/>-->
+<!--                                    <field name="reference" optional="hide" groups="account.group_account_readonly"/>-->
+<!--                                    <field name="analytic_account_id" optional="show" groups="analytic.group_analytic_accounting"/>-->
+<!--                                    <field name="analytic_tag_ids" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>-->
+<!--                                    <field name="account_id" optional="hide" groups="account.group_account_readonly"/>-->
+<!--                                    <field name="company_id" optional="show" groups="base.group_multi_company" readonly="1"/>-->
+<!--                                    <field name="unit_amount" optional="hide" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                                    <field name="quantity" optional="hide"/>-->
+<!--                                    <field name="tax_ids" optional="hide" widget="many2many_tags" groups="account.group_account_invoice,account.group_account_readonly"/>-->
+<!--                                    <field name="attachment_number" nolabel="1" class='fa fa-paperclip pr-0' attrs="{'invisible': [('attachment_number', '=', 0)]}"/>-->
+<!--                                    <field name="total_amount_company" optional="hide" sum="Total Company Currency" widget='monetary' options="{'currency_field': 'company_currency_id'}" decoration-bf="True"/>-->
+<!--                                    &lt;!&ndash; YTI BUTTON TO REMOVE IN MASTER &ndash;&gt;-->
+<!--                                    <button name="action_get_attachment_view" string="Attachments" type="object" icon="fa-paperclip" invisible="1"/>-->
+<!--                                    <field name="total_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>-->
+<!--                                    <field name="actual_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>-->
+<!--                                    <field name="currency_id" optional="hide" groups="base.group_multi_currency"/>-->
+<!--                                    <field name="message_unread" invisible="1"/>-->
+<!--                                    <field name="state" optional="show" readonly="1" decoration-info="state == 'draft'" decoration-success="state in ['reported', 'approved', 'done']" decoration-danger="state in 'refused'" widget="badge"/>-->
+<!--                                </tree>-->
+                            </field>
+                        </page>
+                        <page string="A reembolsar" attrs="{'invisible':[('state','!=','submitted')]}">
+                            <field name="expense_ids" attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'open_attachments': True}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_travel_req" model="ir.actions.act_window">
+        <field name="name">Solicitud de viaje</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.request</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            <p></p>
+        </field>
+    </record>
+
+
+<!--    <menuitem id="travel_main_menu" name="Travel" sequence="22"/>-->
+<!--    <menuitem id="travel_sub_menu" name="Travel Request" sequence="2" parent="travel_main_menu"/>-->
+    <menuitem action="action_travel_req" id="menu_travel_request" parent="hr_expense.menu_hr_expense_my_expenses"
+              name="Solicitud de viaje" sequence="1"/>
+
+
+    <record id="action_travel_req_hr" model="ir.actions.act_window">
+        <field name="name">Solicitud de viaje por aprobar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.request</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('state','in',['confirmed','approved','rejected'])]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            <p></p>
+        </field>
+    </record>
+
+    <!--<menuitem action="action_travel_req_hr" id="menu_travel_request_approve" parent="hr_expense.menu_hr_expense_my_expense"
+              name="Travel Request To Approve" sequence="5" groups="bi_employee_travel_managment.hr_travel_manager_id"/>-->
+</odoo>

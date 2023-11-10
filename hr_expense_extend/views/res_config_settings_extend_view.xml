@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    Vista en ajustes   -->
+        <record id="res_config_settings_hr_expense_extend_view_form" model="ir.ui.view">
+            <field name="name">res_config_settings_hr_expense_extend_view_form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hr_expense.res_config_settings_view_form"/>
+            <field name="priority" eval="75" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='hr_expense']" position="inside">
+                    <h2>Solicitudes de viajes y viáticos</h2>
+                    <div class="col-12 col-lg-6 o_setting_box" id="financial_manager">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <label for="financial_manager"/>
+                            <div class="text-muted">Responsible for managing travel and per diem requests.</div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="financial_manager" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                                <field name="job_title_financial_manager" placeholder="Number" class="oe_inline" style="color: green"
+                                       attrs="{'invisible': [('financial_manager', '=', False)]}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" id="general_manager">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <label for="general_manager"/>
+                            <div class="text-muted">Responsible for approving collection account.</div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="general_manager" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                                <field name="job_title_general_manager" placeholder="Number" class="oe_inline" style="color: green"
+                                       attrs="{'invisible': [('general_manager', '=', False)]}"/>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
