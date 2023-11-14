@@ -154,14 +154,16 @@
                             <span><strong> Balance: </strong></span>
                             <field name="segregation_balance"/>
                         </div>
-                        <field name="demo"/>
                     </group>
-                    <group attrs="{'invisible':[('state','!=','submitted')]}">
+<!--                    <group attrs="{'invisible':[('state','!=','submitted')]}">-->
+                    <group>
                         <group>
-                            <field name="expence_sheet_company_id" options="{'no_create': True}"/>
+<!--                            <field name="expence_sheet_company_id" options="{'no_create': True}"/>-->
+                            <field name="expence_sheet_advance_ids" options="{'no_create': True}" widget="many2many_tags"/>
                         </group>
                         <group>
-                            <field name="expence_sheet_id" options="{'no_create': True}"/>
+<!--                            <field name="expence_sheet_id" options="{'no_create': True}"/>-->
+                            <field name="expence_sheet_own_ids" options="{'no_create': True}" widget="many2many_tags"/>
                         </group>
                     </group>
                     <notebook>

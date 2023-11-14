@@ -17,6 +17,7 @@
     This module will allow you to manage travel of your employees and expense advance and submit expense claim. 
     15.1.0
     15.2.0 Add request for travel, hotels, analytical account grouping, third party, items.
+    15.2.1 Error Corrections.
     """,
 
     'author': "Linktic  Author: Julián Toscano, https://www.linkedin.com/in/jotate70/",

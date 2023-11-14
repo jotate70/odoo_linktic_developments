@@ -6,6 +6,9 @@ from odoo.exceptions import UserError, ValidationError
 class HrExpenseSheet(models.Model):
     _inherit = 'hr.expense.sheet'
 
+    travel_request1_id = fields.Many2one(comodel_name='travel.request', string='Travel Request 1')
+    travel_request2_id = fields.Many2one(comodel_name='travel.request', string='Travel Request 2')
+    travel_expense = fields.Boolean(string='is a travel expense', default=False)
     identification_id = fields.Char(string='Nº identificación', related='employee_id.identification_id')
     name = fields.Char(copy=False, default='New', readonly=True)
     hr_summary_items_id = fields.One2many(comodel_name='hr_items_info', inverse_name='expense_sheet_id',
@@ -13,7 +16,15 @@ class HrExpenseSheet(models.Model):
     hr_summary_analytic_account_id = fields.One2many(comodel_name='hr_analytic_account_info',
                                                      inverse_name='expense_sheet_id', string='Agrupación cuenta analítica')
     hr_summary_contact_id = fields.One2many(comodel_name='hr_third_info', inverse_name='expense_sheet_id',
-                                            string='A09grupación proveedor')
+                                            string='Agrupación proveedor')
+
+    @api.constrains('expense_line_ids', 'employee_id')
+    def _check_employee(self):
+        for sheet in self:
+            if sheet.travel_expense == True:
+                pass
+            else:
+                return super(HrExpenseSheet, self)._check_employee()
 
     def action_submit_sheet(self):
         for rec in self.expense_line_ids:

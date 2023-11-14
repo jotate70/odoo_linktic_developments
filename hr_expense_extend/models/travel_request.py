@@ -39,9 +39,15 @@ class My_travel_request(models.Model):
     req_date = fields.Date(string="Fecha de solicitud")
     confirm_date = fields.Date(string="Fecha de confirmación")
     approve_date = fields.Date(string="Fecha de aprobación")
-    expence_sheet_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de reembolso creada", readonly=True)
-    expence_sheet_company_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de anticipo creada",
-                                               readonly=True)
+    # expence_sheet_company_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de anticipo creada",
+    #                                            readonly=True)
+    # expence_sheet_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de reembolso creada", readonly=True)
+    #
+    expence_sheet_advance_ids = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='travel_request1_id',
+                                                string="Legalización de gastos")
+    expence_sheet_own_ids = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='travel_request2_id',
+                                            string="legalización de reembolso")
+    #
     travel_mode_id = fields.Selection([('0', 'Nacional'),
                                        ('1', 'Internacional')], default='0', index=True, string='Tipo de viaje')
     return_mode_id = fields.Many2one(comodel_name='travel.mode', string="Modo de viaje de regreso")
@@ -113,7 +119,6 @@ class My_travel_request(models.Model):
                                                  string='Budget Line Segregation',
                                                  domain="[('general_budget_id', '=?', general_budget_id), ('analytic_account_id', '=?', account_analytic_id)]")
     segregation_balance = fields.Monetary(string="Balance", compute="get_segregation_balance", store=True, readonly=True)
-    demo = fields.Char(string='demo')
 
     def compute_expense_advance_paid(self):
         if self.state == 'approved' and self.financial_manager == self.env.user.employee_id:
@@ -387,6 +392,16 @@ class My_travel_request(models.Model):
             rec.button_rejected()
         return
 
+    #   Compute function expense   NEW CODE
+    def _compute_create_expense_sheet(self):
+        if self.expense_advance_ids:
+            # for rec in self.expense_advance_ids:
+            #     for line in self.expense_ids:
+            #         if rec.employee_id == line.employee_id:
+            #             expense = rec.action_create_expense(line.employee_id)
+                        # expense_refund = rec.action_create_expense_refund(line.employee_id)
+            self.write({'expence_sheet_advance_ids': [(4, 6)]})
+
     def action_create_expense(self):
         id_lst = []
         for line in self.expense_ids:
@@ -413,7 +428,7 @@ class My_travel_request(models.Model):
             raise UserError('Ya existen diferencia de gasos a reembolsar, para volver a generar gastos a reembolsar elimine los existentes.')
         else:
             for rec in self.advance_payment_ids:
-                if rec.total_amount < rec.actual_amount:
+                if rec.total_amount < rec.actual_amount:            # New code
                     self.write({'expense_ids': [(0, 0, {'company_currency_id': self.currency_id.id,
                                                         'date': rec.date,
                                                         'product_id': rec.product_id.id,
@@ -482,16 +497,4 @@ class my_travel_request(models.Model):
 
     name = fields.Char('Travel Mode')
 
-class HrExpenseSheet(models.Model):
-    
-    _inherit = 'hr.expense.sheet'
-    travel_expense = fields.Boolean(string='is a travel expense', default=False)
-
-    @api.constrains('expense_line_ids', 'employee_id')
-    def _check_employee(self):
-        for sheet in self:
-            if sheet.travel_expense == True:
-                pass
-            else:
-                return super(HrExpenseSheet,self)._check_employee()  
 
