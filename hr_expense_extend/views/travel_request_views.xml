@@ -15,6 +15,34 @@
         </field>
     </record>
 
+    <!-- ///////////////////////////// Smart button sheet advance ////////////////////////  -->
+    <record model="ir.actions.act_window" id="action_sheet_advance_to_so_pt">
+        <field name="name">R(Anticipos)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.expense.sheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('travel_request1_id', '=', active_id)]</field>
+        <field name="context">{
+            "default_travel_request1_id": active_id,
+            "default_user_id": False,
+            }
+        </field>
+    </record>
+
+    <!-- ///////////////////////////// Smart button sheet own ////////////////////////  -->
+    <record model="ir.actions.act_window" id="action_sheet_own_to_so_pt">
+        <field name="name">R(Reembolso)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.expense.sheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('travel_request2_id', '=', active_id)]</field>
+        <field name="context">{
+            "default_travel_request2_id": active_id,
+            "default_user_id": False,
+            }
+        </field>
+    </record>
+
     <record id="view_travel_req_tree" model="ir.ui.view">
         <field name="name">travel.request.tree</field>
         <field name="model">travel.request</field>
@@ -89,13 +117,13 @@
                                 attrs="{'invisible':[('state','!=','approved')]}">
                             <field name="count_purchase_request" widget="statinfo" string="Purchase Request"/>
                         </button>
-                        <button name="action_expence_company_sheet" type="object" class="oe_stat_button" icon="fa-archive"
+                        <button name="%(action_sheet_advance_to_so_pt)d" class="oe_stat_button" icon="ffa-archive" type="action"
                                 attrs="{'invisible':[('state','!=','submitted')]}">
-                            <strong>Anticipos</strong>
+                            <field name="count_sheet_advance" widget="statinfo" string="R(Anticipos)"/>
                         </button>
-                        <button name="action_expence_sheet" type="object" class="oe_stat_button" icon="fa-archive"
+                        <button name="%(action_sheet_own_to_so_pt)d" class="oe_stat_button" icon="fa-archive" type="action"
                                 attrs="{'invisible':[('state','!=','submitted')]}">
-                            <strong>Reembolso</strong>
+                            <field name="count_sheet_own" widget="statinfo" string="R(Reembolsos)"/>
                         </button>
                     </div>
                     <div class="oe_title">
@@ -156,16 +184,6 @@
                         </div>
                     </group>
 <!--                    <group attrs="{'invisible':[('state','!=','submitted')]}">-->
-                    <group>
-                        <group>
-<!--                            <field name="expence_sheet_company_id" options="{'no_create': True}"/>-->
-                            <field name="expence_sheet_advance_ids" options="{'no_create': True}" widget="many2many_tags"/>
-                        </group>
-                        <group>
-<!--                            <field name="expence_sheet_id" options="{'no_create': True}"/>-->
-                            <field name="expence_sheet_own_ids" options="{'no_create': True}" widget="many2many_tags"/>
-                        </group>
-                    </group>
                     <notebook>
                         <page string="Información del empleado">
                             <group>

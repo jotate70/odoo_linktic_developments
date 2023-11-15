@@ -45,8 +45,10 @@ class My_travel_request(models.Model):
     #
     expence_sheet_advance_ids = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='travel_request1_id',
                                                 string="Legalización de gastos")
+    count_sheet_advance = fields.Integer(string='Count advances', compute='_compute_count_sheet_advance')
     expence_sheet_own_ids = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='travel_request2_id',
                                             string="legalización de reembolso")
+    count_sheet_own = fields.Integer(string='Count own', compute='_compute_count_sheet_own')
     #
     travel_mode_id = fields.Selection([('0', 'Nacional'),
                                        ('1', 'Internacional')], default='0', index=True, string='Tipo de viaje')
@@ -147,6 +149,20 @@ class My_travel_request(models.Model):
                 self.count_purchase_request += 1
         else:
             self.count_purchase_request = 0
+
+    def _compute_count_sheet_advance(self):
+        if self.expence_sheet_advance_ids:
+            for rec in self.expence_sheet_advance_ids:
+                self.count_sheet_advance += 1
+        else:
+            self.count_sheet_advance = 0
+
+    def _compute_count_sheet_own(self):
+        if self.expence_sheet_own_ids:
+            for rec in self.expence_sheet_own_ids:
+                self.count_sheet_own += 1
+        else:
+            self.count_sheet_own = 0
 
       # Anticpos automaticos
     def _compute_generate_expense_advance_ids(self):
