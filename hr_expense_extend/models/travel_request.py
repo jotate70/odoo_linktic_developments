@@ -395,29 +395,31 @@ class My_travel_request(models.Model):
     #   Compute function expense   NEW CODE
     def _compute_create_expense_sheet(self):
         if self.expense_advance_ids:
-            # for rec in self.expense_advance_ids:
-            #     for line in self.expense_ids:
-            #         if rec.employee_id == line.employee_id:
-            #             expense = rec.action_create_expense(line.employee_id)
-                        # expense_refund = rec.action_create_expense_refund(line.employee_id)
-            self.write({'expence_sheet_advance_ids': [(4, 6)]})
+            for rec in self.expense_advance_ids:
+                self.action_create_expense(rec.employee_id.id)
 
-    def action_create_expense(self):
+    def action_create_expense(self, employee):
         id_lst = []
-        for line in self.expense_ids:
-            id_lst.append(line.id)
-        res = self.env['hr.expense.sheet'].create({'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': self.employee_id.id,
-                                                   'travel_expense': True, 'payment_mode': 'own_account', 'expense_line_ids' : [(6, 0, id_lst)]})
-        self.expence_sheet_id = res.id
-        self.write({'state': 'submitted'})
         id_lst2 = []
-        for line in self.advance_payment_ids:
-            id_lst2.append(line.id)
-        res2 = self.env['hr.expense.sheet'].create(
-            {'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': self.employee_id.id,
-             'travel_expense': True, 'payment_mode': 'company_account', 'expense_line_ids': [(6, 0, id_lst2)]})
-        self.expence_sheet_company_id = res2.id
-        return
+        if self.expense_ids:
+            for line1 in self.expense_ids:
+                if line1.employee_id.id == employee:
+                    id_lst.append(line1.id)
+                res = self.env['hr.expense.sheet'].create({'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee,
+                                                           'travel_expense': True, 'payment_mode': 'own_account', 'expense_line_ids' : [(6, 0, id_lst)]})
+                # self.expence_sheet_id = res.id
+                self.write({'expence_sheet_own_ids': [(4, res.id)]})
+                self.write({'state': 'submitted'})
+                id_lst2 = []
+        if self.advance_payment_ids:
+            for line2 in self.advance_payment_ids:
+                if line2.employee_id.id == employee:
+                    id_lst2.append(line2.id)
+            res2 = self.env['hr.expense.sheet'].create(
+                {'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee,
+                 'travel_expense': True, 'payment_mode': 'company_account', 'expense_line_ids': [(6, 0, id_lst2)]})
+            # self.expence_sheet_company_id = res2.id
+            self.write({'expence_sheet_advance_ids': [(4, res2.id)]})
 
     def action_create_expense_refund(self):
         c = 0
