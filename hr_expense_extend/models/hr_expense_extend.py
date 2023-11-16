@@ -35,9 +35,9 @@ class HrExpense(models.Model):
             if rec.travel_id:
                 rec.analytic_account_id = rec.travel_id.account_analytic_id
                 rec.payment_mode = 'payment_advance'
-                rec.payment_advance_id = rec.env['hr.expense.advance'].search([('employee_id','=',self.employee_id.ids),
-                                                                                ('travel_request_id','=',self.travel_id.ids),
-                                                                                ('state','=','to_pay')], limit=1)
+                rec.payment_advance_id = rec.env['hr.expense.advance'].search([('employee_id', '=', self.employee_id.ids),
+                                                                               ('travel_request_id', '=', self.travel_id.ids),
+                                                                               ('state', '=', 'to_pay')], limit=1)
 
     def _get_account_move_line_values(self):
         move_line_values_by_expense = {}

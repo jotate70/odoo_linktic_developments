@@ -92,12 +92,12 @@
                             attrs="{'invisible': ['|', ['state_aprove', '!=', 5], ['state', '!=', 'on_aprobation']]}"/>
                     <button name="compute_expense_advance_paid" string="Legalizar"
                             type="object" states="approved" class="btn-primary"/>
-                    <button name="action_create_expense" string="Generar Informe de Gastos"
+                    <button name="compute_create_expense_sheet" string="Generar Informe de Gastos"
                             confirm="¿Desea iniciar legalización de anticipo?"
                             type="object" states="paid_advance" class="btn-primary"/>
-                    <button name="action_create_expense_refund" string="Generar reembolso de Gastos"
-                            confirm="¿Desea iniciar legalización de reembolso de Gastos?"
-                            type="object" states="paid_advance" class="btn-primary"/>
+<!--                    <button name="action_create_expense_refund" string="Generar reembolso de Gastos"-->
+<!--                            confirm="¿Desea iniciar legalización de reembolso de Gastos?"-->
+<!--                            type="object" states="paid_advance" class="btn-primary"/>-->
                     <button name="action_reject" string="Rechazar"
                             confirm="¿Esta seguro de rechazar la solicitud de viaje?"
                             type="object" states="confirmed" class="btn-primary"/>
@@ -109,22 +109,22 @@
                             type="object" groups="hr_expense_extend.hr_travel_manager_id"/>
                     <button name="action_draft" string="Restablecer a borrador"
                             type="object" states="rejected"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,approved"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="%(action_purchase_request_to_so_pt)d" class="oe_stat_button" icon="fa-pencil" type="action"
-                                attrs="{'invisible':[('state','!=','approved')]}">
-                            <field name="count_purchase_request" widget="statinfo" string="Purchase Request"/>
+                                attrs="{'invisible':[('state','in',['draft','confirm','on_aprobation'])]}">
+                            <field name="count_purchase_request" widget="statinfo" string="Requisiciones"/>
                         </button>
-                        <button name="%(action_sheet_advance_to_so_pt)d" class="oe_stat_button" icon="ffa-archive" type="action"
-                                attrs="{'invisible':[('state','!=','submitted')]}">
+                        <button name="%(action_sheet_advance_to_so_pt)d" class="oe_stat_button" icon="fa-archive" type="action"
+                                attrs="{'invisible':[('state','in',['draft','confirm','on_aprobation','approved'])]}">
                             <field name="count_sheet_advance" widget="statinfo" string="R(Anticipos)"/>
                         </button>
-                        <button name="%(action_sheet_own_to_so_pt)d" class="oe_stat_button" icon="fa-archive" type="action"
-                                attrs="{'invisible':[('state','!=','submitted')]}">
-                            <field name="count_sheet_own" widget="statinfo" string="R(Reembolsos)"/>
-                        </button>
+<!--                        <button name="%(action_sheet_own_to_so_pt)d" class="oe_stat_button" icon="fa-archive" type="action"-->
+<!--                                attrs="{'invisible':[('state','in',['draft','confirm','on_aprobation','approved'])]}">-->
+<!--                            <field name="count_sheet_own" widget="statinfo" string="R(Reembolsos)"/>-->
+<!--                        </button>-->
                     </div>
                     <div class="oe_title">
                         <h1>
@@ -144,7 +144,8 @@
                             <label for="manager_id" string="Responsable de aprobación"/>
                             <div>
                                 <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type"
-                                       class="oe_inline" required="True" readonly="1" widget="many2one_avatar_employee"/>
+                                       class="oe_inline" required="True" readonly="1" widget="many2one_avatar_employee"
+                                       attrs="{'readonly':[('state','!=','draft')]}"/>
                                 <span class="oe_read_only" attrs="{'invisible': [('manager_id', '=', False)]}"> - </span>
                                 <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                        attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
@@ -173,11 +174,13 @@
                         <label for="general_budget_id" string="Presupuesto"/>
                         <div>
                             <field name="general_budget_id" placeholder="Posición Presupuestaria"
-                                   class="oe_inline" options="{'no_open': True, 'no_create': True}"/>
+                                   class="oe_inline" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                             <span class="oe_read_only"> -- </span>
                             <span><strong> Segregación: </strong></span>
                             <field name="budget_line_segregation_id" placeholder="Segregación" class="oe_inline"
-                                   options="{'no_open': True, 'no_create': True}"/>
+                                   options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                             <span class="oe_read_only"> -- </span>
                             <span><strong> Balance: </strong></span>
                             <field name="segregation_balance"/>
@@ -255,6 +258,7 @@
                                     <field name="product_id"/>
                                     <field name="name" optional="hide"/>
                                     <field name="travel_type"/>
+                                    <field name="employee_ids" widget="many2many_avatar_employee"/>
                                     <field name="passengers"/>
                                     <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
                                     <field name="from_city" string="Desde"/>
@@ -279,6 +283,7 @@
                                     <field name="product_id"/>
                                     <field name="name" optional="hide"/>
                                     <field name="hotel_type"/>
+                                    <field name="employee_ids" widget="many2many_avatar_employee"/>
                                     <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
                                     <field name="street"/>
                                     <field name="city"/>
@@ -302,48 +307,12 @@
                         <page string="Reporte de gastos" attrs="{'invisible':[('state','in',['draft','confirmed','on_aprobation','approved'])]}">
                             <field name="advance_payment_ids" widget="section_and_note_one2many" mode="tree,kanban"
                                    attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
-<!--                                <tree string="Ordenes de viaticos" editable="bottom">-->
-<!--                                    <control>-->
-<!--                                        <create name="add_recruitment_control" string="Add a recruitment"/>-->
-<!--                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>-->
-<!--                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>4b m-->
-<!--                                    </control>-->
-<!--                                    <field name="id" invisible="1"/>-->
-<!--                                    <field name="company_currency_id" invisible="1"/>-->
-<!--                                    <field name="attachment_number" invisible="1"/>-->
-<!--                                    <field name="of_refunded" invisible="1"/>-->
-<!--                                    <field name="date" optional="show"/>-->
-<!--                                    <field name="product_id" optional="show"/>-->
-<!--                                    <field name="name"/>-->
-<!--                                    <field name="employee_id" widget="many2one_avatar_employee"/>-->
-<!--                                    <field name="sheet_id" optional="show" invisible="not context.get('show_report', False)" readonly="1"/>-->
-<!--                                    <field name="payment_mode" optional="show"/>-->
-<!--                                    <field name="activity_ids" widget="list_activity" optional="show"/>-->
-<!--                                    <field name="accounting_date" optional="hide" groups="account.group_account_invoice,account.group_account_readonly" readonly="0"/>-->
-<!--                                    <field name="reference" optional="hide" groups="account.group_account_readonly"/>-->
-<!--                                    <field name="analytic_account_id" optional="show" groups="analytic.group_analytic_accounting"/>-->
-<!--                                    <field name="analytic_tag_ids" optional="hide" widget="many2many_tags" groups="analytic.group_analytic_tags"/>-->
-<!--                                    <field name="account_id" optional="hide" groups="account.group_account_readonly"/>-->
-<!--                                    <field name="company_id" optional="show" groups="base.group_multi_company" readonly="1"/>-->
-<!--                                    <field name="unit_amount" optional="hide" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
-<!--                                    <field name="quantity" optional="hide"/>-->
-<!--                                    <field name="tax_ids" optional="hide" widget="many2many_tags" groups="account.group_account_invoice,account.group_account_readonly"/>-->
-<!--                                    <field name="attachment_number" nolabel="1" class='fa fa-paperclip pr-0' attrs="{'invisible': [('attachment_number', '=', 0)]}"/>-->
-<!--                                    <field name="total_amount_company" optional="hide" sum="Total Company Currency" widget='monetary' options="{'currency_field': 'company_currency_id'}" decoration-bf="True"/>-->
-<!--                                    &lt;!&ndash; YTI BUTTON TO REMOVE IN MASTER &ndash;&gt;-->
-<!--                                    <button name="action_get_attachment_view" string="Attachments" type="object" icon="fa-paperclip" invisible="1"/>-->
-<!--                                    <field name="total_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>-->
-<!--                                    <field name="actual_amount" optional="show" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="True"/>-->
-<!--                                    <field name="currency_id" optional="hide" groups="base.group_multi_currency"/>-->
-<!--                                    <field name="message_unread" invisible="1"/>-->
-<!--                                    <field name="state" optional="show" readonly="1" decoration-info="state == 'draft'" decoration-success="state in ['reported', 'approved', 'done']" decoration-danger="state in 'refused'" widget="badge"/>-->
-<!--                                </tree>-->
                             </field>
                         </page>
-                        <page string="A reembolsar" attrs="{'invisible':[('state','!=','submitted')]}">
-                            <field name="expense_ids" attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
-                            </field>
-                        </page>
+<!--                        <page string="A reembolsar" attrs="{'invisible':[('state','!=','submitted')]}">-->
+<!--                            <field name="expense_ids" attrs="{'readonly':[('state','in',('rejected','submitted'))]}">-->
+<!--                            </field>-->
+<!--                        </page>-->
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

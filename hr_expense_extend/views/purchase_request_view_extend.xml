@@ -6,8 +6,20 @@
         <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
         <field name="arch" type="xml">
             <!--                Fields           -->
-            <xpath expr="//field[@name='origin']" position="after">
-                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
+<!--            <xpath expr="//field[@name='origin']" position="after">-->
+<!--                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"/>-->
+<!--                <field name="hr_travel_info_id" readonly="1" attrs="{'invisible': [('hr_travel_info_id','=',False)]}"/>-->
+<!--                <field name="hr_hotel_info_id" readonly="1" attrs="{'invisible': [('hr_hotel_info_id','=',False)]}"/>-->
+<!--            </xpath>-->
+            <xpath expr="//notebook" position="inside">
+                <page string="Solicitud de viaje" attrs="{'invisible': [('travel_request_id','=',False)]}">
+                    <group>
+                        <field name="travel_request_id" readonly="1"/>
+                        <field name="hr_travel_info_id" readonly="1" attrs="{'invisible': [('hr_travel_info_id','=',False)]}"/>
+                        <field name="hr_hotel_info_id" readonly="1" attrs="{'invisible': [('hr_hotel_info_id','=',False)]}"/>
+                        <field name="description_travel" readonly="1"/>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

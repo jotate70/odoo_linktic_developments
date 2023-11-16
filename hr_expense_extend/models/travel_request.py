@@ -211,7 +211,7 @@ class My_travel_request(models.Model):
         for line in self:
             line.days = False
             if line.available_departure_date and line.available_return_date:
-                diff = line.available_return_date- line.available_departure_date
+                diff = line.available_return_date - line.available_departure_date
                 mini = diff.seconds // 60
                 hour = mini // 60
                 sec = (diff.seconds) - (mini * 60)
@@ -375,6 +375,8 @@ class My_travel_request(models.Model):
                     #  Creación de requisiciones
                     self._action_travel_expense_to_purchase_request()
                     self._action_hotel_expense_to_purchase_request()
+                    for rec in self.purchase_request_ids:
+                        rec.button_to_approve()
                 else:
                     raise UserError('Ya aprobastes la solicitud de viaje.')
             else:
@@ -409,10 +411,18 @@ class My_travel_request(models.Model):
         return
 
     #   Compute function expense   NEW CODE
-    def _compute_create_expense_sheet(self):
+    def compute_create_expense_sheet(self):
         if self.expense_advance_ids:
-            for rec in self.expense_advance_ids:
-                self.action_create_expense(rec.employee_id.id)
+            if self.expence_sheet_advance_ids:
+                raise UserError('Ya existen informes de gastos relacionados.')
+            else:
+                for rec in self.expense_advance_ids:
+                    self.action_create_expense(rec.employee_id.id)
+                    self.write({'state': 'submitted'})
+            for rec2 in self.expence_sheet_advance_ids:
+                rec2.action_submit_sheet()
+        else:
+            raise UserError('No se han reportado gastos para esta solcitud de viaje.')
 
     def action_create_expense(self, employee):
         id_lst = []
@@ -475,7 +485,10 @@ class My_travel_request(models.Model):
                                                         })]})
 
     def _action_travel_expense_to_purchase_request(self):
+        employee = []
         for rec in self.hr_travel_info_ids:
+            for rec2 in rec.employee_ids:
+                employee.append({'nombre': rec2.name, 'CC': rec2.identification_id})
             self.write({'purchase_request_ids': [(0, 0, {'travel_request_id': self.id,
                                                          'hr_travel_info_id': rec.id,
                                                          'state': 'draft',
@@ -483,17 +496,28 @@ class My_travel_request(models.Model):
                                                          'origin': self.name,
                                                          'date_start': self.approve_date,
                                                          'company_id': self.company_id.id,
-                                                         'description': rec.name,
+                                                         'description': ' Reserva de viaje:  ' + str(self.name),
+                                                         'description_travel': '<strong>Información de empleados:</strong>' +
+                                                                               '<ul>' +
+                                                                               '<li><strong>Fecha:</strong> ' + str(rec.req_departure_date) + ' --> ' + str(rec.req_return_date) + '</li>' +
+                                                                               '<li><strong>Tipo de viaje:</strong> ' + str(rec.travel_type) + '</li>' +
+                                                                               '<li><strong>Empleados:</strong> ' + str(employee) + '</li>' +
+                                                                               '</ul>',
                                                          'line_ids': [(0, 0, {'product_id': rec.product_id.id,
                                                                               'name': self.approve_date,
                                                                               'product_qty': rec.passengers,
                                                                               'product_uom_id': 1,
                                                                               'analytic_account_id': rec.account_analytic_id.id,
+                                                                              'general_budget_id': rec.general_budget_id.id,
+                                                                              'budget_line_segregation_id': rec.budget_line_segregation_id.id,
                                                                               })]
                                                         })]})
 
     def _action_hotel_expense_to_purchase_request(self):
+        employee = []
         for rec in self.hr_hotel_info_ids:
+            for rec2 in rec.employee_ids:
+                employee.append({'nombre': rec2.name, 'CC': rec2.identification_id})
             self.write({'purchase_request_ids': [(0, 0, {'travel_request_id': self.id,
                                                          'hr_hotel_info_id': rec.id,
                                                          'state': 'draft',
@@ -501,12 +525,20 @@ class My_travel_request(models.Model):
                                                          'origin': self.name,
                                                          'date_start': self.approve_date,
                                                          'company_id': self.company_id.id,
-                                                         'description': rec.name,
+                                                         'description': ' Reserva de hospedaje:  ' + str(self.name),
+                                                         'description_travel': '<strong>Información de empleados:</strong>' +
+                                                                               '<ul>' +
+                                                                               '<li><strong>Fecha:</strong> ' + str(rec.req_departure_date) + ' --> ' + str(rec.req_return_date) + '</li>' +
+                                                                               '<li><strong>Tipo de hospedaje:</strong> ' + str(rec.hotel_type) + '</li>' +
+                                                                               '<li><strong>Empleados:</strong> ' + str(employee) + '</li>' +
+                                                                               '</ul>',
                                                          'line_ids': [(0, 0, {'product_id': rec.product_id.id,
                                                                               'name': self.approve_date,
                                                                               'product_qty': rec.number_people,
                                                                               'product_uom_id': 1,
                                                                               'analytic_account_id': rec.account_analytic_id.id,
+                                                                              'general_budget_id': rec.general_budget_id.id,
+                                                                              'budget_line_segregation_id': rec.budget_line_segregation_id.id,
                                                                               })]
                                                         })]})
 

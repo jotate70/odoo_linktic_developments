@@ -49,7 +49,7 @@
                                 <field name="hotel_type" placeholder="Hotel" class="oe_inline"
                                        options="{'no_open': True, 'no_create': True}"/>
                             </div>
-                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="employee_ids" widget="many2many_avatar_employee"/>
                         </group>
                         <group>
                             <field name="account_analytic_id" options="{'no_open': True, 'no_create': True}"/>
