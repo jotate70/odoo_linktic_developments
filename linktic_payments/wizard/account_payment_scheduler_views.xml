@@ -27,6 +27,7 @@
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="state">code</field>
         <field name="code">action = model.action_schedule_payment()</field>
+        <field name="groups_id" eval="[(6, 0, [ref('linktic_payments.group_linktic_payments_administrative_manager')])]"/>
     </record>
 
 </odoo>

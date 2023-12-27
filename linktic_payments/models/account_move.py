@@ -5,10 +5,59 @@ from odoo.exceptions import ValidationError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    scheduled_payment_day = fields.Date(string='Scheduled Payment Date')
-    payment_journal_id = fields.Many2one('account.journal', string='Payment Bank',
-                                         domain="[('company_id', '=', company_id), ('type', 'in', ('bank', 'cash'))]")
-    approved_manager = fields.Boolean(string='Approved Manager')
+    priority = fields.Selection(selection=[('0', 'All'),
+                                           ('1', 'Low priority'),
+                                           ('2', 'High priority'),
+                                           ('3', 'Urgent')],
+                                string='Priority', tracking=True,
+                                index=True)
+    scheduled_payment_day = fields.Date(string='Scheduled Payment Date',
+                                        tracking=True)
+    payment_journal_id = fields.Many2one(comodel_name='account.journal', string='Programmed Payment',
+                                         domain="[('company_id', '=', company_id), ('type', 'in', ('bank', 'cash'))]",
+                                         tracking=True)
+    approved_manager = fields.Boolean(string='Approved Manager', tracking=True)
+    approved_date_payment = fields.Datetime(string='Approved Date Payment', tracking=True)
+    payment_bank_related_id = fields.Many2one(comodel_name='account.journal', string='Payment Bank',
+                                              related='payment_id.journal_id', tracking=True)
+    payment_check = fields.Boolean(string='Payment Check', related='payment_id.payment_check')
+    payment_date_related = fields.Date(string='Payment date', related='payment_id.date')
+
+    def action_form_account_move(self):
+        """ Returns an action account move form."""
+        return {
+            'name': _('Priority Payment'),
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'account.move',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': self.id,
+        }
+
+    def _compute_select_priority(self, vat):
+        for rec in self:
+            rec.write({'priority': vat})
+
+    def action_select_priority(self):
+        """ Returns an action opening priority wizard."""
+        moves = self.env['account.move'].browse(self._context.get('active_ids'))
+        new_wizard = self.env['account.payment.priority'].create({
+            'account_move_ids': [(6, 0, moves.ids)],
+        })
+        return {
+            'name': _('Priority Payment'),
+            'view_mode': 'form',
+            'res_model': 'account.payment.priority',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': new_wizard.id,
+        }
+
+    @api.onchange('approved_manager')
+    def _compute_approved_date_payment(self):
+        if self.approved_manager == True:
+            self.write({'approved_date_payment': fields.datetime.now()})
 
     def write(self, vals):
         if 'approved_manager' in vals:
@@ -101,3 +150,4 @@ class AccountMove(models.Model):
                 _(f"Cannot approve a paid bill, the following bills has been paid:\n {paid_moves.mapped('name')}"))
 
         moves.approved_manager = True
+        moves.approved_date_payment = fields.datetime.now()

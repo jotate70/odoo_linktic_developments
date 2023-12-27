@@ -5,6 +5,8 @@ from odoo.exceptions import ValidationError, UserError
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
+    payment_check = fields.Boolean(string='Payment Check', tracking=True)
+
     @api.depends('journal_id', 'payment_type', 'payment_method_line_id')
     def _compute_outstanding_account_id(self):
         super(AccountPayment, self)._compute_outstanding_account_id()
@@ -12,10 +14,14 @@ class AccountPayment(models.Model):
         for pay in self:
             if pay.journal_id.related_company:
                 pay.outstanding_account_id = pay.journal_id.loan_entry_account_id
+            else:
+                if pay.journal_id.transitional_exception:
+                    pay.outstanding_account_id = pay.journal_id.default_account_id
 
     def _get_valid_liquidity_accounts(self):
         res = super(AccountPayment, self)._get_valid_liquidity_accounts()
-        res = res + (self.journal_id.loan_entry_account_id,)
+        if self.journal_id.related_company:
+            res = res + (self.journal_id.loan_entry_account_id,)
         return res
 
     def _prepare_move_line_default_vals(self, write_off_line_vals=None):
@@ -85,7 +91,7 @@ class AccountPayment(models.Model):
                     ))
 
                 if any(line.partner_id != all_lines[0].partner_id for line in
-                       all_lines) and not pay.journal_id.related_company:
+                       all_lines) and not (pay.journal_id.related_company or pay.journal_id.transitional_exception):
                     raise UserError(_(
                         "Journal Entry %s is not valid. In order to proceed, the journal items must "
                         "share the same partner.",

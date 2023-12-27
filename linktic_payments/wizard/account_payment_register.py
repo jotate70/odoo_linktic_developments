@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, _, models, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class AccountPaymentRegister(models.TransientModel):
@@ -39,8 +39,8 @@ class AccountPaymentRegister(models.TransientModel):
         bill = account_move_line_id.move_id
         move_ref = _(f"Inter Company payment for invoice {bill.name} from company {self.company_id.name}.")
         journal_id = self.related_company_journal_id
-        other_company_journal = self.env['account.journal'].sudo().search(
-            [('related_company', '=', self.company_id.id)])
+        other_company_journal = self.env['account.journal'].search(
+            [('related_company', '=', self.company_id.id)], limit=1)
         related_company_currency = self.journal_related_company.currency_id
         current_currency = self.company_id.currency_id
         prec = related_company_currency.decimal_places
@@ -58,9 +58,16 @@ class AccountPaymentRegister(models.TransientModel):
         }
         lines_list.append((0, 0, deb_line))
 
+        if journal_id.type == 'bank' and journal_id.transitional_exception:
+            credit_account_id = journal_id.default_account_id
+        else:
+            credit_account_id = journal_id.company_id.account_journal_suspense_account_id
+            if not credit_account_id:
+                raise UserError(_("The target company does not have a suspense account set up."))
+
         cred_line = {
             'name': move_ref,
-            'account_id': journal_id.default_account_id.id,
+            'account_id': credit_account_id.id,
             'debit': 0.0,
             'credit': payment_value,
             'currency_id': related_company_currency != current_currency and current_currency.id or False,

@@ -17,3 +17,4 @@ class AccountPaymentRegister(models.TransientModel):
     def action_schedule_payments(self):
         self.active_move_ids.scheduled_payment_day = self.scheduled_payment_day
         self.active_move_ids.payment_journal_id = self.payment_journal_id
+

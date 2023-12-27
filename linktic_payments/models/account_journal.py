@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
+    transitional_exception = fields.Boolean(string="Transitional Exception", default=False)
     related_company = fields.Many2one('res.company', string='Related Company', domain="[('id', '!=', company_id)]")
     loan_entry_account_id = fields.Many2one(
         comodel_name='account.account', check_company=True, copy=False, ondelete='restrict',
