@@ -4,7 +4,7 @@ from odoo import fields, _, models, api
 from odoo.exceptions import ValidationError
 
 
-class AccountPaymentRegister(models.TransientModel):
+class AccountPaymentScheduler(models.TransientModel):
     _name = 'account.payment.scheduler'
     _description = 'Scheduler for bill payments'
 

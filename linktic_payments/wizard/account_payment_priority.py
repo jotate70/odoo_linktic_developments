@@ -2,7 +2,7 @@
 
 from odoo import fields, _, models, api
 
-class AccountPaymentRegister(models.TransientModel):
+class AccountPaymentPriority(models.TransientModel):
     _name = 'account.payment.priority'
 
     account_move_ids = fields.Many2many(comodel_name='account.move', string='Account Move')

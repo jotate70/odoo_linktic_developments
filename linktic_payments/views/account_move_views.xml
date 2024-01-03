@@ -95,6 +95,8 @@
                         />
                     </header>
 <!--                    <button name="action_edit_record" string="Editar" type="object" class="oe_highlight" icon="fa-pencil"/>-->
+                    <field name="approved_vice_president_id" invisible="1" />
+                    <field name="approved_advisor_id" invisible="1" />
                     <field name="name" decoration-bf="1"/>
                     <field name="purchase_id" optional="hide"/>
                     <field name="partner_id" invisible="" />
@@ -118,6 +120,7 @@
                     <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="hide"/>
                     <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
                     <field name="priority" widget="priority" optional="show"/>
+                    <field name="payment_method_line_id" optional="hide"/>
                     <field name="scheduled_payment_day" optional="show"/>
                     <field name="payment_journal_id" optional="show"/>
                     <field name="approved_manager" readonly="1" optional="show" widget="boolean_toggle" groups="linktic_payments.group_linktic_payments_vicepresident"/>
@@ -133,6 +136,8 @@
                                decoration-success="payment_state in ('paid', 'reversed')"
                                attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"
                                optional="show"/>
+                    <field name="approved_vice_president" optional="show" widget="boolean_toggle" readonly="1"/>
+                    <field name="approved_advisor" optional="show" widget="boolean_toggle" readonly="1"/>
                     <field name="payment_check" readonly="1" optional="show" widget="boolean_toggle"/>
                     <field name="to_check" readonly="1" optional="show" widget="boolean_toggle"/>
                     <field name="state" widget="badge" decoration-success="state == 'posted'" decoration-info="state == 'draft'" optional="show"/>
@@ -161,6 +166,8 @@
                 </header>
                 <button name="action_form_account_move" string="Open" type="object" class="oe_highlight" icon="fa-pencil"/>
                 <field name="name" decoration-bf="1" readonly="1"/>
+                <field name="approved_vice_president_id" invisible="" />
+                <field name="approved_advisor_id" invisible="" />
                 <field name="purchase_id" optional="hide"/>
                 <field name="partner_id" invisible=""/>
                 <field name="invoice_source_email" invisible="1"/>
@@ -183,8 +190,11 @@
                 <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="hide"/>
                 <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
                 <field name="priority" widget="priority" optional="show"/>
-                <field name="scheduled_payment_day" groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
-                <field name="payment_journal_id" groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
+                <field name="payment_method_line_id" optional="show" attrs="{'readonly': [('approved_manager', '=', True)]}"/>
+                <field name="scheduled_payment_day" attrs="{'readonly': [('approved_manager', '=', True)]}"
+                       groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
+                <field name="payment_journal_id" attrs="{'readonly': [('approved_manager', '=', True)]}"
+                       groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
                 <field name="approved_manager" optional="show" widget="boolean_toggle" groups="linktic_payments.group_linktic_payments_vicepresident"/>
                 <field name="approved_date_payment" attrs="{'readonly': [('payment_state','!=','not_paid')]}" optional="show"/>
                 <button name="action_register_payment" type="object" class="oe_highlight"
@@ -198,6 +208,10 @@
                        decoration-success="payment_state in ('paid', 'reversed')"
                        attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"
                        optional="show"/>
+                <field name="approved_vice_president" optional="show" widget="boolean_toggle"
+                       attrs="{'readonly': [('approved_manager', '=', False)]}"/>
+                <field name="approved_advisor" optional="show" widget="boolean_toggle"
+                attrs="{'readonly': [('approved_manager', '=', False)]}"/>
                 <field name="payment_check" optional="show" widget="boolean_toggle"/>
                 <field name="to_check" optional="show" widget="boolean_toggle"/>
                 <field name="state" widget="badge" decoration-success="state == 'posted'" decoration-info="state == 'draft'" optional="show"/>
@@ -233,6 +247,24 @@
         <field name="binding_model_id" ref="account.model_account_move"/>
         <field name="state">code</field>
         <field name="code">action = model.approve_bills()</field>
+        <field name="groups_id" eval="[(6, 0, [ref('linktic_payments.group_linktic_payments_vicepresident')])]"/>
+    </record>
+
+    <record id="account_approved_vice_president_action" model="ir.actions.server">
+        <field name="name">Approve Vice President</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_register_approved_vice_president()</field>
+        <field name="groups_id" eval="[(6, 0, [ref('linktic_payments.group_linktic_payments_vicepresident')])]"/>
+    </record>
+
+    <record id="account_approved_advisor_action" model="ir.actions.server">
+        <field name="name">Approve Advisor</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_register_approved_advisor()</field>
         <field name="groups_id" eval="[(6, 0, [ref('linktic_payments.group_linktic_payments_vicepresident')])]"/>
     </record>
 

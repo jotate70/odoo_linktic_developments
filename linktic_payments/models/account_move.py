@@ -17,11 +17,20 @@ class AccountMove(models.Model):
                                          domain="[('company_id', '=', company_id), ('type', 'in', ('bank', 'cash'))]",
                                          tracking=True)
     approved_manager = fields.Boolean(string='Approved Manager', tracking=True)
+    approved_vice_president = fields.Boolean(string='Approved vice-president', tracking=True)
+    approved_advisor = fields.Boolean(string='Approved advisor', tracking=True)
     approved_date_payment = fields.Datetime(string='Approved Date Payment', tracking=True)
     payment_bank_related_id = fields.Many2one(comodel_name='account.journal', string='Payment Bank',
                                               related='payment_id.journal_id', tracking=True)
     payment_check = fields.Boolean(string='Payment Check', related='payment_id.payment_check')
     payment_date_related = fields.Date(string='Payment date', related='payment_id.date')
+    payment_method_line_id = fields.Many2one(comodel_name='account.payment.method.line', string='Payment Method',
+                                             store=True)
+
+    approved_vice_president_id = fields.Many2one(comodel_name='hr.employee', string='Approved vice-president',
+                                                 related='company_id.approved_vice_president_id')
+    approved_advisor_id = fields.Many2one(comodel_name='hr.employee', string='Approved advisor',
+                                          related='company_id.approved_advisor_id')
 
     def action_form_account_move(self):
         """ Returns an action account move form."""
@@ -33,6 +42,25 @@ class AccountMove(models.Model):
             'type': 'ir.actions.act_window',
             'target': 'new',
             'res_id': self.id,
+        }
+
+    def _compute_select_payment_method_line_id(self, vat):
+        for rec in self:
+            rec.write({'payment_method_line_id': vat})
+
+    def action_select_payment_method_wizard(self):
+        """ Returns an action opening payment method wizard."""
+        moves = self.env['account.move'].browse(self._context.get('active_ids'))
+        new_wizard = self.env['account.payment.method.wizard'].create({
+            'account_move_ids': [(6, 0, moves.ids)],
+        })
+        return {
+            'name': _('Priority Payment'),
+            'view_mode': 'form',
+            'res_model': 'account.payment.method.wizard',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': new_wizard.id,
         }
 
     def _compute_select_priority(self, vat):
@@ -151,3 +179,37 @@ class AccountMove(models.Model):
 
         moves.approved_manager = True
         moves.approved_date_payment = fields.datetime.now()
+
+    def action_register_approved_vice_president(self):
+        moves = self.env['account.move'].browse(self._context.get('active_ids'))
+        if moves[0].approved_vice_president_id.user_id == self.env.user:
+            moves.approved_vice_president = True
+        else:
+            raise ValidationError("You are not responsible for approval")
+
+    def action_register_approved_advisor(self):
+        moves = self.env['account.move'].browse(self._context.get('active_ids'))
+        if moves[0].approved_advisor_id.user_id == self.env.user:
+            moves.approved_advisor = True
+        else:
+            raise ValidationError("You are not responsible for approval")
+
+    @api.onchange('approved_vice_president_id')
+    def _compute_constrains_approved_vice_president_id(self):
+        for rec in self:
+            if rec.approved_vice_president_id.user_id != self.env.user:
+                raise ValidationError("You are not responsible for approval")
+
+    @api.onchange('approved_advisor_id')
+    def _compute_constrains_approved_advisor_id(self):
+        for rec in self:
+            if rec.approved_advisor_id.user_id != self.env.user:
+                raise ValidationError("You are not responsible for approval")
+
+
+
+
+
+
+
+

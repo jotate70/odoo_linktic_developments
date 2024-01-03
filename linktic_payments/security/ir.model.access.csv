@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_payment_scheduler,account.payment.scheduler,model_account_payment_scheduler,base.group_user,1,1,1,1
 access_account_payment_priority,account.payment.priority,model_account_payment_priority,base.group_user,1,1,1,1
+access_account_payment_method_wizard,account.payment.method.wizard,model_account_payment_method_wizard,base.group_user,1,1,1,1

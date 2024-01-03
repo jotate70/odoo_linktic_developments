@@ -14,9 +14,11 @@
         'views/account_journal_views.xml',
         'views/account_move_views.xml',
         'views/account_payment_views_extend.xml',
+        'views/res_config_settings_views.xml',
         'wizard/account_payment_register_views.xml',
         'wizard/account_payment_scheduler_views.xml',
         'wizard/account_payment_priority_views.xml',
+        'wizard/account_payment_method_wizard_views.xml',
     ],
 
     'installable': True,

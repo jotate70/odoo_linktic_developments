@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0+e-20230724\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-27 12:23+0000\n"
-"PO-Revision-Date: 2023-12-27 12:23+0000\n"
+"POT-Creation-Date: 2023-12-29 19:22+0000\n"
+"PO-Revision-Date: 2023-12-29 19:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,7 @@ msgid "A payment must always belongs to a bank or cash journal."
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__account_move_ids
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__account_move_ids
 msgid "Account Move"
 msgstr ""
@@ -60,8 +61,18 @@ msgid "Approval State"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_approved_advisor_action
+msgid "Approve Advisor"
+msgstr ""
+
+#. module: linktic_payments
 #: model:ir.actions.server,name:linktic_payments.account_payment_approval_action
 msgid "Approve Payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_approved_vice_president_action
+msgid "Approve Vice President"
 msgstr ""
 
 #. module: linktic_payments
@@ -81,6 +92,30 @@ msgstr ""
 #: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_manager
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_manager
 msgid "Approved Manager"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_company__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_config_settings__approved_advisor_id
+msgid "Approved advisor"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_company__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_config_settings__approved_vice_president_id
+msgid "Approved vice-president"
 msgstr ""
 
 #. module: linktic_payments
@@ -105,6 +140,7 @@ msgid "Bill Date"
 msgstr ""
 
 #. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
 #: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_priority_wizard_form
 #: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
 msgid "Cancel"
@@ -117,12 +153,24 @@ msgid "Cannot change the validation state for a paid Bill."
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__create_uid
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__create_uid
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__create_date
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__create_date
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_date
 msgid "Created on"
@@ -135,6 +183,7 @@ msgid "Customer"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__display_name
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__display_name
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__display_name
 msgid "Display Name"
@@ -147,6 +196,7 @@ msgid "High priority"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__id
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__id
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__id
 msgid "ID"
@@ -221,18 +271,21 @@ msgid ""
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard____last_update
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority____last_update
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__write_uid
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__write_uid
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__write_date
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__write_date
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_date
 msgid "Last Updated on"
@@ -262,6 +315,7 @@ msgid "Moves"
 msgstr ""
 
 #. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
 #: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_priority_wizard_form
 msgid "Next Stage"
 msgstr ""
@@ -305,6 +359,14 @@ msgid "Payment Check"
 msgstr ""
 
 #. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_method_wizard_action
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_method_line_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_method_line_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__payment_method_line_id
+msgid "Payment Method"
+msgstr ""
+
+#. module: linktic_payments
 #: model:ir.actions.server,name:linktic_payments.account_payment_priority_action
 msgid "Payment Priority"
 msgstr ""
@@ -316,10 +378,20 @@ msgid "Payment Scheduler"
 msgstr ""
 
 #. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Payment approvers"
+msgstr ""
+
+#. module: linktic_payments
 #: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_date_related
 #: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_date_related
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_date_related
 msgid "Payment date"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
+msgid "Payment method"
 msgstr ""
 
 #. module: linktic_payments
@@ -349,6 +421,7 @@ msgid "Priority"
 msgstr ""
 
 #. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
 #: code:addons/linktic_payments/models/account_move.py:0
 #: code:addons/linktic_payments/models/account_move.py:0
 #, python-format
@@ -384,6 +457,22 @@ msgstr ""
 #. module: linktic_payments
 #: model:ir.model.fields,field_description:linktic_payments.field_account_payment_register__related_company_journal_id
 msgid "Related Company Payment Bank"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_res_config_settings__approved_vice_president_id
+msgid "Responsible for validating all bank payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Responsible for validating all bank payments."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_res_config_settings__approved_advisor_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Responsible for validating bank payments"
 msgstr ""
 
 #. module: linktic_payments
@@ -486,6 +575,11 @@ msgstr ""
 #. module: linktic_payments
 #: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
 msgid "Waiting Schedule"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_method_wizard
+msgid "account.payment.method.wizard"
 msgstr ""
 
 #. module: linktic_payments
