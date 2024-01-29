@@ -9,30 +9,81 @@
             <field name="priority" eval="75" />
             <field name="arch" type="xml">
                 <xpath expr="//div[@data-key='hr_expense']" position="inside">
-                    <h2>Solicitudes de viajes y viáticos</h2>
-                    <div class="col-12 col-lg-6 o_setting_box" id="financial_manager">
+                    <h2>Informe de gastos</h2>
+                    <div class="row mt16 o_settings_container" id="journal_id">
                         <div class="col-12 col-lg-6 o_setting_box">
-                            <label for="financial_manager"/>
-                            <div class="text-muted">Responsible for managing travel and per diem requests.</div>
-                            <div class="content-group">
-                                <div class="mt16">
-                                    <field name="financial_manager" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                            <div>
+                                <label for="journal_id"/>
+                                <div class="text-muted">default journal per company.</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="journal_id" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                    </div>
                                 </div>
-                                <field name="job_title_financial_manager" placeholder="Number" class="oe_inline" style="color: green"
-                                       attrs="{'invisible': [('financial_manager', '=', False)]}"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div>
+                                <label for="expense_manager_id"/>
+                                <div class="text-muted">Expense approver per company.</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="expense_manager_id" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div>
+                                <label for="account_default_id"/>
+                                <div class="text-muted">Cuenta de gasto por defecto.</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="account_default_id" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 o_setting_box" id="general_manager">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <label for="general_manager"/>
-                            <div class="text-muted">Responsible for approving collection account.</div>
-                            <div class="content-group">
-                                <div class="mt16">
-                                    <field name="general_manager" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                    <h2>Solicitudes de viajes y viáticos</h2>
+                    <div class="row mt16 o_settings_container" name="tipoRadicado_setting_container" id="financial_manager_id">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div>
+                                <label for="financial_manager_id"/>
+                                <div class="text-muted">
+                                    Responsible for managing travel and per diem requests.
                                 </div>
-                                <field name="job_title_general_manager" placeholder="Number" class="oe_inline" style="color: green"
-                                       attrs="{'invisible': [('general_manager', '=', False)]}"/>
+                                <div>
+                                    <field name="financial_manager_id"/>
+                                </div>
+                                <field name="job_title_financial_manager_id" placeholder="Number" class="oe_inline" style="color: green"
+                                           attrs="{'invisible': [('financial_manager_id', '=', False)]}"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div>
+                                <label for="account_manager_id"/>
+                                <div class="text-muted">
+                                    Responsible for approving collection account.
+                                </div>
+                                <div>
+                                    <field name="account_manager_id"/>
+                                </div>
+                                <field name="job_title_account_manager_id" placeholder="Number" class="oe_inline" style="color: green"
+                                           attrs="{'invisible': [('account_manager_id', '=', False)]}"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div>
+                                <label for="general_manager_id"/>
+                                <div class="text-muted">
+                                    Responsible for approving collection.
+                                </div>
+                                <div>
+                                    <field name="general_manager_id"/>
+                                </div>
+                                <field name="job_title_general_manager_id" placeholder="Number" class="oe_inline" style="color: green"
+                                           attrs="{'invisible': [('general_manager_id', '=', False)]}"/>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ class HrExpense(models.Model):
                                     help='Tipo de documento')
     supplier_vat = fields.Char(string='Nº identificación', help='Número de Documento')
     of_refunded = fields.Boolean(string='¿Viene de un reembolso?')
+    account_default_id = fields.Many2one(comodel_name='account.account', string='Cuenta de gasto')
 
     @api.onchange('supplier_id')
     def _compute_select_supplier(self):
@@ -29,7 +30,7 @@ class HrExpense(models.Model):
         for rec in self:
             rec.amount_difference - rec.actual_amount - rec.total_amount
 
-    @api.onchange('product_id', 'employee_id', 'travel_expence_id')
+    @api.onchange('product_id', 'employee_id', 'travel_expence_id', 'travel_id')
     def _select_manager_employee_id(self):
         for rec in self:
             if rec.travel_id:

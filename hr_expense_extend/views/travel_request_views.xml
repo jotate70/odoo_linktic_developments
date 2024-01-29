@@ -144,8 +144,7 @@
                             <label for="manager_id" string="Responsable de aprobación"/>
                             <div>
                                 <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type"
-                                       class="oe_inline" required="True" readonly="1" widget="many2one_avatar_employee"
-                                       attrs="{'readonly':[('state','!=','draft')]}"/>
+                                       class="oe_inline" required="True" attrs="{'readonly':[('state','!=','draft')]}" widget="many2one_avatar_employee"/>
                                 <span class="oe_read_only" attrs="{'invisible': [('manager_id', '=', False)]}"> - </span>
                                 <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                        attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)]}"/>
@@ -153,29 +152,33 @@
                                        attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)]}"/>
                             </div>
                             <field name="job_type" invisible="1"/>
-                            <field name="financial_manager" invisible="1"/>
-                            <field name="general_manager" invisible="1"/>
+                            <field name="financial_manager_id" invisible="1"/>
+                            <field name="general_manager_id" invisible="1"/>
+                            <field name="account_manager_id" invisible="1"/>
                             <field name="request_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
                             <field name="confirm_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
                             <field name="approve_by" readonly="1" options="{'no_open': True, 'no_create': True}"/>
                         </group>
                         <group>
                             <field name="company_id" groups="base.group_multi_company"
+                                   options="{'no_open': True, 'no_create': True}"
                                    attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
                             <field name="currency_id" attrs="{'readonly':[('state','!=','draft')]}"
                                    options="{'no_open': True, 'no_create': True}"/>
-                            <field name="account_analytic_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="account_analytic_id" attrs="{'readonly':[('state','!=','draft')]}"
+                                   options="{'no_open': True, 'no_create': True}"/>
                             <field name="req_date" readonly="1"/>
                             <field name="confirm_date" readonly="1"/>
                             <field name="approve_date" readonly="1"/>
                         </group>
                     </group>
                     <group>
+                        <field name="general_budget_domain" invisible="1"/>
                         <label for="general_budget_id" string="Presupuesto"/>
                         <div>
                             <field name="general_budget_id" placeholder="Posición Presupuestaria"
                                    class="oe_inline" options="{'no_open': True, 'no_create': True}"
-                                   attrs="{'readonly':[('state','!=','draft')]}"/>
+                                   attrs="{'readonly':[('state','!=','draft')], 'required': True}"/>
                             <span class="oe_read_only"> -- </span>
                             <span><strong> Segregación: </strong></span>
                             <field name="budget_line_segregation_id" placeholder="Segregación" class="oe_inline"
@@ -186,7 +189,6 @@
                             <field name="segregation_balance"/>
                         </div>
                     </group>
-<!--                    <group attrs="{'invisible':[('state','!=','submitted')]}">-->
                     <notebook>
                         <page string="Información del empleado">
                             <group>
@@ -209,44 +211,11 @@
                                 <group>
                                     <field name="days"/>
                                 </group>
-                                <group string="Información del empleado">
+                                <group string="Descripción del viaje">
                                 </group>
                                 <group>
                                 </group>
-                                <group>
-                                      <field name="identification_id"
-                                           attrs="{'readonly':[('state','!=','draft')]}"/>
-                                </group>
-                                <group>
-                                    <field name="birthday"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
-                                </group>
-                                <group>
-                                      <field name="gender"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
-                                </group>
-                                <group>
-                                </group>
-                                <group>
-                                    <field name="visa_country_id" options="{'no_open': True, 'no_create': True}"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
-                                           'invisible':[('travel_mode_id','=','0')]}"/>
-                                    <field name="visa_expire" options="{'no_open': True, 'no_create': True}"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
-                                           'invisible':[('travel_mode_id','=','0')]}"/>
-                                    <field name="emergency_contact" options="{'no_open': True, 'no_create': True}"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
-                                </group>
-                                <group>
-                                    <field name="visa_no"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
-                                           'invisible':[('travel_mode_id','=','0')]}"/>
-                                    <field name="passport_id"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))],
-                                           'invisible':[('travel_mode_id','=','0')]}"/>
-                                    <field name="emergency_phone"
-                                           attrs="{'readonly':[('state','in',('approved','rejected','submitted'))]}"/>
-                                </group>
+                                <field name="observations"/>
                             </group>
                         </page>
                         <page string="Reserva de viaje">
@@ -275,7 +244,7 @@
                         </page>
                         <page string="Reserva de hospedaje">
                             <field name="hr_hotel_info_ids" widget="section_and_note_one2many" mode="tree,kanban"
-                                   attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                                   attrs="{'readonly':[('state','in',('rejected','submitted','done'))]}">
                                 <tree string="Reserva de hospedaje">
                                     <field name="id" invisible="1"/>
                                     <field name="company_id" invisible="1"/>
@@ -301,12 +270,12 @@
                             </field>
                         </page>
                         <page string="Anticipo">
-                            <field name="expense_advance_ids" attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                            <field name="expense_advance_ids" attrs="{'readonly':[('state','in',('rejected','submitted','done'))]}">
                             </field>
                         </page>
                         <page string="Reporte de gastos" attrs="{'invisible':[('state','in',['draft','confirmed','on_aprobation','approved'])]}">
                             <field name="advance_payment_ids" widget="section_and_note_one2many" mode="tree,kanban"
-                                   attrs="{'readonly':[('state','in',('rejected','submitted'))]}">
+                                   attrs="{'readonly':[('state','in',('rejected','submitted','done'))]}">
                             </field>
                         </page>
 <!--                        <page string="A reembolsar" attrs="{'invisible':[('state','!=','submitted')]}">-->
@@ -336,11 +305,11 @@
         </field>
     </record>
 
-
-<!--    <menuitem id="travel_main_menu" name="Travel" sequence="22"/>-->
-<!--    <menuitem id="travel_sub_menu" name="Travel Request" sequence="2" parent="travel_main_menu"/>-->
     <menuitem action="action_travel_req" id="menu_travel_request" parent="hr_expense.menu_hr_expense_my_expenses"
               name="Solicitud de viaje" sequence="1"/>
+
+    <menuitem action="account.res_partner_action_supplier" id="menu_procurement_management_supplier" parent="hr_expense.menu_hr_expense_my_expenses"
+              name="Proveedores" sequence="10"/>
 
 
     <record id="action_travel_req_hr" model="ir.actions.act_window">
@@ -355,6 +324,4 @@
         </field>
     </record>
 
-    <!--<menuitem action="action_travel_req_hr" id="menu_travel_request_approve" parent="hr_expense.menu_hr_expense_my_expense"
-              name="Travel Request To Approve" sequence="5" groups="bi_employee_travel_managment.hr_travel_manager_id"/>-->
 </odoo>

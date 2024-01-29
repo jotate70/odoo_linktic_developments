@@ -49,6 +49,7 @@
                         </group>
                     </group>
                     <group>
+                        <field name="general_budget_domain" invisible="1"/>
                         <label for="general_budget_id" string="Presupuesto"/>
                         <div>
                             <field name="general_budget_id" placeholder="Posición Presupuestaria"

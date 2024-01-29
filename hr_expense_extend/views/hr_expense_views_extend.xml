@@ -37,12 +37,19 @@
                     </div>
                 </xpath>
                 <xpath expr="//field[@name='tax_ids']" position="after">
+                    <label for="payment_mode" attrs="{'invisible': [('product_has_cost', '=', True)]}"/>
+                    <div id="payment_mode" attrs="{'invisible': [('product_has_cost', '=', True)]}">
+                        <field name="payment_mode" widget="radio"/>
+                    </div>
                     <field name="travel_id" placeholder="TR/0001"
                            options="{'no_open': True, 'no_create': True}"
+                           domain="[('state','=','paid_advance')]"
                            attrs="{'invisible':[('payment_mode','!=','payment_advance')]}"/>
-                    <field name="travel_expence_id" placeholder="TR/0001"
-                           options="{'no_open': True, 'no_create': True}"
-                           attrs="{'invisible':[('payment_mode','!=','own_account')]}"/>
+<!--                    <field name="travel_expence_id" placeholder="TR/0001"-->
+<!--                           options="{'no_open': True, 'no_create': True}"-->
+<!--                           attrs="{'invisible':[('payment_mode','!=','own_account')]}"/>-->
+                    <field name="payment_advance_id" options="{'no_quick_create': True, 'no_create_edit' : True}"
+                           attrs="{'invisible': [('payment_mode','!=','payment_advance')], 'required': [('payment_mode','=','payment_advance')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='product_id']" position="attributes">
                     <attribute name="options">{"no_open":true,"no_create":true}</attribute>
@@ -61,6 +68,18 @@
                 </xpath>
                 <xpath expr="//field[@name='currency_id']" position="attributes">
                     <attribute name="options">{"no_open":true,"no_create":true}</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/div[2]/field[@name='payment_mode']" position="attributes">
+                    <attribute name="attrs">{"readonly": [["state","in",["done","approved","reported"]]]}</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/field[@name='payment_advance_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["payment_mode","=","payment_advance"]]}</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_has_cost']" position="before">
+                    <xpath expr="//field[@name='employee_id']" position="move"/>
+                    <xpath expr="//field[@name='identification_id']" position="move"/>
                 </xpath>
             </field>
         </record>

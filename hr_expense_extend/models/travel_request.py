@@ -2,6 +2,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+import json
 
 class travel_expence(models.Model):
     _name = "travel.expence"
@@ -39,10 +40,6 @@ class My_travel_request(models.Model):
     req_date = fields.Date(string="Fecha de solicitud")
     confirm_date = fields.Date(string="Fecha de confirmación")
     approve_date = fields.Date(string="Fecha de aprobación")
-    # expence_sheet_company_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de anticipo creada",
-    #                                            readonly=True)
-    # expence_sheet_id = fields.Many2one(comodel_name='hr.expense.sheet', string="Hoja de reembolso creada", readonly=True)
-    #
     expence_sheet_advance_ids = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='travel_request1_id',
                                                 string="Legalización de gastos")
     count_sheet_advance = fields.Integer(string='Count advances', compute='_compute_count_sheet_advance')
@@ -73,13 +70,14 @@ class My_travel_request(models.Model):
                               ('approved', 'Anticipo Aprobado'),
                               ('paid_advance', 'Legalización'),
                               ('submitted', 'Gastos Reportados'),
+                              ('done', 'Hecho'),
                               ('rejected', 'Rechazado'),
                               ],
                              default="draft", string="Estado")
 
     # extras fields
     activity_id = fields.Integer(string='id actividad')
-    manager_id = fields.Many2one(comodel_name='hr.employee', string='Gerente responsable',
+    manager_id = fields.Many2one(comodel_name='hr.employee', string='Gerente responsable', store=True,
                                  help='Responsable de aprobación')
     time_off = fields.Char(string='Disponibilidad', compute='_compute_number_of_days')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
@@ -99,10 +97,11 @@ class My_travel_request(models.Model):
                                     tracking=True)
     emergency_phone = fields.Char(string="Teléfono de emergencia", groups="hr.group_hr_user",
                                   tracking=True)
-    financial_manager = fields.Many2one(comodel_name='hr.employee', string='Gerente Financiero', related='company_id.financial_manager')
+    financial_manager_id = fields.Many2one(comodel_name='hr.employee', string='Responsable Financiero', related='company_id.financial_manager_id')
     birthday = fields.Date(string='Fecha de nacimiento')
     # Aditional fields
-    general_manager = fields.Many2one(comodel_name='hr.employee', string='Vicepresidente', related='company_id.general_manager')
+    general_manager_id = fields.Many2one(comodel_name='hr.employee', string='Vicepresidente', related='company_id.general_manager_id')
+    account_manager_id = fields.Many2one(comodel_name='hr.employee', string='Responsable Contable', related='company_id.account_manager_id')
     purchase_request_ids = fields.One2many(comodel_name='purchase.request',
                                            inverse_name='travel_request_id',
                                            string='Requisiciones')
@@ -116,24 +115,67 @@ class My_travel_request(models.Model):
                                  ('operational_staff', 'Personal Operativo')],
                                 string='Tipo de cargo', related='manager_id.job_id.job_type')
     count_approved = fields.Integer(string='Contador de aprovaciones')
-    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position')
+    general_budget_domain = fields.Char(string='Domain budget position', compute='_compute_account_analytic_domain')
+    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position',
+                                        domain='general_budget_domain')
     budget_line_segregation_id = fields.Many2one(comodel_name='crossovered.budget.lines.segregation',
                                                  string='Budget Line Segregation',
                                                  domain="[('general_budget_id', '=?', general_budget_id), ('analytic_account_id', '=?', account_analytic_id)]")
     segregation_balance = fields.Monetary(string="Balance", compute="get_segregation_balance", store=True, readonly=True)
+    observations = fields.Html(string='Información de viaje')
+
+    # Compute state done
+    @api.depends('expence_sheet_advance_ids')
+    def _compute_change_sate_to_done(self):
+        if self.expence_sheet_advance_ids and self.state == 'submitted':
+            c = 0
+            for rec in self.expence_sheet_advance_ids:
+                if rec.state != 'done':
+                    c += 1
+            if c == 0:
+                self.state = 'done'
+            else:
+                return
+
+    # function domain dynamic
+    @api.depends('account_analytic_id')
+    def _compute_account_analytic_domain(self):
+        for rec in self:
+            if rec.account_analytic_id:
+                vat = rec.env['crossovered.budget.lines.segregation'].search([('analytic_account_id', 'in', rec.account_analytic_id.ids)])
+                rec.general_budget_domain = json.dumps([('id', 'in', list(set(vat.general_budget_id.ids)))])
+            else:
+                rec.general_budget_domain = json.dumps([()])
 
     def compute_expense_advance_paid(self):
-        if self.state == 'approved' and self.financial_manager == self.env.user.employee_id:
+        if self.state == 'approved' and self.account_manager_id == self.env.user.employee_id:
             c = 0
             for rec in self.expense_advance_ids:
                 if rec.state != 'to_pay':
                     c += 1
             if c == 0:
                 self.state = 'paid_advance'
+                #  Marca actividad como hecha de forma automatica
+                new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                new_activity.action_feedback(feedback='Es Aprobado')
+                # Código que crea una nueva actividad
+                create_vals = {
+                    'activity_type_id': 4,
+                    'summary': 'Solicitud de viaje:',
+                    'automated': True,
+                    'note': 'Ha sido asignado para generar informe de gastos',
+                    'date_deadline': fields.datetime.now(),
+                    'res_model_id': self.env['ir.model']._get(self._name).id,
+                    'res_id': self.id,
+                    'user_id': self.employee_id.user_id.id,
+                }
+                new_activity = self.env['mail.activity'].create(create_vals)
+                # Escribe el id de la actividad en un campo
+                self.write({'activity_id': new_activity})
             else:
                 raise UserError('Porfavor pagar los anticipos para continuar')
         else:
-            raise UserError('Solo el gerente financiero puede validar')
+            raise UserError('Solo el responsable de contabilidad puede validar')
 
     @api.depends('budget_line_segregation_id')
     def get_segregation_balance(self):
@@ -164,48 +206,6 @@ class My_travel_request(models.Model):
         else:
             self.count_sheet_own = 0
 
-      # Anticpos automaticos
-    def _compute_generate_expense_advance_ids(self):
-        employee = []
-        for rec in self.hr_travel_info_ids.employee_ids:
-            employee.append(rec.id)
-            for rec2 in self.hr_hotel_info_ids.employee_ids:
-                employee.append(rec2.id)
-        self.demo = set(employee)
-        # for rec3 in employee:
-        #     product = rec.env['product.product'].search([('product_expense_type', '=', 'advance')], limit=1)
-        #     amount = rec.env['hr_type_travel_expenses'].search([('product_id', '=', rec.product_id.ids),
-        #                                                         ('currency_id', '=', rec.currency_id.ids)], limit=1)
-        #     if amount:
-        #         if rec.employee_id.job_id.job_type == 'president':
-        #             value = amount.amount_president
-        #         elif rec.employee_id.job_id.job_type == 'vice_president':
-        #             value = amount.amount_vice_president
-        #         elif rec.employee_id.job_id.job_type == 'director':
-        #             value = amount.amount_director
-        #         elif rec.employee_id.job_id.job_type == 'department_manager':
-        #             value = amount.amount_department_manager
-        #         elif rec.employee_id.job_id.job_type == 'project_manager':
-        #             value = amount.amount_project_manager
-        #         elif rec.employee_id.job_id.job_type == 'operational_staff':
-        #             value = amount.amount_operational_staff
-        #     else:
-        #     create_vals = {
-        #         'employee_id': rec3,
-        #         'date': self.available_departure_date,
-        #         'travel_request_id': self.id,
-        #         'product_id': product,
-        #         'days': self.days,
-        #         'days2': self.days2,
-        #         'amount_qty': amount,
-        #         'total_amount': amount * int(self.days2),
-        #         'account_id': self.employee_id.company_id.hr_expense_advance_account.id,
-        #         'analytic_account_id': self.account_analytic_id.id,
-        #         # 'journal_id':,
-        #         'company_id': self.employee_id.company_id.id,
-        #     }
-        #     self.env['mail.activity'].create(create_vals)
-
     @api.depends('available_departure_date','available_return_date')
     def _compute_days(self):
         for line in self:
@@ -233,7 +233,7 @@ class My_travel_request(models.Model):
 
     @api.onchange('supplier_id')
     def _raise_financial_manager_supplier(self):
-        if self.financial_manager:
+        if self.financial_manager_id:
             return
         else:
             raise UserError('Debes agregar responsable financiero al empleado.')
@@ -262,7 +262,7 @@ class My_travel_request(models.Model):
     @api.onchange('employee_id')
     def onchange_employee(self):
         if self.employee_id and self.state in ['draft']:
-            self.manager_id = self.financial_manager
+            self.manager_id = self.financial_manager_id
             self.identification_id = self.employee_id.identification_id
             self.passport_id = self.employee_id.passport_id
             self.gender = self.employee_id.gender
@@ -299,7 +299,8 @@ class My_travel_request(models.Model):
         if self.state == 'draft':
             self._raise_financial_manager_supplier()
             if self.hr_travel_info_ids:
-                self.write({'state': 'confirmed'})
+                self.write({'state': 'confirmed',
+                            'confirm_date': fields.datetime.now()})
                 for rec in self.expense_advance_ids:
                     rec.button_to_approve()     # Confirmar anticipo
                 # Código que crea una nueva actividad
@@ -311,7 +312,7 @@ class My_travel_request(models.Model):
                     'date_deadline': fields.datetime.now(),
                     'res_model_id': self.env['ir.model']._get(self._name).id,
                     'res_id': self.id,
-                    'user_id': self.financial_manager.user_id.id,
+                    'user_id': self.financial_manager_id.user_id.id,
                 }
                 new_activity = self.env['mail.activity'].create(create_vals)
                 # Escribe el id de la actividad en un campo
@@ -328,12 +329,12 @@ class My_travel_request(models.Model):
     # Approve acción
     def button_action_on_aprobation(self):
         if self.hr_travel_info_ids:
-            if  self.env.user in [self.financial_manager.user_id, self.general_manager.user_id]:
-                if self.financial_manager == self.env.user.employee_id and self.count_approved == 0:
+            if self.env.user in [self.financial_manager_id.user_id, self.general_manager_id.user_id]:
+                if self.financial_manager_id == self.env.user.employee_id and self.count_approved == 0:
                     self.state_aprove += 1
                     self.count_approved += 1
                     self.write({'state': 'on_aprobation'})
-                    self.manager_id = self.general_manager
+                    self.manager_id = self.general_manager_id
                     #  Marca actividad como hecha de forma automatica
                     new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
                     new_activity.action_feedback(feedback='Es Aprobado')
@@ -346,15 +347,15 @@ class My_travel_request(models.Model):
                         'date_deadline': fields.datetime.now(),
                         'res_model_id': self.env['ir.model']._get(self._name).id,
                         'res_id': self.id,
-                        'user_id': self.general_manager.user_id.id,
+                        'user_id': self.general_manager_id.user_id.id,
                     }
                     new_activity = self.env['mail.activity'].create(create_vals)
                     # Escribe el id de la actividad en un campo
                     self.write({'activity_id': new_activity})
-                elif self.general_manager == self.env.user.employee_id and self.count_approved == 1:
+                elif self.general_manager_id == self.env.user.employee_id and self.count_approved == 1:
                     self.action_approve()
                     self.expense_advance_ids.sudo().button_approve()      # Aprobar anticipo
-                    self.manager_id = self.financial_manager
+                    self.manager_id = self.account_manager_id
                     #  Marca actividad como hecha de forma automatica
                     new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
                     new_activity.action_feedback(feedback='Es Aprobado')
@@ -363,11 +364,11 @@ class My_travel_request(models.Model):
                         'activity_type_id': 4,
                         'summary': 'Solicitud de viaje:',
                         'automated': True,
-                        'note': 'Ha sido asignado para hacer seguimiento a la solitud de viaje',
+                        'note': 'Ha sido asignado para hacer seguimiento y aprobación a la solitud de viaje',
                         'date_deadline': fields.datetime.now(),
                         'res_model_id': self.env['ir.model']._get(self._name).id,
                         'res_id': self.id,
-                        'user_id': self.financial_manager.user_id.id,
+                        'user_id': self.account_manager_id.user_id.id,
                     }
                     new_activity = self.env['mail.activity'].create(create_vals)
                     # Escribe el id de la actividad en un campo
@@ -376,7 +377,7 @@ class My_travel_request(models.Model):
                     self._action_travel_expense_to_purchase_request()
                     self._action_hotel_expense_to_purchase_request()
                     for rec in self.purchase_request_ids:
-                        rec.button_to_approve()
+                        rec.button_approved()
                 else:
                     raise UserError('Ya aprobastes la solicitud de viaje.')
             else:
@@ -412,19 +413,27 @@ class My_travel_request(models.Model):
 
     #   Compute function expense   NEW CODE
     def compute_create_expense_sheet(self):
-        if self.expense_advance_ids:
-            if self.expence_sheet_advance_ids:
-                raise UserError('Ya existen informes de gastos relacionados.')
+        if self.advance_payment_ids:
+            if self.employee_id == self.env.user.employee_id:
+                if self.expence_sheet_advance_ids:
+                    raise UserError('Ya existen informes de gastos relacionados.')
+                else:
+                    for rec in self.expense_advance_ids:
+                        self.action_create_expense(rec.employee_id.id, rec.id)
+                        self.write({'state': 'submitted'})
+                        #  Marca actividad como hecha de forma automatica
+                        new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                        new_activity.action_feedback(feedback='Es Aprobado')
+                    for rec2 in self.expence_sheet_advance_ids:
+                        rec2.action_submit_sheet()
+                for rec2 in self.expence_sheet_advance_ids:
+                    rec2.action_submit_sheet()
             else:
-                for rec in self.expense_advance_ids:
-                    self.action_create_expense(rec.employee_id.id)
-                    self.write({'state': 'submitted'})
-            for rec2 in self.expence_sheet_advance_ids:
-                rec2.action_submit_sheet()
+                    raise UserError('El solicitante es el responsable de generar informe de gatos.')
         else:
             raise UserError('No se han reportado gastos para esta solcitud de viaje.')
 
-    def action_create_expense(self, employee):
+    def action_create_expense(self, employee, payment_advance):
         id_lst = []
         id_lst2 = []
         if self.expense_ids:
@@ -432,7 +441,8 @@ class My_travel_request(models.Model):
                 if line1.employee_id.id == employee:
                     id_lst.append(line1.id)
                 res = self.env['hr.expense.sheet'].create({'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee,
-                                                           'travel_expense': True, 'payment_mode': 'own_account', 'expense_line_ids' : [(6, 0, id_lst)]})
+                                                           'travel_expense': True, 'payment_mode': 'own_account', 'payment_advance_id': payment_advance,
+                                                           'expense_line_ids': [(6, 0, id_lst)]})
                 # self.expence_sheet_id = res.id
                 self.write({'expence_sheet_own_ids': [(4, res.id)]})
                 self.write({'state': 'submitted'})
@@ -443,7 +453,8 @@ class My_travel_request(models.Model):
                     id_lst2.append(line2.id)
             res2 = self.env['hr.expense.sheet'].create(
                 {'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee,
-                 'travel_expense': True, 'payment_mode': 'company_account', 'expense_line_ids': [(6, 0, id_lst2)]})
+                 'travel_expense': True, 'payment_mode': 'company_account', 'payment_advance_id': payment_advance,
+                 'expense_line_ids': [(6, 0, id_lst2)]})
             # self.expence_sheet_company_id = res2.id
             self.write({'expence_sheet_advance_ids': [(4, res2.id)]})
 

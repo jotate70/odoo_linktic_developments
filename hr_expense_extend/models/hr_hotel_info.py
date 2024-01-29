@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, Command, models, _
+import json
 
 class HrHotelInfo(models.Model):
     _name = "hr_hotel_info"
@@ -45,7 +46,9 @@ class HrHotelInfo(models.Model):
                               ('cancel', 'Cancelado')], default="draft", string="Estado")
     attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
     # Aditional fields
-    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position')
+    general_budget_domain = fields.Char(string='Domain budget position', compute='_compute_account_analytic_domain')
+    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position',
+                                        domain='general_budget_domain')
     budget_line_segregation_id = fields.Many2one(comodel_name='crossovered.budget.lines.segregation',
                                                  string='Budget Line Segregation',
                                                  domain="[('general_budget_id', '=?', general_budget_id), ('analytic_account_id', '=?', account_analytic_id)]")
@@ -56,6 +59,17 @@ class HrHotelInfo(models.Model):
     count_purchase_request = fields.Integer(string='Count Purchase Request', compute='_compute_count_purchase_request')
     employee_ids = fields.Many2many(comodel_name='hr.employee', string='Empleados')
     number_people = fields.Integer(string='Número de personas', compute='_compute_count_number_people')
+
+    # function domain dynamic
+    @api.depends('account_analytic_id')
+    def _compute_account_analytic_domain(self):
+        for rec in self:
+            if rec.account_analytic_id:
+                vat = rec.env['crossovered.budget.lines.segregation'].search(
+                    [('analytic_account_id', 'in', rec.account_analytic_id.ids)])
+                rec.general_budget_domain = json.dumps([('id', 'in', list(set(vat.general_budget_id.ids)))])
+            else:
+                rec.general_budget_domain = json.dumps([()])
 
     @api.depends('budget_line_segregation_id')
     def get_segregation_balance(self):
@@ -82,10 +96,11 @@ class HrHotelInfo(models.Model):
                         rec.req_return_date)) + ' ] '
             rec.name = name
             rec.account_analytic_id = rec.travel_request_id.account_analytic_id
-            rec.employee_ids = rec.travel_request_id.employee_id
             rec.general_budget_id = rec.travel_request_id.general_budget_id
             rec.budget_line_segregation_id = rec.travel_request_id.budget_line_segregation_id
             rec.product_id = rec.env['product.product'].search([('product_expense_type', '=', 'accommodation')], limit=1)
+            if not self.employee_ids:
+                rec.employee_ids = rec.travel_request_id.employee_id
 
     def _compute_count_purchase_request(self):
         if self.purchase_request_ids:

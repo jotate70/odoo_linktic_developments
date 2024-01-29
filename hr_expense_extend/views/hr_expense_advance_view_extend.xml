@@ -7,13 +7,15 @@
         <field name="arch" type="xml">
             <!--                Fields           -->
             <xpath expr="//field[@name='date']" position="after">
-                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
-                <field name="product_id" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
+                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"
+                       options="{'no_open': True, 'no_create': True}"/>
+                <field name="product_id" options="{'no_open': True, 'no_create': True}"
+                       attrs="{'invisible': [('travel_request_id','=',False)]}"/>
                 <label for="days" string="Valor" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
-                <div class="o_row" attrs="{'invisible': [('travel_request_id','=',False)]}">
-                    <field name="days" class="oe_inline"/>
+                <div class="o_row" attrs="{'invisible': [('travel_request_id','=',False)], 'readonly': [('state','in',['done','refused'])]}">
+                    <field name="days"/>
                     <span class="oe_read_only"> - </span>
-                    <field name="amount_qty" widget='monetary'/>
+                    <field name="amount_qty" widget='monetary' attrs="{'readonly': [('state','in',['done','refused'])]}"/>
                 </div>
             </xpath>
         </field>

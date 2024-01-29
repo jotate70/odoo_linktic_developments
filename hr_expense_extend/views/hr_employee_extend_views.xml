@@ -9,6 +9,9 @@
                 <field name="visa_country_id" placeholder="Estados Unidos"
                        options="{'no_open': True, 'no_create': True}"/>
             </xpath>
+            <xpath expr="//group[@name='managers']" position="inside">
+                <field name="expense_manager_id2" invisible="1"/>
+            </xpath>
         </field>
     </record>
 </odoo>

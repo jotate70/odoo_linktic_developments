@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, Command, models, _
+import json
 
 class HrTravelInfo(models.Model):
     _name = "hr_travel_info"
@@ -52,7 +53,9 @@ class HrTravelInfo(models.Model):
                               ('cancel', 'Cancelado')], default="draft", string="Estado")
     attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
     # Aditional fields
-    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position')
+    general_budget_domain = fields.Char(string='Domain budget position', compute='_compute_account_analytic_domain')
+    general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position',
+                                        domain='general_budget_domain')
     budget_line_segregation_id = fields.Many2one(comodel_name='crossovered.budget.lines.segregation', string='Budget Line Segregation',
                                                  domain="[('general_budget_id', '=?', general_budget_id), ('analytic_account_id', '=?', account_analytic_id)]")
     segregation_balance = fields.Monetary(string="Balance", compute="get_segregation_balance", store=True, readonly=True)
@@ -63,13 +66,24 @@ class HrTravelInfo(models.Model):
     employee_ids = fields.Many2many(comodel_name='hr.employee', string='Empleados')
     passengers = fields.Integer(string='Pasajeros', compute='_compute_count_passengers')
 
+    # function domain dynamic
+    @api.depends('account_analytic_id')
+    def _compute_account_analytic_domain(self):
+        for rec in self:
+            if rec.account_analytic_id:
+                vat = rec.env['crossovered.budget.lines.segregation'].search(
+                    [('analytic_account_id', 'in', rec.account_analytic_id.ids)])
+                rec.general_budget_domain = json.dumps([('id', 'in', list(set(vat.general_budget_id.ids)))])
+            else:
+                rec.general_budget_domain = json.dumps([])
+
     @api.depends('budget_line_segregation_id')
     def get_segregation_balance(self):
         for record in self:
             if record.budget_line_segregation_id:
-                record.segregation_balance = (
-                                                         record.budget_line_segregation_id.planned_amount - record.budget_line_segregation_id.practical_amount) * -1
+                record.segregation_balance = (record.budget_line_segregation_id.planned_amount - record.budget_line_segregation_id.practical_amount) * -1
             else:
+                record.segregation_balance = 0
                 record.segregation_balance = 0
 
     @api.depends('employee_ids')
@@ -101,14 +115,17 @@ class HrTravelInfo(models.Model):
     @api.onchange('product_id','travel_type','from_city','to_city','req_departure_date','req_return_date')
     def _compute_name_get(self):
         for rec in self:
-            name = (str(rec.product_id.name) + ' [ ' + str(rec.travel_type) + ' ] ' + ' [ ' + str(rec.from_city) + ' --> '
-                    + str(rec.to_city) + ' ] ' + ' [ ' + str(rec.req_departure_date) + ' --> ' + str(rec.req_return_date)) + ' ] '
+            name = (str(rec.product_id.name) + ' [ ' + str(rec.travel_type) + ' ] ' + ' [ ' + str(
+                rec.from_city) + ' --> '
+                    + str(rec.to_city) + ' ] ' + ' [ ' + str(rec.req_departure_date) + ' --> ' + str(
+                        rec.req_return_date)) + ' ] '
             rec.name = name
             rec.account_analytic_id = rec.travel_request_id.account_analytic_id
-            rec.employee_ids = rec.travel_request_id.employee_id
             rec.general_budget_id = rec.travel_request_id.general_budget_id
             rec.budget_line_segregation_id = rec.travel_request_id.budget_line_segregation_id
-            rec.product_id = rec.env['product.product'].search([('product_expense_type','=','journey')], limit=1)
+            rec.product_id = rec.env['product.product'].search([('product_expense_type', '=', 'journey')], limit=1)
+            if not self.employee_ids:
+                rec.employee_ids = rec.travel_request_id.employee_id
 
     def _compute_count_purchase_request(self):
         if self.purchase_request_ids:

@@ -147,5 +147,11 @@ class HrExpenseSheet(models.Model):
                                                           'currency_id': rec3.currency_id.id,
                                                           'mode': 'supplier',
                                                           })]})
+    # Compute state to done for travel request
+    def action_legalize_advance_expense_sheet(self):
+        res = super(HrExpenseSheet, self).action_legalize_advance_expense_sheet()
+        if self.travel_request1_id:
+            self.travel_request1_id._compute_change_sate_to_done()
+        return res
 
 
