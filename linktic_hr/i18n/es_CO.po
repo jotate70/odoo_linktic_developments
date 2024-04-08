@@ -1,0 +1,938 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_hr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-18 19:42+0000\n"
+"PO-Revision-Date: 2023-07-18 19:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_certification_wizard_form
+msgid ""
+"<b>\n"
+"                                <u>Important Information:</u>\n"
+"                            </b>"
+msgstr ""
+"<b>\n"
+"                                <u>Información Importante:</u>\n"
+"                            </b>"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid ""
+"<br/>\n"
+"                            <br/>\n"
+"                            Sincerely,\n"
+"                            <br/>"
+msgstr ""
+"<br/>\n"
+"                            <br/>\n"
+"                            Atentamente,\n"
+"                            <br/>"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid ""
+"<br/>\n"
+"                            This certification is issued at the request of the interested on"
+msgstr ""
+"<br/>\n"
+"                            Esta certificación se expide a solicitud del interesado el"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_contract_form_inherit_linktic_fields
+msgid "<span>/</span>"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__rh__ab+
+msgid "AB+"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__rh__ab-
+msgid "AB-"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__arl
+#: model:res.partner.category,name:linktic_hr.res_partner_cat_arl
+msgid "ARL"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_arl_risk_form
+msgid "ARL Risk"
+msgstr "Riesgo ARL"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__active_value
+msgid "Active Value"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.actions.act_window,help:linktic_hr.hr_contract_export_import_action
+msgid "Add a new Employee Contract"
+msgstr "Adiciona un nuevo Contrato de Empleado"
+
+#. module: linktic_hr
+#: model_terms:ir.actions.act_window,help:linktic_hr.hr_payroll_parameter_action
+msgid "Add a new Payroll Parameter"
+msgstr "Adiciona un nuevo parametro de Nomina"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_address
+msgid "Address"
+msgstr "Dirección"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_address2
+msgid "Address Complement"
+msgstr "Dirección Complemento"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__addressed_to
+msgid "Addressed to"
+msgstr "Dirigido a"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__addressee
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee_certifications_wizard__addressed_to__addressee
+msgid "Addressee"
+msgstr "Destinatario"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__age
+msgid "Age"
+msgstr "Edad"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/models/hr_contract.py:0
+#, python-format
+msgid ""
+"An employee can only have one contract at the same time. (Excluding Draft and Cancelled contracts).\n"
+"\n"
+"Employee: %(employee_name)s"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__analyst
+msgid "Analyst"
+msgstr "Analista"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_applicant
+msgid "Applicant"
+msgstr "Candidato"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__applied_computer
+msgid "Applied Computer"
+msgstr "Solicitud Equipo Computo"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__assistant
+msgid "Assistant"
+msgstr "Asistente"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_bank_number
+msgid "Bank Account"
+msgstr "Cuenta Bancaria"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_bank_name
+msgid "Bank Name"
+msgstr "Banco"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Bearing Aid"
+msgstr "Subsidio de Rodamiento"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__bearing_aid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_bearing_aid
+msgid "Bearing Assistance"
+msgstr "Subsidio de Rodamiento"
+
+#. module: linktic_hr
+#: model:hr.leave.type,name:linktic_hr.hr_leave_type_bereavement
+msgid "Bereavement Leave"
+msgstr "Licencia por Luto"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Bogotá, D.C."
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__business_photo_url
+msgid "Business Photo URL"
+msgstr "URL Foto Corporativa"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_certification_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__category_ids_labels
+msgid "Category Labels"
+msgstr "Labels Categorias"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#, python-format
+msgid "Certificates"
+msgstr "Certificados"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__with_salary
+msgid "Certification with salary allocation"
+msgstr "Certificación Con Asignacion Salarial"
+
+#. module: linktic_hr
+#: model:ir.ui.menu,name:linktic_hr.hr_employee_certifications_menu
+msgid "Certifications"
+msgstr "Certificaciones"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_city
+msgid "City of Residence"
+msgstr "Ciudad de Residencia"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_leave__civil_registration
+msgid "Civil Registration"
+msgstr "Registro Civil"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__code
+msgid "Code"
+msgstr "Codigo"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__company_ids
+msgid "Companies"
+msgstr "Compañias"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__emergency_kinship
+msgid "Contact Relationship"
+msgstr "Parentesco"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_analytic_account_id
+msgid "Contract Analytic Account"
+msgstr "Cuenta Analitica Contrato"
+
+#. module: linktic_hr
+#: model:ir.ui.menu,name:linktic_hr.hr_contract_export_import_menu
+msgid "Contract Export-Import"
+msgstr "Contratos Exportar-Importar"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_type_id
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Contract Type"
+msgstr "Tipo Contrato"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_wage
+msgid "Contract Wage"
+msgstr "Salario Contrato"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_contract_history
+msgid "Contract history"
+msgstr "Histórico de contratación"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__arl_contribution_percentage
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__contribution_percentage
+msgid "Contribution %"
+msgstr "% Contribución"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__create_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__create_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__create_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__create_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__create_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__create_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__curriculum_vitae_url
+msgid "Curriculum Vitae URL"
+msgstr "URL Hoja de Vida"
+
+#. module: linktic_hr
+#: model:l10n_latam.identification.type,name:linktic_hr.l10n_latam_id_type_ven03
+msgid "Cédula Venezolana"
+msgstr ""
+
+#. module: linktic_hr
+#: model:l10n_latam.identification.type,name:linktic_hr.l10n_latam_id_type_arg01
+msgid "DNI Argentina"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__date_end
+msgid "Date End"
+msgstr "Fecha Fin"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__date_start
+msgid "Date Start"
+msgstr "Fecha Inicio"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_leave__death_certificate
+msgid "Death Certificate"
+msgstr "Certificado Defunción"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/models/hr_leave.py:0
+#, python-format
+msgid "Death Certificate and Civil Registration are mandatory for this leave"
+msgstr ""
+"El certificado de defunción y el registro civil son obligatorios para "
+"aprobar esta ausencia"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__display_name
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__display_name
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__display_name
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__eps
+#: model:res.partner.category,name:linktic_hr.res_partner_cat_eps
+msgid "EPS"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_hr
+#: model:ir.actions.act_window,name:linktic_hr.hr_employee_multiple_certificate_action
+msgid "Employee Certificates"
+msgstr "Certificados Laborales"
+
+#. module: linktic_hr
+#: model:ir.actions.report,name:linktic_hr.action_employee_certificate_pdf_report
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_certification_wizard_form
+msgid "Employee Certification"
+msgstr "Certificación Empleado"
+
+#. module: linktic_hr
+#: model:ir.ui.menu,name:linktic_hr.hr_employee_multiple_certifications_menu
+msgid "Employee Certifications"
+msgstr "Certificaciones Empleados"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_employee_certifications_wizard
+msgid "Employee Certifications Wizard"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,help:linktic_hr.field_hr_employee__contract_wage
+msgid "Employee's monthly gross wage."
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__employee_ids
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "End Date"
+msgstr "Fecha Terminación"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__entrance_ticket
+msgid "Entrance Ticket"
+msgstr "Ticket de Entrada"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__expedition_place_id
+msgid "Expedition Place"
+msgstr "Lugar de Expedición"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__expert
+msgid "Expert"
+msgstr "Experto"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Failed to Upload"
+msgstr "Fallo la Carga"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__first_last_name
+msgid "First Last Name"
+msgstr "Primer Apellido"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__first_name
+msgid "First Name"
+msgstr "Primer Nombre"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__food_aid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_food_aid
+msgid "Food Assistance"
+msgstr "Auxilio no Salarial Alimentación"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__gender_value
+msgid "Gender Value"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_certification_wizard_form
+msgid "Generate Certificates"
+msgstr "Generar Certificados"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__recruitment_degree_id
+msgid "Grade"
+msgstr "Grado"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_employee_arl_risk
+msgid "HR Employee ARL Risk"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_payroll_parameter
+msgid "HR Parameter"
+msgstr "HR Parametro"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_payroll_parameter_line
+msgid "HR Parameter Values"
+msgstr "HR Valor Parametro"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_applicant__helpdesk_ticket_id
+msgid "Helpdesk Ticket"
+msgstr "Ticket Mesa de Ayuda"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_contract__payment_period__hour
+msgid "Hour"
+msgstr "Hora"
+
+#. module: linktic_hr
+#: model:ir.actions.act_window,name:linktic_hr.hr_contract_export_import_action
+msgid "Hr Contract Export-Import"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.actions.act_window,name:linktic_hr.hr_payroll_parameter_action
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_payroll_parameter_form
+msgid "Hr Payroll Parameter"
+msgstr "Parametro Nomina"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__id
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__id
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__id
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__identification_id
+msgid "Identification No"
+msgstr "Nº identificación"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__l10n_latam_identification_type_id
+msgid "Identification Type"
+msgstr "Tipo Identificación"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_employee_certification_wizard_form
+msgid ""
+"If you need an employee certification with functions information, please send an Email\n"
+"                                to talento@linktic.com"
+msgstr ""
+"En caso de requerir certificación laboral con funciones, por favor solicitarlo con un correo\n"
+"                                a talento@linktic.com"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_leave__is_bereavement
+msgid "Is Bereavement"
+msgstr "Es Luto"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__is_linktic
+msgid "Is Linktic"
+msgstr "Es Linktic"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__own_employee
+msgid "Is own or multiple employee"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Job"
+msgstr "Cargo"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__junior
+msgid "Junior"
+msgstr ""
+
+#. module: linktic_hr
+#: model:res.partner.category,name:linktic_hr.res_partner_cat_layoffs
+msgid "LAYOFFS"
+msgstr "CESANTIAS"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__label_birthday
+msgid "Label Birthday"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__label_departure_date
+msgid "Label Departure Date"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__label_first_contract_date
+msgid "Label First Contract Date"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk____last_update
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard____last_update
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter____last_update
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__write_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__write_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__write_uid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__write_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_certifications_wizard__write_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__write_date
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__layoffs
+msgid "Layoffs"
+msgstr "Cesantias"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__line_ids
+msgid "Line"
+msgstr "Linea"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_locality
+#: model:ir.model.fields,field_description:linktic_hr.field_res_partner__locality
+#: model:ir.model.fields,field_description:linktic_hr.field_res_users__locality
+msgid "Locality"
+msgstr "Localidad"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.res_partner_form_inherit_address_fields
+#: model_terms:ir.ui.view,arch_db:linktic_hr.res_partner_view_form_private_inherit_address_fields
+msgid "Locality..."
+msgstr "Localidad..."
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_contract__payment_period__month
+msgid "Month"
+msgstr "Mes"
+
+#. module: linktic_hr
+#: model:ir.ui.menu,name:linktic_hr.hr_own_employee_certifications_menu
+msgid "My Certification"
+msgstr "Mi Certificación"
+
+#. module: linktic_hr
+#: model:ir.actions.act_window,name:linktic_hr.hr_employee_own_certificate_action
+msgid "My Employee Certificate"
+msgstr "Mi Certificación Laboral"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee_arl_risk__name
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contact_neighborhood
+#: model:ir.model.fields,field_description:linktic_hr.field_res_partner__neighborhood
+#: model:ir.model.fields,field_description:linktic_hr.field_res_users__neighborhood
+msgid "Neighborhood"
+msgstr "Barrio"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.res_partner_form_inherit_address_fields
+#: model_terms:ir.ui.view,arch_db:linktic_hr.res_partner_view_form_private_inherit_address_fields
+msgid "Neighborhood..."
+msgstr "Barrio..."
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__no_smlv
+msgid "No. SMLV (if applies)"
+msgstr "No. SMLV (si aplica)"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Non Salary Bonus"
+msgstr "Bonificación no Salarial"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: linktic_hr
+#: model:res.partner.category,name:linktic_hr.res_partner_cat_pension
+msgid "PENSION"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__parameter_id
+msgid "Parameter"
+msgstr "Parametro"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_payroll_parameter_form
+msgid "Parameter Value"
+msgstr "Valor Parametro"
+
+#. module: linktic_hr
+#: model:ir.ui.menu,name:linktic_hr.hr_payroll_parameter_menu
+msgid "Parameters"
+msgstr "Parametros"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid ""
+"Paula Alejandra Moreno Andrade\n"
+"                                <br/>\n"
+"                                Human Talent Manager"
+msgstr ""
+"Paula Alejandra Moreno Andrade\n"
+"                                <br/>\n"
+"                                Gerente de Talento Humano"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__payment_period
+msgid "Payment Period"
+msgstr "Periodo Pago"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__pension
+msgid "Pension"
+msgstr ""
+
+#. module: linktic_hr
+#: model:l10n_latam.identification.type,name:linktic_hr.l10n_latam_id_type_ven01
+msgid "Permiso Especial de Permanencia"
+msgstr ""
+
+#. module: linktic_hr
+#: model:l10n_latam.identification.type,name:linktic_hr.l10n_latam_id_type_ven02
+msgid "Permiso por Protección Temporal"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__professional
+msgid "Professional"
+msgstr "Profesional"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_applicant__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_kanban_view_applicant_inherit_linktic_fields
+msgid "Project:"
+msgstr "Proyecto:"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__rh
+msgid "RH"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Ref.: CERTIFICATION"
+msgstr "Ref.: CERTIFICACIÓN"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__arl_risk_id
+msgid "Risk Level"
+msgstr "Nivel Riesgo"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Salary"
+msgstr "Salario"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__second_last_name
+msgid "Second Last Name"
+msgstr "Segundo Apellido"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__second_name
+msgid "Second Name"
+msgstr "Segundo Nombre"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__semisenior
+msgid "Semi-senior"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__senior
+msgid "Senior"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__seniority
+msgid "Seniority"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_applicant__services_provided
+msgid "Services Provided"
+msgstr "Prestación de Servicios"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Start Date"
+msgstr "Fecha Inicio"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Support Fee"
+msgstr "Cuota de Sostenimiento"
+
+#. module: linktic_hr
+#: model:ir.model.fields,help:linktic_hr.field_hr_employee__l10n_latam_identification_type_id
+msgid "The type of identification"
+msgstr "El tipo de Identificación"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/models/hr_payroll_parameter.py:0
+#, python-format
+msgid "There are multiple lines value in which the date range overlaps"
+msgstr "Existen multiples lineas de valor con fechas sobrelapadas"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_kanban_view_applicant_inherit_linktic_fields
+msgid "Ticket:"
+msgstr ""
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_hr_leave
+msgid "Time Off"
+msgstr "Ausencias"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee_certifications_wizard__addressed_to__to_whom_it_concerns
+msgid "To Whom It Concerns"
+msgstr "A QUIEN LE INTERESE"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__total_income
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_total_income
+msgid "Total Income"
+msgstr "Total Ingresos"
+
+#. module: linktic_hr
+#: model:ir.model.fields.selection,name:linktic_hr.selection__hr_employee__seniority__trainee
+msgid "Trainee"
+msgstr "Aprendiz"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "Transport Aid"
+msgstr "Auxilio de Transporte"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__transport_aid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_transport_aid
+msgid "Transport Assistance"
+msgstr "Auxilio de Transporte"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_payroll_parameter_line__value
+msgid "Value"
+msgstr "Valor"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_payroll_parameter_form
+msgid "Values"
+msgstr "Valores"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_contract__welfare_aid
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__contract_welfare_aid
+msgid "Welfare Assistance"
+msgstr "Auxilio no Salarial Transporte"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "With this document we certify that the person"
+msgstr "Por medio de la presente certificamos que el(a) senor(a)"
+
+#. module: linktic_hr
+#: model:ir.model.fields,field_description:linktic_hr.field_hr_employee__worked_months
+msgid "Worked Months"
+msgstr "Meses Trabajados"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/models/hr_recruitment.py:0
+#, python-format
+msgid "You must define a Contact Name for this applicant."
+msgstr "Se debe definir un nombre de contacto para este aplicante."
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#, python-format
+msgid "currently works"
+msgstr "labora actualmente"
+
+#. module: linktic_hr
+#: model:ir.model.fields,help:linktic_hr.field_hr_employee__contact_address2
+msgid "field used to save the contact address complement field"
+msgstr ""
+"Campo utilizado para guardar el complemento de la direccion del contacto"
+
+#. module: linktic_hr
+#: model:ir.model.fields,help:linktic_hr.field_hr_employee__contact_address
+msgid "field used to save the contact address field"
+msgstr "Campo utilizado para guardar la direccion del contacto"
+
+#. module: linktic_hr
+#: model:ir.model.fields,help:linktic_hr.field_hr_employee__contact_city
+msgid "field used to save the contact city field"
+msgstr "Campo utilizado para guardar la ciudad del contacto"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#, python-format
+msgid "has been performing"
+msgstr "se ha desempeñado"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "honorarium"
+msgstr "Honorarios"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "identified with document No."
+msgstr "identificado(a) con el numero de cédula de ciudadanía"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "in our company, during his permanence"
+msgstr "en nuestra compañia, durante su permanencia"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "in the following denominations:"
+msgstr "en las siguientes denominaciones"
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#, python-format
+msgid "performed"
+msgstr "se desempeño"
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.hr_kanban_view_applicant_inherit_linktic_fields
+msgid "project"
+msgstr "proyecto"
+
+#. module: linktic_hr
+#: model:ir.model,name:linktic_hr.model_report_linktic_hr_employee_certification_pdf_template
+msgid "report.linktic_hr.employee_certification_pdf_template"
+msgstr ""
+
+#. module: linktic_hr
+#: model_terms:ir.ui.view,arch_db:linktic_hr.employee_certification_pdf_template
+msgid "with expedition place"
+msgstr "de "
+
+#. module: linktic_hr
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#: code:addons/linktic_hr/wizard/hr_employee_certifications.py:0
+#, python-format
+msgid "worked"
+msgstr "laboró"

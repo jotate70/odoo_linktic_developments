@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_job_form_view_extend" model="ir.ui.view">
+        <field name="name">hr_job_form_view_extend</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref='hr.view_hr_job_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address_id']" position="after">
+                <field name="hr_recruitment_requisition_ids" invisible="1"/>
+                <field name="hr_recruitment_requisition_id" invisible=""/>
+                <field name="state_requisition" invisible=""/>
+            </xpath>
+            <xpath expr="//button[@name='set_open']" position="replace">
+                <button name="set_open" string="Stop Recruitment" type="object" groups="base.group_user"
+                        attrs="{'invisible': ['|', ('state_requisition', '=', False), ('state', '=', 'open')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='set_recruit']" position="replace">
+                <button name="set_recruit" string="Start Recruitment" type="object" class="oe_highlight" groups="base.group_user"
+                        attrs="{'invisible': ['|', ('state_requisition', '=', False), ('state', '=', 'recruit')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_job_kanban_view_extend" model="ir.ui.view">
+        <field name="name">view_hr_job_kanban_view_extend</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref='hr_recruitment.view_hr_job_kanban'/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='application_count']" position="after">
+                <field name="state_requisition"/>
+            </xpath>
+            <xpath expr="//kanban[1]/templates[1]/t[1]/div[1]/div[2]/t[2]" position="replace">
+                <t t-if="record.state.raw_value == 'open'">
+                    <div class="row">
+                        <div class="col-7 o_kanban_primary_left" attrs="{'invisible': ['|', ('state_requisition', '=', False), ('state', '=', 'recruit')]}">
+                            <button class="btn btn-secondary" name="set_recruit" type="object">Iniciar Reclutamiento</button>
+                        </div>
+                        <t t-if="record.old_application_count.raw_value != 0">
+                            <div class="col-5 text_top_padding">
+                                <field name="old_application_count"/> Applicaciones<br/>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </xpath>
+            <xpath expr="//a[@name='set_recruit']" position="replace">
+                <a t-if="record.state.raw_value == 'open'" name="set_recruit" type="object"
+                   attrs="{'invisible': ['|', ('state_requisition', '=', False), ('state', '=', 'recruit')]}">Comenzar reclutamiento</a>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

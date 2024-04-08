@@ -1,0 +1,1191 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_payments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0-20230724\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-03 21:38+0000\n"
+"PO-Revision-Date: 2024-04-03 21:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_move_form_inherit_scheduled_payment
+msgid "<span class=\"oe_read_only\"> - </span>"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "<span><b>Description</b></span>"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_supplier_payment_form_inherit_payment
+msgid "<span>Batch Payment</span>"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid "A payment must always belongs to a bank or cash journal."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__aws_billing_records__platform_type__aws
+msgid "AWS"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.act_window,name:linktic_payments.action_window_aws_billing_records
+#: model:ir.ui.menu,name:linktic_payments.menu_aws_billing_records
+msgid "AWS Billing Records"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_aws_billing_records
+msgid "AWS consumption and historical information storage"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__analytic_account_ids
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__analytic_account_ids2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__analytic_account_ids
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__analytic_account_ids2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__analytic_account_ids
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__analytic_account_ids2
+msgid "Account Analytic"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__analytic_account_name
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__analytic_account_name
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__analytic_account_name
+msgid "Account Analytic Name"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__account_move_ids
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__account_move_ids
+msgid "Account Move"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Accounting Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__active
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__active
+msgid "Active"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__active_user
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__active_user
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__active_user
+msgid "Active User"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__active_user2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__active_user2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__active_user2
+msgid "Active User 2"
+msgstr ""
+
+#. module: linktic_payments
+#: model:res.groups,name:linktic_payments.group_linktic_payments_administrative_manager
+msgid "Administrative manager"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_journal__purchase_type_journal__advance
+msgid "Advance"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__priority__0
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_move__priority__0
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_priority__priority__0
+msgid "All"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "All payments in the batch must belong to the same company."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "All payments in the batch must share the same payment method."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__amount
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__amount
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "Amount"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Amount Due"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__amount_signed
+msgid "Amount Signed"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__analytic_account_id
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__analytic_account_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Analytic Account"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Approval State"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_approved_advisor_action
+msgid "Approve Advisor"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_approval_action
+msgid "Approve Payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_approved_vice_president_action
+msgid "Approve Vice President"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Approved"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_date_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_date_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_date_payment
+msgid "Approved Date Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_manager
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_manager
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_manager
+msgid "Approved Manager"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_advisor
+#: model:ir.model.fields,field_description:linktic_payments.field_res_company__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_config_settings__approved_advisor_id
+msgid "Approved advisor"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_advisor_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_advisor_id
+msgid "Approved advisor_employee_id"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_vice_president
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_company__approved_vice_president_id
+#: model:ir.model.fields,field_description:linktic_payments.field_res_config_settings__approved_vice_president_id
+msgid "Approved vice-president"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_move_form_inherit_scheduled_payment
+msgid "Aprobado Gerente"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__available_payment_method_ids
+msgid "Available Payment Method"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "BATCH/..."
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_move_form_inherit_scheduled_payment
+msgid "Banco Pago"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_move_form_inherit_scheduled_payment
+msgid "Banco programado"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__journal_id
+msgid "Bank"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_search_view
+msgid "Bank Journal"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "Batch Content"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_journal_dashboard_kanban_view_extend
+msgid "Batch Deposit"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#: model:ir.model,name:linktic_payments.model_account_batch_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__batch_payment_id
+#: model:ir.ui.menu,name:linktic_payments.menu_batch_payment_menu
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_search_view
+#, python-format
+msgid "Batch Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.act_window,name:linktic_payments.action_window_batch_payment_act_window
+#: model:ir.actions.act_window,name:linktic_payments.action_window_batch_payment_in
+#: model:ir.actions.act_window,name:linktic_payments.action_window_batch_payment_out
+#: model:ir.ui.menu,name:linktic_payments.menu_batch_payment_purchases
+#: model:ir.ui.menu,name:linktic_payments.menu_batch_payment_sales
+#: model_terms:ir.ui.view,arch_db:linktic_payments.search_account_payment_view_extend
+msgid "Batch Payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__batch_type
+msgid "Batch Type"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Bill Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__ceco
+msgid "CECO"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__cop_value
+msgid "COP value"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_priority_wizard_form
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Cancel"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "Cannot change the validation state for a paid Bill."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Cannot validate an empty batch. Please add some payments to it first."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__name
+msgid "Card Name"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__card_type
+msgid "Card Type"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.act_window,name:linktic_payments.action_window_card_movement_records
+#: model:ir.ui.menu,name:linktic_payments.menu_card_movement_records_menu
+#: model_terms:ir.ui.view,arch_db:linktic_payments.aws_billing_records_search_view
+#: model_terms:ir.ui.view,arch_db:linktic_payments.card_movement_records_search_view
+msgid "Card movement records"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.view_account_move_line_filter_inherit
+msgid "Categories"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move_line__category
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move_line__category_id
+msgid "Category"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__payment_method_code
+msgid "Code"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__company_id
+msgid "Company"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.action_account_create_batch_payment_view
+msgid "Create batch payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__create_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__create_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__create_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__create_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__create_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__create_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__create_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__create_date
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__create_date
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__card_type__credit
+msgid "Credit"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_journal__purchase_type_journal__credit_card
+msgid "Credit Card"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_term__term_type__credit_type
+msgid "Credit Type"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__currency_id
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__currency_id
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Customer"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__date_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__date_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__date_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__date
+msgid "Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__card_type__debit
+msgid "Debit"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__description
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__description
+msgid "Description"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__display_name
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__display_name
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__display_name
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__display_name
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__display_name
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__aws_billing_records__state__done
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__state__done
+msgid "Done"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_move
+msgid "Electronic invoicing"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_journal__purchase_type_journal__equivalent_document
+msgid "Equivalent Document"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__aws_billing_records__platform_type__google_cloud
+msgid "Google Cloud"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_search_view
+#: model_terms:ir.ui.view,arch_db:linktic_payments.aws_billing_records_search_view
+#: model_terms:ir.ui.view,arch_db:linktic_payments.card_movement_records_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__priority__2
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_move__priority__2
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_priority__priority__2
+msgid "High priority"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__id
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__id
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Id: %s"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__batch_type__inbound
+msgid "Inbound"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_journal_form_inherit_linktic_fields
+msgid "Inter Company Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Invoice Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__related_move_ids
+msgid "Invoice Related"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Invoices"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__journal_credit
+msgid "Journal Credit"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, all optional journal "
+"items must share the same account."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, the journal items must "
+"include one and only one outstanding payments/receipts account."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, the journal items must "
+"include one and only one receivable/payable account (with an exception of "
+"internal transfers)."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, the journal items must "
+"share the same currency."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_payment.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, the journal items must "
+"share the same partner."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment____last_update
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard____last_update
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority____last_update
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler____last_update
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records____last_update
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__write_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__write_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__write_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__write_uid
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__write_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__write_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__write_date
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__write_date
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__write_date
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__loan_entry_account_id
+msgid "Loan Entry Account"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__loan_exit_account_id
+msgid "Loan Exit Account"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__priority__1
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_move__priority__1
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_priority__priority__1
+msgid "Low priority"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__month_value_ppto
+msgid "Month value ppto"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__active_move_ids
+msgid "Moves"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_account_payment__amount_signed
+msgid "Negative value of amount field if payment_type is outbound"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__state__draft
+#: model:ir.model.fields.selection,name:linktic_payments.selection__aws_billing_records__state__draft
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__state__draft
+msgid "New"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_priority_wizard_form
+msgid "Next Stage"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.search_account_payment_view_extend
+msgid "Not reconciled"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "Only can change the Approval state of Posted Bills."
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Open"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_journal__purchase_type_journal__others
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_term__term_type__others
+msgid "Others"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__batch_type__outbound
+msgid "Outbound"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__partner_name
+msgid "Partner Name"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__pay_date
+msgid "Pay Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__pay_mode
+msgid "Pay Mode"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_id2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_id2
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_id2
+#: model:ir.ui.menu,name:linktic_payments.linktic_payments_menu_account_payment_mgt_custom
+#, python-format
+msgid "Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.act_window,name:linktic_payments.action_window_payment_approval
+#: model:ir.ui.menu,name:linktic_payments.linktic_payments_payment_approval_menu
+msgid "Payment Approval"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_bank_related_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_bank_related_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_bank_related_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__payment_journal_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Payment Bank"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_check
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_check
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_check
+msgid "Payment Check"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_method_wizard_action
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_method_line_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__payment_method_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_method_line_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__payment_method_line_id
+msgid "Payment Method"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_method
+msgid "Payment Methods"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_priority_action
+msgid "Payment Priority"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_payment_scheduler_action
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Payment Scheduler"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_term
+msgid "Payment Terms"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Payment approvers"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_date_related
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_date_related
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_date_related
+msgid "Payment date"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_method_wizard__payment_method_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_method_wizard_form
+#, python-format
+msgid "Payment method"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.module.category,description:linktic_payments.module_linktic_payments_account
+msgid "Payment permissions in accounting."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__payment_ids
+#: model:ir.module.category,name:linktic_payments.module_linktic_payments_account
+#: model:ir.ui.menu,name:linktic_payments.linktic_payments_menu_account_payments_payable
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "Payments"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Payments must be posted to be added to a batch."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__payslip_journal
+msgid "Payslip Journal"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Pending Approval"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__platform
+msgid "Platform"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__platform_type
+msgid "Platform Type"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__priority
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__priority
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__priority
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__priority
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_priority__priority
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_priority_wizard_form
+msgid "Priority"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "Priority Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_payment_scheduler_form
+msgid "Process"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__payment_journal_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__payment_journal_id
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__payment_journal_id
+msgid "Programmed Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_journal__purchase_type_journal__purchase
+msgid "Purchase"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__state__reconciled
+#: model:ir.model.fields.selection,name:linktic_payments.selection__aws_billing_records__state__reconciled
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__state__reconciled
+msgid "Reconciled"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__name
+msgid "Reference"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_register
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Register Payment"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__related_company
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_register__journal_related_company
+msgid "Related Company"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_register__related_company_journal_id
+msgid "Related Company Payment Bank"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "Reset To Draft"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_res_config_settings__approved_vice_president_id
+msgid "Responsible for validating all bank payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Responsible for validating all bank payments."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_res_config_settings__approved_advisor_id
+#: model_terms:ir.ui.view,arch_db:linktic_payments.res_config_settings_expense_inherit_advance
+msgid "Responsible for validating bank payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Salesperson"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__scheduled_payment_day
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__scheduled_payment_day
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Scheduled Payment Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_scheduler
+msgid "Scheduler for bill payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__state__sent
+msgid "Sent"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Set payments state to \"posted\"."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Some payments have already been matched with a bank statement."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "Some payments have already been sent."
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Source Document"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__star_date
+msgid "Star Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_batch_payment__state
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__state
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__state
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_search_view
+msgid "State"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Tax"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Tax Excluded"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_term__term_type
+msgid "Term Type"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid ""
+"The batch must have the same payment method as the payments it contains."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid "The batch must have the same type as the payments it contains."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid ""
+"The journal of the batch payment and of the payments it contains must be the"
+" same."
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,help:linktic_payments.field_account_batch_payment__payment_method_id
+msgid "The payment method used by the payments in this batch."
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid ""
+"There are documents with different payment bank configured, please all "
+"records should have the same bank"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_move.py:0
+#, python-format
+msgid "This user doesn't have approval permissions."
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Total"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Total in Currency"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__total_ppto_value
+msgid "Total ppto value"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__transitional_exception
+msgid "Transitional Exception"
+msgstr ""
+
+#. module: linktic_payments
+#: model:res.groups,name:linktic_payments.group_linktic_payments_account_treasurer
+msgid "Treasurer"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_bank_statement_line__purchase_type_journal
+#: model:ir.model.fields,field_description:linktic_payments.field_account_journal__purchase_type_journal
+#: model:ir.model.fields,field_description:linktic_payments.field_account_move__purchase_type_journal
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment__purchase_type_journal
+msgid "Type Type Journal"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__ultimas4
+msgid "ULTIMAS4"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_search_view
+msgid "Unreconciled"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__upload_date
+msgid "Upload Date"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_batch_payment__priority__3
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_move__priority__3
+#: model:ir.model.fields.selection,name:linktic_payments.selection__account_payment_priority__priority__3
+msgid "Urgent"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_card_movement_records__user_id
+msgid "User"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_batch_payment_form_view
+msgid "Validate"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.actions.server,name:linktic_payments.account_validated_payments_action
+msgid "Validated Payments"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_aws_billing_records__value
+msgid "Value USD"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_inherit_payment_scheduled
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_tree_payment_scheduled_2
+msgid "Vendor"
+msgstr ""
+
+#. module: linktic_payments
+#: model:res.groups,name:linktic_payments.group_linktic_payments_vicepresident
+msgid "Vicepresident"
+msgstr ""
+
+#. module: linktic_payments
+#: model_terms:ir.ui.view,arch_db:linktic_payments.account_invoice_filter_inherits_scheduled_payment
+msgid "Waiting Schedule"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid ""
+"You cannot add payments that are not posted.\n"
+"Payments:\n"
+"%s"
+msgstr ""
+
+#. module: linktic_payments
+#: code:addons/linktic_payments/models/account_batch_payments.py:0
+#, python-format
+msgid ""
+"You cannot add payments with zero amount in a Batch Payment.\n"
+"Payments:\n"
+"%s"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_method_wizard
+msgid "account.payment.method.wizard"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_account_payment_priority
+msgid "account.payment.priority"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model,name:linktic_payments.model_card_movement_records
+msgid "card movement records"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields,field_description:linktic_payments.field_account_payment_scheduler__company_id
+msgid "company"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__pay_mode__physical
+msgid "physical"
+msgstr ""
+
+#. module: linktic_payments
+#: model:ir.model.fields.selection,name:linktic_payments.selection__card_movement_records__pay_mode__virtual
+msgid "virtual"
+msgstr ""

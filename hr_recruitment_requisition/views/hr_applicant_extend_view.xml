@@ -1,0 +1,211 @@
+<odoo>
+  <data>
+      <record id="hr_applicant_form_extend_view" model="ir.ui.view">
+          <field name="name">hhr_applicant_form_extend_view</field>
+          <field name="model">hr.applicant</field>
+          <field name="inherit_id" ref='hr_recruitment.hr_applicant_view_form'/>
+          <field name="arch" type="xml">
+              <xpath expr="//header" position="replace">
+                  <header>
+                      <button name="compute_stage_before" string="Before Stage" type="object"
+                              confirm="¿Desea regresar de etapa?"/>
+                      <button name="open_stage_transition_wizard" string="Next Stage" type="object" class="btn-primary"
+                              confirm="¿Desea finalizar etapa?"
+                              attrs="{'invisible': ['|', '|', ('stage_type','=','refused'), ('active', '=', False), ('signed_contract', '=', True)]}"/>
+                      <button string="Create Employee" name="create_employee_from_applicant" type="object"
+                              data-hotkey="v" class="oe_highlight o_create_employee"
+                              attrs="{'invisible': ['|','|',('emp_id', '!=', False),('active', '=', False),('hired_stage', '=', False)]}"/>
+                      <button string="Refuse" name="archive_applicant" type="object"
+                              attrs="{'invisible': [('active', '=', False)]}" data-hotkey="x"/>
+                      <button string="Restore" name="toggle_active" type="object"
+                              attrs="{'invisible': [('active', '=', True)]}" data-hotkey="z"/>
+                      <field name="stage_id" widget="statusbar" options="{'fold_field': 'fold'}"
+                             attrs="{'invisible': [('active', '=', False),('emp_id', '=', False)]}"/>
+                      <field name="stage_domain" invisible="1"/>
+                  </header>
+              </xpath>
+              <xpath expr="//div[@class='oe_title']" position="replace">
+                  <div class="oe_title">
+                    <label for="display_name" class="oe_edit_only"/>
+                    <h1><field name="display_name" placeholder="e.g. Sales Manager 2 year experience"/></h1>
+                    <h2 class="o_row">
+                        <div>
+                            <label for="partner_name" class="oe_edit_only"/>
+                            <field name="partner_name"/>
+                        </div>
+                    </h2>
+                </div>
+              </xpath>
+              <xpath expr="//field[@name='source_id']" position="after">
+                  <field name="recruitment_type_id" widget="many2many_tags" readonly="1"/>
+                  <field name="stage_after" invisible="1"/>
+                  <field name="state_level" invisible="1"/>
+                  <field name="state_aprove" invisible="1"/>
+                  <field name="hired_stage" invisible="1"/>
+                  <field name="signed_contract" invisible="1"/>
+                  <field name="requires_approval" invisible="1"/>
+                  <field name="stage_type" invisible="1"/>
+                  <field name="hr_requisition_domain" invisible="1"/>
+                  <field name="hr_requisition_id" domain="hr_requisition_domain" required="1"
+                         options="{'no_create': True}"/>
+              </xpath>
+              <xpath expr="//field[@name='email_from']" position="before">
+                  <label for="identification_type_id" string="Identification number"/>
+                  <div>
+                      <field name="identification_type_id" options="{'no_open': True, 'no_create': True}" placeholder="Cédula de ciudadania" class="oe_inline"/>
+                      <span class="oe_read_only"> - </span>
+                      <field name="vat" placeholder="Number" class="oe_inline"/>
+                  </div>
+              </xpath>
+              <xpath expr="//field[@name='availability']" position="after">
+                  <field name="equipment_prioritization"/>
+              </xpath>
+              <xpath expr="//group" position="inside">
+                  <group string="Currículum">
+                      <field name="reques_specifications"/>
+                      <field name="professional_card"/>
+                      <field name="expedition_date"/>
+                      <field name="certifications"/>
+                      <field name="academic_training"/>
+                      <field name="overall_experience"/>
+                      <field name="specific_experience"/>
+                      <field name="job_skills"/>
+                  </group>
+                  <group>
+                  </group>
+                  <group string="responsible" >
+                      <field name="time_off_related" invisible="1"/>
+                      <label for="manager_id" string="Approve By"/>
+                      <div>
+<!--                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"-->
+<!--                                 attrs="{'readonly': [('stage_type', '!=', 'new')]}"/>-->
+                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"/>
+                          <span class="oe_read_only"> - </span>
+                          <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                 attrs="{'invisible': ['|',('time_off_related', '=', True),('manager_id', '=', False)]}"/>
+                          <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                 attrs="{'invisible': ['|',('time_off_related', '=', False),('manager_id', '=', False)]}"/>
+                      </div>
+                      <field name="manager_id2" options="{'no_create':true, 'no_open':true}"
+                             attrs="{'invisible': [('time_off_related', '=', False)]}"/>
+                      <field name="manager_before" invisible="1"/>
+                      <field name="manager_after_id" invisible="1"/>
+                  </group>
+                  <group string="Uncapped Manager">
+                      <field name="uncapped_manager_id" attrs="{'readonly': [('stage_type', '!=', 'new')]}"/>
+                      <field name="requires_budget_approval" invisible="1"/>
+                      <field name="budget_amount" invisible="1"/>
+                  </group>
+              </xpath>
+              <xpath expr="//field[@name='department_id']" position="after">
+                  <field name="analytic_account_id"/>
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Labor conditions" name="labor_conditions">
+                      <group>
+                          <field name="partner_name"/>
+                          <label for="identification_type_id" string="Identification number"/>
+                          <div>
+                              <field name="identification_type_id" options="{'no_open': True, 'no_create': True}" placeholder="Cédula de ciudadania" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="vat" placeholder="Number" class="oe_inline"/>
+                          </div>
+                          <field name="job_id" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="contract_type_id" options="{'no_open': True, 'no_create': True}"/>
+                          <label for="negotiated_salary" string="Salary/Honorarium"/>
+                          <div>
+                              <field name="negotiated_salary" placeholder="6.000.0000" class="oe_inline"/>
+                              <span class="oe_read_only"> + </span>
+                              <field name="negotiated_food_bond" placeholder="2.000.0000" class="oe_inline"/>
+                              <span class="oe_read_only"> = </span>
+                              <field name="total_salary" placeholder="8.000.0000" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="currency_id" placeholder="COP" class="oe_inline" style="color: blue"
+                                     options="{'no_open': True, 'no_create': True}"/>
+                          </div>
+                          <field name="date_start"/>
+                          <label for="contract_duration_qty" string="Contract duration"/>
+                          <div>
+                              <field name="contract_duration_qty" placeholder="12" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="contract_duration_sel" placeholder="Month" class="oe_inline"/>
+                          </div>
+                          <field name="department_id" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="analytic_account_id" options="{'no_open': True, 'no_create': True}"/>
+                          <label for="required_mail" string="Mail"/>
+                          <div>
+                              <field name="required_mail" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="mail_domain" placeholder="linktic.com" class="oe_inline"/>
+                          </div>
+                          <label for="computer_equipment" string="Computer Equipment"/>
+                          <div>
+                              <field name="computer_equipment" class="oe_inline"/>
+                              <span class="oe_read_only"> - </span>
+                              <field name="os" class="oe_inline"/>
+                          </div>
+                          <field name="tools" placeholder="Otban/OSTicket..."/>
+                          <field name="supervisor" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="contractor_company" options="{'no_open': True, 'no_create': True}"/>
+                          <field name="prepaid" invisible="1"/>
+                          <field name="observations"/>
+                      </group>
+                  </page>
+                  <page string="Stage Report" name="stage_report">
+                      <field name="hr_applicant_stage_log_ids" mode="tree" nolabel="1" readonly="1">
+                          <tree string="RRHH Ticket Report" default_order="datetime_start desc">
+                              <field name="stage_id"/>
+                              <field name="user_id" widget="many2one_avatar_user"/>
+                              <field name="datetime_start"/>
+                              <field name="datetime_end"/>
+                              <field name="no_hours" widget="float_time"/>
+                              <field name="stage_result" style="max-width: 200px"/>
+                          </tree>
+                      </field>
+                  </page>
+                  <page string="Control Panel" name="control_panel"
+                        groups="hr_recruitment_requisition.group_hr_recruitment_requisition_settings">
+                      <group>
+                          <label for="stage_control" string="Stage Control"/>
+                          <div>
+                              <field name="stage_control" options="{'no_create':true, 'no_open':true}"/>
+                              <span> - </span>
+                              <button name="control_stage_apply" string="Apply" type="object" class="btn-primary"
+                                      confirm="Is it safe to change state?"/>
+                          </div>
+                          <field name="stage_after" readonly="1" force_save="1" options="{'no_open':true}"/>
+                          <field name="state_level" readonly="1" force_save="1"/>
+                          <field name="state_aprove" readonly="1" force_save="1"/>
+                          <field name="requires_approval" readonly="1" force_save="1"/>
+                      </group>
+                  </page>
+              </xpath>
+              <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="required">1</attribute>
+              </xpath>
+          </field>
+      </record>
+
+      <!--                Control View               -->
+      <record id="hr_applicant_view_search_bis_extend" model="ir.ui.view">
+          <field name="name">hr_applicant_view_search_bis_extend</field>
+          <field name="model">hr.applicant</field>
+          <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="hr_requisition_id"/>
+                <field name="analytic_account_id"/>
+                <field name="manager_id"/>
+                <field name="uncapped_manager_id"/>
+                <separator/>
+                <filter string="My Assigned" domain="[('user_id','=',uid)]" name="user_id_filter"/>
+                <group expand="0" string="Group By">
+                    <filter name="hr_requisition_id_group" context="{'group_by':'hr_requisition_id'}"/>
+                </group>
+            </xpath>
+          </field>
+        </record>
+  </data>
+</odoo>
+

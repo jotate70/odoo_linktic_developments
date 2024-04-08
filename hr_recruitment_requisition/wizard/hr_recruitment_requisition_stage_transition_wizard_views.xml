@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="hr_recruitment_requisition_stage_transition_wizard_form">
+        <field name="name">helpdesk.ticket.stage.transition.wizard.form</field>
+        <field name="model">hr_recruitment_requisition_stage_transition_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Recruitment Stage Transition">
+                <header>
+                    <field name="state_domain" invisible="1"/>
+                    <field name="stage_id" widget="statusbar" readonly="1" domain="state_domain"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="button_cancel" invisible="1"/>
+                            <field name="recruitment_type_id" invisible="1"/>
+                            <field name="hr_recruitment_requisition_id" invisible="1"/>
+                            <field name="time_off" invisible="1"/>
+                            <field name="time_off_related" invisible="1"/>
+                            <field name="approved_by" widget="many2one_avatar_user" readonly="1"/>
+                            <label for="manager_id" string="Manager"/>
+                            <div>
+                                <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline" readonly="1"/>
+                                <span class="oe_read_only"> - </span>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', True), ('manager_id', '=', False)], 'readonly': True}"/>
+                                <field name="time_off" placeholder="Number" class="oe_inline" style="color: red"
+                                       attrs="{'invisible': ['|', ('time_off_related', '=', False), ('manager_id', '=', False)], 'readonly': True}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="requires_approval" invisible="1"/>
+                            <field name="manager_after_id" attrs="{'invisible': ['|',('requires_approval','=','no'),('button_cancel','=',True)]}"/>
+                        </group>
+                        <field name="stage_result" required="True"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="do_action" string="Next Stage" type="object" class="btn-primary"
+                            attrs="{'invisible': [('button_cancel','=',True)]}"/>
+                    <button name="do_action_cancel" string="refuse" type="object" class="btn-primary"
+                            attrs="{'invisible': [('button_cancel','=',False)]}"/>
+<!--                    <button string="Cancel" class="btn-secondary" special="cancel"-->
+<!--                            attrs="{'invisible': [('button_cancel','=',True)]}"/>-->
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

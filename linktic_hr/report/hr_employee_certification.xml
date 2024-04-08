@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <report
+            id="action_employee_certificate_pdf_report"
+            model="hr.employee.certifications.wizard"
+            string="Employee Certification"
+            name="linktic_hr.employee_certification_pdf_template"
+            file="linktic_hr.employee_certification_pdf_template"
+            report_type="qweb-pdf"
+            paperformat="linktic_hr.paperformat_employee_certification_letter"
+    />
+
+    <template id="employee_certification_pdf_template">
+        <t t-call="web.html_container">
+            <t t-call="linktic_hr.employee_certification_layout">
+                <div class="page" style="font-size:15px;text-align:justify">
+                    <div class="oe_structure"/>
+                    <div>
+                        Bogotá, D.C.
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%b-%Y')"/>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div>
+                        Ref.: CERTIFICATION
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <h3 style="text-decoration: underline;">
+                        <center>
+                            <span t-esc="h3_string"/>
+                        </center>
+                    </h3>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+                        <div>
+                            With this document we certify that the person
+                            <span t-esc="employee_name"/>
+                            identified with document No.
+                            <span t-esc="employee_id_number"/>
+                            with expedition place
+                            <span t-esc="employee_expedition_place"/>,
+                            <span t-esc="active_employee"/>
+                            in our company, during his permanence
+                            <span t-esc="active_employee_2"/>
+                            in the following denominations:
+                        </div>
+                    </div>
+                    <br/>
+
+                    <table t-if="no_payroll_contracts > 0" class="table table-condensed table-bordered" style="font-size:12px">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle">
+                                    <center>Contract</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Job</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Contract Type</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Start Date</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>End Date</center>
+                                </th>
+                                <t t-if="with_salary">
+                                    <th style="vertical-align: middle">
+                                        <center>Salary</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Non Salary Bonus</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Transport Aid</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Bearing Aid</center>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-as="payroll_contract" t-foreach="payroll_contracts">
+                                <tr>
+                                    <td style="text-align: left;">
+                                        <span t-field="payroll_contract.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="payroll_contract.job_id.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="payroll_contract.contract_type_id.name"/>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-field="payroll_contract.date_start"/>
+                                        </center>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-out="payroll_contract.date_end or 'Vigente'"/>
+                                        </center>
+                                    </td>
+                                    <t t-if="with_salary">
+                                        <td>
+                                            <center>
+                                                <span t-field="payroll_contract.wage"/> <span t-field="payroll_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="payroll_contract.welfare_aid"/> <span t-field="payroll_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="payroll_contract.transport_aid"/> <span t-field="payroll_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="payroll_contract.bearing_aid"/> <span t-field="payroll_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <table t-if="no_services_contracts > 0" class="table table-condensed table-bordered" style="font-size:12px">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle">
+                                    <center>Contract</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Job</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Contract Type</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Start Date</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>End Date</center>
+                                </th>
+                                <t t-if="with_salary">
+                                    <th style="vertical-align: middle">
+                                        <center>honorarium</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Non Salary Bonus</center>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-as="service_contract" t-foreach="services_contracts">
+                                <tr>
+                                    <td style="text-align: left;">
+                                        <span t-field="service_contract.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="service_contract.job_id.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="service_contract.contract_type_id.name"/>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-field="service_contract.date_start"/>
+                                        </center>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-out="service_contract.date_end or 'Vigente'"/>
+                                        </center>
+                                    </td>
+                                    <t t-if="with_salary">
+                                        <td>
+                                            <center>
+                                                <span t-field="service_contract.wage"/> <span t-field="service_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="service_contract.welfare_aid"/> <span t-field="service_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <table t-if="no_learning_contracts > 0" class="table table-condensed table-bordered" style="font-size:12px">
+                        <thead>
+                            <tr>
+                                <th style="vertical-align: middle">
+                                    <center>Contract</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Job</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Contract Type</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>Start Date</center>
+                                </th>
+                                <th style="vertical-align: middle">
+                                    <center>End Date</center>
+                                </th>
+                                <t t-if="with_salary">
+                                    <th style="vertical-align: middle">
+                                        <center>Support Fee</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Non Salary Bonus</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Transport Aid</center>
+                                    </th>
+                                    <th style="vertical-align: middle">
+                                        <center>Bearing Aid</center>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-as="learning_contract" t-foreach="learning_contracts">
+                                <tr>
+                                    <td style="text-align: left;">
+                                        <span t-field="learning_contract.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="learning_contract.job_id.name"/>
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-field="learning_contract.contract_type_id.name"/>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-field="learning_contract.date_start"/>
+                                        </center>
+                                    </td>
+                                    <td style="min-width: 90px;">
+                                        <center>
+                                            <span t-out="learning_contract.date_end or 'Vigente'"/>
+                                        </center>
+                                    </td>
+                                    <t t-if="with_salary">
+                                        <td>
+                                            <center>
+                                                <span t-field="learning_contract.wage"/> <span t-field="learning_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="learning_contract.welfare_aid"/> <span t-field="learning_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="learning_contract.transport_aid"/> <span t-field="learning_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <span t-field="learning_contract.bearing_aid"/> <span t-field="learning_contract.payment_period"/>
+                                            </center>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div>
+                            <br/>
+                            This certification is issued at the request of the interested on
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%B-%Y')"/>
+                            <br/>
+                            <br/>
+                            Sincerely,
+                            <br/>
+                            <img src='/linktic_hr/static/images/signature.png' alt="Failed to Upload" width="250"
+                                 height="150"/>
+                            <t t-if="is_linktic">
+                                <img src='/linktic_hr/static/images/stamp.png' alt="Failed to Upload" width="100"
+                                     height="150"/>
+                            </t>
+                        </div>
+                    </div>
+
+                    <table>
+                        <tr style="font-weight:bold;border-top: 1pt solid black;">
+                            <td style="min-width: 230px;">Paula Alejandra Moreno Andrade
+                                <br/>
+                                Human Talent Manager
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

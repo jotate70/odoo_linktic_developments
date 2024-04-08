@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_advance_views_respartner" model="ir.ui.view">
+        <field name="name">account_advance_views_respartner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_account_payable_id']" position="after">
+                <field name="property_account_advance_id" options="{'no_create': True, 'no_edit' : True}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

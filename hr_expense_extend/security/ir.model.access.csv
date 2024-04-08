@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_travel_request,access.travel.request,model_travel_request,base.group_user,1,1,1,1
+access_travel_mode,access.travel.mode,model_travel_mode,base.group_user,1,1,1,1
+access_hr_type_travel_expenses,access_hr_type_travel_expenses,model_hr_type_travel_expenses,base.group_user,1,1,1,1
+access_hr_travel_info,access_hr_travel_info,model_hr_travel_info,base.group_user,1,1,1,1
+access_hr_hotel_info,access_hr_hotel_info,model_hr_hotel_info,base.group_user,1,1,1,1
+access_hr_analytic_account_info,access_hr_analytic_account_info,model_hr_analytic_account_info,base.group_user,1,1,1,1
+access_hr_items_info,access_hr_items_info,model_hr_items_info,base.group_user,1,1,1,1
+access_hr_third_info,access_hr_third_info,model_hr_third_info,base.group_user,1,1,1,1
+access_terms_conditions_transition_wizard,access_terms_conditions_transition_wizard,model_terms_conditions_transition_wizard,base.group_user,1,1,1,1
+
+

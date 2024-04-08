@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--  //////////////////////////////////// Tree View ////////////////////////////////////   -->
+        <record id="card_movement_records_tree_view" model="ir.ui.view">
+            <field name="name">card_movement_records_tree_view</field>
+            <field name="model">card_movement_records</field>
+            <field name="arch" type="xml">
+                <tree decoration-muted="state == 'reconciled'" decoration-info="state == 'draft'" sample="1" editable="top" create="1">
+                    <field name="active" invisible="1"/>
+                    <field name="date" readonly="1" force_save="1" required="1"/>
+                    <field name="name" readonly="1" force_save="1" required="1"/>
+                    <field name="analytic_account_id" readonly="0" force_save="1"/>
+                    <field name="partner_name" readonly="1" force_save="1" required="1"/>
+                    <field name="partner_id" invisible="1"/>
+                    <field name="description" readonly="1" force_save="1" required="1"/>
+                    <field name="user_id" readonly="1" force_save="1" required="1"/>
+                    <field name="ultimas4" readonly="1" force_save="1" required="1"/>
+                    <field name="pay_mode" readonly="1" force_save="1" required="1"/>
+                    <field name="card_type" readonly="1" force_save="1" required="1"/>
+                    <field name="amount" readonly="1" force_save="1" required="1"/>
+                    <field name="currency_id" optional="show" required="1"/>
+                    <field name="ceco" readonly="1" force_save="1" required="1"/>
+                    <field name="pay_date" readonly="1" force_save="1" required="1"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-info="state == 'draft'" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--  //////////////////////////////////// Panel Control ////////////////////////////////////   -->
+        <record id="card_movement_records_search_view" model="ir.ui.view">
+            <field name="name">card_movement_records_search_view</field>
+            <field name="model">card_movement_records</field>
+            <field name="arch" type="xml">
+                <search string="Card movement records">
+                    <!--         Search           -->
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="analytic_account_id" />
+                    <!--         Filter           -->
+                    <filter domain="[('state','=','done')]" name="Done"/>
+                    <filter domain="[('state','=','draft')]" name="Draft"/>
+                    <filter domain="[('pay_mode','=','physical')]" name="Physical"/>
+                    <filter domain="[('pay_mode','=','virtual')]" name="Virtual"/>
+                    <filter domain="[('card_type','=','debit')]" name="Debit"/>
+                    <filter domain="[('card_type','=','credit')]" name="Credit"/>
+                    <!--         Group By           -->
+                    <group expand="0" string="Group By">
+                        <filter name="partner_id" context="{'group_by':'partner_id'}"/>
+                        <filter name="analytic_account_id" context="{'group_by':'analytic_account_id'}"/>
+                        <filter name="date" context="{'group_by':'date'}"/>
+                        <filter name="user_id" context="{'group_by':'user_id'}"/>
+                        <filter name="pay_mode" context="{'group_by':'pay_mode'}"/>
+                        <filter name="card_type" context="{'group_by':'card_type'}"/>
+                        <filter name="currency_id" context="{'group_by':'currency_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--  //////////////////////////////////// Actions Window ////////////////////////////////////   -->
+        <record id="action_window_card_movement_records" model="ir.actions.act_window">
+            <field name="name">Card movement records</field>
+            <field name="res_model">card_movement_records</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="card_movement_records_tree_view"/>
+            <field name="search_view_id" ref="card_movement_records_search_view"/>
+            <field name="context">{'search_default_open': 1, 'default_batch_type': 'inbound'}</field>
+        </record>
+
+        <!--  //////////////////////////////////// Menus item ////////////////////////////////////   -->
+        <menuitem id="menu_card_movement_records_menu"
+                  name="Card movement records"
+                  action="action_window_card_movement_records"
+                  parent="linktic_payments.linktic_payments_menu_account_payment_mgt_custom"
+                  groups="linktic_payments.group_linktic_payments_administrative_manager"
+                  sequence="4"
+        />
+
+    </data>
+</odoo>

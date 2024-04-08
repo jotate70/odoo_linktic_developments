@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <!--   tree view     -->
+        <record id="res_partner_type_bank_account_tree_view" model="ir.ui.view">
+            <field name="name">res_partner_type_bank_account_tree_view</field>
+            <field name="model">res_partner_type_bank</field>
+            <field name="arch" type="xml">
+                <tree string="tree" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--   actions opening views on models   -->
+        <record model="ir.actions.act_window" id="action_window_res_partner_type_bank_account">
+          <field name="name">Type bank account</field>
+          <field name="res_model">res_partner_type_bank</field>
+          <field name="view_mode">list</field>
+        </record>
+
+        <!--   Supplier menu   -->
+        <menuitem name="Type bank account" id="res_partner_type_bank_account_menu" parent="contacts.menu_config_bank_accounts"
+                  action="action_window_res_partner_type_bank_account" sequence="20"/>
+    </data>
+</odoo>

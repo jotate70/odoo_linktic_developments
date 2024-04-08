@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_payment_scheduler,account.payment.scheduler,model_account_payment_scheduler,base.group_user,1,1,1,1
+access_account_payment_priority,account.payment.priority,model_account_payment_priority,base.group_user,1,1,1,1
+access_account_payment_method_wizard,account.payment.method.wizard,model_account_payment_method_wizard,base.group_user,1,1,1,1
+
+access_account_batch_payment_readonly,account.batch.payment,model_account_batch_payment,account.group_account_readonly,1,0,0,0
+access_account_batch_payment,account.batch.payment,model_account_batch_payment,account.group_account_invoice,1,1,1,1
+
+access_card_movement_records,card_movement_records,model_card_movement_records,account.group_account_invoice,1,1,1,1
+access_aws_billing_records,aws_billing_records,model_aws_billing_records,account.group_account_invoice,1,1,1,1

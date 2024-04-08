@@ -1,0 +1,46 @@
+<odoo>
+  <data>
+
+      <record id="linktic_report_task_tree_extend" model="ir.ui.view">
+          <field name="name">linktic_report_task_tree_extend"</field>
+            <field name="model">linktic.report.task</field>
+            <field name="arch" type="xml">
+                <tree decoration-muted="(not active)" create="1" editable="bottom">
+                    <field name="active" invisible="1"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="task_group_id"/>
+                </tree>
+            </field>
+      </record>
+
+      <record id="linktic_report_task_group_tree_extend" model="ir.ui.view">
+          <field name="name">linktic_report_task_group_tree_extend"</field>
+            <field name="model">linktic.report.task.group</field>
+            <field name="arch" type="xml">
+                <tree decoration-muted="(not active)" create="1" editable="bottom">
+                    <field name="active" invisible="1"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="report_task_ids" invisible="1"/>
+                </tree>
+            </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="action_window_linktic_report_task_tree">
+          <field name="name">Report Task</field>
+          <field name="res_model">linktic.report.task</field>
+          <field name="view_mode">list</field>
+      </record>
+
+      <record model="ir.actions.act_window" id="action_window_linktic_report_task_group_tree">
+          <field name="name">Report Task Group</field>
+          <field name="res_model">linktic.report.task.group</field>
+          <field name="view_mode">list</field>
+      </record>
+
+      <menuitem id="linktic_report_task_menu_act" name="Report Task" parent="linktic_contractor_charge_account.menu_charge_account_settings" action="action_window_linktic_report_task_tree" sequence="1"/>
+      <menuitem id="linktic_report_task_group_menu_act" name="Report Task Group" parent="linktic_contractor_charge_account.menu_charge_account_settings" action="action_window_linktic_report_task_group_tree" sequence="2"/>
+
+  </data>
+</odoo>

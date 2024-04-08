@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payroll_parameter,hr.payroll.parameter,model_hr_payroll_parameter,base.group_user,1,1,1,1
+access_hr_payroll_parameter_line,hr.payroll.parameter.line,model_hr_payroll_parameter_line,base.group_user,1,1,1,1
+access_hr_employee_arl_risk,hr.employee.arl.risk,model_hr_employee_arl_risk,base.group_user,1,1,1,1
+access_hr_employee_arl_risk,hr.employee.arl.risk,model_hr_employee_arl_risk,base.group_user,1,1,1,1
+access_hr_employee_certifications_wizard,hr.employee.certifications.wizard,model_hr_employee_certifications_wizard,base.group_user,1,1,1,1
+access_hr_contract_kiosk,hr.contract.certification.access,hr_contract.model_hr_contract,hr_attendance.group_hr_attendance_kiosk,1,0,0,0
+access_hr_contract_type_kiosk,hr.contract.type.certification.access,hr_contract.model_hr_contract_type,hr_attendance.group_hr_attendance_kiosk,1,0,0,0
+access_hr_employee_kiosk,hr.employee.certification.access,hr.model_hr_employee,hr_attendance.group_hr_attendance_kiosk,1,0,0,0
+access_hr_job_kiosk,hr.job.certification.access,hr.model_hr_job,hr_attendance.group_hr_attendance_kiosk,1,0,0,0

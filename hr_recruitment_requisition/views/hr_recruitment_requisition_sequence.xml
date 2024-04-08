@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--                                Secuencia              -->
+        <record id="sequence_hr_recruitment_requisition_ifpv" model="ir.sequence">
+            <field name="name">Secuence recruitment requisition</field>
+            <field name="code">recruitment.ifpv</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">RRHH</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

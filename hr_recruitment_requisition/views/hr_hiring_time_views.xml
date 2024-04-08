@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Discipline Category View-->
+	    <record id="hr_hiring_times_view_tree" model="ir.ui.view">
+            <field name="name">hr_hiring_times_view_tree</field>
+            <field name="model">hr.hiring.times</field>
+            <field name="arch" type="xml">
+                <tree string="Hiring Times" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="id" optional="hide"/>
+                    <field name="contract_type_id"/>
+                    <field name="contract_duration_qty"/>
+                    <field name="contract_duration_qty_end"/>
+                    <field name="contract_duration_sel"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--   actions opening views on models   -->
+        <record model="ir.actions.act_window" id="action_window_hr_hiring_times">
+            <field name="name">Hiring Times</field>
+            <field name="res_model">hr.hiring.times</field>
+            <field name="view_mode">list</field>
+        </record>
+
+    </data>
+</odoo>

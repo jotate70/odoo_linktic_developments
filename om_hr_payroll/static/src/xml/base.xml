@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+   <t t-extend="ListView.buttons" t-name="payroll_period.buttons">
+       <t t-jquery="button.o_list_export_xlsx" t-operation="before">
+           <button type="button" class="btn btn-primary generate_period_action">
+               Generate Periods
+           </button>
+       </t>
+   </t>
+</templates>

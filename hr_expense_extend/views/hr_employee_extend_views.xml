@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_inherit" model="ir.ui.view">
+        <field name="name">view_employee_form_inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref='hr.view_employee_form'/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='visa_no']" position="before">
+                <field name="visa_country_id" placeholder="Estados Unidos"
+                       options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+            <xpath expr="//group[@name='managers']" position="inside">
+                <field name="expense_manager_id2" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

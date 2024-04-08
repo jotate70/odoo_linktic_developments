@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data >
+        <record id="res_bank_txt_config_view_form" model="ir.ui.view">
+            <field name="name">res.bank.txt_config.view.form</field>
+            <field name="model">res.bank.txt_config</field>
+            <field name="arch" type="xml">
+                <form string="txt">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="bank_id"/>
+                                <field name="file_type"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                                <field name="minimum_limit_line"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Header" name="header">
+                                <field name="header_line_id">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="size" sum="total chars"/>
+                                        <field name="alignment"/>
+                                        <field name="fill"/>
+                                        <field name="value_type"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Body" name="body">
+                                <field name="body_line_id">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="size" sum="total chars"/>
+                                        <field name="alignment"/>
+                                        <field name="fill"/>
+                                        <field name="value_type"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Footer" name="footer">
+                                <field name="footer_line_id">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="size" sum="total chars"/>
+                                        <field name="alignment"/>
+                                        <field name="fill"/>
+                                        <field name="value_type"/>
+                                        <field name="value"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Help" name="help">
+                                <div class="container" style="padding-top: 20px;">
+                                    <!-- <h2>Convenciones de configuracion</h2>
+                                    <p>Utilize las siguientes convenciones para configurar su archivo de dispersion:</p>
+                                    <a type="button" class="btn btn-default" data-toggle="collapse" data-target="#convenciones">Mostrar convenciones</a>
+                                    <br/> -->
+                                    <div id="convenciones" style="padding-top: 1px;">
+                                        <h3>Help with python expressions:</h3>
+                                        <p>
+                                        These variables can be used with python syntax to access the information you require.
+                                        <br/></p>
+                                        <table class="table table-sm table-striped table-hover">
+                                            <thead style="background-color: #986483; color: white;">
+                                                <tr>
+                                                    <th style="border: 1px solid white">Variable</th>
+                                                    <th style="border: 1px solid white">Return value</th>
+                                                    <th style="border: 1px solid white">Available in</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>batch_payment</td>
+                                                    <td>Payment batch object (account.batch.payment)</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>payment</td>
+                                                    <td>Payment batch line object (account.payment)</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br/>
+                                        <hr/>
+                                        <h3>Help with available variable expressions</h3>
+                                        <p>
+                                            Select in the value type column "call variable" 
+                                            and type the name of the variable as shown in the following table.<br/>
+                                            Date type variables are formattable, 
+                                            to use them type it followed by "," and the date format<br/>
+                                            <b>Example:</b><br/>
+                                            date_transmission,%Y-%m-%d %H:%M:%S the returned date format will be YYYY-MM-DD HH:MM:SS
+                                        </p>
+                                        
+                                        <table class="table table-sm table-striped table-hover">
+                                            <thead style="background-color: #986483; color: white;">
+                                                <tr>
+                                                    <th style="border: 1px solid white">Variable</th>
+                                                    <th style="border: 1px solid white">Return value</th>
+                                                    <th style="border: 1px solid white">Available in</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>company_name</td>
+                                                    <td>Name of the company</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>company_street</td>
+                                                    <td>Company address</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>number_lines</td>
+                                                    <td>Number of lines or payment records</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>dispersing_account</td>
+                                                    <td>Bank account to be debited</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>amount_total</td>
+                                                    <td>Total transfer</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>date_payment</td>
+                                                    <td>Payment date</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>date_transmission</td>
+                                                    <td>Broadcast date</td>
+                                                    <td>Header, Body, Footer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>beneficiary_name</td>
+                                                    <td>Beneficiary's name</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>beneficiary_street</td>
+                                                    <td>Address of beneficiary</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>amount_line</td>
+                                                    <td>Transaction value on payment line</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>circular</td>
+                                                    <td>Description of the transaction given in the lines</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>item</td>
+                                                    <td>Pay line sequence</td>
+                                                    <td>Body</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br/>
+                                        <hr/>
+                                        <h3>Help with date format expressions</h3>
+                                        <table>
+                                            <tr>
+                                                <td style="width: 10px">%Y</td>
+                                                <td style="width: 300px">: Year with century (YYYY)</td>
+
+                                                <td>%y</td>
+                                                <td>: Year without century (YY)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%m</td>
+                                                <td>: Month as a decimal number (MM)</td>
+
+                                                <td>%B</td>
+                                                <td>: Full name of the month. (January)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%d</td>
+                                                <td>: Day as a decimal number (DD)</td>
+
+                                                <td>%A</td>
+                                                <td>: Full name of the day of the week (Monday)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%H</td>
+                                                <td>: Time (24 hours) as a decimal number (HH)</td>
+
+                                                <td>%I</td>
+                                                <td>: Time (12 hours) as a decimal number (HH)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%M</td>
+                                                <td>: Minute as a decimal number (MM)</td>
+
+                                                <td>%p</td>
+                                                <td>: Local AM or PM (AM, PM)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%S</td>
+                                                <td>: Second as a decimal number (SS)</td>
+
+                                                <td>%z</td>
+                                                <td>: UTC offset with + HHMM or -HHMM format</td>
+                                            </tr>
+                                            <tr>
+                                                <td>%Z</td>
+                                                <td>: Time zone name</td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="res_bank_txt_config_view_tree" model="ir.ui.view">
+            <field name="name">res.bank.txt_config.view.tree</field>
+            <field name="model">res.bank.txt_config</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="bank_id"/>
+                    <field name="name"/>
+                    <field name="file_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="res_bank_txt_config_view_search" model="ir.ui.view">
+            <field name="name">res.bank.txt_config.view.search</field>
+            <field name="model">res.bank.txt_config</field>
+            <field name="arch" type="xml">
+                <search string="txt config">
+                    <field name="bank_id"/>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="res_bank_txt_config_action" model="ir.actions.act_window">
+            <field name="name">Banks file settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.bank.txt_config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Add bank txt configuration 
+                </p>
+                <p>
+                    Configuration record to generate TXT file to upload the payment to the banking portal
+                </p>
+            </field>
+        </record>
+        
+        <menuitem id="res_bank_txt_config_menu_act" name="Bank file setting" parent="account.root_payment_menu" action="res_bank_txt_config_action" sequence="40"/>
+    </data>
+</odoo>

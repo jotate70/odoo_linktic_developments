@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="policy_purchase_order_line_tree" model="ir.ui.view">
+        <field name="name">policy.purchase.order.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree string="Policy Purchase Order Lines" create="false">
+                <field name="order_id"/>
+                <field name="order_modified_policy_order_id"/>
+                <field name="name"/>
+                <field name="partner_id" string="Vendor"/>
+                <field name="product_id"/>
+                <field name="price_subtotal" widget="monetary"/>
+                <field name="order_state" optional="show"/>
+                <field name="order_invoice_status" optional="hide"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

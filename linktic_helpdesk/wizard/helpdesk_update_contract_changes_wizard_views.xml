@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="helpdesk_update_contract_info_wizard_form">
+        <field name="name">helpdesk.update.contract.info.wizard.form</field>
+        <field name="model">helpdesk.update.contract.info.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Contract Info Update">
+                <group>
+                    <group>
+                        <field name="wizard_updated_job"/>
+                        <field name="wizard_updated_contract_type_id"/>
+                        <field name="wizard_updated_contract_date_end"/>
+                        <field name="wizard_contract_wage_rise"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="do_action" string="Update Info." type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

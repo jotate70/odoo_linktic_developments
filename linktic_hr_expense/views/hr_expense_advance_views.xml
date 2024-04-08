@@ -1,0 +1,201 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="view_hr_expense_advance_form" model="ir.ui.view">
+        <field name="name">hr.expense.advance.form</field>
+        <field name="model">hr.expense.advance</field>
+        <field name="arch" type="xml">
+            <form string="Expense Advance">
+                <header>
+                    <field name="state_aprove" invisible="1"/>
+
+                    <button name="button_draft" string="Set to Draft" type="object"/>
+                    <button name="button_approve" string="Aapprove" type="object"/>
+
+                    <button name="button_draft" states="to_approve,refused" string="Set to Draft" type="object"/>
+<!--                    <button name="button_to_approve" states="draft" string="Advance Approval" type="object"-->
+<!--                            class="oe_highlight"/>-->
+                    <button name="action_button_to_approve" states="draft" string="Advance Approval" type="object"
+                            class="oe_highlight"/>
+<!--                    <button name="button_approve" states="to_approve" string="Approve" type="object"-->
+<!--                            class="oe_highlight" groups="hr_expense.group_hr_expense_manager"/>-->
+
+                    <button name="action_button_approve" string="Aprobacion ⁽1⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar anticipo?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 1], ['state', '!=', 'to_approve']]}"/>
+                    <button name="action_button_approve" string="Aprobacion ⁽2⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar anticipo?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 2], ['state', '!=', 'to_approve']]}"/>
+                    <button name="action_button_approve" string="Aprobacion ⁽3⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar anticipo?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 3], ['state', '!=', 'to_approve']]}"/>
+                    <button name="action_button_approve" string="Aprobacion ⁽4⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar anticipo?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 4], ['state', '!=', 'to_approve']]}"/>
+                    <button name="action_button_approve" string="Aprobacion ⁽5⁾" type="object" class="btn-primary"
+                            confirm="¿Desea aprobar anticipo?"
+                            attrs="{'invisible': ['|', ['state_aprove', '!=', 5], ['state', '!=', 'to_approve']]}"/>
+
+                    <button name="button_reject" states="to_approve" string="Reject" type="object" class="oe_highlight"
+                            groups="hr_expense.group_hr_expense_manager"/>
+                    <button name="action_register_payment" states="approved" string="Register Payment" type="object"
+                            class="oe_highlight" groups="hr_expense.group_hr_expense_manager"/>
+                    <button name="action_view_sheet" type="object" string="View Expense Report" class="oe_highlight"
+                            attrs="{'invisible': [('sheet_count', '=', 0)]}" data-hotkey="w"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,done,rejected"
+                           statusbar_colors='{"approved":"blue"}'/>
+                </header>
+                <sheet>
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline"/>
+                    </div>
+                    <h1>
+                        <field name="is_editable" invisible="1"/>
+                        <field name="name" class="oe_inline" readonly="True"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="same_currency" invisible="1"/>
+                            <field name="is_editable" invisible="1"/>
+                            <field name="company_currency_id" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="employee_id" groups="hr_expense.group_hr_expense_team_approver"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   context="{'default_company_id': company_id}" widget="many2one_avatar_employee"
+                                   attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="manager_id" readonly="1" force_save="1" widget="many2one_avatar"/>
+                            <label for="total_amount" string="Total"/>
+                            <div class="o_row">
+                                <field name="total_amount" widget='monetary'
+                                       options="{'currency_field': 'currency_id'}"
+                                       attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                                <field name="currency_id" options="{'no_open': True, 'no_create': True}"
+                                       groups="base.group_multi_currency"
+                                       attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            </div>
+                            <field name="state_aprove" invisible="1"/>
+                            <field name="count_approved" invisible="1"/>
+                            <field name="parent_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="account_id" string="Account" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sheet_id" invisible="1"/>
+                            <field name="sheet_count" invisible="1"/>
+                            <field name="analytic_account_id"
+                                   options="{'no_open': True, 'no_create': True}"
+                                   domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"
+                                   groups="analytic.group_analytic_accounting"
+                                   attrs="{'readonly': ['|',('is_editable', '=', False),('state','in',['done','refused'])]}"/>
+                            <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags"
+                                   attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                            <field name="journal_id" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="account_move_id" attrs="{'invisible': [('account_move_id', '=', False)]}"
+                                   readonly="1" options="{'no_create': True}"/>
+
+                        </group>
+                        <group name="scheduled_payment"
+                               attrs="{'invisible': [('state', 'not in', ['approved', 'done', 'to_pay'])], 'readonly': [('state', '!=', 'approved')]}">
+                            <field name="scheduled_payment_day" attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="payment_journal_id" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                            <field name="approved_manager"
+                                   attrs="{'readonly': [('state','in',['done','refused'])]}"/>
+                        </group>
+                    </group>
+                    <div>
+                        <field name="description" class="oe_inline" placeholder="Notes..."/>
+                    </div>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_expense_advance_tree" model="ir.ui.view">
+        <field name="name">hr.expense.advance.tree</field>
+        <field name="model">hr.expense.advance</field>
+        <field name="arch" type="xml">
+            <tree name="Expense Advances">
+                <field name="name"/>
+                <field name="employee_id" widget="many2one_avatar_employee"/>
+                <field name="date"/>
+                <field name="scheduled_payment_day"/>
+                <field name="payment_journal_id"/>
+                <field name="approved_manager"/>
+                <field name="total_amount"/>
+                <field name="currency_id"/>
+                <field name="company_id"/>
+                <field name="approved_manager" optional="hide" widget="boolean_toggle"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    <record id="view_purchase_request_log_search" model="ir.ui.view">-->
+    <!--        <field name="name">purchase.request.log.list.select</field>-->
+    <!--        <field name="model">purchase.request.log</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <search string="Search Purchase Request">-->
+    <!--                <field name="name" string="Purchase Request" />-->
+    <!--                <separator />-->
+    <!--                <field name="product_id" />-->
+    <!--&lt;!&ndash;                <field name="state" />&ndash;&gt;-->
+    <!--                <separator />-->
+    <!--                <group expand="0" string="Group By...">-->
+    <!--                    <filter-->
+    <!--                        name="product_id"-->
+    <!--                        string="By Product"-->
+    <!--                        icon="fa-user"-->
+    <!--                        domain="[]"-->
+    <!--                        context="{'group_by':'product_id'}"-->
+    <!--                    />-->
+    <!--                    <filter-->
+    <!--                        name="partner_id"-->
+    <!--                        string="By Vendor"-->
+    <!--                        icon="fa-user"-->
+    <!--                        domain="[]"-->
+    <!--                        context="{'group_by':'purchase_order_vendor'}"-->
+    <!--                    />-->
+    <!--                    <filter-->
+    <!--                        name="request_creation_date"-->
+    <!--                        string="Request Date"-->
+    <!--                        icon="fa-calendar"-->
+    <!--                        domain="[]"-->
+    <!--                        context="{'group_by':'request_creation_date'}"-->
+    <!--                    />-->
+    <!--                </group>-->
+    <!--            </search>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record model="ir.actions.act_window" id="hr_expense_advance_action">
+        <field name="name">Expense Advance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.expense.advance</field>
+        <field name="view_mode">tree,form</field>
+        <!--        <field name="search_view_id" ref="view_purchase_request_log_search"/>-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There are no expenses advances. Let's create one
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_hr_expense_advance"
+            sequence="1"
+            parent="hr_expense.menu_hr_expense_my_expenses"
+            action="hr_expense_advance_action"
+            name="Expense Advance"
+    />
+
+</odoo>

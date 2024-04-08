@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--	<data>-->
+<!--		<record id="hr_travel_manager_id" model="res.groups">-->
+<!--			<field name="name">HR Manager (Travel)</field>-->
+<!--			<field name="category_id" ref="base.module_category_hidden"/>-->
+<!--		</record>-->
+<!--	</data>-->
+
+	<record id="group_hr_expense_manager_user" model="res.groups">
+        <field name="name">Gerente</field>
+        <field name="category_id" ref="base.module_category_human_resources_expenses"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_hr_expense_team_approver" model="res.groups">
+        <field name="name">Team Approver</field>
+        <field name="implied_ids" eval="[(4, ref('hr_expense_extend.group_hr_expense_manager_user'))]"/>
+        <!-- Aquí puedes agregar otros campos según tus necesidades -->
+    </record>
+
+<!--	<record id="group_hr_expense_team_approver" model="res.groups">-->
+<!--        <field name="name">Team Approver</field>-->
+<!--        <field name="category_id" ref="base.module_category_human_resources_expenses"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('hr_expense_extend.group_hr_expense_manager_user'))]"/>-->
+<!--    </record>-->
+
+</odoo>

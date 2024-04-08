@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="crossovered_budget_lines_segregation_view_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.lines.segregation.view.tree</field>
+        <field name="model">crossovered.budget.lines.segregation</field>
+        <field name="arch" type="xml">
+            <tree string="Budget Segregation" editable="bottom">
+                <field name="name"
+                       attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"
+                       colspan="1"/>
+                <field name="quantity" attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="crossovered_budget_line_id" readonly="True"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="planned_amount" attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="practical_amount"/>
+                <field name="theoritical_amount"/>
+                <field name="crossovered_budget_state" invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crossovered_budget_lines_segregation_view_payroll_tree" model="ir.ui.view">
+        <field name="name">crossovered.budget.lines.segregation.view.payroll.tree</field>
+        <field name="model">crossovered.budget.lines.segregation</field>
+        <field name="arch" type="xml">
+            <tree string="Budget Segregation" editable="bottom">
+                <field name="name" readonly="1" force_save="1" colspan="1"/>
+                <field name="job_position_id" required="1"
+                       attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="salary_scale_id" required="0"
+                       attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="quantity" attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="position_months" required="1"
+                       attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="occupation_perc" required="1" widget="percentage"/>
+                <field name="crossovered_budget_line_id" readonly="True"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="planned_amount" attrs="{'readonly': [('crossovered_budget_state', '!=', 'draft')]}"/>
+                <field name="practical_amount"/>
+                <field name="theoritical_amount"/>
+                <field name="crossovered_budget_state" invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="crossovered_budget_lines_segregation_action">
+        <field name="name">Budget Segregation</field>
+        <field name="res_model">crossovered.budget.lines.segregation</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="crossovered_budget_lines_segregation_view_tree"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="crossovered_budget_lines_segregation_payroll_action">
+        <field name="name">Budget Segregation Payroll</field>
+        <field name="res_model">crossovered.budget.lines.segregation</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="crossovered_budget_lines_segregation_view_payroll_tree"/>
+    </record>
+
+    <record id="crossovered_budget_view_form_segregation" model="ir.ui.view">
+        <field name="name">crossovered.budget.view.form.segregation</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="om_account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="analytic_account_id"/>
+                <field name="project_id"/>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']" position="attributes">
+                <attribute name="context">{'default_date_from': date_from,'default_date_to': date_to,
+                    'default_analytic_account_id': analytic_account_id}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree/field[@name='planned_amount']"
+                   position="attributes">
+                <attribute name="readonly">True</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree/field[@name='analytic_account_id']"
+                   position="attributes">
+                <attribute name="attrs">{'readonly':[('parent.analytic_account_id', '!=', False)]}</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='crossovered_budget_line']/tree/button[@name='action_open_budget_entries']"
+                   position="before">
+                <button type="object" name="action_open_budget_line_segregation" string="Segregation..."
+                        icon="fa-arrow-circle-o-right"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="budget_post_view_form_linktic_fields" model="ir.ui.view">
+        <field name="name">budget.post.view.form.linktic.fields</field>
+        <field name="model">account.budget.post</field>
+        <field name="inherit_id" ref="om_account_budget.view_budget_post_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_payroll_position"/>
+                <field name="is_policy_position"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

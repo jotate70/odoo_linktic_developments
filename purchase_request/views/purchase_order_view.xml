@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="purchase_order_form_inherits_request" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherits.request</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="states">draft,to approve,sent,purchase,policy_approval</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="before">
+                <button name="button_accept_policy" string="Accept Policy Payment" type="object"
+                        attrs="{'invisible' : ['|', ('state', '!=', 'policy_approval'), ('can_approve_policy_po', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_rfq_send']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="purchase_request_lines" invisible="1"/>
+                <button
+                        attrs="{'invisible': [('purchase_request_lines', '=', [])]}"
+                        name="action_open_request_line_tree_view"
+                        type="object"
+                        icon="fa-folder-open-o"
+                />
+            </xpath>
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="need_contract" invisible="1"/>
+                <field name="need_policy" invisible="1"/>
+                <field name="mandatory_policy" invisible="1"/>
+                <field name="need_policy_payment_approval" invisible="1"/>
+                <field name="can_approve_policy_po" invisible="1"/>
+                <field name="contract_attachment" filename="contract_att_name"
+                       attrs="{'invisible': [('need_contract', '=', False)], 'required': [('need_contract', '=', True)]}"/>
+                <field name="contract_att_name" invisible="1"/>
+                <field name="policy_attachment" filename="policy_att_name"
+                       attrs="{'invisible': [('need_policy', '=', False)], 'required': [('need_policy', '=', True), ('mandatory_policy', '=', True)]}"/>
+                <field name="policy_att_name" invisible="1"/>
+                <field name="modified_policy_order_id" attrs="{'invisible': [('modified_policy_order_id', '=', False)]}"
+                       readonly="True" force_save="True"/>
+                <field name="approved_policy_payment" readonly="1" force_save="1"
+                       attrs="{'invisible': ['|',('need_policy_payment_approval', '=', False),('state', 'not in', ['purchase','cancel'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='account_analytic_id']" position="after">
+                <field name="budget_line_segregation_id" groups="analytic.group_analytic_accounting" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_line_form2" model="ir.ui.view">
+        <field name="name">purchase.order.line.form2</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <separator string="Purchase Request Lines"/>
+                <field name="purchase_request_lines"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_line_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="purchase_request_lines" invisible="1"/>
+                <button
+                        attrs="{'invisible': [('purchase_request_lines', '=', [])]}"
+                        name="action_open_request_line_tree_view"
+                        type="object"
+                        icon="fa-folder-open-o"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

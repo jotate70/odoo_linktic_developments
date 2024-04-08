@@ -1,0 +1,140 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+
+    <!-- ///////////////////////////// Smart button requisition ////////////////////////  -->
+    <record model="ir.actions.act_window" id="action_purchase_request_to_travel_info">
+        <field name="name">Purchase Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('hr_travel_info_id', '=', active_id)]</field>
+        <field name="context">{
+            "default_hr_travel_info_id": active_id,
+            "default_user_id": False,
+            }
+        </field>
+    </record>
+
+    <record id="hr_travel_info_view_form" model="ir.ui.view">
+        <field name="name">hr_travel_info_view_form</field>
+        <field name="model">hr_travel_info</field>
+        <field name="arch" type="xml">
+            <form string="Employee Travel Request">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_purchase_request_to_travel_info)d" class="oe_stat_button" icon="fa-pencil" type="action"
+                                attrs="{'invisible': [('count_purchase_request','=',0)]}">
+                            <field name="count_purchase_request" widget="statinfo" string="Purchase Request"/>
+                        </button>
+                        <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-file-text-o" type="object">
+                            <field name="attachment_number" widget="statinfo" string="Adjuntos" options="{'reload_on_button': true}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name"/>
+                            <field name="name" invisible="1" placeholder="Motivo del viaje"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="¿Qué tipo de transporte?"></group>
+                        <group></group>
+                        <group>
+                            <field name="product_id" options="{'no_open': True, 'no_create': True}" domain="[('product_expense_type','=','journey')]"/>
+                            <field name="employee_ids" widget="many2many_avatar_employee"/>
+                        </group>
+                        <group>
+                            <field name="account_analytic_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="passengers"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="general_budget_domain" invisible="1"/>
+                        <label for="general_budget_id" string="Presupuesto"/>
+                        <div>
+                            <field name="general_budget_id" placeholder="Posición Presupuestaria"
+                                   class="oe_inline" options="{'no_open': True, 'no_create': True}"/>
+                            <span> Segregación:     </span>
+                            <field name="budget_line_segregation_id" placeholder="Segregación" class="oe_inline"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <span> Balance:     </span>
+                            <field name="segregation_balance"/>
+                        </div>
+                    </group>
+                    <group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <field name="supplier_id" placeholder="Example Company" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <label for="supplier_type" string="Número de Identificación"/>
+                            <div>
+                                <field name="supplier_type" placeholder="NIT"
+                                       class="oe_inline" options="{'no_open': True, 'no_create': True}" />
+                                <span class="oe_read_only"> - </span>
+                                <field name="supplier_vat" placeholder="542367676-4" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group string="¿A dónde viajas?"></group>
+                        <group></group>
+                        <group>
+                            <field name="travel_type" />
+                        </group>
+                        <group></group>
+                        <group>
+                            <label for="from_city" string="Desde"/>
+                            <div class="o_address_format">
+                                <field name="from_city" placeholder="City" class="o_address_city"/>
+                                <field name="from_state_id" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="from_country_id" placeholder="Country" class="o_address_country"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <label for="to_city" string="Hacia"/>
+                            <div class="o_address_format">
+                                <field name="to_city" placeholder="City" class="o_address_city"/>
+                                <field name="to_state_id" class="o_address_state" placeholder="State"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="to_country_id" placeholder="Country" class="o_address_country"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                            </div>
+                        </group>
+                        <group string="¿Cuándo viajas?"></group>
+                        <group></group>
+                        <group>
+                            <field name="req_departure_date" />
+                        </group>
+                        <group>
+                            <field name="req_return_date" attrs="{'readonly': [('travel_type','=','going')]}"/>
+                        </group>
+                        <group>
+                            <field name="days"/>
+                        </group>
+                        <group>
+                            <field name="luggage" />
+                        </group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}" string="¿Cuál es el valor del viaje?"></group>
+                        <group></group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <label for="amount_total" string="Costo"/>
+                            <div>
+                                <field name="amount_total" placeholder="1000.000"
+                                       class="oe_inline"/>
+                                <span class="oe_read_only"> - </span>
+                                <field name="currency_id" placeholder="COP" class="oe_inline"
+                                       options="{'no_open': True, 'no_create': True}" />
+                            </div>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'open_attachments': True}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

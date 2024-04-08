@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- ///////////////////////////// Smart button RRHH Ticket ////////////////////////  -->
+        <record model="ir.actions.act_window" id="action_rrhh_ticket_to_so_pt">
+            <field name="name">RRHH Ticket</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr_recruitment_requisition</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('employee_ids', '=', active_id)]</field>
+            <field name="context">{
+                "default_employee_ids": active_id,
+                }
+            </field>
+        </record>
+
+        <!-- Inherit employee -->
+        <record id="hr_view_employee_form_view_extend" model="ir.ui.view">
+            <field name="name">hr_view_employee_form_view_extend</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref='hr.view_employee_form'/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div" position="inside">
+                        <button name="%(action_rrhh_ticket_to_so_pt)d" type="action" class="oe_stat_button" icon="fa-pencil"
+                                groups="hr_recruitment.group_hr_recruitment_user">
+                            <field name="count_rrhh_ticket" widget="statinfo" string="RRHH Ticket"/>
+                        </button>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="rrhh_tickets_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

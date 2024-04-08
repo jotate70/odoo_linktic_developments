@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Recruitment Requisition tree view -->
+        <record model="ir.ui.view" id="hr_requisition_stage_tree_view">
+            <field name="name">Recruitment Stages</field>
+            <field name="model">hr_requisition_state</field>
+            <field name="arch" type="xml">
+                <tree string="Applicants" multi_edit="1" sample="1">
+                    <field name="id" invisible="" optional="hide"/>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name" readonly="1"/>
+                    <field name="requires_approval" optional="show"/>
+                    <field name="manager_id"/>
+                    <field name="optional_manager_id" optional="show"/>
+                    <field name="state_type" optional="show"/>
+                    <field name="mail_template_id" optional="hide"/>
+                    <field name="fold" optional="hide"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="recruitment_type_id" widget="many2many_tags" optional="show"/>
+                    <field name="color" widget="color_picker" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Recruitment Requisition form view -->
+        <record model="ir.ui.view" id="hr_requisition_stage_form_view">
+            <field name="name">Recruitment Stages</field>
+            <field name="model">hr_requisition_state</field>
+            <field name="arch" type="xml">
+                <form string="Applicants" multi_edit="1" sample="1">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group name="main">
+                            <group name="main_left">
+                                <field name="sequence" invisible=""/>
+                                <field name="requires_approval"/>
+                                <field name="manager_id" options="{'no_create':true}"
+                                       attrs="{'invisible': [('requires_approval', '=', 'no')], 'required': [('requires_approval', '=', 'yes')]}"/>
+                                <field name="optional_manager_id"  options="{'no_create':true}"
+                                       attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
+                                <field name="state_type"/>
+                                <field name="apply_contract_changes"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group name="main_right">
+                                <field name="mail_template_id"/>
+                                <field name="fold"/>
+                                <field name="color" widget="color_picker"/>
+                                <field name="recruitment_type_id" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <field name="description" widget="html"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        Control Panel     -->
+        <record id="hr_requisition_stage_view_search" model="ir.ui.view">
+            <field name="name">hr_requisition_stage_view_search</field>
+            <field name="model">hr_requisition_state</field>
+            <field name="arch" type="xml">
+                <search string="Tickets Search">
+                    <field name="name"/>
+                    <field name="requires_approval"/>
+                    <field name="manager_id"/>
+                    <field name="optional_manager_id"/>
+                    <field name="recruitment_type_id"/>
+                    <field name="state_type"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Recruitment Type" name="recruitment_type" context="{'group_by':'recruitment_type_id'}"/>
+                        <filter string="State Type" name="state_type" context="{'group_by':'state_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

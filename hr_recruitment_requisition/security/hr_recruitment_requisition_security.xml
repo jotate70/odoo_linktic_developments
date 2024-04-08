@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--                        Rules regits                         -->
+    <data>
+        <!--                    Registration rule                  -->
+        <record id="hr_recruitment_requisition_group_hr_recruitment_user" model="ir.rule">
+            <field name="name">Requisition recruitment user</field>
+            <field name="model_id" ref="hr_recruitment_requisition.model_hr_recruitment_requisition"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id), ('employee_id','in',user.employee_id.child_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <record id="hr_recruitment_requisition_group_hr_recruitment_manager" model="ir.rule">
+            <field name="name">Requisition recruitment manager</field>
+            <field name="model_id" ref="hr_recruitment_requisition.model_hr_recruitment_requisition"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('hr_recruitment.group_hr_recruitment_manager'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+    </data>
+</odoo>

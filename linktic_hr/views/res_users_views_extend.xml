@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--     Main view form from contacts module      -->
+    <record id="res_users_preferences_form_inherit_extend" model="ir.ui.view">
+        <field name="name">res_users_preferences_form_inherit_extend</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tz']" position="after">
+                <field name="hhrr_sign" widget="signature"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

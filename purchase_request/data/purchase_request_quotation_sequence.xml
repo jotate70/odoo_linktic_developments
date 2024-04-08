@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo noupdate="1">
+
+    <record id="seq_purchase_request_quotation" model="ir.sequence">
+        <field name="name">Purchase Request Quotations</field>
+        <field name="code">purchase.request.quotation</field>
+        <field name="prefix">COT-</field>
+        <field name="padding">8</field>
+        <field name="company_id"></field>
+    </record>
+
+</odoo>

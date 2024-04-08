@@ -1,0 +1,15 @@
+<odoo>
+    <data noupdate="1">
+        <record id="helpdesk_ticket_auto_close_cron" model="ir.cron">
+            <field name="name">Convert Drive Rep into ir.attachments</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.convert_drive_files_to_attachment()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="False"/>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

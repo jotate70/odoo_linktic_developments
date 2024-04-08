@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <record id="product_template_common_form_inherits_linktic_budget" model="ir.ui.view">
+            <field name="name">product.template.common.form.inherits.linktic.budget</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_ok']/parent::*" position="after">
+                    <span class="d-inline-block">
+                        <field name="is_policy_product"/>
+                        <label for="is_policy_product"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    # Main view form from contacts module
+    <record id="res_partner_form_inherit_address_fields" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.address.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='street2']" position="after">
+                <field name="neighborhood" placeholder="Neighborhood..." class="o_address_street"
+                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                <field name="locality" placeholder="Locality..." class="o_address_street"
+                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    # View used in hr_employee view form
+    <record id="res_partner_view_form_private_inherit_address_fields" model="ir.ui.view">
+        <field name="name">res.partner.view.form.private.inherit.address.fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_view_form_private"/>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='street2']" position="after">
+                <field name="neighborhood" placeholder="Neighborhood..." class="o_address_street"/>
+                <field name="locality" placeholder="Locality..." class="o_address_street"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

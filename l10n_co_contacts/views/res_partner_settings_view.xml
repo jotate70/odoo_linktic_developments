@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    Vista en ajustes   -->
+        <record id="res_config_contact_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.contact</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="priority" eval="75" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="contact" string="Contactos" data-key="l10n_co_contacts" groups="base.group_system">
+                        <h2>Evitar registros duplicados</h2>
+                        <div class="row mt16 o_settings_container" id="check_vat">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="check_vat"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="check_vat"/>
+                                    <div class="text-muted">
+                                        Marcar check de número de identificación para evitar duplicar registros en los contactos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt16 o_settings_container" id="check_phone">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="check_phone"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="check_phone"/>
+                                    <div class="text-muted">
+                                        Marcar check de teléfono para evitar duplicar registros en los contactos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt16 o_settings_container" id="check_mobile">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="check_mobile"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="check_mobile"/>
+                                    <div class="text-muted">
+                                        Marcar check de móvil para evitar duplicar registros en los contactos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt16 o_settings_container" id="check_email">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="check_email"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="check_email"/>
+                                    <div class="text-muted">
+                                        Marcar check de correo electronico para evitar duplicar registros en los contactos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt16 o_settings_container" id="check_website">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="check_website"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="check_website"/>
+                                    <div class="text-muted">
+                                        Marcar check de sitio web para evitar duplicar registros en los contactos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    <!--  Menu de acceso de ajustes desde contactos      -->
+
+    <record model="ir.actions.act_window" id="action_window_contact_settings">
+        <field name="name">Ajustes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'l10n_co_contacts', 'bin_size': False}</field>
+    </record>
+
+    <!--                            Agregar elemento de menú externo                                         -->
+    <menuitem name="Ajustes" id="l10n_co_contacts_settings" parent="contacts.res_partner_menu_config"
+              action="l10n_co_contacts.action_window_contact_settings" sequence="11"/>
+    </data>
+</odoo>

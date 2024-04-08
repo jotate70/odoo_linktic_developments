@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="view_helpdesk_category_form_inherit_linktic_fields" model="ir.ui.view">
+        <field name="name">view.helpdesk.category.form.inherit.linktic.fields</field>
+        <field name="model">helpdesk.ticket.category</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.view_helpdesk_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="before">
+                <field name="helpdesk_team" widget="many2many_tags" options="{'no_create':True}"/>
+                <field name="activity_type"/>
+            </xpath>
+
+            <xpath expr="//group[@name='main']" position="after">
+                <field name="stage_relation_ids" mode="tree" nolabel="1">
+                    <tree string="Ticket Stage Report" context="{'parent_category_id': id}" default_order="sequence" editable="bottom">
+                        <field name="category_id" invisible="1"/>
+                        <field name="sequence"/>
+                        <field name="stage_id"/>
+                        <field name="approver_user_ids" widget="many2many_tags" options="{'no_create':True}"/>
+                    </tree>
+                </field>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

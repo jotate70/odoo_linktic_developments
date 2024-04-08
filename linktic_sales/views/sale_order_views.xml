@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="view_order_form_linktic_fields" model="ir.ui.view">
+        <field name="name">view.order.form.linktic.fields</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//button[@name='action_cancel']" position="after">
+                    <button name="action_assign_purchase_policy" string="Assign Policy" type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', 'not in', ['sale','done']), ('policy_purchase_order_id', '!=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Documentation" name="documentation">
+                        <group name="sale_type">
+                            <group>
+                                <field name="sale_type"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group name="attachments_group" string="Files Attachments" attrs="{'invisible': [('sale_type', '=', False)]}">
+                                <field name="att_technical_proposal" filename="att_technical_proposal_name"
+                                       attrs="{'invisible': [('sale_type', '=', False)]}"/>
+                                <field name="att_technical_proposal_name" invisible="1"/>
+                                <field name="att_specification" filename="att_specification_name"
+                                       attrs="{'invisible': ['|', ('sale_type', '=', False), ('sale_type', '=', 'commercial')]}"/>
+                                <field name="att_specification_name" invisible="1"/>
+                                <field name="att_attachment" filename="att_attachment_name"
+                                       attrs="{'invisible': ['|', ('sale_type', '=', False), ('sale_type', '=', 'commercial')]}"/>
+                                <field name="att_attachment_name" invisible="1"/>
+                                <field name="att_adjudication_certificate" filename="att_adjudication_certificate_name"
+                                       attrs="{'invisible': ['|', ('sale_type', '=', False), ('sale_type', '=', 'commercial')]}"/>
+                                <field name="att_adjudication_certificate_name" invisible="1"/>
+                                <field name="att_business_case" filename="att_business_case_name"
+                                       attrs="{'invisible': [('sale_type', '=', False)]}"/>
+                                <field name="att_business_case_name" invisible="1"/>
+                                <field name="att_approval_mail" filename="att_approval_mail_name"
+                                       attrs="{'invisible': ['|', ('sale_type', '=', False), ('sale_type', '=', 'public')]}"/>
+                                <field name="att_approval_mail_name" invisible="1"/>
+                                <field name="att_contract" filename="att_contract_name"
+                                       attrs="{'invisible': [('sale_type', '=', False)]}"/>
+                                <field name="att_contract_name" invisible="1"/>
+                                <field name="att_policy" filename="att_policy_name"
+                                       attrs="{'invisible': [('sale_type', '=', False)]}"/>
+                                <field name="att_policy_name" invisible="1"/>
+                                <field name="policy_purchase_order_id" options='{"no_create": True}'
+                                       attrs="{'invisible': [('sale_type', '=', False)], 'readonly': [('state', 'not in', ['draft','sent'])]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

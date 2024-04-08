@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="view_purchase_request_log_tree" model="ir.ui.view">
+        <field name="name">purchase.request.log.tree</field>
+        <field name="model">purchase.request.log</field>
+        <field name="arch" type="xml">
+            <tree name="Purchase Log" create="false" edit="false">
+                <field name="request_id" />
+                <field name="request_line_id" />
+                <field name="product_id" />
+                <field name="request_creation_date" />
+                <field name="request_creation_user" widget="many2one_avatar_user" />
+                <field name="request_approve_date" />
+                <field name="request_approve_user" widget="many2one_avatar_user" />
+                <field name="request_quotations_date" />
+                <field name="request_quotations_user" widget="many2one_avatar_user" />
+                <field name="purchase_order_id" optional="show"/>
+                <field name="purchase_order_vendor" optional="show"/>
+                <field name="purchase_creation_date" optional="show"/>
+                <field name="purchase_creation_user" widget="many2one_avatar_user" optional="show"/>
+                <field name="picking_id" optional="show"/>
+                <field name="picking_validation_date" optional="show"/>
+                <field name="picking_validation_user" widget="many2one_avatar_user" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" widget="selection" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_request_log_search" model="ir.ui.view">
+        <field name="name">purchase.request.log.list.select</field>
+        <field name="model">purchase.request.log</field>
+        <field name="arch" type="xml">
+            <search string="Search Purchase Request">
+                <field name="name" string="Purchase Request" />
+                <separator />
+                <field name="product_id" />
+<!--                <field name="state" />-->
+                <separator />
+                <group expand="0" string="Group By...">
+                    <filter
+                        name="product_id"
+                        string="By Product"
+                        icon="fa-user"
+                        domain="[]"
+                        context="{'group_by':'product_id'}"
+                    />
+                    <filter
+                        name="partner_id"
+                        string="By Vendor"
+                        icon="fa-user"
+                        domain="[]"
+                        context="{'group_by':'purchase_order_vendor'}"
+                    />
+                    <filter
+                        name="request_creation_date"
+                        string="Request Date"
+                        icon="fa-calendar"
+                        domain="[]"
+                        context="{'group_by':'request_creation_date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="purchase_request_log_action">
+        <field name="name">Purchase Requests Log</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request.log</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_purchase_request_log_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Here will be listed the different states/dates of the purchase flow
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_purchase_request_reports"
+        name="Reports"
+        parent="parent_menu_purchase_request"
+        groups="group_purchase_request_approver,group_purchase_request_manager"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_purchase_request_log_act"
+        sequence="10"
+        parent="menu_purchase_request_reports"
+        action="purchase_request_log_action"
+        name="Purchase Dates Report"
+    />
+
+    <menuitem
+        id="menu_purchase_log_act"
+        sequence="110"
+        parent="purchase.purchase_report_main"
+        action="purchase_request_log_action"
+        name="Purchase Dates Report"
+    />
+
+</odoo>

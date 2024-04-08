@@ -1,0 +1,346 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_sales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-21 16:26+0000\n"
+"PO-Revision-Date: 2023-06-21 16:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__goal_perc
+msgid "% Achieved"
+msgstr "% Cumplimiento"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_adjudication_certificate
+msgid "Adjudication Certificate"
+msgstr "Acta de Adjudicación"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_adjudication_certificate_name
+msgid "Adjudication Certificate Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_approval_mail_name
+msgid "Approval Mail Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_approval_mail
+msgid "Approval Mail/Purchase Order"
+msgstr "Correo de Aprobación / Orden de Compra"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_order_form_linktic_fields
+msgid "Assign Policy"
+msgstr "Asignar Poliza"
+
+#. module: linktic_sales
+#: code:addons/linktic_sales/models/sale_order.py:0
+#: model_terms:ir.ui.view,arch_db:linktic_sales.sale_order_assign_policy_wizard_form
+#, python-format
+msgid "Assign Policy Purchase"
+msgstr "Asignar Compra Poliza"
+
+#. module: linktic_sales
+#: model:ir.model,name:linktic_sales.model_sale_order_assign_policy_wizard
+msgid "Assign Policy to Sale Order"
+msgstr "Asignar Poliza a Orden Venta"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_attachment
+msgid "Attachments"
+msgstr "Anexos"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_attachment_name
+msgid "Attachments Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model,name:linktic_sales.model_account_budget_post
+msgid "Budgetary Position"
+msgstr "Posición Presupuestaria"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_business_case
+msgid "Business Case"
+msgstr "Caso de Negocio"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_business_case_name
+msgid "Business Case Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "By Sales Team"
+msgstr "Equipos de Ventas"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.sale_order_assign_policy_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: linktic_sales
+#: model:ir.model.fields.selection,name:linktic_sales.selection__sale_order__sale_type__commercial
+msgid "Commercial Management"
+msgstr "Gestión Comercial"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_contract
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_technical_proposal_name
+msgid "Contract Attachment Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_contract_name
+msgid "Contract Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__create_uid
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__create_date
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__crm_team_goal_id
+msgid "Crm Team Goal"
+msgstr ""
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "Crm Team Goal Search"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__display_name
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_order_form_linktic_fields
+msgid "Documentation"
+msgstr "Documentación"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__date_end
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "End Date"
+msgstr "Fecha Fin"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_order_form_linktic_fields
+msgid "Files Attachments"
+msgstr "Archivos Adjuntos"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.crm_team_form_inherit_goals
+msgid "Goals"
+msgstr "Metas"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team__team_goals_count
+msgid "Goals Count"
+msgstr "Contador Metas"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "Group By..."
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__id
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_sales
+#: model:account.budget.post,name:linktic_sales.initial_budget_post
+msgid "INITIAL BUDGET"
+msgstr "PRESUPUESTO INICIAL"
+
+#. module: linktic_sales
+#: code:addons/linktic_sales/models/sale_order.py:0
+#, python-format
+msgid "Initial Budget"
+msgstr "Presupuesto Inicial"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal____last_update
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__write_uid
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__write_date
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__period_sales
+msgid "Period Sales"
+msgstr "Ventas Periodo"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_policy
+msgid "Policy"
+msgstr "Poliza"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_policy_name
+msgid "Policy Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__policy_purchase_order_id
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__policy_purchase_order_id
+msgid "Policy Purchase Order"
+msgstr "Orden de compra poliza"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.sale_order_assign_policy_wizard_form
+msgid "Process"
+msgstr "Procesar"
+
+#. module: linktic_sales
+#: model:ir.model.fields.selection,name:linktic_sales.selection__sale_order__sale_type__public
+msgid "Public Tender"
+msgstr "Contratación Publica"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__sale_goal_amount
+msgid "Sale Goal Amount"
+msgstr "Monto Meta Ventas"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__sale_order_ids
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order_assign_policy_wizard__sale_order_id
+msgid "Sale Order"
+msgstr "Orden Venta"
+
+#. module: linktic_sales
+#: model:ir.actions.act_window,name:linktic_sales.crm_team_goals_action
+#: model:ir.ui.menu,name:linktic_sales.menu_crm_team_goals
+msgid "Sale Team Goals"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__sale_type
+msgid "Sale Type"
+msgstr "Tipo de Venta"
+
+#. module: linktic_sales
+#: model:ir.model,name:linktic_sales.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de Venta"
+
+#. module: linktic_sales
+#: model:ir.model,name:linktic_sales.model_crm_team
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__team_id
+msgid "Sales Team"
+msgstr "Equipo de Ventas"
+
+#. module: linktic_sales
+#: code:addons/linktic_sales/models/crm_team.py:0
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team__team_goal_ids
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree_edit_create
+#, python-format
+msgid "Sales Team Goals"
+msgstr "Metas Equipo Ventas"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_specification
+msgid "Specification"
+msgstr "Pliego de Condiciones"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_specification_name
+msgid "Specification Name"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team_goal__date_start
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "Start Date"
+msgstr "Fecha Inicio"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_search
+msgid "Team Goal"
+msgstr "Metas"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__att_technical_proposal
+msgid "Technical Proposal"
+msgstr "Propuesta Técnica"
+
+#. module: linktic_sales
+#: code:addons/linktic_sales/models/crm_team.py:0
+#, python-format
+msgid "This Sale goals overlaps with another goal set for this team"
+msgstr ""
+"Las fechas de esta meta se sobreponen con otra meta creada para este equipo "
+"de ventas"
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree_edit_create
+msgid "Total Goals"
+msgstr ""
+
+#. module: linktic_sales
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree
+#: model_terms:ir.ui.view,arch_db:linktic_sales.view_crm_team_goals_tree_edit_create
+msgid "Total Sales"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_crm_team__user_can_edit_goals
+msgid "User Can Edit"
+msgstr "Usuario puede editar"
+
+#. module: linktic_sales
+#: model:ir.model.fields,field_description:linktic_sales.field_sale_order__can_create_invoice
+msgid "can create invoice"
+msgstr ""
+
+#. module: linktic_sales
+#: model:ir.model,name:linktic_sales.model_crm_team_goal
+msgid "crm team goals"
+msgstr "crm metas equipo ventas"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="ir.ui.view" id="res_config_settings_expense_inherit_advance">
+        <field name="name">res.config.settings.expense.inherit.advance</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_expense.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='hr_expense']" position="inside">
+                <h2>Anticipos</h2>
+                <div class="row mt16 o_settings_container" name="expense_advance_setting_container" id="expense_advance_setting_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div>
+                            <label for="journal_expense_advance_id"/>
+                            <div class="text-muted">
+                                Diario de anticipo por defecto.
+                            </div>
+                            <div>
+                                <field name="journal_expense_advance_id"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div>
+                            <label for="property_account_advance_id"/>
+                            <div class="text-muted">
+                                Cuenta de anticipos por defecto para empleados
+                            </div>
+                            <div>
+                                <field name="property_account_advance_id"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div>
+                            <label for="hr_expense_advance_account"/>
+                            <div class="text-muted">
+                                Cuenta Ganancia.
+                            </div>
+                            <div>
+                                <field name="hr_expense_advance_account"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div>
+                            <label for="hr_expense_advance_gain_account"/>
+                            <div class="text-muted">
+                                Cuenta Ganancia.
+                            </div>
+                            <div>
+                                <field name="hr_expense_advance_gain_account"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div>
+                            <label for="hr_expense_advance_loss_account"/>
+                            <div class="text-muted">
+                                Cuenta Perdida.
+                            </div>
+                            <div>
+                                <field name="hr_expense_advance_loss_account"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

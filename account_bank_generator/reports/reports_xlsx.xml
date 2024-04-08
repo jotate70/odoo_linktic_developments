@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <report id="account_bank_payment_xlsx"
+                model="account.batch.payment"
+                string="Print to XLSX"
+                report_type="xlsx"
+                name="account_bank_generator.account_bank_payment_xlsx"
+                file="account_bank_generator.account_bank_payment_xlsx"
+                attachment_use="False"
+        />
+    </data>
+</odoo>

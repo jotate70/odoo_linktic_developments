@@ -1,0 +1,134 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+
+    <!-- ///////////////////////////// Smart button requisition ////////////////////////  -->
+    <record model="ir.actions.act_window" id="action_purchase_request_to_hotel_info">
+        <field name="name">Purchase Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('hr_hotel_info_id', '=', active_id)]</field>
+        <field name="context">{
+            "default_hr_hotel_info_id": active_id,
+            "default_user_id": False,
+            }
+        </field>
+    </record>
+
+    <record id="hr_hotel_info_view_form" model="ir.ui.view">
+        <field name="name">hr_hotel_info_view_form</field>
+        <field name="model">hr_hotel_info</field>
+        <field name="arch" type="xml">
+            <form string="Solicitud de hotel">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_purchase_request_to_hotel_info)d" class="oe_stat_button" icon="fa-pencil" type="action"
+                                attrs="{'invisible': [('count_purchase_request','=',0)]}">
+                            <field name="count_purchase_request" widget="statinfo" string="Purchase Request"/>
+                        </button>
+                        <button name="action_get_attachment_view" class="oe_stat_button" icon="fa-file-text-o" type="object">
+                            <field name="attachment_number" widget="statinfo" string="Adjuntos" options="{'reload_on_button': true}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name"/>
+                            <field name="name" invisible='1' placeholder="Motivo del Hospedaje"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="¿Qué tipo de hospedaje"></group>
+                        <group></group>
+                        <group>
+                            <label for="product_id" string="Hospedaje"/>
+                            <div>
+                                <field name="product_id" placeholder="Alojamiento"
+                                       domain="[('product_expense_type','=','accommodation')]"
+                                       class="oe_inline" options="{'no_open': True, 'no_create': True}" />
+                                <span class="oe_read_only"> --> </span>
+                                <field name="hotel_type" placeholder="Hotel" class="oe_inline"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                            </div>
+                            <field name="employee_ids" widget="many2many_avatar_employee"/>
+                        </group>
+                        <group>
+                            <field name="account_analytic_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="number_people" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="general_budget_domain" invisible="1"/>
+                        <label for="general_budget_id" string="Presupuesto"/>
+                        <div>
+                            <field name="general_budget_id" placeholder="Posición Presupuestaria"
+                                   class="oe_inline" options="{'no_open': True, 'no_create': True}"/>
+                            <span> Segregación:     </span>
+                            <field name="budget_line_segregation_id" placeholder="Segregación" class="oe_inline"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <span> Balance:     </span>
+                            <field name="segregation_balance"/>
+                        </div>
+                    </group>
+                    <group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <field name="supplier_id" placeholder="Example Company" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <label for="supplier_type" string="Número de Identificación"/>
+                            <div>
+                                <field name="supplier_type" placeholder="NIT"
+                                       class="oe_inline" options="{'no_open': True, 'no_create': True}" />
+                                <span class="oe_read_only"> - </span>
+                                <field name="supplier_vat" placeholder="542367676-4" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group string="¿En que lugar te hospedas?"></group>
+                        <group></group>
+                        <group>
+                            <label for="street" string="Dirección"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Dirección..." class="o_address_street"/>
+                                <field name="city" placeholder="Medellín" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="Antioquia"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                                <field name="country_id" placeholder="Colombia" class="o_address_country"
+                                       options="{'no_open': True, 'no_create': True}"/>
+                            </div>
+                        </group>
+                        <group></group>
+                        <group string="¿Cuándo tiempo te hospedas?"></group>
+                        <group></group>
+                        <group>
+                            <field name="req_departure_date" />
+                        </group>
+                        <group>
+                            <field name="req_return_date"/>
+                        </group>
+                        <group>
+                            <field name="days"/>
+                        </group>
+                        <group></group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}" string="¿Cuál es el valor del hospedaje?"></group>
+                        <group></group>
+                        <group attrs="{'invisible': [('supplier_id','=',False)]}">
+                            <label for="amount_total" string="Costo"/>
+                            <div>
+                                <field name="amount_total" placeholder="200.000"
+                                       class="oe_inline"/>
+                                <span class="oe_read_only"> - </span>
+                                <field name="currency_id" placeholder="COP" class="oe_inline"
+                                       options="{'no_open': True, 'no_create': True}" />
+                            </div>
+                        </group>
+                        <group></group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'open_attachments': True}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

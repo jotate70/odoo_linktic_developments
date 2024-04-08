@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpdesk_ticket_stage_log,helpdesk.ticket.stage.log,model_helpdesk_ticket_stage_log,base.group_user,1,1,1,1
+access_helpdesk_ticket_stage_transition_wizard,helpdesk.ticket.stage.transition.wizard,model_helpdesk_ticket_stage_transition_wizard,base.group_user,1,1,1,1
+access_helpdesk_stage_category_relation,helpdesk.stage.category.relation,model_helpdesk_stage_category_relation,base.group_user,1,1,1,1
+access_helpdesk_update_contract_info_wizard,helpdesk.update.contract.info.wizard,model_helpdesk_update_contract_info_wizard,base.group_user,1,1,1,1
+access_helpdesk_contract_info_log,helpdesk.contract.info.log,model_helpdesk_contract_info_log,base.group_user,1,1,1,1

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="project_project_form_budget" model="ir.ui.view">
+        <field name="name">project.project.form.budget</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='analytic_account_id']" position="after">
+                <field name="crossovered_budget_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!--          Tree view       -->
+    <record id="hr_contract_type_tree_inherit_fields" model="ir.ui.view">
+        <field name="name">hr_contract_type_tree_inherit_fields</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_contract_type_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sequence']" position="before">
+                <field name="id" optional="hide"/>
+            </xpath>
+            <xpath expr="//tree[1]/field[@name='name']" position="after">
+                <field name="contract_type_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+    <!--          Form view       -->
+    <record id="hr_contract_type_form_inherit_fields" model="ir.ui.view">
+        <field name="name">hr_contract_type_form_inherit_fields</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_contract_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="replace">
+                <sheet>
+                    <group name="group_main">
+                    <group name="group_left">
+                        <field name="name"/>
+                    </group>
+                    <group name="group_right">
+                        <field name="contract_type_id"/>
+                    </group>
+                </group>
+                </sheet>
+            </xpath>
+        </field>
+    </record>
+</odoo>

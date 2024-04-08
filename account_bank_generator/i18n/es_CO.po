@@ -1,0 +1,1011 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_bank_generator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0-20240210\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-26 03:05+0000\n"
+"PO-Revision-Date: 2024-03-26 03:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Day as a decimal number (DD)"
+msgstr ": Día como número decimal (DD)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Full name of the day of the week (Monday)"
+msgstr ": Nombre completo del día de la semana (Lunes)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Full name of the month. (January)"
+msgstr ": Nombre completo del mes (Enero)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Local AM or PM (AM, PM)"
+msgstr ": AM o PM local (AM, PM)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Minute as a decimal number (MM)"
+msgstr ": Minutos como número decimal (MM)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Month as a decimal number (MM)"
+msgstr ": Mes como número decimal (MM)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Second as a decimal number (SS)"
+msgstr ": Segundos como número decimal (SS)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Time (12 hours) as a decimal number (HH)"
+msgstr ": Hora (12 horas) como número decimal (HH)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Time (24 hours) as a decimal number (HH)"
+msgstr ": Hora (24 horas) como número decimal (HH)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Time zone name"
+msgstr ": Nombre de la zona horaria"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": UTC offset with + HHMM or -HHMM format"
+msgstr ": Compensación UTC con formato +HHMM o -HHMM"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Year with century (YYYY)"
+msgstr ": Año con siglo (AAAA)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ": Year without century (YY)"
+msgstr ": Año sin siglo (AA)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_txt_generator_wizard_view_form
+msgid ""
+"<span>If you do not select a configuration file, the system will "
+"automatically search for a configuration for the selected bank.</span>"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__access_warning
+msgid "Access warning"
+msgstr "Advertencia de acceso"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_payment__acc_number
+msgid "Account Number"
+msgstr "Numero cuenta"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_needaction
+msgid "Action Needed"
+msgstr "Accion necesaria"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__active
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config__state__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.actions.act_window,help:account_bank_generator.payment_type_action
+msgid "Add Payment type"
+msgstr "Agregar un tipo de pago"
+
+#. module: account_bank_generator
+#: model_terms:ir.actions.act_window,help:account_bank_generator.res_bank_txt_config_action
+msgid "Add bank txt configuration"
+msgstr "Agregar configuración de txt de banco"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Address of beneficiary"
+msgstr "Dirección del beneficiario"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__alignment
+msgid "Alignment"
+msgstr "Alineación"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Available in"
+msgstr "Disponible en"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_res_bank
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_payment__bank_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__bank_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__bank_id
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_search
+msgid "Bank"
+msgstr "Banco"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Cuentas bancarias"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank__bank_code
+msgid "Bank Code"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Bank account to be debited"
+msgstr "Cuenta bancaria a ser debitada"
+
+#. module: account_bank_generator
+#: model:ir.ui.menu,name:account_bank_generator.res_bank_txt_config_menu_act
+msgid "Bank file setting"
+msgstr "Configuration txt de banco"
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/account_batch_payment.py:0
+#: code:addons/account_bank_generator/wizards/payment_txt_generator_wizard.py:0
+#, python-format
+msgid "Bank not found"
+msgstr "No se encontró un banco"
+
+#. module: account_bank_generator
+#: model:ir.actions.act_window,name:account_bank_generator.res_bank_txt_config_action
+msgid "Banks file settings"
+msgstr "Configurationes txt de bancos"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_account_batch_payment
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__batch_payment_id
+msgid "Batch Payment"
+msgstr "Pago por lotes"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Beneficiary's name"
+msgstr "Nombre del beneficiario"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Body"
+msgstr "Detalle"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Broadcast date"
+msgstr "Fecha de transmisión"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config_line__value_type__burned
+msgid "Burned value"
+msgstr "Valor quemado"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config_line__value_type__call
+msgid "Call variable"
+msgstr "Llamar variable"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_txt_generator_wizard_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_l10n_latam_identification_type__code
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__code
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__code
+msgid "Code"
+msgstr "Código"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Company address"
+msgstr "Dirección de la compañia"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_res_bank_txt_config
+msgid ""
+"Configuration of txt generator of each banks for payments in the banking "
+"portal"
+msgstr ""
+"Configuración del generador de txt de cada banco para pagos en el portal "
+"bancario"
+
+#. module: account_bank_generator
+#: model_terms:ir.actions.act_window,help:account_bank_generator.res_bank_txt_config_action
+msgid ""
+"Configuration record to generate TXT file to upload the payment to the "
+"banking portal"
+msgstr ""
+"Registro de configuración para generar archivo TXT para subir el pago al "
+"portal bancario"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__create_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__create_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__create_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__create_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__create_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__create_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__create_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__create_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__name
+msgid "Description"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Description of the transaction given in the lines"
+msgstr "Descripción de la transacción dada en las lineas"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__display_name
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__display_name
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__display_name
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__display_name
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__payment_type_domain
+msgid "Domain type payment"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.constraint,message:account_bank_generator.constraint_payment_type_code_unique
+msgid "El Código debe ser único por banco"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.constraint,message:account_bank_generator.constraint_payment_type_name_unique
+msgid "El nombre debe ser único"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__txt_setting_id
+msgid "File Config"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__file_type
+msgid "File Type"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__fill
+msgid "Filling"
+msgstr "Relleno"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Footer"
+msgstr "Pie"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.account_batch_payment_txt
+msgid "Generate File"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_txt_generator_wizard_view_form
+msgid "Generate Txt"
+msgstr "Generar Txt"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__txt_file
+msgid "Generated file"
+msgstr "Generar Arhivo"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Header"
+msgstr "Encabezado"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Header, Body, Footer"
+msgstr "Encabezado, Detalle, Pie"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Help"
+msgstr "Ayuda"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Help with available variable expressions"
+msgstr "Ayuda con expresiones de variables disponibles"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Help with date format expressions"
+msgstr "Ayuda con expresiones de formatos de fecha"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Help with python expressions:"
+msgstr "Ayuda con expresiones Python"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__id
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__id
+msgid "ID"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_l10n_latam_identification_type
+msgid "Identification Types"
+msgstr "Tipos de Identificación"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_needaction
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, los mensajes nuevos requieren su atención."
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_has_error
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config__state__incative
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_search
+msgid "Inactive"
+msgstr "Inactivo"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_search
+msgid "Inactive payment types"
+msgstr "Tipos de pago inactivos"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_is_follower
+msgid "Is Follower"
+msgstr "Es Seguidor"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard____last_update
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type____last_update
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config____last_update
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line____last_update
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank____last_update
+msgid "Last Modified on"
+msgstr "Ultima modificación el"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__write_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__write_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__write_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__write_uid
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__write_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__write_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__write_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__write_date
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización el"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config_line__alignment__left
+msgid "Left"
+msgstr "Izquierda"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_res_bank_txt_config_line
+msgid ""
+"Lines of configuration of txt generator of each banks for payments in the "
+"banking portal"
+msgstr ""
+"Líneas de configuración del generador de txt de cada banco para pagos en el "
+"portal bancario"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__minimum_limit_line
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__minimum_limit_line
+msgid "Minimum Limit Line"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__name
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__name
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_type_bank__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__txt_filename
+msgid "Name file"
+msgstr "Nombre del archivo"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Name of the company"
+msgstr "Nombre de la compañia"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__account_batch_payment__state__draft
+msgid "New"
+msgstr "Nuevo"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/account_batch_payment.py:0
+#: code:addons/account_bank_generator/wizards/payment_txt_generator_wizard.py:0
+#, python-format
+msgid "No txt configuration record found for bank %s"
+msgstr "No se encuentra un registro de configuración para el banco %s"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Number of lines or payment records"
+msgstr "Número de lineas o registros de pago"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Pay line sequence"
+msgstr "Secuencia de linea de pago"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_payment_type
+msgid "Payment Type"
+msgstr "Tipo de pago"
+
+#. module: account_bank_generator
+#: model:ir.actions.act_window,name:account_bank_generator.payment_type_action
+msgid "Payment Types"
+msgstr "Tipos de pago"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Payment batch line object (account.payment)"
+msgstr "Objeto de línea de lote de pago (account.payment)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Payment batch object (account.batch.payment)"
+msgstr "Objeto de lote de pago (account.batch.payment)"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Payment date"
+msgstr "Fecha de pago"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__payment_type_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_payment__payment_type_id
+#: model:ir.ui.menu,name:account_bank_generator.payment_type_menu_act
+msgid "Payment type"
+msgstr "Tipo de pago"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.actions.report,name:account_bank_generator.account_bank_payment_xlsx
+msgid "Print to XLSX"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config_line__value_type__python
+msgid "Python"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__account_batch_payment__state__reconciled
+msgid "Reconciled"
+msgstr "Reconciliado"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_type__required_account_bank
+msgid "Required account bank?"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Return value"
+msgstr "Valor de retorno"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config_line__alignment__right
+msgid "Right"
+msgstr "Derecha"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ""
+"Select in the value type column \"call variable\" \n"
+"                                            and type the name of the variable as shown in the following table.<br/>\n"
+"                                            Date type variables are formattable, \n"
+"                                            to use them type it followed by \",\" and the date format<br/>\n"
+"                                            <b>Example:</b><br/>\n"
+"                                            date_transmission,%Y-%m-%d %H:%M:%S the returned date format will be YYYY-MM-DD HH:MM:SS"
+msgstr ""
+"Seleccione en la columna de tipo de valor \"Llamar variable\"  y escriba el nombre de la variable como se muestra en la siguiente tabla. <br/>\n"
+"Las variables de tipo de fecha son formateables, \n"
+" para usarlas, escríbalas seguidas de \",\" y el formato de fecha <br/>\n"
+"<b>Ejemplo: </b><br/>\n"
+"date_transmission,%Y-%m-%d $H:%M:%S el formato de fecha devuelto será AAAA-MM-DD HH:MM:SS"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__account_batch_payment__state__sent
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__size
+msgid "Size"
+msgstr "Tamaño"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__state
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__state
+msgid "State"
+msgstr "Estado"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/payment_type.py:0
+#, python-format
+msgid "The code must be unique per bank"
+msgstr "El Código debe ser único por banco"
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/payment_type.py:0
+#, python-format
+msgid "The name must be unique"
+msgstr "El nombre debe ser único"
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/wizards/payment_txt_generator_wizard.py:0
+#, python-format
+msgid ""
+"The system does not detect the payment batch record to generate the txt file"
+msgstr ""
+"El sistema no detecta el registro del lote de pago para generar el archivo "
+"txt"
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/res_bank_txt_config.py:0
+#, python-format
+msgid "The value %s does not belong to one of the available variables"
+msgstr "El valor %s no pertenece a ninguna de las variables disponibles"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid ""
+"These variables can be used with python syntax to access the information you require.\n"
+"                                        <br/>"
+msgstr ""
+"Estas variables se pueden usar con la sintaxis de Python para acceder a la información que necesita. \n"
+"<br/>"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Total transfer"
+msgstr "Total transferencia"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Transaction value on payment line"
+msgstr "Valor de transacción en la línea de pago"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_payment_txt_generator_wizard__transmission_date
+msgid "Transmission date"
+msgstr "Fecha de transmisión"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__body_line_id
+msgid "Txt Body"
+msgstr "Txt Detalle"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__footer_line_id
+msgid "Txt Footer"
+msgstr "Txt Pie"
+
+#. module: account_bank_generator
+#: model:ir.actions.act_window,name:account_bank_generator.payment_txt_generator_wizard_action
+msgid "Txt Generator"
+msgstr "Generador de Txt"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config__header_line_id
+msgid "Txt Header"
+msgstr "Txt Encabezado"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_payment_txt_generator_wizard
+msgid "Txt generator"
+msgstr "Generador Txt"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__body_setting_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__footer_setting_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__header_setting_id
+msgid "Txt generator setting"
+msgstr "Configuración del generador de Txt"
+
+#. module: account_bank_generator
+#: model:ir.actions.act_window,name:account_bank_generator.action_window_res_partner_type_bank_account
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_payment__type_bank_account_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_setup_bank_manual_config__type_bank_account_id
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_partner_bank__type_bank_account_id
+#: model:ir.ui.menu,name:account_bank_generator.res_partner_type_bank_account_menu
+msgid "Type bank account"
+msgstr "Tipo cuenta bancaria"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__value
+msgid "Value"
+msgstr "Valor"
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_res_bank_txt_config_line__value_type
+msgid "Value type"
+msgstr "Tipo de valor"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "Variable"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,field_description:account_bank_generator.field_account_batch_payment__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields,help:account_bank_generator.field_account_batch_payment__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicación del sitio web"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "amount_line"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "amount_total"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "batch_payment"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "beneficiary_name"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "beneficiary_street"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "circular"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "company_name"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "company_street"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config__file_type__cvs
+msgid "cvs"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "date_payment"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "date_transmission"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "dispersing_account"
+msgstr ""
+
+#. module: account_bank_generator
+#: code:addons/account_bank_generator/models/account_batch_payment.py:0
+#, python-format
+msgid ""
+"does not meet the minimum number of lines to generate a batch payment file "
+"for the selected bank."
+msgstr "no cumple con el número mínimo de líneas para generar un archivo de pago por lotes para el banco seleccionado."
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "item"
+msgstr "Item"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "number_lines"
+msgstr "Numero de lienas"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "payment"
+msgstr "Pago"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_form
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_type_view_search
+msgid "payment_type"
+msgstr "Tipo de Pago"
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_report_account_bank_generator_account_bank_payment_xlsx
+msgid "report.account_bank_generator.account_bank_payment_xlsx"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model,name:account_bank_generator.model_res_partner_type_bank
+msgid "res_partner_type_bank"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "total chars"
+msgstr "Total caracteres"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_partner_type_bank_account_tree_view
+msgid "tree"
+msgstr ""
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config__file_type__txt
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_form
+msgid "txt"
+msgstr ""
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.res_bank_txt_config_view_search
+msgid "txt config"
+msgstr "Configuración txt"
+
+#. module: account_bank_generator
+#: model_terms:ir.ui.view,arch_db:account_bank_generator.payment_txt_generator_wizard_view_form
+msgid "txt generator"
+msgstr "generador txt"
+
+#. module: account_bank_generator
+#: model:ir.model.fields.selection,name:account_bank_generator.selection__res_bank_txt_config__file_type__xlsx
+msgid "xlsx"
+msgstr ""
