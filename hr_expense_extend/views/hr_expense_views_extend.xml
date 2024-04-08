@@ -19,6 +19,11 @@
             <field name="model">hr.expense</field>
             <field name="inherit_id" ref="hr_expense.hr_expense_view_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_id']" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                    <attribute name="force_save">True</attribute>
+                    <attribute name="readonly">1</attribute>
+                </xpath>
                 <xpath expr="//field[@name='employee_id']" position="after">
                     <field name="identification_id"/>
                 </xpath>
@@ -26,14 +31,16 @@
                     <field name="code_analytic_account_id" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='reference']" position="before">
-                    <field name="supplier_id" placeholder="Example Company"
-                           options="{'no_open': True, 'no_create': True}"/>
+<!--                    <field name="supplier_id" placeholder="Example Company"-->
+<!--                           options="{'no_open': True, 'no_create': True}"/>-->
+                    <field name="supplier_id" placeholder="Example Company"/>
                     <label for="supplier_type" string="Número de Identificación"/>
                     <div>
-                        <field name="supplier_type" placeholder="NIT"
+                        <field name="supplier_type" placeholder="NIT" readonly="1" force_save="1"
                                class="oe_inline" options="{'no_open': True, 'no_create': True}" />
                         <span class="oe_read_only"> - </span>
-                        <field name="supplier_vat" placeholder="542367676-4" class="oe_inline"/>
+                        <field name="supplier_vat" placeholder="542367676-4" class="oe_inline"
+                               readonly="1" force_save="1"/>
                     </div>
                 </xpath>
                 <xpath expr="//field[@name='tax_ids']" position="after">
@@ -78,6 +85,7 @@
                     <attribute name="invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='product_has_cost']" position="before">
+                    <xpath expr="//field[@name='company_id']" position="move"/>
                     <xpath expr="//field[@name='employee_id']" position="move"/>
                     <xpath expr="//field[@name='identification_id']" position="move"/>
                 </xpath>

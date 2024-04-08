@@ -3,13 +3,14 @@ from odoo.exceptions import ValidationError, UserError
 from odoo.osv import expression
 from odoo.tools.misc import clean_context, format_date
 
-
 class HrExpense(models.Model):
     _inherit = "hr.expense"
 
     payment_mode = fields.Selection(selection_add=[("payment_advance", "Payment Advance")])
-    payment_advance_id = fields.Many2one('hr.expense.advance', string="Advance",
+    payment_advance_id = fields.Many2one(comodel_name='hr.expense.advance', string="Advance",
                                          domain="[('state', '=', 'to_pay'), ('employee_id', '=', employee_id)]")
+    total_amount_company = fields.Monetary(string="Monto Anticpo", related='payment_advance_id.total_amount_company',
+                                           currency_field='company_currency_id')
 
     def action_submit_expenses(self):
         res = super(HrExpense, self).action_submit_expenses()
@@ -74,7 +75,14 @@ class HrExpense(models.Model):
             unit_amount = expense.unit_amount or expense.total_amount
             quantity = expense.quantity if expense.unit_amount else 1
             taxes = expense.tax_ids.with_context(round=True).compute_all(unit_amount, expense.currency_id,quantity,expense.product_id)
-            partner_id = expense.employee_id.sudo().address_home_id.commercial_partner_id.id
+            # partner_id = expense.employee_id.sudo().address_home_id.commercial_partner_id.id
+
+            # ////////////////////////////////////////// NEW CODE ///////////////////////////////////////////////////
+            if self.supplier_id:
+                partner_id = expense.supplier_id.id
+            else:
+                partner_id = expense.employee_id.sudo().address_home_id.commercial_partner_id.id
+            # ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
             # source move line
             balance = expense.currency_id._convert(taxes['total_excluded'], company_currency, expense.company_id, account_date)
@@ -134,16 +142,17 @@ class HrExpense(models.Model):
 
         # Advance Value Line
         employee_contact = self.employee_id.sudo().address_home_id.with_company(self.company_id)
+        partner_id2 = expense.employee_id.sudo().address_home_id.commercial_partner_id.id
 
         move_line_dst = {
             'name': _("Payment Advance"),
             'debit': 0,
             'credit': self.sheet_id.payment_advance_id.total_amount,
-            'account_id': employee_contact.property_account_receivable_id.id or employee_contact.parent_id.property_account_receivable_id,
+            'account_id': employee_contact.property_account_advance_id.id or employee_contact.parent_id.property_account_advance_id.id or self.company_id.property_account_advance_id.id,
             'date_maturity': account_date,
             'amount_currency': self.sheet_id.payment_advance_id.total_amount_company,
             'currency_id': self.sheet_id.currency_id.id,
-            'partner_id': partner_id,
+            'partner_id': partner_id2,
             'exclude_from_invoice_tab': True,
         }
         move_line_values.append(move_line_dst)
@@ -161,7 +170,7 @@ class HrExpense(models.Model):
                 'date_maturity': account_date,
                 'amount_currency': self.sheet_id.payment_advance_id.total_amount_company - self.sheet_id.currency_id.id,
                 'currency_id': self.sheet_id.currency_id.id,
-                'partner_id': partner_id,
+                'partner_id': partner_id2,
                 'exclude_from_invoice_tab': True,
             }
             move_line_values.append(move_line_dst)

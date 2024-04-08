@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="request_for_bonuses_tree" model="ir.ui.view">
+        <field name="name">Request For Bonuses Tree</field>
+        <field name="model">request.bonuses</field>
+        <field name="arch" type="xml">
+            <tree string ="Request For Bonuses">
+                <field name="name"/>
+                <field name="create_uid"/>
+                <field name="Types_bonuses"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="request_for_bonuses_form" model="ir.ui.view">
+        <field name="name">Request For Bonuses Form</field>
+        <field name="model">request.bonuses</field>
+        <field name="arch" type="xml">
+            <form string="Request For Bonuses">
+                <header>
+                    <field name="state" widget="statusbar" clickable="0"/>
+                    <button name="cancel_bonus" string="Cancel bonus" type="object" attrs="{'invisible': [('state', 'in', ['draft','decline'])]}" confirm="¿Desea cancelar bonificación?"/>
+                    <button name="go_to_financial" string="Go to financial" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}" confirm="¿Desea pasar al estado Pendiente aprobación líder financiero?"/>
+                    <button name="request_hr_approval" string="RRHH approval" type="object" attrs="{'invisible': [('state', '!=', 'finance_leader_approval_pending')]}" confirm="¿Desea solicitar aprobación de RRHH.?"/>
+                    <button name="vice_presidency_approval" string="Vice Presidency Approval" type="object" attrs="{'invisible': [('state', '!=', 'human_talent_approval_pending')]}" confirm="¿Desea solicitar aprobación de vicepresidencia?"/>
+                    <button name="request_accounting_review" string="Request Accounting Review" type="object" attrs="{'invisible': [('state', '!=', 'pending_approval_vice_presidency')]}" confirm="¿Desea solicitar revisión de contabilidad?"/>
+                    <button name="request_approval" string="Approve" type="object" attrs="{'invisible': [('state', '!=', 'under_review_accounting')]}" confirm="¿Desea Aprobar la bonificación?"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="get_invoices"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                            <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
+                            <field name='invoice_ids2' invisible="1"/>
+                        </button>
+                        <button type="object" name="get_invoices_published"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                            <field name="invoice_count_published" widget="statinfo" string="Vendor Bills published"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                            <field name="name" readonly="True"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="create_uid"/>
+                            <field name="bonuses_document" filename="bonuses_document_name" widget="binary"
+                            attrs="{'required': [('state', '=', 'finance_leader_approval_pending')], 'invisible': ['|',('state', '=', 'draft'),('Types_bonuses', '!=', 'individuals_or_worker')]}"/>
+                            <field name="bonuses_document_name" invisible="1"/>
+                            <field name="Types_bonuses" required="1"/>
+                        </group>
+                        <group>
+                            <field name="financial_lead_approver_id" attrs="{'invisible': [('state', '!=','finance_leader_approval_pending')]}"/>
+                            <field name="approver_th_id" attrs="{'invisible': [('state', '!=','human_talent_approval_pending')]}"/>
+                            <field name="vice_president_approver_id" attrs="{'invisible': [('state', '!=','pending_approval_vice_presidency')]}"/>
+                            <field name="accounting_approver_id" attrs="{'invisible': [('state', '!=','under_review_accounting')]}"/>
+                            <field name="create_date" string="Fecha de creación"/>
+                            <field name="write_date" string="Fecha de actualización"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="employee_bonus_report" string="Employee Bonus Report">
+                            <field name="charge_account_ids" context="{'default_account_type':'bonus'}">
+                                <tree string="Employee Bonus Report">
+                                    <field name="employee_id" required="1"/>
+                                    <field name="employee_company_id"/>
+                                    <field name="analytic_account_ids" widget="many2many_tags" required="1"/>
+                                    <field name="bonus_value" required="1"/>
+                                    <field name="request_bonuses_id" invisible="1"/>
+                                    <field name="bonus_card" required="1" filename="bonus_card_name" widget="binary"/>
+                                    <field name="bonus_card_name" invisible="1"/>
+                                    <field name="account_type" invisible="1"/>
+                                </tree>
+                                <form string="Employee Bonus Report">
+                                    <sheet>
+                                        <div class="oe_button_box" name="button_box">
+                                            <button type="object" name="open_charge_account_bill"
+                                                    class="oe_stat_button"
+                                                    icon="fa-pencil-square-o">
+                                                <field name="invoice_count" widget="statinfo" string="Vendor Bills"/>
+                                                <field name='invoice_ids' invisible="1"/>
+                                            </button>
+                                        </div>
+                                        <group>
+                                            <group>
+                                                <field name="request_bonuses_id" invisible="1"/>
+                                                <field name="employee_id" required="1"/>
+                                                <field name="employee_company_id"/>
+                                                <field name="bonus_value" required="1"/>
+                                                <field name="bonus_card" required="1" filename="bonus_card_name" widget="binary"/>
+                                                <field name="journal_bonus_id"/>
+                                                <field name="bonus_card_name" invisible="1"/>
+                                                <field name="account_type" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                    <notebook>
+                                        <page name="request_bonuses_associate_employee" string="Bonus Report">
+                                            <field name="bonus_line_ids">
+                                                <tree string="Bonus Report" editable="top">
+                                                    <field name="account_analytic_id" required="1"/>
+                                                    <field name="bonus_percentage" required="1"/>
+                                                    <field name="bonus"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                            <group>
+                                <group>
+                                    <field name="notes" nolabel="1" placeholder="Write some observations for the document"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="request_for_bonuses_window" model="ir.actions.act_window">
+        <field name="name">Request For Bonuses</field>
+        <field name="view_mode">tree,form</field>
+        <field name="res_model">request.bonuses</field>
+        <field name="limit">25</field>
+    </record>
+
+    <menuitem
+            id="menu_bonuses"
+            name="Bonuses"
+            sequence="23"
+            parent="parent_menu_contractor_charge_account"
+    />
+
+    <menuitem
+            id="menu_request_for_bonuses"
+            parent="menu_bonuses"
+            action="linktic_contractor_charge_account.request_for_bonuses_window"
+    />
+</odoo>

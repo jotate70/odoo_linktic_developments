@@ -40,7 +40,7 @@
                                 <div class="text-muted">Product Used on Bills created in this process</div>
                                 <div class="content-group">
                                     <div class="mt16">
-                                        <field name="contractor_charge_product_id" class="o_light_label" domain="[('purchase_ok','=',True)]"/>
+                                        <field name="contractor_charge_product_id" class="o_light_label" domain="[('purchase_ok','=',True),('detailed_type','=','service')]"/>
                                     </div>
                                 </div>
                             </div>
@@ -52,6 +52,86 @@
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="contactor_budget_approver" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Bonus Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="bonus_charge_default_journal_id"/>
+                                <div class="text-muted">Default journal used in Bonuses</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="bonus_charge_default_journal_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="financial_lead_approver_id"/>
+                                <div class="text-muted">User used to approve in status Pending financial leader approval</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="financial_lead_approver_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="approver_th_id"/>
+                                <div class="text-muted">User used to approve in status Pending approval Human talent</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="approver_th_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="vice_president_approver_id"/>
+                                <div class="text-muted">User used to approve pending approval status Vice Presidency</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="vice_president_approver_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="accounting_approver_id"/>
+                                <div class="text-muted">User used to approve status Under review Accounting</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="accounting_approver_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="bonus_charge_product_id"/>
+                                <div class="text-muted">Product used for bonuses</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="bonus_charge_product_id" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="bonus_account_default_id"/>
+                                <div class="text-muted">Account Default</div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="bonus_account_default_id" class="o_light_label"/>
                                     </div>
                                 </div>
                             </div>
@@ -75,6 +155,7 @@
             id="menu_charge_account_settings"
             name="Configuration"
             parent="parent_menu_contractor_charge_account"
+            sequence="24"
             groups="linktic_contractor_charge_account.group_contractor_charge_manager"
     />
 

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_settings_constrains,l10n_co_contacts.res_settings_constrains,model_res_settings_constrains,base.group_user,1,1,1,1
+
+

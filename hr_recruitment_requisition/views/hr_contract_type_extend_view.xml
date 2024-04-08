@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+      <record id="view_hr_contract_type_tree_extend" model="ir.ui.view">
+          <field name="name">view_hr_contract_type_tree_extend</field>
+          <field name="model">hr.contract.type</field>
+          <field name="inherit_id" ref='om_hr_payroll.view_hr_contract_type_tree'/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='name']" position="after">
+                  <field name="budget_post_ids" widget="many2many_tags"/>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="view_hr_contract_type_form_extend" model="ir.ui.view">
+          <field name="name">view_hr_contract_type_form_extend</field>
+          <field name="model">hr.contract.type</field>
+          <field name="inherit_id" ref='om_hr_payroll.view_hr_contract_type_form'/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='name']" position="after">
+                  <field name="budget_post_ids" widget="many2many_tags"/>
+              </xpath>
+          </field>
+      </record>
+  </data>
+</odoo>
+

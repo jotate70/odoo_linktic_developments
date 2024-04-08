@@ -56,9 +56,9 @@
         </record>
 
         <record model="ir.actions.act_window" id="action_window_hr_recruitment_type_view">
-          <field name="name">RRHH Ticket Type</field>
-          <field name="res_model">hr_recruitment_type</field>
-          <field name="view_mode">list,form</field>
+            <field name="name">RRHH Ticket Type</field>
+            <field name="res_model">hr_recruitment_type</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <record model="ir.actions.act_window" id="action_window_hr_requisition_stage_view">
@@ -137,7 +137,8 @@
         <menuitem name="Assigned Applicants" id="hr_recruitment_crm_case_tree_view_job_assigned2"
                   parent="hr_recruitment_requisition.hr_recruitment_case_tree_view_job"
                   groups="hr_recruitment_requisition.group_hr_recruitment_requisition_official"
-                  action="hr_recruitment_requisition.action_window_hr_recruitment_crm_case_tree_assigned" sequence="24"/>
+                  action="hr_recruitment_requisition.action_window_hr_recruitment_crm_case_tree_assigned"
+                  sequence="24"/>
 
         <menuitem name="All Applicants" id="hr_recruitment_crm_case_tree_view_job_2"
                   parent="hr_recruitment_requisition.hr_recruitment_case_tree_view_job"
@@ -164,6 +165,36 @@
                   parent="hr_recruitment_requisition.menu_hr_recruitment_configuration"
                   groups="hr_recruitment_requisition.group_hr_recruitment_requisition_settings"
                   action="hr_recruitment.hr_recruitment_stage_act" sequence="23"/>
+
+        <menuitem id="contract_management_menu_category"
+                  name="Contract Management"
+                  parent="hr_recruitment_requisition.menu_recruitment_requisition_setting"
+                  groups="base.group_no_one"
+                  sequence="30"/>
+
+        <menuitem name="Contrat Management Line"
+                  id="contract_management_line_menu"
+                  parent="contract_management_menu_category"
+                  sequence="5"
+                  action="hr_recruitment_requisition.contract_management_line_act_window"/>
+
+        <menuitem name="Reason"
+                  id="contract_management_reason_setting_menu"
+                  parent="contract_management_menu_category"
+                  sequence="10"
+                  action="hr_recruitment_requisition.contract_management_reason_setting_act_window"/>
+
+        <menuitem name="Class"
+                  id="contract_management_class_setting_menu"
+                  parent="contract_management_menu_category"
+                  sequence="15"
+                  action="hr_recruitment_requisition.contract_management_class_setting_act_window"/>
+
+         <menuitem name="Hiring Times"
+                   id="hr_hiring_times_menu"
+                   parent="contract_management_menu_category"
+                   sequence="20"
+                   action="hr_recruitment_requisition.action_window_hr_hiring_times"/>
 
     </data>
 </odoo>

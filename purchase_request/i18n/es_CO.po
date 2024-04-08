@@ -1,0 +1,2559 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-20 18:51+0000\n"
+"PO-Revision-Date: 2023-06-20 18:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_request
+#: model:ir.actions.report,print_report_name:purchase_request.report_purchase_request_quotation
+msgid "'Request for Quotation - %s' % (object.name)"
+msgstr "'Solicitud de Cotización - %s' % (object.name)"
+
+#. module: purchase_request
+#: model:mail.template,body_html:purchase_request.email_template_purchase_quotation
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear\n"
+"                        <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>\n"
+"                        <t t-if=\"object.partner_id.parent_id\">\n"
+"                            (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>)\n"
+"                        </t>\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Here is in attachment a request for quotation\n"
+"                        <strong t-out=\"object.name or ''\">P00015</strong>\n"
+"                        <t t-if=\"object.partner_ref\">\n"
+"                            with reference:\n"
+"                            <t t-out=\"object.partner_ref or ''\">REF_XXX</t>\n"
+"                        </t>\n"
+"                        from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        If you have any questions, please do not hesitate to contact us.\n"
+"                        <br/>\n"
+"                        <br/>\n"
+"                        Best regards,\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid ""
+"<li><b>%(prl_name)s</b>: Ordered quantity %(prl_qty)s %(prl_uom)s, Planned "
+"date %(prl_date_planned)s</li>"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_allocation.py:0
+#, python-format
+msgid ""
+"<li><b>%(product_name)s</b>: Received quantity %(product_qty)s "
+"%(product_uom)s</li>"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"<li><b>%(product_name)s</b>: Transferred quantity %(product_qty)s "
+"%(product_uom)s</li>"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "<span class=\"o_form_label\">Quotation</span>"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid "<strong>Analytic Account</strong>"
+msgstr "<strong>Cuenta analítica</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Assigned to:</strong>\n"
+"                                <br/>"
+msgstr ""
+"<strong>Asignado a:</strong>\n"
+"                                <br/>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Creation Date:</strong>\n"
+"                                <br/>"
+msgstr ""
+"<strong>Fecha de creación:</strong>\n"
+"                                <br/>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Description:</strong>\n"
+"                                <br/>"
+msgstr ""
+"<strong>Descripción:</strong>\n"
+"                                <br/>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchaserequestquotation_document
+msgid "<strong>Description</strong>"
+msgstr "<strong>Descripción</strong"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid "<strong>Estimated Cost</strong>"
+msgstr "<strong>Costo Estimado</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchaserequestquotation_document
+msgid "<strong>Expected Date</strong>"
+msgstr "<strong>Fecha Estimada</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Picking Type:</strong>\n"
+"                                <br/>"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid "<strong>Product UoM</strong>"
+msgstr "<strong>UdM Producto</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchaserequestquotation_document
+msgid "<strong>Qty</strong>"
+msgstr "<strong>Cant.</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Request Reference:</strong>\n"
+"                                <br/>"
+msgstr ""
+"<strong>Referencia Requisición:</strong>\n"
+"                                <br/>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid "<strong>Requested Date</strong>"
+msgstr "<strong>Fecha Solicitada</strong>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Requested by:</strong>\n"
+"                                <br/>"
+msgstr ""
+"<strong>Solicitado por:</strong>\n"
+"                                <br/>"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid ""
+"<strong>Source:</strong>\n"
+"                                <br/>"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+msgid "<strong>Specifications</strong>"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.actions.act_window,help:purchase_request.purchase_request_form_action
+msgid ""
+"A purchase request is an instruction to Purchasing to procure\n"
+"            a certain quantity of materials services, so that they are\n"
+"            available at a certain point in time."
+msgstr ""
+"Una requisición de compras es una instrucción para iniciar un procedimiento de compras\n"
+"            con cierta cantidad de materiales o serviccios, para que esten disponibles\n"
+"            en cierto periodo de tiempo."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid ""
+"A purchase request with policy lines can only have 2 different analytic "
+"accounts"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid "A purchase request with policy lines cannot have another type of items"
+msgstr "Una requisición de compra no puede tener lineas con otro tipo de artículos"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move.py:0
+#, python-format
+msgid ""
+"A sale/manufacturing order that generated this purchase request has been "
+"cancelled/deleted. Check if an action is needed."
+msgstr ""
+"Una orden de venta/manufactura que se generó de esta orden fue "
+"cancelada/eliminada. Revisar si se necesita alguna acción aparte."
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation_line__product_type
+msgid ""
+"A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_form_inherits_request
+msgid "Accept Policy Payment"
+msgstr "Aceptar Pago Poliza"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_needaction
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_needaction
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_exception_decoration
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_state
+msgid "Activity State"
+msgstr "Estado Actividad"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_type_icon
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_type_icon
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Add a note"
+msgstr "Adicionar Nota"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Add a product"
+msgstr "Adicionar Producto"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Add a section"
+msgstr "Adicionar Sección"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "All Bought"
+msgstr "Todo Comprado"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid "All lines must have a segregation selected"
+msgstr "Todas las lineas deben tener una segregación seleccionada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__allocated_product_qty
+msgid "Allocated Quantity"
+msgstr "Cantidad"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_form
+msgid "Allocations"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_product_product__allow_less_purchase_quotations
+#: model:ir.model.fields,field_description:purchase_request.field_product_template__allow_less_purchase_quotations
+msgid "Allow less than 3 quotations"
+msgstr "Permitir menos de 3 cotizaciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__analytic_account_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__account_analytic_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Analytic Account"
+msgstr "Cuenta Analítica"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_request_users
+msgid "Analytic Account that will trigger the validation on purchase lines"
+msgstr "Cuenta Analitica que va a disparar la validación en Ordenes de compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__analytic_tag_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr "Etiquetas Analiticas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__approval_user_id
+msgid "Approval User"
+msgstr "Usuario Aprobador"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Approve"
+msgstr "Aprobar"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request__state__approved
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__approved
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__approved
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Approved"
+msgstr "Aprobado"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__approved_policy_payment
+msgid "Approved Policy Manager"
+msgstr "Aprobador Polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__assigned_to
+msgid "Approver"
+msgstr "Aprobador"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__assigned_to_editable
+msgid "Assigned To Editable"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__assigned_to
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Assigned to"
+msgstr "Asignado a"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Assigned to me"
+msgstr "Asignado a mi"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "At least a Draft PO has been created"
+msgstr "Al menos 1 OC en Borrador ha sido creada"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "At least a PO has been completed"
+msgstr "Al menos 1 OC ha sido completada"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "At least a PO has been confirmed"
+msgstr "Al menos 1 OC ha sido confirmada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_attachment_count
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_attachment_count
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_attachment_count
+msgid "Attachment Count"
+msgstr "Cuenta de Adjuntos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__segregation_balance
+msgid "Balance"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__order_invoice_status
+msgid "Billing Status"
+msgstr "Estado de Facturación"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__budget_line_segregation_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__budget_line_segregation_id
+msgid "Budget Line Segregation"
+msgstr "Segregación Linea de Presupuestos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__general_budget_id
+msgid "Budgetary Position"
+msgstr "Posición Presupuestal"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+msgid "By Product"
+msgstr "Por Producto"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+msgid "By Vendor"
+msgstr "Por Proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__can_approve_policy_po
+msgid "Can Approve Policy PO"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__can_approve_request
+msgid "Can Approve Request"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__can_close_request
+msgid "Can Close Request"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__can_edit_line_description
+msgid "Can Edit Line Description"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_make_purchase_order
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__cancelled
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Cancelled Quantity"
+msgstr "Cantidad"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "Cannot Create a Zero value Quotation"
+msgstr "No se pueden confirmar cotizaciones con valor 0"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "Cannot create a new quotation for a line request the has been approved"
+msgstr ""
+"No se puede crear una nueva cotizacion para una linea de requisición que "
+"esta siendo aprobada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_line.py:0
+#, python-format
+msgid "Cant manage quotations of a non approved request"
+msgstr "No se pueden manejar cotizaciones de una requisición sin aprobar"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__product_uom_category_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__product_uom_category_id
+msgid "Category"
+msgstr "Categoria"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_product_product__purchase_request
+#: model:ir.model.fields,help:purchase_request.field_product_template__purchase_request
+msgid ""
+"Check this box to generate Purchase Request instead of generating Requests "
+"For Quotation from procurement."
+msgstr ""
+"Habilitar si se desea generar una requisición de compras en vez de una RFQ "
+"en el proceso de adquicisión de compras."
+
+#. module: purchase_request
+#: model_terms:ir.actions.act_window,help:purchase_request.purchase_request_form_action
+msgid "Click to start a new purchase request process."
+msgstr "Click para iniciar un nuevo proceso de requisición."
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__closed
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__company_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__company_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__company_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__company_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__company_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "Compose Email"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Confirm Quotation"
+msgstr "Confirmar Cotización"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__date_approve
+msgid "Confirmation Date"
+msgstr "Fecha de Confirmación"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__contract_attachment
+msgid "Contract Attachment"
+msgstr "Contrato Adjunto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__contract_att_name
+msgid "Contract Attachment Name"
+msgstr "Nombre del Contrato Adjunto"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__product_uom_category_id
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation_line__product_uom_category_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr ""
+"Conversion de unidades solo pueden ocurrir entre unidades de la misma "
+"categoria. La conversion se basa en los ratios configurados."
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__keep_description
+msgid "Copy descriptions to new PO"
+msgstr "Copiar descripciones a una nueva PO"
+
+#. module: purchase_request
+#: model:ir.actions.act_window,name:purchase_request.action_purchase_request_line_make_purchase_order
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_make_purchase_order
+msgid "Create RFQ"
+msgstr "Crear RFQ"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_stock_move__created_purchase_request_line_id
+msgid "Created Purchase Request Line"
+msgstr "Linea de Requisición Creada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__create_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__create_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__date_start
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__date_start
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+#. module: purchase_request
+#: model:account.payment.term,name:purchase_request.credit_card_payment_term
+msgid "Credit Card"
+msgstr "Tarjeta de Credito"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__currency_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__currency_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__currency_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__date_calendar_start
+msgid "Date Calendar Start"
+msgstr "Fecha Inicio"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__date_start
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__date_start
+msgid "Date when the user initiated the request."
+msgstr "Fecha en la que el usuario inicio la requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__analytic_account_policy
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__analytic_account_policy
+msgid "Default Analytic Account Policy Purchase Order"
+msgstr "Cuenta Analitica por defecto en Ordenes de Compra de Polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__purchase_credit_card
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__purchase_credit_card
+msgid "Default Credit Card for Purchases"
+msgstr "Tarjeta de Credito Predeterminada en Compras"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_inherit_purchase_credit_card
+msgid ""
+"Default Credit Card used when a purchase order with \"Credit Card\" Term "
+"creates a bill"
+msgstr ""
+"Tarjeta de Credito asociada cuando una orden de compra con forma de pago "
+"\"Trajeta de Credito\" crea una factura de compras."
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__policy_quotations_approver
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__policy_quotations_approver
+msgid "Default Policy Purchase Order Approver"
+msgstr "Aprobador de Ordenes de Compra de Polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__purchase_quotations_approver
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__purchase_quotations_approver
+msgid "Default Quotation Approver"
+msgstr "Aprobador de Cotizaciones por Defecto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__purchase_quotations_manager
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__purchase_quotations_manager
+msgid "Default Quotation Manager"
+msgstr "Administrador de Cotizaciones por Defecto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__purchase_request_approver
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__purchase_request_approver
+msgid "Default Request Approver"
+msgstr "Aprobador de Requisiciones por Defecto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__date_planned
+msgid "Delivery Date"
+msgstr "Fecha Entrega"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation_line__date_planned
+msgid ""
+"Delivery date expected from vendor. This date respectively defaults to "
+"vendor pricelist lead time then today's date."
+msgstr "Fecha de entrega esperada por el proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__description
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__description
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_line.py:0
+#, python-format
+msgid "Detailed Line"
+msgstr "Linea Detallada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__display_name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__display_type
+msgid "Display Type"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request__state__done
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__done
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Done"
+msgstr "Realizado"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__move_dest_ids
+msgid "Downstream Moves"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request__state__draft
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__draft
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__draft
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "Enter a positive quantity."
+msgstr "Ingresar Cantidad Positiva"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "Enter a supplier."
+msgstr "Ingrese un Proveedor."
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__estimated_cost
+msgid "Estimated Cost"
+msgstr "Costo Estimado"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__estimated_cost
+msgid "Estimated cost of Purchase Request Line, not propagated to PO."
+msgstr "Costo Estimado de la linea de requisición, no se hereda a la PO"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_make_purchase_order
+msgid "Existing RFQ to update:"
+msgstr "RFQ existente a actualizar:"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__date_expiration
+msgid "Expiration date"
+msgstr "Fecha Vencimiento"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__fiscal_position_id
+msgid "Fiscal Position"
+msgstr "Posición Fiscal"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_follower_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_follower_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_partner_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_partner_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__activity_type_icon
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__activity_type_icon
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_allocation.py:0
+#, python-format
+msgid ""
+"From last reception this quantity has been allocated to this purchase "
+"request"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Future Activities"
+msgstr "Actividade Futuras"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_search_sub
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Group By"
+msgstr "Agrupar por..."
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__has_message
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__has_message
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__has_message
+msgid "Has Message"
+msgstr "Tiene Mensaje"
+
+#. module: purchase_request
+#: model_terms:ir.actions.act_window,help:purchase_request.purchase_request_log_action
+msgid "Here will be listed the different states/dates of the purchase flow"
+msgstr "Aca se enlistan los diferentes Estados/Fechas del proceso de compras"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_search_sub
+msgid "Hide cancelled lines"
+msgstr "Esconder lineas canceladas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_exception_icon
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_exception_icon
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__activity_exception_icon
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__activity_exception_icon
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_needaction
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_unread
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_needaction
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_unread
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_needaction
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Habilitado, si nuevos mensajes requieren su atención"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_has_error
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_has_sms_error
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_has_error
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_has_sms_error
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_has_error
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Habilitado, si algunos mensajes tienen error de envío"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_picking.py:0
+#, python-format
+msgid "Informative Message"
+msgstr "Mensaje Informativo"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__is_closed
+msgid "Is Closed"
+msgstr "Esta Cerrado"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__is_editable
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__is_editable
+msgid "Is Editable"
+msgstr "Es editable"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_is_follower
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_is_follower
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_is_follower
+msgid "Is Follower"
+msgstr "Es Seguidor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__is_name_editable
+msgid "Is Name Editable"
+msgstr "Tiene Nombre Editable"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__item_ids
+msgid "Items"
+msgstr "Articulos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation____last_update
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__write_uid
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__write_date
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Late Activities"
+msgstr "Actividades Tardias"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Lines"
+msgstr "Lineas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_main_attachment_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto Principal"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__mandatory_policy
+msgid "Mandatory Policy"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_form2_sub
+msgid "Manual Invoices"
+msgstr "Facturas Manuales"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__policy_max_amount_approval
+msgid "Max. quotation amount that will manage the policy quotation approver"
+msgstr ""
+"Max. monto en cotización que va a ser aprobado por el aprobador de "
+"cotización de polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__sync_data_planned
+msgid "Merge on PO lines with equal Scheduled Date"
+msgstr "Agrupar en una linea PO con la misma fecha programada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_has_error
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_has_error
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_has_error
+msgid "Message Delivery error"
+msgstr "Mensaje de error de envio"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_ids
+msgid "Messages"
+msgstr "Mensajes no leídos"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regla de Inventario Mínimo"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__modified_policy_order_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__order_modified_policy_order_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__modified_policy_order_id
+msgid "Modified Policy Order"
+msgstr "Orden Poliza Modificada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__my_activity_date_deadline
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__my_activity_date_deadline
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha limite actividad"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "My Quotations"
+msgstr "Mis Cotizaciones"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "My requests"
+msgstr "Mis Requisiciones"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Name, TIN, Email, or Reference"
+msgstr "Nombre, TIN, Email o Referencia"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__need_policy_payment_approval
+msgid "Need Policy Payment Approval"
+msgstr "Requiere Aprobacion Pago Polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__need_contract
+msgid "Needs Contract Attached"
+msgstr "Requiere Contrato Adjunto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__need_policy
+msgid "Needs Policy Attached"
+msgstr "Requiere Poliza Adjunta"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#: code:addons/purchase_request/models/purchase_request.py:0
+#: code:addons/purchase_request/models/purchase_request.py:0
+#: code:addons/purchase_request/models/purchase_request_log.py:0
+#: code:addons/purchase_request/models/purchase_request_log.py:0
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_make_purchase_order
+msgid "New PO details:"
+msgstr "Detalles Nueva PO:"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_calendar_event_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_calendar_event_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Siguiente Actividad Evento Calendario"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_date_deadline
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_date_deadline
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha Limite Siguiente Actividad"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_summary
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_summary
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen Siguiente Actividad"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_type_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_type_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo Siguiente Actividad"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "No RFQ or Purchase has been created"
+msgstr "No RFQ o Compra ha sido creado"
+
+#. module: purchase_request
+#: model_terms:ir.actions.act_window,help:purchase_request.purchase_request_quotation_action
+msgid "No quotation found. Let's create one!"
+msgstr "No se encontraron cotizaciones. Creemos una!"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation_line__display_type__line_note
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Note"
+msgstr "Nota"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_needaction_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_needaction_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de Acciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_has_error_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_has_error_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de Errores"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_needaction_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_needaction_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_has_error_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_has_error_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de envío"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__message_unread_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__message_unread_counter
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Mensajes no leídos"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "Only 1 quotation can be set as the best for this purchase request line"
+msgstr ""
+"Solo 1 cotización puede ser definida como la mejor para esta linea de "
+"requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__open_product_qty
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Open Quantity"
+msgstr "Cantidad Abierta"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Order"
+msgstr "Orden"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_search_sub
+msgid "Order Reference"
+msgstr "Referencia Orden"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid "Order confirmation %(po_name)s for your Request %(pr_name)s"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__orderpoint_id
+msgid "Orderpoint"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Other Information"
+msgstr "Otra Información"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__description
+msgid "PR Description"
+msgstr "Descripción"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__invoice_payment_term_id
+msgid "Payment Terms"
+msgstr "Termino de Pagos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__pending_qty_to_receive
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Pending Qty to Receive"
+msgstr "Cant. Pendiente a Recibir"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__picking_type_id
+msgid "Picking Type"
+msgstr "Tipo de albarán"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Pickings"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the purchase order %s which have been "
+"approved and can be invoiced."
+msgstr ""
+"Por favor %s revise la informacion de la orden de compra %s la cual ha "
+"ha sido aprobada y puede ser facturada."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the purchase order %s which have been "
+"rejected."
+msgstr ""
+"Por favor %s revise la informacion de la orden de compra %s la cual ha "
+"sido rechazada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_picking.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the purchase order %s which needs to be "
+"approved"
+msgstr ""
+"Por favor %s revise la informacion de la orden de compra %s la cual debe ser "
+"aprobada."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the request %s in which a request "
+"approval has been created"
+msgstr ""
+"Por favor %s revise la informacion de la requisición %s en la cual una "
+"aprobación ha sido creada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the request %s which have been approved "
+"and needs purchase quotations"
+msgstr ""
+"Por favor %s revise la informacion de la requisición %s la cual ha sido "
+"aprobada y necesita aprobaciones de compra"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the request line %s in which a quotation"
+" approval has been created"
+msgstr ""
+"Por favor %s revise la informacion de la requisición %s en la cual una "
+"aprobación de cotización ha sido creada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid ""
+"Please %s review the information of the request line %s where the purchase "
+"quotations have been rejected"
+msgstr ""
+"Por favor %s revise la informacion de la requisición %s en la cual una "
+"cotización a sido rechazada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "Please select a product for all lines"
+msgstr "Por favor seleccionar un producto para todas las lineas"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "Please select the user that will approve this quotation."
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__need_policy_purchase_amount
+msgid "Policy Amount"
+msgstr "Monto Poliza"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__policy_max_amount_approval
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__policy_max_amount_approval
+msgid "Policy Amount for Approval"
+msgstr "Monto Polizas para Aprobación"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_order__state__policy_approval
+msgid "Policy Approval"
+msgstr "Aprobación Poliza"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__policy_attachment
+msgid "Policy Attachment"
+msgstr "Poliza Adjunta"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__policy_att_name
+msgid "Policy Attachment Name"
+msgstr "Nombre Poliza Adjunta"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchase_policy_modification
+msgid "Policy Modification"
+msgstr "Modifica Poliza"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchase_policy_order_id
+msgid "Policy Purchase"
+msgstr "Orden Compra Poliza"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.policy_purchase_order_line_tree
+msgid "Policy Purchase Order Lines"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__supplier_id
+msgid "Preferred supplier"
+msgstr "Proveedor Preferido"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__group_id
+msgid "Procurement Group"
+msgstr "Abastecimiento"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__product_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__product_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Product"
+msgstr "Producto"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de Producto (Stock Move Line)"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_product_template
+msgid "Product Template"
+msgstr "Plantilla del Producto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__product_type
+msgid "Product Type"
+msgstr "Tipo de Producto"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Products"
+msgstr "Productos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__line_ids
+msgid "Products to Purchase"
+msgstr "Productos a Comprar"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__project_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_config_settings__need_contract_purchase_amount
+msgid "Purchase Amount"
+msgstr "Monto Compra"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_inherit_need_contract_amount
+msgid "Purchase Amount Validation"
+msgstr "Validación Monto Compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__need_contract_purchase_amount
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__need_contract_purchase_amount
+msgid "Purchase Amount that needs Contract Files"
+msgstr "Monto de compras que necesitan archivos de contrato"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_res_company__need_policy_purchase_amount
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__need_policy_purchase_amount
+msgid "Purchase Amount that needs Policy Files"
+msgstr "Monto de compras que necesitan archivos de poliza"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Purchase Confirmed"
+msgstr "Compra Confirmada"
+
+#. module: purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_log_act
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_log_act
+msgid "Purchase Dates Report"
+msgstr "Reporte Fechas Compra"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Purchase Done"
+msgstr "Compra Hecha"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__purchase_line_id
+msgid "Purchase Line"
+msgstr "Abastecimiento"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_order
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__purchase_order_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__purchase_order_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__purchase_order_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Purchase Order"
+msgstr "Orden de Compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__purchase_creation_date
+msgid "Purchase Order Creation"
+msgstr "Creacion Orden Compra"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de Orden de Compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchase_lines
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_form2_sub
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_details
+msgid "Purchase Order Lines"
+msgstr "Lineas Orden de Compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__purchase_creation_user
+msgid "Purchase Order User"
+msgstr "Usuario Orden Compra"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Purchase Orders"
+msgstr "Abastecimiento"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_tree
+msgid "Purchase Quotation"
+msgstr "Cotización Compra"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Purchase Quotation Line"
+msgstr "Linea Cotización"
+
+#. module: purchase_request
+#: model:mail.template,name:purchase_request.email_template_purchase_quotation
+msgid "Purchase Quotation: Send Draft"
+msgstr "Cotización Compras: Enviar Borrador"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__user_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Purchase Representative"
+msgstr "Representante Compras"
+
+#. module: purchase_request
+#: model:ir.actions.report,name:purchase_request.action_report_purchase_requests
+#: model:ir.model,name:purchase_request.model_purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_product_product__purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_product_template__purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__request_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__request_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_id
+#: model:ir.module.category,name:purchase_request.module_category_purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Purchase Request"
+msgstr "Requisición Compras"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid "Purchase Request %s has already been completed"
+msgstr "Requisición de compras %s esta en estado completada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "Purchase Request %s is not approved"
+msgstr "Requisición de compras %s no esta aprobado"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_allocation
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__purchase_request_allocation_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchase_request_allocation_ids
+#: model:ir.model.fields,field_description:purchase_request.field_stock_move__purchase_request_allocation_ids
+msgid "Purchase Request Allocation"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_move_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_picking_form
+msgid "Purchase Request Allocations"
+msgstr ""
+
+#. module: purchase_request
+#: model:res.groups,name:purchase_request.group_purchase_request_approver
+msgid "Purchase Request Approver"
+msgstr "Aprobador Requisición Compras"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_line
+#: model:ir.model,name:purchase_request.model_purchase_request_quotation_line
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__purchase_request_line_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__line_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_form
+msgid "Purchase Request Line"
+msgstr "Lineas Requisición Compras"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_line_make_purchase_order
+msgid "Purchase Request Line Make Purchase Order"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_line_make_purchase_order_item
+msgid "Purchase Request Line Make Purchase Order Item"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_quotation
+msgid "Purchase Request Line Quotations"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__line_count
+msgid "Purchase Request Line count"
+msgstr "Cuenta lineas de requisición de compras"
+
+#. module: purchase_request
+#: model:ir.actions.act_window,name:purchase_request.purchase_request_line_form_action
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__purchase_request_lines
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_line
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_line_act
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_form2
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_form2_sub
+msgid "Purchase Request Lines"
+msgstr "Lineas de requisición de compras"
+
+#. module: purchase_request
+#: model:res.groups,name:purchase_request.group_purchase_request_manager
+msgid "Purchase Request Manager"
+msgstr "Administrador Requisiciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__quotation_ids
+msgid "Purchase Request Quotations"
+msgstr "Cotizaciones de Requisiciones"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_request_users
+msgid "Purchase Request Settings"
+msgstr "Configuracion Requisiciones de Compra"
+
+#. module: purchase_request
+#: model:res.groups,name:purchase_request.group_purchase_request_user
+msgid "Purchase Request User"
+msgstr "Usuario Requisición de Compras"
+
+#. module: purchase_request
+#: model:mail.message.subtype,description:purchase_request.mt_request_approved
+#: model:mail.message.subtype,name:purchase_request.mt_request_approved
+msgid "Purchase Request approved"
+msgstr "Aprobador Requisición de Compras"
+
+#. module: purchase_request
+#: model:mail.message.subtype,name:purchase_request.mt_request_done
+msgid "Purchase Request done"
+msgstr "Requisición de Compra Realizada"
+
+#. module: purchase_request
+#: model:mail.message.subtype,description:purchase_request.mt_request_done
+msgid "Purchase Request is done"
+msgstr "Requisición de Compras esta realizada"
+
+#. module: purchase_request
+#: model:mail.message.subtype,description:purchase_request.mt_request_rejected
+#: model:mail.message.subtype,name:purchase_request.mt_request_rejected
+msgid "Purchase Request rejected"
+msgstr "Requisición de Compras Rechazada"
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_log
+msgid "Purchase Request time Log"
+msgstr "Log Tiempo Requisición de Compras"
+
+#. module: purchase_request
+#: model:mail.message.subtype,description:purchase_request.mt_request_to_approve
+#: model:mail.message.subtype,name:purchase_request.mt_request_to_approve
+msgid "Purchase Request to be approved"
+msgstr "Requisición de Compras a Aprobar"
+
+#. module: purchase_request
+#: model:ir.actions.act_window,name:purchase_request.action_purchase_request_line_product_tree
+#: model:ir.actions.act_window,name:purchase_request.purchase_request_form_action
+#: model:ir.model.fields,field_description:purchase_request.field_stock_move__purchase_request_ids
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_act
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_pro_mgt
+#: model:ir.ui.menu,name:purchase_request.parent_menu_purchase_request
+msgid "Purchase Requests"
+msgstr "Requisiciones de Compras"
+
+#. module: purchase_request
+#: model:ir.actions.act_window,name:purchase_request.purchase_request_log_action
+msgid "Purchase Requests Log"
+msgstr "Log Requisición de Compras"
+
+#. module: purchase_request
+#: model:ir.actions.act_window,name:purchase_request.purchase_request_quotation_action
+msgid "Purchase Requests Quotations"
+msgstr "Cotizaciones de Requisición de Compras"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchase_state
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Purchase Status"
+msgstr "Estado Compra"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__purchase_order_vendor
+msgid "Purchase Vendor"
+msgstr "Proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__purchase_count
+msgid "Purchases count"
+msgstr "Abastecimiento"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Purchasing not started"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__qty_cancelled
+msgid "Qty Cancelled"
+msgstr "Cant. Cancelado"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__qty_done
+msgid "Qty Done"
+msgstr "Cant. Hecha"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__qty_in_progress
+msgid "Qty In Progress"
+msgstr "Cant. en Progreso"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__product_qty
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__product_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__qty_cancelled
+msgid "Quantity cancelled"
+msgstr "Cantidad"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__qty_done
+msgid "Quantity completed"
+msgstr "Cantidad"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__qty_in_progress
+msgid "Quantity in progress."
+msgstr "Cantidad en progreso."
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_allocation__allocated_product_qty
+msgid ""
+"Quantity of the purchase request line allocated to the stockmove, in the "
+"default UoM of the product"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_allocation__requested_product_uom_qty
+msgid ""
+"Quantity of the purchase request line allocated to thestock move, in the UoM"
+" of the Purchase Request Line"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__product_qty
+msgid "Quantity to purchase"
+msgstr "Cantidad a Comprar"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Quantity:"
+msgstr "Cantidad:"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__quotation
+msgid "Quotation"
+msgstr "Cotización"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Quotation Date"
+msgstr "Fecha Cotización"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__quotation_line
+msgid "Quotation Products"
+msgstr "Productos Cotización"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__name
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__quotation_id
+msgid "Quotation Reference"
+msgstr "Referencia Cotización"
+
+#. module: purchase_request
+#: model:ir.actions.report,name:purchase_request.report_purchase_request_quotation
+msgid "Quotation Request Line"
+msgstr "Linea Requisición de Cotización"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__date
+msgid "Quotation date"
+msgstr "Fecha Cotización"
+
+#. module: purchase_request
+#: model:mail.template,report_name:purchase_request.email_template_purchase_quotation
+msgid "Quotation_{{ (object.name or '').replace('/','_') }}"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_quotations_date
+msgid "Quotations Creation"
+msgstr "Creacion Cotizaciones"
+
+#. module: purchase_request
+#: model_terms:ir.actions.act_window,help:purchase_request.purchase_request_quotation_action
+msgid ""
+"Quotations are estimations of future purchase negotiations.\n"
+"                Three quotations are needed at minimum to proceed with the purchase process."
+msgstr ""
+"Cotización son estimaciones de negociaciones de compra futuras.\n"
+"                Tres cotizaciones son necesarias como minimo para proceder con el flujo de compras."
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_tree
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Quotations..."
+msgstr "Cotizaciones..."
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "RFQ"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__purchased_qty
+msgid "RFQ/PO Qty"
+msgstr "Cant. RFQ/PO"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__picking_id
+msgid "Receipt"
+msgstr "Recepción"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__picking_validation_date
+msgid "Receipt Validation"
+msgstr "Validación"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__picking_validation_user
+msgid "Receipt Validation User"
+msgstr "Usuario Aprobador Recepción"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Receipt confirmation %(picking_name)s for your Request %(request_name)s"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#, python-format
+msgid "Receipt confirmation for Request %s"
+msgstr "Recibo confirmado para requisición %s"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__best_quotation
+msgid "Recommended by Purchase Dept."
+msgstr "Recomendado Dept. Compras"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_tree
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__partner_ref
+msgid ""
+"Reference of the sales order or bid sent by the vendor. It's used to do the "
+"matching when you receive the products as this reference is usually written "
+"on the delivery order sent by your vendor."
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Reject"
+msgstr "Rechazar"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request__state__rejected
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__rejected
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__rejected
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Rejected"
+msgstr "Rechazada"
+
+#. module: purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_reports
+msgid "Reports"
+msgstr "Reportes"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Request"
+msgstr "Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_approve_date
+msgid "Request Approbation"
+msgstr "Aprobación Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_approve_user
+msgid "Request Approbation User"
+msgstr "Usuario Aprobador Requisición"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Request Approval Quotation"
+msgstr "Solicitar Aprobación Cotización"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_creation_date
+msgid "Request Creation"
+msgstr "Creación Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__date_required
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+msgid "Request Date"
+msgstr "Fecha Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_line_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__purchase_request_line_id
+msgid "Request Line"
+msgstr "Linea Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__name
+msgid "Request Log Reference"
+msgstr "Referencia Log Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_quotations_user
+msgid "Request Quotations User"
+msgstr "Usuario Cotizaciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__name
+msgid "Request Reference"
+msgstr "Referencia Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_log__request_creation_user
+msgid "Request User"
+msgstr "Usuario Requisición"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Request approval"
+msgstr "Aprobar Requisición"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#: model_terms:ir.ui.view,arch_db:purchase_request.report_purchaserequestquotation_document
+#, python-format
+msgid "Request for Quotation"
+msgstr "Solicitud Cotización"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Request is approved"
+msgstr "Solicitud esta aprobada"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Request is done"
+msgstr "Solicitud esta hecha"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Request is rejected"
+msgstr "Solicitud esta rezada"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Request is to be approved"
+msgstr "Solicitud esta pendiente aprobación"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__request_state
+msgid "Request state"
+msgstr "Fecha Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__requested_by
+msgid "Requested By"
+msgstr "Solicitado por"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__requested_product_uom_qty
+msgid "Requested Quantity"
+msgstr "Cantidad Solicitada"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__requested_by
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Requested by"
+msgstr "Solicitado por"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Requested for Quotation"
+msgstr "Solicitado para Cotización"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Reset"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__activity_user_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__activity_user_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario Responsable"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_form
+msgid "Restore Request"
+msgstr "Reestablecer Requisición"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_has_sms_error
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_has_sms_error
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_search_sub
+msgid "Search Purchase Order Line"
+msgstr "Buscar Linea Orden de Compra"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Search Purchase Quotation"
+msgstr "Buscar Cotización Compras"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_log_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Search Purchase Request"
+msgstr "Buscar Requisición Compras"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation_line__display_type__line_section
+msgid "Section"
+msgstr "Sección"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Section Name (eg. Products, Services)"
+msgstr "Nombre Sección (ej. Productos, Servicios)"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Send by Email"
+msgstr "Enviar Email"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__sent
+msgid "Sent to Vendor"
+msgstr "Enviado Proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_allocation__purchase_line_id
+msgid "Service Purchase Order Line"
+msgstr "Abastecimiento"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line_make_purchase_order_item__keep_description
+msgid ""
+"Set true if you want to keep the descriptions provided in the wizard in the "
+"new PO."
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Show all records which has next action date is before today"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Source"
+msgstr "Origen"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__origin
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__origin
+msgid "Source Document"
+msgstr "Documento Origen"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__specifications
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_details
+msgid "Specifications"
+msgstr "Especificaciones"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Start Date"
+msgstr "Fecha de Inicio"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order__state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_order_line__order_state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__purchase_state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__state
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__state
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__activity_state
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__activity_state
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_stock_move
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__stock_move_id
+msgid "Stock Move"
+msgstr "Movimiento de Existencias"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__move_count
+msgid "Stock Move count"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_form2_sub
+msgid "Stock Moves"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_stock_rule
+msgid "Stock Rule"
+msgstr "Regla de Inventario"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__price_subtotal
+msgid "Subtotal"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order__supplier_id
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__price_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__tax_country_id
+msgid "Tax Country"
+msgstr "País Impuesto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__tax_totals_json
+msgid "Tax Totals Json"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__amount_tax
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__taxes_id
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation_line__display_type
+msgid "Technical field for UX purpose."
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__tax_country_id
+msgid ""
+"Technical field to filter the available taxes depending on the fiscal "
+"country and fiscal position."
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__notes
+msgid "Terms and Conditions"
+msgstr "Terminos y Condiciones"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_picking.py:0
+#, python-format
+msgid "The PO is a policy related and needs to be approved"
+msgstr "La OC tiene polizas relacionadas y necesita ser aprobada"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_picking.py:0
+#, python-format
+msgid ""
+"The PO related to this Picking has policy related items and must be approved"
+" by the correspondent user, when that PO is accepted this picking will be "
+"validated automatically"
+msgstr ""
+"La OC relacionada a esta recepción tiene artículos tipo poliza asociados y debe ser aprobada "
+"por el usuario correspondiente, cuando la OC es aceptada, este movimiento va a ser "
+"validado automaticamente"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_picking.py:0
+#, python-format
+msgid ""
+"The Purchase Order (%s) does not have a policy attached, please set a "
+"document in the PO and try again"
+msgstr ""
+"La ordn de compra (%s) no tiene poliza adjunta, por favor seleccionar el "
+"documento en la OC e intentar de nuevo"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move.py:0
+#, python-format
+msgid ""
+"The company of the purchase request must match with that of the location."
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_order.py:0
+#, python-format
+msgid ""
+"The following requested items from Purchase Request %(pr_name)s have now "
+"been confirmed in Purchase Order %(po_name)s:"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"The following requested items from Purchase Request %(request_name)s have "
+"now been received in %(location_name)s using Picking %(picking_name)s:"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"The following requested items from Purchase Request %(request_name)s "
+"requested by %(requestor)s have now been received in %(location_name)s:"
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "The purchase has already been completed."
+msgstr "La compra ya ha sido completada."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid ""
+"There is no default Purchase Quotation Approver defined, please set on "
+"settings/purchase menu"
+msgstr ""
+"No se ha definido un Administrador de Cotizaciones, por favor asociarlo en "
+"el menu ajustes/compras"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__qty_to_buy
+msgid "There is some pending qty to buy"
+msgstr "Existen cantidades pendientes a comprar"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_line__state__to_approve
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "To Approve"
+msgstr "Pendiente Aprobación"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__to_approve_allowed
+msgid "To Approve Allowed"
+msgstr "Aprobado"
+
+#. module: purchase_request
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request__state__to_approve
+#: model:ir.model.fields.selection,name:purchase_request.selection__purchase_request_quotation__state__to_approve
+msgid "To be approved"
+msgstr "Pendiente Aprobación"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "To request approbation there should be 3 quotations created"
+msgstr "Para solicitar aprobación debe existir 3 cotizaciones confirmadas"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Today Activities"
+msgstr "Actividades de Hoy"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__amount_total
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__price_total
+msgid "Total"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__estimated_cost
+msgid "Total Estimated Cost"
+msgstr "Costo Estimado Total"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_tree
+msgid "Total Untaxed amount"
+msgstr "Total sin Impuestos"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_tree
+msgid "Total amount"
+msgstr "Monto Total"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_form
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_line_details
+msgid "Tracking"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model,name:purchase_request.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__activity_exception_decoration
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__activity_exception_decoration
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Unassigned"
+msgstr "Sin asignar"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Unassigned Request"
+msgstr "Requisición sin asignar"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_line_search
+msgid "Uncancelled"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__price_unit
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Unit Price:"
+msgstr "Precio Unitario:"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation_line__product_uom
+msgid "Unit of Measure"
+msgstr "Unidad de Medida"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_unread
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_unread
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_unread
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_search
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__message_unread_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__message_unread_counter
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Mensajes no leídos"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_tree
+msgid "Untaxed"
+msgstr "Sin Impuesto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__amount_untaxed
+msgid "Untaxed Amount"
+msgstr "Monto sin Impuesto"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_allocation__product_uom_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__product_uom_id
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__product_uom_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "UoM"
+msgstr "UdM"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_request_users
+msgid ""
+"User that will be assigned with the activity of policy purchase order "
+"approval"
+msgstr ""
+"Usuario que se le va ha asignar la actividad de aprobar ordenes de compra "
+"de polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__policy_quotations_approver
+msgid ""
+"User that will be assigned with the activity of policy quotation approval"
+msgstr ""
+"Usuario que se le asignara la actividad de aprobar cotizaciones de polizas"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__purchase_quotations_approver
+msgid "User that will be assigned with the activity of quotation approval"
+msgstr "Usuario que se le va a asignar la actividad de aprobar cotizaciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__purchase_quotations_manager
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_request_users
+msgid "User that will be assigned with the activity of quotation creation"
+msgstr "Usuario que se le va a asignar la actividad de crear cotizaciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_res_config_settings__purchase_request_approver
+#: model_terms:ir.ui.view,arch_db:purchase_request.res_config_settings_view_form_purchase_request_users
+msgid "User that will be assigned with the activity of request approval"
+msgstr "Usuario que se le va a asignar la actividad de aprobar requisiciones"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__partner_id
+#: model_terms:ir.ui.view,arch_db:purchase_request.policy_purchase_order_line_tree
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_search_sub
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_order_line_tree_sub
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Vendor"
+msgstr "Proveedor"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__partner_ref
+msgid "Vendor Reference"
+msgstr "Referencia Proveedor"
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.view_purchase_request_quotation_filter
+msgid "Warnings"
+msgstr "Advertencias"
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request__website_message_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line__website_message_ids
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_quotation__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes no leídos"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request__website_message_ids
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_line__website_message_ids
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: purchase_request
+#: model:ir.model.fields,field_description:purchase_request.field_purchase_request_line_make_purchase_order_item__wiz_id
+msgid "Wizard"
+msgstr ""
+
+#. module: purchase_request
+#: model_terms:ir.ui.view,arch_db:purchase_request.purchase_request_quotation_form
+msgid "Write some observations for the document"
+msgstr "Escriba algunas observaciones para el documento"
+
+#. module: purchase_request
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_log__purchase_order_vendor
+#: model:ir.model.fields,help:purchase_request.field_purchase_request_quotation__partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr ""
+"Puede encontrar el proveedor por Nombre, NIT, Email o Referencia Interna"
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_line.py:0
+#, python-format
+msgid ""
+"You can only delete a purchase request line if the purchase request is in "
+"draft state."
+msgstr ""
+"Solo se puede eliminar una linea de requisición de compras si la requisición"
+" esta  en estado borrador."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#, python-format
+msgid ""
+"You can't request an approval for a purchase request which is empty. (%s)"
+msgstr "No se puede solicitar una aprobación a una requisición vacia. (%s)"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid ""
+"You cannot create a single purchase order from purchase requests that have "
+"different procurement group."
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request.py:0
+#: code:addons/purchase_request/models/purchase_request_quotations.py:0
+#, python-format
+msgid "You cannot delete a purchase request which is not draft."
+msgstr ""
+"No se puede eliminar una requisición de compras que no esta en borrador."
+
+#. module: purchase_request
+#: code:addons/purchase_request/models/purchase_request_line.py:0
+#, python-format
+msgid "You cannot delete a record that refers to purchase lines!"
+msgstr ""
+"No se puede eliminar un registro que hace referencia a lineas de compra!"
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "You have to enter a Picking Type."
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "You have to select lines from the same Picking Type."
+msgstr ""
+
+#. module: purchase_request
+#: code:addons/purchase_request/wizard/purchase_request_line_make_purchase_order.py:0
+#, python-format
+msgid "You have to select lines from the same company."
+msgstr ""
+
+#. module: purchase_request
+#: model:mail.template,subject:purchase_request.email_template_purchase_quotation
+msgid ""
+"{{ object.company_id.name }} Quotation (Ref {{ object.name or 'n/a' }})"
+msgstr ""

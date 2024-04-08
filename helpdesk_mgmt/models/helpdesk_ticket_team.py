@@ -66,6 +66,16 @@ class HelpdeskTeam(models.Model):
         default=True,
         help="Allow to select this team when creating a new ticket in the portal.",
     )
+    team_type = fields.Selection(selection=[('suport', 'Suport'),
+                                            ('request', 'Request'),
+                                            ('other', 'Other')],
+                                 default='other',
+                                 string='Team Type',
+                                 required=1)
+    helpdesk_type_id = fields.Many2many(comodel_name='helpdesk.ticket.type', relation='x_helpdesk_ticket_type',
+                                        column1='helpdesk_ticket_team_id', column2='helpdesk_ticket_type_id',
+                                        string='Helpdesk Type',
+                                        help='Ticket type relationship and help desks')
 
     @api.depends("ticket_ids", "ticket_ids.stage_id")
     def _compute_todo_tickets(self):

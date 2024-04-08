@@ -7,8 +7,8 @@
         <field name="model">hr.contractor.charge.account.line</field>
         <field name="arch" type="xml">
             <tree create="0" editable="top">
-                <field name="contractor_charge_account_id" readonly="True"/>
-                <field name="contractor_charge_account_employee_id" readonly="True" options="{'no_create':True, 'no_open': True}"/>
+                <field name="contractor_charge_account_id" readonly="True" options="{'no_create':True, 'no_open': False}"/>
+                <field name="contractor_charge_account_employee_id" readonly="True" options="{'no_create':True, 'no_open': True}" />
                 <field name="header_state" readonly="True"/>
                 <field name="account_analytic_id" readonly="True" options="{'no_create':True, 'no_open': True}"/>
                 <field name="reported_hours" readonly="True"/>

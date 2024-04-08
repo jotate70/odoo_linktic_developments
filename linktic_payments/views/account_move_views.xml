@@ -10,6 +10,10 @@
             <xpath expr="//field[@name='name']" position="before">
                 <field name="priority" widget="priority" class="mr-3"/>
             </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='analytic_account_id']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="required">1</attribute>
+            </xpath>
             <xpath expr="//field[@name='partner_bank_id']" position="after">
                 <label for="scheduled_payment_day" string="Banco programado"
                        attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')]}"/>
@@ -25,9 +29,7 @@
                     <span class="oe_read_only"> - </span>
                     <field name="payment_check" widget="boolean_toggle"/>
                 </div>
-<!--                <field name="scheduled_payment_day" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>-->
-<!--                <field name="payment_journal_id" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>-->
-<!--                <field name="payment_bank_related_id" attrs="{'invisible': ['|','|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft'),('payment_bank_related_id','=',False)], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>-->
+                <field name="analytic_account_ids" widget="many2many_tags" invisible="1"/>
             </xpath>
             <xpath expr="//group[@id='header_right_group']" position="inside">
                 <label for="approved_manager" string="Aprobado Gerente"
@@ -35,10 +37,9 @@
                 <div attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}">
                     <field name="approved_manager" widget="boolean_toggle"/>
                     <span class="oe_read_only"> - </span>
-                    <field name="approved_date_payment"/>
+                    <field name="approved_date_payment" force_save="1"/>
                 </div>
-<!--                <field name="approved_manager" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>-->
-<!--                <field name="approved_date_payment" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt')),('state', '=', 'draft')], 'readonly': [('payment_state', '!=', 'not_paid')]}"/>-->
+                <field name="payment_id2" invisible="1"/>
             </xpath>
             <!-- /////////////////////////////////////     Options      //////////////////////////////////////       -->
             <xpath expr="//form[1]/sheet[1]/notebook[1]/page[1]/field[@name='invoice_line_ids']/tree[1]/field[@name='product_id']" position="attributes">
@@ -77,6 +78,22 @@
         </field>
     </record>
 
+    <record id="account_move_view_form_inherit_l10n_co_edi_jorels_extend" model="ir.ui.view">
+        <field name="name">account_move_view_form_inherit_l10n_co_edi_jorels_extend</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_co_edi_jorels.account_move_view_form_inherit_l10n_co_edi_jorels"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_method_id']" position="attributes">
+                <attribute name="attrs">{"readonly": [["state","not in",["draft"]]]}</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_form_id']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <record id="account_invoice_tree_inherit_payment_scheduled" model="ir.ui.view">
         <field name="name">account.invoice.tree.inherit.payment.scheduled</field>
         <field name="model">account.move</field>
@@ -94,9 +111,6 @@
                                 invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund', 'out_receipt', 'in_invoice', 'in_refund','in_receipt')"
                         />
                     </header>
-<!--                    <button name="action_edit_record" string="Editar" type="object" class="oe_highlight" icon="fa-pencil"/>-->
-                    <field name="approved_vice_president_id" invisible="1" />
-                    <field name="approved_advisor_id" invisible="1" />
                     <field name="name" decoration-bf="1"/>
                     <field name="purchase_id" optional="hide"/>
                     <field name="partner_id" invisible="" />
@@ -108,6 +122,7 @@
                     <field name="date" optional="hide" invisible="context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')" string="Accounting Date"/>
                     <field name="invoice_date_due" widget="remaining_days" optional="show" attrs="{'invisible': [['payment_state', 'in', ('paid', 'in_payment', 'reversed')]]}"/>
                     <field name="invoice_origin" optional="hide" string="Source Document"/>
+                    <field name="analytic_account_ids" widget="many2many_tags" optional="show"/>
                     <field name="payment_reference" optional="show" invisible="context.get('default_move_type') in ('out_invoice', 'out_refund','out_receipt')"/>
                     <field name="ref" optional="hide"/>
                     <field name="invoice_user_id" optional="hide" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Salesperson" widget="many2one_avatar_user"/>
@@ -120,26 +135,24 @@
                     <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="hide"/>
                     <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
                     <field name="priority" widget="priority" optional="show"/>
-                    <field name="payment_method_line_id" optional="hide"/>
-                    <field name="scheduled_payment_day" optional="show"/>
-                    <field name="payment_journal_id" optional="show"/>
-                    <field name="approved_manager" readonly="1" optional="show" widget="boolean_toggle" groups="linktic_payments.group_linktic_payments_vicepresident"/>
-                    <field name="approved_date_payment" optional="show"/>
-                    <button name="action_register_payment" type="object" class="oe_highlight"
-                            attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
-                            context="{'dont_redirect_to_payments': True}" string="Register Payment" groups="linktic_payments.group_linktic_payments_account_treasurer"/>
+<!--                    <field name="payment_method_line_id" optional="hide"/>-->
+                    <field name="payment_method_id" optional="hide"/>
+                    <field name="scheduled_payment_day" optional="hide"/>
+                    <field name="payment_journal_id" optional="hide"/>
+                    <field name="approved_manager" readonly="1" optional="hide" widget="boolean_toggle" groups="linktic_payments.group_linktic_payments_vicepresident"/>
+                    <field name="approved_date_payment" force_save="1" optional="hide"/>
                     <field name="payment_date_related" optional="hide"/>
                     <field name="payment_bank_related_id" optional="show"/>
-                    <field name="payment_state" widget="badge"
+                    <field name="payment_state" widget="badge" force_save="1"
                                decoration-danger="payment_state == 'not_paid'"
                                decoration-warning="payment_state in ('partial', 'in_payment')"
                                decoration-success="payment_state in ('paid', 'reversed')"
                                attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"
                                optional="show"/>
-                    <field name="approved_vice_president" optional="show" widget="boolean_toggle" readonly="1"/>
-                    <field name="approved_advisor" optional="show" widget="boolean_toggle" readonly="1"/>
-                    <field name="payment_check" readonly="1" optional="show" widget="boolean_toggle"/>
-                    <field name="to_check" readonly="1" optional="show" widget="boolean_toggle"/>
+                    <field name="approved_vice_president" optional="hide" widget="boolean_toggle" readonly="1"/>
+                    <field name="approved_advisor" optional="hide" widget="boolean_toggle" readonly="1"/>
+                    <field name="payment_check" readonly="1" optional="hide" widget="boolean_toggle"/>
+                    <field name="to_check" readonly="1" optional="hide" widget="boolean_toggle"/>
                     <field name="state" widget="badge" decoration-success="state == 'posted'" decoration-info="state == 'draft'" optional="show"/>
                     <field name="move_type" invisible="context.get('default_move_type', True)"/>
                 </tree>
@@ -166,10 +179,9 @@
                 </header>
                 <button name="action_form_account_move" string="Open" type="object" class="oe_highlight" icon="fa-pencil"/>
                 <field name="name" decoration-bf="1" readonly="1"/>
-                <field name="approved_vice_president_id" invisible="" />
-                <field name="approved_advisor_id" invisible="" />
                 <field name="purchase_id" optional="hide"/>
                 <field name="partner_id" invisible=""/>
+                <field name="payment_id2" invisible="1"/>
                 <field name="invoice_source_email" invisible="1"/>
                 <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')" groups="base.group_user" string="Vendor" />
                 <field name="invoice_partner_display_name" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" groups="base.group_user" string="Customer" />
@@ -178,6 +190,7 @@
                 <field name="date" optional="hide" invisible="context.get('default_move_type') in ('out_invoice', 'out_refund', 'out_receipt')" string="Accounting Date"/>
                 <field name="invoice_date_due" readonly="1" widget="remaining_days" optional="show" attrs="{'invisible': [['payment_state', 'in', ('paid', 'in_payment', 'reversed')]]}"/>
                 <field name="invoice_origin" readonly="1" optional="hide" string="Source Document"/>
+                <field name="analytic_account_ids" widget="many2many_tags" optional="show"/>
                 <field name="payment_reference" groups="linktic_payments.group_linktic_payments_account_treasurer" optional="show" invisible="context.get('default_move_type') in ('out_invoice', 'out_refund','out_receipt')"/>
                 <field name="ref" readonly="1" optional="hide"/>
                 <field name="invoice_user_id" optional="hide" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Salesperson" widget="many2one_avatar_user"/>
@@ -190,28 +203,33 @@
                 <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="hide"/>
                 <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
                 <field name="priority" widget="priority" optional="show"/>
-                <field name="payment_method_line_id" optional="show" attrs="{'readonly': [('approved_manager', '=', True)]}"/>
+<!--                <field name="payment_method_line_id" optional="show" attrs="{'readonly': [('approved_manager', '=', True)]}"/>-->
+                <field name="payment_method_id" optional="show" attrs="{'readonly': [('approved_manager', '=', True)]}"/>
                 <field name="scheduled_payment_day" attrs="{'readonly': [('approved_manager', '=', True)]}"
                        groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
                 <field name="payment_journal_id" attrs="{'readonly': [('approved_manager', '=', True)]}"
                        groups="linktic_payments.group_linktic_payments_administrative_manager" optional="show"/>
                 <field name="approved_manager" optional="show" widget="boolean_toggle" groups="linktic_payments.group_linktic_payments_vicepresident"/>
-                <field name="approved_date_payment" attrs="{'readonly': [('payment_state','!=','not_paid')]}" optional="show"/>
+                <field name="approved_date_payment" force_save="1" attrs="{'readonly': [('payment_state','!=','not_paid')]}" optional="show"/>
                 <button name="action_register_payment" type="object" class="oe_highlight"
                         attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('payment_state', 'not in', ('not_paid', 'partial')), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"
                         context="{'dont_redirect_to_payments': True}" string="Register Payment" groups="linktic_payments.group_linktic_payments_account_treasurer"/>
                 <field name="payment_date_related" optional="hide"/>
                 <field name="payment_bank_related_id" optional="show"/>
-                <field name="payment_state" widget="badge"
+                <field name="payment_state" widget="badge" force_save="1"
                        decoration-danger="payment_state == 'not_paid'"
                        decoration-warning="payment_state in ('partial', 'in_payment')"
                        decoration-success="payment_state in ('paid', 'reversed')"
                        attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}"
                        optional="show"/>
+                <field name="approved_vice_president_id" invisible="1"/>
+                <field name="approved_advisor_id" invisible="1"/>
+                <field name="active_user" invisible="1"/>
+                <field name="active_user2" invisible="1"/>
                 <field name="approved_vice_president" optional="show" widget="boolean_toggle"
-                       attrs="{'readonly': [('approved_manager', '=', False)]}"/>
+                       attrs="{'readonly': ['|',('approved_manager', '=', False),('active_user','=',False)]}"/>
                 <field name="approved_advisor" optional="show" widget="boolean_toggle"
-                attrs="{'readonly': [('approved_manager', '=', False)]}"/>
+                       attrs="{'readonly': ['|',('approved_manager', '=', False),('active_user2','=',False)]}"/>
                 <field name="payment_check" optional="show" widget="boolean_toggle"/>
                 <field name="to_check" optional="show" widget="boolean_toggle"/>
                 <field name="state" widget="badge" decoration-success="state == 'posted'" decoration-info="state == 'draft'" optional="show"/>
@@ -235,8 +253,10 @@
                 <filter name="scheduled_payment_day" string="Scheduled Payment Date" date="scheduled_payment_day"/>
             </xpath>
             <xpath expr="//filter[@name='status']" position="after">
+                <field name="analytic_account_ids2" optional="show"/>
                 <filter name="payment_journal" string="Payment Bank" context="{'group_by':'payment_journal_id'}"/>
                 <filter name="approved_manager" string="Approval State" context="{'group_by':'approved_manager'}"/>
+                <filter name="analytic_account_ids" string="Analytic Account" context="{'group_by':'analytic_account_ids2'}"/>
             </xpath>
         </field>
     </record>
@@ -272,23 +292,10 @@
     <record model="ir.actions.act_window" id="action_window_payment_approval">
         <field name="name">Payment Approval</field>
         <field name="res_model">account.move</field>
-        <field name="domain">[('journal_id.type', '=', 'purchase'),('state','=','posted')]</field>
+        <field name="domain">[('state','=','posted'), '|', ('journal_id.type', '=', 'purchase'), ('journal_id.payslip_journal', '=', True)]</field>
         <field name="view_id" ref="linktic_payments.account_invoice_tree_payment_scheduled_2" />
         <field name="context">{'search_default_open': True}</field>
     </record>
-
-<!--    <record id="action_account_payments_payable" model="ir.actions.act_window">-->
-<!--            <field name="name">Payments</field>-->
-<!--            <field name="res_model">account.payment</field>-->
-<!--            <field name="view_mode">tree</field>-->
-<!--            <field name="context">{-->
-<!--                'default_payment_type': 'outbound',-->
-<!--                'default_partner_type': 'supplier',-->
-<!--                'search_default_outbound_filter': 1,-->
-<!--                'default_move_journal_types': ('bank', 'cash'),-->
-<!--            }</field>-->
-<!--            <field name="view_id" ref="view_account_supplier_payment_tree"/>-->
-<!--        </record>-->
 
     <!-- /////////////////////////////  Header main  //////////////////////////// -->
     <menuitem name="Payment"

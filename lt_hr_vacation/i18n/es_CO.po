@@ -1,0 +1,428 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* lt_hr_vacation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-01 00:05+0000\n"
+"PO-Revision-Date: 2024-04-01 00:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_leave.py:0
+#, python-format
+msgid ""
+"\n"
+"The employees that lack allocation days are:\n"
+"%s"
+msgstr "\nLos empleados que carecen de días de asignación son:\n%s"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_novelty_form_lt_hr_vacation
+msgid "<span class=\"o_stat_text\">Compensated Money</span>"
+msgstr "<span class=\"o_stat_text\">Dinero compensado</span>"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "Allocation Request"
+msgstr "Solicitud de asignación"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__balance
+msgid "Balance"
+msgstr "Días Pendientes"
+
+#. module: lt_hr_vacation
+#: model:ir.actions.server,name:lt_hr_vacation.action_compute_hr_leave
+msgid "Calcular Días"
+msgstr "Días Calculados"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__company_id
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_search
+msgid "Company"
+msgstr "Compañia"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_novelty.py:0
+#, python-format
+msgid "Compensated Money Vacation"
+msgstr "Vacaciones en dinero compensadas"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "Compensated Vacation"
+msgstr "Vacaciones Compensadas"
+
+#. module: lt_hr_vacation
+#: model:ir.actions.act_window,name:lt_hr_vacation.action_hr_vacation_novelty
+#: model:ir.ui.menu,name:lt_hr_vacation.menu_hr_vacation_novelty
+msgid "Compensated Vacations"
+msgstr "Vacaciones Compensadas"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__contract_id
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.actions.act_window,help:lt_hr_vacation.action_hr_vacation
+msgid "Create the first vacation book of payslip."
+msgstr "Crea el primer libro de vacaciones de nómina."
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__date_start
+msgid "Date Start"
+msgstr "Fecha Inicio"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_payslip.py:0
+#, python-format
+msgid "Days of income"
+msgstr "Días de Ingreso"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_payslip.py:0
+#, python-format
+msgid "Days of retirement"
+msgstr "Días de Retiro"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_novelty_form
+msgid "Deduction"
+msgstr "Deducción"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_payslip.py:0
+#, python-format
+msgid "Discount Dominical Days"
+msgstr "Días Dominicales de Descuento"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_leave_type__dominican_discount
+msgid "Dominican Discount"
+msgstr "Descuento Dominicana"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,help:lt_hr_vacation.field_hr_vacation__wage
+msgid "Employee's monthly gross wage."
+msgstr "Salario bruto mensual del empleado."
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__form_vacation
+msgid "Form Vacation"
+msgstr "Forma de vacaciones"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_payslip.py:0
+#, python-format
+msgid "Global Leaves"
+msgstr "Hojas globales"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_search
+msgid "Hr Vacation"
+msgstr "Modelo de Vacaciones"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__id
+msgid "ID"
+msgstr "identificación"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__identification
+msgid "Identification"
+msgstr "Identificación"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_novelty_form
+msgid "Income"
+msgstr "Ingresos"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty_type__is_ns_vacation_compensated
+msgid "Is Not Vacation Compensated"
+msgstr "No se compensan las vacaciones"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_leave_allocation__is_provisioned_vacation
+msgid "Is Provisiones Vacation"
+msgstr "Es Provisión de Vacaciones"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_leave__is_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_leave_type__is_vacation
+msgid "Is Vacation"
+msgstr "Es Vacaciones"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__is_vacation_compensated
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty_type__is_vacation_compensated
+msgid "Is Vacation Compensated"
+msgstr "¿Se compensan las vacaciones?"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_novelty.py:0
+#, python-format
+msgid "It is not possible to create a novelty with value 0"
+msgstr "No es posible crear una novedad con valor 0"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_payslip_worked_days__leave_id
+msgid "Leave"
+msgstr "Ausencia"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__leave_allocation_id
+msgid "Leave Allocation ID"
+msgstr "Asignación Asociada"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__leave_id
+msgid "Leave ID"
+msgstr "Dejar identificación"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "New Allocation"
+msgstr "Nueva asignación"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "New Time Off"
+msgstr "Nuevo tiempo libre"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "New time off"
+msgstr "Nuevo tiempo libre"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.actions.act_window,help:lt_hr_vacation.action_hr_vacation_novelty
+msgid "No data found."
+msgstr "No se encontraron datos."
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__ns_value
+msgid "Not Salary Value"
+msgstr "Sin valor salarial"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__novelty_id
+msgid "Novelty Ids"
+msgstr "ID de novedad"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_novelty
+msgid "Novelty of Payroll"
+msgstr "Novedad de Nómina"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_novelty_type
+msgid "Payroll Novelty Type"
+msgstr "Nómina Novedad Tipo"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_payslip_worked_days
+msgid "Payslip Worked Days"
+msgstr "Días trabajados de la nómina"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_novelty_form
+msgid "Properties"
+msgstr "Propiedades"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__provisioned
+msgid "Provisioned"
+msgstr "Días Causados"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_novelty_form
+msgid "SIG"
+msgstr ""
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__s_value
+msgid "Salary Value"
+msgstr "Valor salarial"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__taken
+msgid "Taken"
+msgstr "Días Tomados"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_leave.py:0
+#: code:addons/lt_hr_vacation/models/hr_leave.py:0
+#, python-format
+msgid ""
+"The number of remaining time off is not sufficient for this time off type.\n"
+"Please also check the time off waiting for validation."
+msgstr "El número de tiempo libre restante no es suficiente para este tipo de tiempo libre.\nVerifique también el tiempo libre en espera de validación."
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_leave
+msgid "Time Off"
+msgstr "Ausencias"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "Time Off : %s"
+msgstr "Tiempo libre: %s"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_leave_allocation
+msgid "Time Off Allocation"
+msgstr "Asignación de ausencias"
+
+#. module: lt_hr_vacation
+#. openerp-web
+#: code:addons/lt_hr_vacation/static/src/js/vacation_novelty_employee.js:0
+#, python-format
+msgid "Time Off Request"
+msgstr "Solicitud de tiempo libre"
+
+#. module: lt_hr_vacation
+#: model:ir.model,name:lt_hr_vacation.model_hr_leave_type
+msgid "Time Off Type"
+msgstr "Tipo de ausencia"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__to_paid
+msgid "To Paid"
+msgstr "Valor a Pagar"
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_novelty__total_compensated
+msgid "Total"
+msgstr "total"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.ui.view,arch_db:lt_hr_vacation.view_hr_vacation_novelty_form
+msgid ""
+"Upload the THU-FOR-027 Vacation Financial Compensation Request form, available\n"
+"                                        in the"
+msgstr "Cargue el formulario de Solicitud de Compensación Financiera de Vacaciones THU-FOR-027, disponible\n en el"
+"Cargue el formulario de Solicitud de Compensación Financiera de Vacaciones THU-FOR-027, disponible\n"
+" en el"
+
+#. module: lt_hr_vacation
+#: model_terms:ir.actions.act_window,help:lt_hr_vacation.action_hr_vacation_novelty
+msgid "Use this menu to get an overview of your Compensated Holidays."
+msgstr "Utilice este menú para obtener una descripción general de sus Vacaciones Compensadas."
+"Utilice este menú para obtener una descripción general de sus Vacaciones "
+"Compensadas."
+
+#. module: lt_hr_vacation
+#: model:ir.actions.act_window,name:lt_hr_vacation.action_hr_vacation
+#: model:ir.ui.menu,name:lt_hr_vacation.menu_hr_vacation
+msgid "Vacation Book"
+msgstr "Vacaciones Activos"
+
+#. module: lt_hr_vacation
+#: model:ir.actions.server,name:lt_hr_vacation.ir_cron_auto_post_draft_entry_ir_actions_server
+#: model:ir.cron,cron_name:lt_hr_vacation.ir_cron_auto_post_draft_entry
+#: model:ir.cron,name:lt_hr_vacation.ir_cron_auto_post_draft_entry
+msgid "Vacation Book; Generate vacation provision daily."
+msgstr "Libro de vacaciones; Generar provisión de vacaciones diariamente."
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_vacation.py:0
+#, python-format
+msgid "Vacation Provisioned: %s"
+msgstr "Vacaciones provisionadas: %s"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_novelty.py:0
+#: code:addons/lt_hr_vacation/models/hr_novelty.py:0
+#, python-format
+msgid ""
+"Vacation compensated in cash may not exceed 50% of the days accrued, "
+"currently accrued {0:.3f}."
+msgstr "Las vacaciones compensadas en efectivo no podrán exceder el 50% de los días devengados, actualmente devengados {0:.3f}."
+"Las vacaciones compensadas en efectivo no podrán exceder el 50% de los días "
+"devengados, actualmente devengados {0:.3f}."
+
+#. module: lt_hr_vacation
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__wage
+msgid "Wage"
+msgstr "Salario"
+
+#. module: lt_hr_vacation
+#: code:addons/lt_hr_vacation/models/hr_payslip.py:0
+#: model:ir.model.fields,field_description:lt_hr_vacation.field_hr_vacation__worked_days
+#, python-format
+msgid "Worked Days"
+msgstr "Días Trabajados"

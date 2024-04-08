@@ -8,6 +8,7 @@
             <form string="Contract Type">
                 <group col="4">
                     <field colspan="4" name="name"/>
+                    <field name="provision_vacation"/>
                 </group>
             </form>
         </field>
@@ -20,6 +21,7 @@
             <tree string="Contract Type">
                 <field name="sequence" widget="handle"/>
                 <field colspan="4" name="name"/>
+                <field name="provision_vacation"/>
             </tree>
         </field>
     </record>
@@ -31,6 +33,7 @@
             <search string="Search Contract Type">
                 <field name="name" string="Contract Type"/>
                 <field name="sequence" string="Sequence"/>
+                <field name="provision_vacation"/>
             </search>
         </field>
     </record>

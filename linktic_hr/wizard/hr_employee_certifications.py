@@ -70,8 +70,7 @@ class HrEmployeeCertifications(models.TransientModel):
                     'employee_id_number': employee.identification_id,
                     'employee_expedition_place': employee.expedition_place_id,
                     'active_employee': _('currently works') if employee.active else _('worked'),
-                    # 'active_employee_2': _('has been performing') if self.employee_ids.active else _('performed'),
-                    'active_employee_2': _('has been performing') if self.employee_ids.ids else _('performed'),
+                    'active_employee_2': _('has been performing') if self.employee_ids.active else _('performed'),
                     'h3_string': self.addressee if self.addressed_to == 'addressee' else dict(
                         self._fields['addressed_to']._description_selection(self.env)).get(self.addressed_to),
                     'addressed_to': self.addressed_to,
@@ -129,19 +128,9 @@ class EmployeeCertificateReportPDF(models.AbstractModel):
             domain.append(('employee_id', '=', data.get('employee_id')))
         employees = self.env['hr.employee'].browse(data.get('employee_id'))
         employee_contracts = self.env['hr.contract'].search(domain)
-        # learning_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id == 15)
-        # services_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in (12, 13, 14, 16, 17))
-        # payroll_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in (10, 11))
-        # /////////////////////////////////////   NEW CODE ///////////////////////////////////////////////////
-        apprenticeship_type_contract_id = self.env['hr.contract.type'].search(
-            [('contract_type_id', '=', 'apprenticeship_type_contract')])
-        temporary_type_contract_id = self.env['hr.contract.type'].search(
-            [('contract_type_id', '=', 'temporary_type_contract')])
-        undefined_contract_type_id = self.env['hr.contract.type'].search(
-            [('contract_type_id', '=', 'undefined_contract_type')])
-        learning_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id == apprenticeship_type_contract_id.ids)
-        services_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in temporary_type_contract_id.ids)
-        payroll_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in undefined_contract_type_id.ids)
+        learning_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id == 14)
+        services_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in (11, 12, 13, 15, 16))
+        payroll_contracts = employee_contracts.filtered(lambda c: c.contract_type_id.id in (9, 10))
         return {
             'doc_ids': docids,
             'doc_model': 'hr.contract',

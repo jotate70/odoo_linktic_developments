@@ -27,7 +27,7 @@ class HrPayslipLine(models.Model):
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
-    date = fields.Date('Date Account', states={'draft': [('readonly', False)]}, readonly=True,
+    date = fields.Date('Date Account', states={'draft': [('readonly', False)]}, required=True, readonly=True,
         help="Keep empty to use the period of the validation(Payslip) date.")
     journal_id = fields.Many2one('account.journal', 'Salary Journal', readonly=True, required=True,
         states={'draft': [('readonly', False)]}, default=lambda self: self.env['account.journal'].search([('type', '=', 'general')], limit=1))
@@ -76,9 +76,9 @@ class HrPayslip(models.Model):
 
                 debit_account_id = line.salary_rule_id.account_debit.id
                 credit_account_id = line.salary_rule_id.account_credit.id
-                # if not debit_account_id or not credit_account_id:
-                #     raise UserError(_('Missing Debit Or Credit Account in salary rule: "%s" !') % (
-                #         line.salary_rule_id))
+                if not debit_account_id or not credit_account_id:
+                    raise UserError(_('Missing Debit Or Credit Account in salary rule: "%s" !') % (
+                        line.salary_rule_id))
                 if debit_account_id:
                     debit_line = (0, 0, {
                         'name': line.name,

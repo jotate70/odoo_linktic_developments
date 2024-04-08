@@ -2,6 +2,7 @@
 from odoo import api, fields, models
 from random import randint
 
+
 class RecruitmentRequisition(models.Model):
     _name = 'hr_requisition_state'
     _description = "Recruitment Requisition Stage"
@@ -19,7 +20,7 @@ class RecruitmentRequisition(models.Model):
     manager_id = fields.Many2one(comodel_name='hr.employee', string='Approver',
                                  help='Responsible for approval.')
     optional_manager_id = fields.Many2one(comodel_name='hr.employee', string='Optional approver',
-                                       help='Responsible for optional approval.')
+                                          help='Responsible for optional approval.')
     fold = fields.Boolean(string="Folded in Kanban",
                           help="This stage is folded in the kanban view when there are no records in that stage to display.")
     mail_template_id = fields.Many2one(comodel_name="mail.template", string="Email Template",
@@ -27,17 +28,20 @@ class RecruitmentRequisition(models.Model):
                                        help="If set an email will be sent to the customer when the ticket reaches this step.")
     company_id = fields.Many2one(comodel_name="res.company", string="Company", default=lambda self: self.env.company)
     recruitment_type_id = fields.Many2many(comodel_name='hr_recruitment_type', relation='x_hr_recruitment_stage_rel',
-                                column1='recruitment_state_id', column2='recruitment_type_id', string='Recruitment Type',
-                                help='Match the stages with the types of personnel request.')
-    state_type = fields.Selection([('draft', 'Draft'),
-                                   ('confirm', 'Confirm'),
-                                   ('in_progress', 'In Progress'),
-                                   ('recruitment', 'Recruitment'),
-                                   ('done', 'Done'),
-                                   ('refused', 'Refused')],
+                                           column1='recruitment_state_id', column2='recruitment_type_id',
+                                           string='Recruitment Type',
+                                           help='Match the stages with the types of personnel request.')
+    state_type = fields.Selection(selection=[('draft', 'Draft'),
+                                             ('confirm', 'Confirm'),
+                                             ('in_progress', 'In Progress'),
+                                             ('recruitment', 'Recruitment'),
+                                             ('hiring', 'Hiring'),
+                                             ('done', 'Done'),
+                                             ('refused', 'Refused')],
                                   string='State Type', store=True, default='in_progress', required=True,
                                   help='classifies the type of stage, important for the behavior of the approval for personnel request.')
     description = fields.Html(translate=True, sanitize_style=True)
+    apply_contract_changes = fields.Boolean(string="Apply Contract Changes", default=False)
 
     # Reset approvers
     @api.onchange('requires_approval')

@@ -165,7 +165,7 @@ class HrTravelInfo(models.Model):
                 # time = str(diff.days) + ' Days, ' + ("%d:%02d.%02d" % (hour, miniute, sec))
                 time = str(diff.days) + ' Days'
                 line.days = time
-                return
+                # return
             else:
                 line.days = 0
-                return
+                # return

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        #Create a new user group to manage the confirm sale button visibility
+        <record id="group_sale_manager_approve" model="res.groups">
+            <field name="name">Sale Approve Administrator</field>
+            <field name="category_id" eval="ref('base.module_category_sales_sales')"/>
+            <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+        </record>
+
+        # Remove sales groups from item menu products on sales and add user inventory to the list
+        <record id="sale.product_menu_catalog" model="ir.ui.menu">
+            <field name="groups_id"
+                   eval="[(3, ref('sales_team.group_sale_salesman')),(4, ref('stock.group_stock_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

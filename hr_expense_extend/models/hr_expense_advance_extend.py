@@ -11,6 +11,13 @@ class HrExpenseAdvance(models.Model):
     days2 = fields.Char(string='Días', related='travel_request_id.days2')
     amount_qty = fields.Monetary(string='Valor día')
 
+    @api.onchange('employee_id')
+    def _compute_select_manager_id(self):
+        res = super(HrExpenseAdvance, self)._compute_select_manager_id()
+        if self.travel_request_id:
+            self.journal_id = self.travel_request_id.journal_travel_id
+        return res
+
     @api.onchange('product_id', 'employee_id', 'travel_request_id')
     def _select_manager_employee_id(self):
         if self.travel_request_id:

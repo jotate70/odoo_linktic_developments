@@ -18,7 +18,7 @@
     <menuitem id="menu_payroll_employee"
               name="Employees"
               parent="om_hr_payroll.menu_hr_payroll_root"
-              sequence="15"/>
+              sequence="20"/>
 
     <menuitem id="menu_hr_employee"
               name="Employees"

@@ -2,7 +2,7 @@
 <odoo noupdate="1">
     <!--                        Rules regits                         -->
     <data>
-        <!--                    Stock picking type                   -->
+        <!--                    Registration rule                  -->
         <record id="hr_recruitment_requisition_group_hr_recruitment_user" model="ir.rule">
             <field name="name">Requisition recruitment user</field>
             <field name="model_id" ref="hr_recruitment_requisition.model_hr_recruitment_requisition"/>

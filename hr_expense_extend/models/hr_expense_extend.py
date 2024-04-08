@@ -18,7 +18,14 @@ class HrExpense(models.Model):
                                     help='Tipo de documento')
     supplier_vat = fields.Char(string='Nº identificación', help='Número de Documento')
     of_refunded = fields.Boolean(string='¿Viene de un reembolso?')
-    account_default_id = fields.Many2one(comodel_name='account.account', string='Cuenta de gasto')
+    account_default_id = fields.Many2one(comodel_name='account.account', string='Cuenta de gasto',
+                                         related='company_id.account_default_id')
+
+    def _compute_from_product_id_company_id(self):
+        res = super(HrExpense, self)._compute_from_product_id_company_id()
+        for rec in self:
+            rec.account_id = rec.account_default_id
+        return res
 
     @api.onchange('supplier_id')
     def _compute_select_supplier(self):

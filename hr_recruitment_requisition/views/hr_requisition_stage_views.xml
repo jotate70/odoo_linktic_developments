@@ -46,6 +46,7 @@
                                 <field name="optional_manager_id"  options="{'no_create':true}"
                                        attrs="{'invisible': [('requires_approval', '=', 'no')]}"/>
                                 <field name="state_type"/>
+                                <field name="apply_contract_changes"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                             <group name="main_right">

@@ -1,0 +1,657 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* lt_hr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-01 00:17+0000\n"
+"PO-Revision-Date: 2024-04-01 00:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Cargo</strong>"
+msgstr "<strong>Carga</strong>"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Comprobante Número</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Cuenta Bancaria</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Fecha Desde</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Fecha Hasta</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>No Identificación</strong>"
+msgstr "<strong>Sin Identificación</strong>"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Nombre</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Total Deducciones</strong>"
+msgstr "<strong>Deducciones Totales</strong>"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "<strong>Total Devengos</strong>"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Adjustment Entry"
+msgstr "Entrada de ajuste"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Amount Type"
+msgstr "Tipo de cantidad"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_contract__rtefte_aportes_vol_pens_empleador
+msgid "Aporte para pensiones voluntarias"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payslip__apply_compensation
+msgid "Apply Compensation"
+msgstr "Aplicar compensación"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.view_hr_payslip_form_lt_hr
+msgid "Calcular Total"
+msgstr "Total calculado"
+
+#. module: lt_hr
+#: model:ir.actions.server,name:lt_hr.action_compute_total_hr_payslip_from_list
+msgid "Calcular Totales"
+msgstr "Totales calculados"
+
+#. module: lt_hr
+#: model:ir.actions.server,name:lt_hr.action_cancel_hr_payslip_from_list
+msgid "Cancelar"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Cantidad"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payslip_line__specific_struct_salary_ids
+#: model:ir.model.fields,field_description:lt_hr.field_hr_salary_rule__specific_struct_salary_ids
+#: model_terms:ir.ui.view,arch_db:lt_hr.alfa_amb_hr_salary_rule_form_view_inherit
+msgid "Causación especifica según estructura salarial"
+msgstr "Causación específica según estructura salarial"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_employee_arl_risk_filter
+msgid "Clase"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_employee_arl_risk_filter
+msgid "Clases de Riesgo"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_res_company
+#: model:ir.model.fields,field_description:lt_hr.field_hr_department__company_ids
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payroll_structure__company_id
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__company_id
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Company"
+msgstr "Compañía"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Comprobante de Nómina"
+msgstr "Comprobante de Nomina"
+
+#. module: lt_hr
+#: model:ir.actions.server,name:lt_hr.action_action_payslip_done_hr_payslip_edir_from_list
+#: model:ir.actions.server,name:lt_hr.action_done_hr_payslip_from_list
+msgid "Confirmar"
+msgstr ""
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Contract does not have a name for the employee %s."
+msgstr "El contrato no tiene nombre para el empleado %s."
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_contribution_register
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Contribution Register"
+msgstr "Registro de contribución"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__analytic_account_id
+msgid "Cuenta Analítica"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__account_credit
+msgid "Cuenta Crédito"
+msgstr "Cuenta Credito"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__account_debit
+msgid "Cuenta Débito"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Deducciones"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_department
+msgid "Department"
+msgstr "Departamento"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Devengos"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_employee.py:0
+#, python-format
+msgid "Employee %s has ID number duplicated with another existing employee."
+msgstr "El empleado %s tiene un número de identificación duplicado con el de otro empleado existente."
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contrato de empleado"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have a first name for the employee %s."
+msgstr "El empleado no tiene un nombre para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have a postal municipality for the employee %s."
+msgstr "El empleado no tiene municipio postal para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have a surname for the employee %s."
+msgstr "El empleado no tiene apellido para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have an address for the employee %s."
+msgstr "El empleado no tiene una dirección para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have an document number for the employee %s."
+msgstr "Empleado no tiene número de documento para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Employee does not have an identification type for the employee %s."
+msgstr "Empleado no tiene tipo de identificación para el empleado %s."
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: lt_hr
+#: model:ir.model.fields,help:lt_hr.field_hr_contract__rtefte_aportes_vol_pens_empleador
+msgid ""
+"Este es el aporte que el empleador hace a nombre del trabajador como aporte "
+"voluntario a pensiones obligatorias, diferente de los aportes a fondos de "
+"pensiones voluntarias que pueda hacer el trabajador por su cuenta"
+msgstr "Este es el aporte que el empleador tiene a nombre del trabajador como aporte voluntario a pensiones obligatorias, diferente de los aportes a fondos de pensiones voluntarias que pueda hacer el trabajador por su cuenta"
+
+#. module: lt_hr
+#: model:ir.model.fields,help:lt_hr.field_hr_contract__rtefte_incentivo_vivienda
+msgid ""
+"Este es un incentivo que paga el empleador con destinación exclusiva para "
+"inversión en vivienda. Será contemplado como un ingreso laboral no "
+"prestacional. Solo influye en el cálculo de la retención en la fuente, de "
+"manera que debe estar ingresado en el campo de pago no salarial para que "
+"afecte la nómina como un ingreso."
+msgstr "Este es un incentivo que paga el empleador con destino exclusivo para inversión en vivienda. "
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__struct_id
+msgid "Estructura Salarial"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_account_account__group_payslip
+msgid "Grouped in Payslip"
+msgstr "Agrupados en Nómina"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.view_company_form_linktic_hr
+msgid "Human Resource"
+msgstr "Recursos Humanos"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__id
+msgid "ID"
+msgstr "identificación"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__account_tax_id
+msgid "Impuesto"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_contract__rtefte_incentivo_vivienda
+msgid "Incentivo empleador para vivienda"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payroll_structure__is_liquidation
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payslip__is_liquidation
+msgid "Is Liquidation"
+msgstr "Es liquidación"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_payslip__date_liquidation
+msgid "Liquidation Date"
+msgstr "Fecha de Liquidación"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_department__manager_id
+msgid "Manager"
+msgstr "Gerente"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Neto a Pagar"
+msgstr ""
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: lt_hr
+#: model:ir.actions.server,name:lt_hr.action_draft_hr_payslip_from_list
+msgid "Pasar a borrador"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_payslip_line
+msgid "Payslip Line"
+msgstr "Línea de nómina"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.view_hr_payslip_line_pivot
+msgid "Payslip Line Analysis"
+msgstr "Análisis de línea de recibo de nómina"
+
+#. module: lt_hr
+#: model:ir.ui.menu,name:lt_hr.hr_payslip_line_menu
+msgid "Payslip Line's"
+msgstr "Línea de recibo de nómina"
+
+#. module: lt_hr
+#: model:ir.actions.act_window,name:lt_hr.action_hr_payslip_line
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Payslip Lines"
+msgstr "Líneas de recibo de nómina"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_specific_causation__rule_id
+msgid "Regla Salarial"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_resource_calendar
+msgid "Resource Working Time"
+msgstr "Tiempo de Trabajo de Recursos"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "SALARIOS POR PAGAR"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_salary_rule
+msgid "Salary Rule"
+msgstr "Regla de Salario"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Salary Rule Category"
+msgstr "Categoría de regla salarial"
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_hr_payroll_structure
+msgid "Salary Structure"
+msgstr "Estructura salarial"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Search Payslip Lines"
+msgstr "Buscar líneas de recibo de nómina"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_contribution_register__field_id
+msgid "Seguridad Social Empleado"
+msgstr "Seguridad Social Empleada"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_hr_contribution_register__partner_from_employee_contract
+msgid "Seleccionar el partner desde el empleado"
+msgstr "Seleccionar el socio desde el empleado"
+
+#. module: lt_hr
+#: model:ir.actions.server,name:lt_hr.action_senf_email_hr_payslip_from_list
+msgid "Send Email"
+msgstr "Enviar correo electrónico"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Slip"
+msgstr "Resbalón"
+
+#. module: lt_hr
+#: model:ir.model,name:lt_hr.model_specific_causation
+msgid "Specific Causation"
+msgstr "Causalidad específica"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The 'Layoffs' and 'Layoffs interest' rules are mandatory in order to report "
+"Layoffs"
+msgstr "Las reglas de 'Despidos' e 'Intereses de despidos' son obligatorias para poder reportar despidos"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The 'Primas' rule is mandatory in order to report Primas"
+msgstr "La regla 'Primas' es obligatoria para poder reportar Primas"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The Expense Journal \"%s\" has not properly configured the Credit Account!"
+msgstr "¡El Diario de Gastos \"%s\" no ha configurado correctamente la Cuenta de Crédito!"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The Expense Journal \"%s\" has not properly configured the Debit Account!"
+msgstr "¡El Diario de Gastos \"%s\" no ha configurado correctamente la Cuenta de Débito!"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The Origin payslip is required for adjusment notes."
+msgstr "Se requiere la nómina de Origen para notas de ajuste."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The code parameter is necessary."
+msgstr "El parámetro de código es necesario."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Scheduled Pay' field configured for the employee"
+" %s."
+msgstr "El contrato debe tener configurado el campo 'Pago Programado' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Start Date' field configured for the employee "
+"%s."
+msgstr "El contrato debe tener configurado el campo 'Fecha de Inicio' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Subtype worker' field configured for the "
+"employee %s."
+msgstr "El contrato debe tener configurado el campo 'Subtipo trabajador' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Type contract' field configured for the employee"
+" %s."
+msgstr "El contrato debe tener configurado el campo 'Tipo de contrato' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Type worker' field configured for the employee "
+"%s."
+msgstr "El contrato debe tener configurado el campo 'Tipo de trabajador' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The contract must have the 'Wage' field configured for the employee %s."
+msgstr "El contrato debe tener configurado el campo 'Salario' para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The employee's document type cannot be NIT for the employee %s."
+msgstr "El tipo de documento del empleado no puede ser NIT para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The parameter %s does not exist."
+msgstr "El parámetro %s no existe."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"The payroll must have a consecutive number, 'Reference' field for the "
+"employee %s."
+msgstr "La nómina debe tener un número consecutivo, campo 'Referencia' del empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The payroll must have a payment date for the employee %s."
+msgstr "La nómina debe tener fecha de pago para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The payroll must have a payment form for the employee %s."
+msgstr "La nómina debe tener una forma de pago para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The payroll must have a payment method for the employee %s."
+msgstr "La nómina debe tener un método de pago para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The payroll must have a period for the employee %s."
+msgstr "La nómina debe tener un período para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "The sequence must have a prefix"
+msgstr "La secuencia debe tener un prefijo"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_employee_arl_risk_form
+msgid "Tipo de Riesgo"
+msgstr ""
+
+#. module: lt_hr
+#: model:ir.actions.act_window,name:lt_hr.action_hr_employee_arl_risk
+#: model:ir.ui.menu,name:lt_hr.menu_hr_employee_arl_risk
+msgid "Tipos de Riesgos"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_employee_arl_risk_tree
+msgid "Tipos de riesgos"
+msgstr ""
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.report_report_payslip_custom
+msgid "Total"
+msgstr "total"
+
+#. module: lt_hr
+#: model_terms:ir.ui.view,arch_db:lt_hr.hr_payslip_line_search
+msgid "Type Concept"
+msgstr "Concepto de tipo"
+
+#. module: lt_hr
+#: model:ir.model.fields,help:lt_hr.field_res_company__validation_create_employee
+msgid "Type of validation in create employee."
+msgstr "Tipo de validación en crear empleado."
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_res_company__validation_create_employee
+msgid "Validation Employee"
+msgstr "Empleado de Validación"
+
+#. module: lt_hr
+#: model:ir.model.fields,field_description:lt_hr.field_resource_calendar__weekly_hours
+msgid "Weekly Hours"
+msgstr "Horas Semanales"
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Your company does not have a document number for the employee %s."
+msgstr "Su empresa no tiene un número de documento para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Your company does not have a name for the employee %s."
+msgstr "Su empresa no tiene nombre para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Your company does not have a postal municipality for the employee %s."
+msgstr "Su empresa no tiene municipio postal para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Your company does not have an address for the employee %s."
+msgstr "Su empresa no tiene dirección para el empleado %s."
+
+#. module: lt_hr
+#: code:addons/lt_hr/models/hr_payslip.py:0
+#, python-format
+msgid "Your company does not have an identification type for the employee %s."
+msgstr "Su empresa no tiene un tipo de identificación para el empleado %s."

@@ -22,7 +22,7 @@
                     name="number"
                     filter_domain="['|',('number', 'ilike', self),('name', 'ilike', self)]"
                 />
-                <field name="partner_id" />
+                <field name="partner_id"/>
                 <field name="user_id" />
                 <field name="name" />
                 <field name="tag_ids" />
@@ -143,41 +143,53 @@
                         <h1 class="oe_title">
                             <field name="number" />
                         </h1>
-                        <h2 class="o_row">
-                            <field name="name" />
-                        </h2>
+<!--                        <h2 class="o_row">-->
+<!--                            <field name="name" readonly="1"/>-->
+<!--                        </h2>-->
                     </div>
                     <group name="main">
                         <group>
                             <field name="active" invisible="1" />
-                            <field name="team_id" options='{"always_reload": True}' />
+                            <field name="stage_type" invisible="1" />
+                            <field name="team_id" string="Solicitud" options='{"always_reload": True, "no_open": True, "no_create": True}'
+                                   attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
+                            <field name="domain_type" invisible="1" />
+                            <field name="type_id" domain='domain_type' required="1" string="Módulo" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
+                            <field name="category_id" required="1" attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}"
+                                   options="{'no_open': True, 'no_create': True}" force_save="1"/>
                             <field name="user_ids" invisible="1" readonly="1" />
-                            <field name="user_id" options='{"always_reload": True}' />
+                            <field name="user_id" options='{"always_reload": True, "no_open": True, "no_create": True}'
+                                   attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
                             <field name="priority" widget="priority" />
-                            <field
-                                name="company_id"
-                                options="{'no_create': True}"
-                                groups="base.group_multi_company"
-                            />
-                            <field name="create_date" readonly="1" />
-                            <field name="channel_id" />
+
                         </group>
                         <group>
-                            <field name="partner_id" />
-                            <field name="partner_name" />
-                            <field name="partner_email" />
-                            <field name="category_id" />
+                            <field name="partner_id" required="1" options="{'no_open': True, 'no_create': True}"
+                                   attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
+                            <field name="partner_name" attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
+                            <field name="partner_email" attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"/>
+<!--                            <field-->
+<!--                                name="tag_ids"-->
+<!--                                widget="many2many_tags"-->
+<!--                                options="{'no_create_edit': True}"-->
+<!--                                attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"-->
+<!--                            />-->
                             <field
-                                name="tag_ids"
-                                widget="many2many_tags"
-                                options="{'no_create_edit': True}"
+                                name="company_id"
+                                options="{'no_open': True, 'no_create': True}"
+                                groups="base.group_multi_company"
+                                attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}" force_save="1"
                             />
+                            <field name="create_date" readonly="1" force_save="1"/>
+                            <field name="channel_id" invisible="1"/>
                         </group>
                     </group>
                     <group>
                         <notebook>
                             <page string="Description" name="description">
-                                <field name="description" widget="html" />
+                                <field name="description" widget="html" attrs="{'readonly': [('stage_type', 'in', ['in_progress', 'done', 'close'])]}"
+                                       force_save="1"/>
                             </page>
                             <page string="Other Information" name="other_info">
                                 <group>

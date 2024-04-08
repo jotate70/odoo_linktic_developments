@@ -6,9 +6,7 @@
         <field name="inherit_id" ref="linktic_hr_expense.view_hr_expense_advance_form"/>
         <field name="arch" type="xml">
             <!--                Fields           -->
-            <xpath expr="//field[@name='date']" position="after">
-                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"
-                       options="{'no_open': True, 'no_create': True}"/>
+            <xpath expr="//label[@for='total_amount']" position="before">
                 <field name="product_id" options="{'no_open': True, 'no_create': True}"
                        attrs="{'invisible': [('travel_request_id','=',False)]}"/>
                 <label for="days" string="Valor" attrs="{'invisible': [('travel_request_id','=',False)]}"/>
@@ -17,6 +15,10 @@
                     <span class="oe_read_only"> - </span>
                     <field name="amount_qty" widget='monetary' attrs="{'readonly': [('state','in',['done','refused'])]}"/>
                 </div>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="travel_request_id" readonly="1" attrs="{'invisible': [('travel_request_id','=',False)]}"
+                       options="{'no_open': True, 'no_create': True}"/>
             </xpath>
         </field>
     </record>

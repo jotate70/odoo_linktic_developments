@@ -1,6 +1,4 @@
 from odoo import fields, _, models, api
-from odoo.exceptions import ValidationError
-
 
 class HrEmployee(models.Model):
     _inherit = "hr.employee"

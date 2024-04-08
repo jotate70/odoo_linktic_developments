@@ -21,7 +21,8 @@ class Applicant(models.Model):
                                compute='_compute_stage', store=True, readonly=False,
                                copy=False, index=True,
                                group_expand='_read_group_stage_ids')
-    stage_type = fields.Selection([('new', 'New'),
+    stage_control = fields.Many2one(comodel_name='hr.recruitment.stage', string='Stage', index=True)
+    stage_type = fields.Selection(selection=[('new', 'New'),
                                    ('in_progress', 'In progress'),
                                    ('done', 'Done'),
                                    ('refused', 'Refused')],
@@ -32,13 +33,15 @@ class Applicant(models.Model):
                                                  copy=False)
     hired_stage = fields.Boolean(string='Hired Stage', related='stage_id.hired_stage',
                                  help="If checked, this stage is used to determine the hire date of an applicant")
+    signed_contract = fields.Boolean(string='Signed Contract', related='stage_id.signed_contract',
+                                     help='Indicates whether the contract has actually been signed and the process has ended.')
     stage_after = fields.Many2one(comodel_name="hr.recruitment.stage", string="Stage After")
-    state_level = fields.Integer(string='state count')
+    state_level = fields.Integer(string='state count next')
     hr_requisition_domain = fields.Char(string='Requisition domain', compute='_domain_employee_id')
     # hr_requisition_domain = fields.Char(string='Requisition domain')
     hr_requisition_id = fields.Many2one(comodel_name='hr_recruitment_requisition',
                                         string='RRHH ticket')
-    requires_approval = fields.Selection([('yes', 'Yes'), ('no', 'No')], string='Requires Approval',
+    requires_approval = fields.Selection(selection=[('yes', 'Yes'), ('no', 'No')], string='Requires Approval',
                                          help='Indicates if this stage requires approval in the personnel request.',
                                          store=True, related='stage_id.requires_approval')
     manager_id = fields.Many2one(comodel_name='hr.employee', string='Approve By',
@@ -60,16 +63,21 @@ class Applicant(models.Model):
     time_off = fields.Char(string='Disponibilidad', compute='_compute_number_of_days')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
     state_aprove = fields.Integer(string='approval level')
-    recruitment_type = fields.Selection([('0', 'recruitment'),
-                                         ('1', 'modifications of working conditions'),
-                                         ('2', 'Labor dismissal'),
-                                         ('3', 'Disciplinary Process')],
+    recruitment_type = fields.Selection(selection=[('0', 'recruitment'),
+                                                   ('1', 'modifications of working conditions'),
+                                                   ('2', 'Labor dismissal'),
+                                                   ('3', 'Disciplinary Process')],
                                         string=r'Recruitment Type', default='0', index=True,
                                         related='hr_requisition_id.recruitment_type')
     recruitment_type_id = fields.Many2many(comodel_name='hr_recruitment_type', relation='x_hr_recruitment_stage',
                                            column1='recruitment_stage_id', column2='recruitment_type_id',
                                            string='Recruitment Type', related='stage_id.recruitment_type_id',
                                            help='Match the stages with the types of personnel request.')
+    equipment_prioritization = fields.Selection(selection=[('high ', 'High'),
+                                                           ('average', 'Avarage'),
+                                                           ('low', 'Low'),
+                                                           ('not_required', 'not required')],
+                                                required=True, string='Computer equipment prioritization')
 
     # ////////////////////////////////////////////  Fields for contracts  ////////////////////////////////////////////
 
@@ -103,16 +111,14 @@ class Applicant(models.Model):
                                              string="To", default='month', tracking=True)
     analytic_account_id = fields.Many2one(comodel_name='account.analytic.account', string='Account Analytic',
                                           check_company=True, tracking=True)
-    required_mail = fields.Selection([('yes', 'Yes'),
-                                         ('no', 'No'),],
+    required_mail = fields.Selection(selection=[('yes', 'Yes'), ('no', 'No'),],
                                         string='Required Mail', default='yes')
     mail_domain = fields.Char(string='Mail domain')
-    computer_equipment = fields.Selection([('yes', 'Yes'),
-                                         ('no', 'No'),],
+    computer_equipment = fields.Selection(selection=[('yes', 'Yes'), ('no', 'No'),],
                                         string='Computer Equipment', default='yes', tracking=True)
-    os = fields.Selection([('windows', 'Windows'),
-                           ('macos', 'MacOS'),
-                           ('linux', 'Linux')],
+    os = fields.Selection(selection=[('windows', 'Windows'),
+                                     ('macos', 'MacOS'),
+                                     ('linux', 'Linux')],
                           string='OS', default='windows', tracking=True)
     tools = fields.Char(string='Tools', tracking=True)
     supervisor = fields.Many2one(comodel_name='hr.employee', string='Supervisor', tracking=True)
@@ -134,6 +140,25 @@ class Applicant(models.Model):
         return result
 
     #  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    def control_stage_apply(self):
+        self.write({'stage_id': self.stage_control.id})
+        self._control_stage_recruitment()
+
+    @api.onchange('stage_control')
+    def _control_stage_recruitment(self):
+        for rec in self:
+            vat = []
+            len1 = 0
+            data = self.env['hr.recruitment.stage'].search([('recruitment_type_id', '=', self.recruitment_type_id.ids)])
+            for rec2 in data:
+                vat.append(rec2.id)
+                len1 = len(vat)
+            for i in range(0, len1-1):
+                if vat[i] == rec.stage_control.id:
+                    rec.stage_after = vat[i+1]
+                    rec.state_level = i + 1
+                    rec.state_aprove = i
 
     @api.onchange('display_name')
     def _compute_display_name_to_name(self):
@@ -277,6 +302,8 @@ class Applicant(models.Model):
             self.write({'state_aprove': c})
 
     def compute_next_stage(self):
+        if self.stage_after.stage_type == 'done':
+            self.hr_requisition_id._compute_done_assigned()
         #  Marca actividad como hecha de forma automatica
         new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
         new_activity.action_feedback(feedback='Es Aprobado')
@@ -286,32 +313,59 @@ class Applicant(models.Model):
         self._compute_stage_after()
 
     def open_stage_transition_wizard(self):
-        if self.stage_id.requires_approval == 'yes' and self.requires_budget_approval == False:
-            approved = self.manager_before
-        elif self.requires_budget_approval == True:
-            approved = self.uncapped_manager_id
+        if self.stage_id.requires_approval == 'yes':
+            if self.requires_budget_approval == False:
+                approved = self.manager_id
+            elif self.requires_budget_approval == True:
+                approved = self.uncapped_manager_id
+            # else:
+            #     approved = self.user_id.employee_id
+            if approved.user_id == self.env.user:
+                new_wizard = self.env['hr_applicant_stage_transition_wizard'].create({
+                    'hr_applicant_id': self.id,
+                    'recruitment_type_id': self.recruitment_type_id.ids,
+                    'hr_recruitment_requisition_id': self.hr_requisition_id.id,
+                    'stage_id': self.stage_id.id,
+                    'requires_approval': self.stage_after.requires_approval,
+                    'manager_id': approved.id,
+                    'manager_after_id': self.stage_after.manager_id.id,
+                    'time_off': self.time_off,
+                    'time_off_related': self.time_off_related,
+                    'datetime_start': fields.datetime.now(),
+                })
+                return {
+                    'name': _('Stage Transition'),
+                    'view_mode': 'form',
+                    'res_model': 'hr_applicant_stage_transition_wizard',
+                    'type': 'ir.actions.act_window',
+                    'target': 'new',
+                    'res_id': new_wizard.id,
+                }
+            else:
+                raise UserError('No tiene permisos para aprobar la solicitud, solo el aprobador asignado puede confirmarla.')
+        elif self.user_id == self.env.user:
+            new_wizard = self.env['hr_applicant_stage_transition_wizard'].create({
+                'hr_applicant_id': self.id,
+                'recruitment_type_id': self.recruitment_type_id.ids,
+                'hr_recruitment_requisition_id': self.hr_requisition_id.id,
+                'stage_id': self.stage_id.id,
+                'requires_approval': self.stage_after.requires_approval,
+                'manager_id': self.user_id.employee_id.id,
+                'manager_after_id': self.stage_after.manager_id.id,
+                'time_off': self.time_off,
+                'time_off_related': self.time_off_related,
+                'datetime_start': fields.datetime.now(),
+            })
+            return {
+                'name': _('Stage Transition'),
+                'view_mode': 'form',
+                'res_model': 'hr_applicant_stage_transition_wizard',
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                'res_id': new_wizard.id,
+            }
         else:
-            approved = self.user_id.employee_id
-        new_wizard = self.env['hr_applicant_stage_transition_wizard'].create({
-            'hr_applicant_id': self.id,
-            'recruitment_type_id': self.recruitment_type_id.ids,
-            'hr_recruitment_requisition_id': self.hr_requisition_id.id,
-            'stage_id': self.stage_id.id,
-            'requires_approval': self.stage_after.requires_approval,
-            'manager_id': approved.id,
-            'manager_after_id': self.stage_after.manager_id.id,
-            'time_off': self.time_off,
-            'time_off_related': self.time_off_related,
-            'datetime_start': fields.datetime.now(),
-        })
-        return {
-            'name': _('Stage Transition'),
-            'view_mode': 'form',
-            'res_model': 'hr_applicant_stage_transition_wizard',
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'res_id': new_wizard.id,
-        }
+            raise UserError('Sólo la persona asignada puede cambiar de etapa.')
 
     def archive_applicant(self):
         new_wizard = self.env['applicant.get.refuse.reason'].create({

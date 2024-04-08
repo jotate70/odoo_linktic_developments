@@ -2,41 +2,22 @@
 # This file contains the translation of the following modules:
 # 	* hr_recruitment_requisition
 #
-# Translators:
-# Julián Toscano <jotate70@gmail.com>, 2023
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 15.0-20240229\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-16 08:08+0000\n"
-"PO-Revision-Date: 2017-11-16 08:08+0000\n"
-"Last-Translator: Julián Toscano <jotate70@gmail.com>, 2023\n"
-"Language-Team: Spanish (Colombia)"
+"POT-Creation-Date: 2024-03-06 18:48+0000\n"
+"PO-Revision-Date: 2024-03-06 18:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CO\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_draft
-msgid "0. Elaboración Ticket"
-msgstr ""
+"Plural-Forms: \n"
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "01-02-2018"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_liquidation_completion
-msgid "1. Realización Liquidación"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_confirm
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_disciplinary_process
-msgid "1. Revisión"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -46,83 +27,8 @@ msgid "12"
 msgstr ""
 
 #. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_schedule_induction
-msgid "14. Programar Inducción"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_request_contract_documents
-msgid "17. Firmar Contrato"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_contract_preparation
-msgid "19. Consolidar Documentos"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_liquidation_approval
-msgid "2. Aprobación Liquidación"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_approval
-msgid "2. Aprobación Vicepresidencia"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_presentation_disclaimers
-msgid "2. Correctivo"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_validation
-msgid "2. Validación"
-msgstr ""
-
-#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "2.000.0000"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_sifa_registration
-msgid "3. Contabilización Liquidación"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_notification
-msgid "3. Notificación Empleado"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_rrhh_interview
-msgid "4. Calificación Pruebas"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_recruitment
-msgid "4. En Reclutamiento"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_contract_addendum
-msgid "4. Notificación Nomina"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_liquidation_payment
-msgid "4. Pago Liquidación"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_employee_update
-msgid "5. Actualización del Empleado"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_send_liquidation
-msgid "5. Enviar Liquidación"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -132,28 +38,8 @@ msgid "5.000.000,00"
 msgstr ""
 
 #. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_archive_employee
-msgid "6. Archivar Empleado"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_interview_manager_process_leader
-msgid "6. Entrevistas Gerentes/Líderes"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_generation_contract_addendum
-msgid "6. Generar Otro Sí"
-msgstr ""
-
-#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "6.000.0000"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_in_sign_contract_addendum
-msgid "7. Firmar Otro Sí"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -169,11 +55,16 @@ msgstr ""
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid ""
-"<span attrs=\"{'invisible': [('recruitment_type','!=','0')]}\"><b>profile description</b></span>\n"
-"                        <span attrs=\"{'invisible': [('recruitment_type','=','0')]}\"><b>Description</b></span>"
+"<span attrs=\"{'invisible': [('recruitment_type','!=','0')]}\">\n"
+"                            <b>profile description</b>\n"
+"                        </span>\n"
+"                        <span attrs=\"{'invisible': [('recruitment_type','=','0')]}\">\n"
+"                            <b>Description</b>\n"
+"                        </span>"
 msgstr ""
-"<span attrs=\"{'invisible': [('recruitment_type','!=','0')]}\"><b>Descripción del perfil</b></span>\n"
-"                        <span attrs=\"{'invisible': [('recruitment_type','=','0')]}\"><b>Descripción</b></span>"
+"<span attrs=\"{'invisible': [('recruitment_type','!=','0')]}\">\n"
+" <b>descripción del perfil</b>\n"
+" </span> "
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
@@ -184,19 +75,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_stage_transition_wizard_form
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_recruitment_requisition_stage_transition_wizard_form
-#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
-#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_kanban_view
 msgid "<span class=\"oe_read_only\"> - </span>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
-msgid "<span class=\"oe_read_only\"> / mes </span>"
 msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "<span class=\"oe_read_only\"> = </span>"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_kanban_view
+msgid "<span class=\"oe_read_only\">-</span>"
+msgstr "<span class=\"oe_read_only\">/mes</span>"
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+msgid "<span> - </span>"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -274,6 +170,16 @@ msgid "Activity Type Icon"
 msgstr "Ícono de tipo de actividad"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__actual_company_id
+msgid "Actual Company"
+msgstr "Compañia Actual"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__actual_value
+msgid "Actual Value"
+msgstr "Valor Actual"
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Add a note"
 msgstr "Agrega una nota"
@@ -337,11 +243,13 @@ msgstr "Cantidad"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__count_recruited
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__count_signed_contract
 msgid "Amount recruit"
 msgstr "Cantidad reclutar"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__contract_duration_sel__annual
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__annual
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__annual
 msgid "Annual"
 msgstr "Anual"
@@ -386,6 +294,17 @@ msgstr "Postulaciones"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__termination_date
 msgid "Application Date"
 msgstr "Fecha de aplicacion"
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__apply_contract_changes
+msgid "Apply Contract Changes"
+msgstr "Aplicar cambios de contrato"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__manager_before
@@ -474,15 +393,6 @@ msgid "Assigned activity"
 msgstr "Actividad asignada"
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_notification
-msgid ""
-"At this stage, a record is left that the worker was notified of the new "
-"conditions."
-msgstr ""
-"En esta etapa se deja constancia de que el trabajador fue notificado de las "
-"nuevas condiciones."
-
-#. module: hr_recruitment_requisition
 #: model:ir.model,name:hr_recruitment_requisition.model_ir_attachment
 msgid "Attachment"
 msgstr "Adjunto"
@@ -512,6 +422,11 @@ msgstr "Adjuntos"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__time_off_related
 msgid "Ausencia"
 msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__equipment_prioritization__average
+msgid "Avarage"
+msgstr "Media"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__avatar_1920
@@ -554,18 +469,20 @@ msgid "Before Stage"
 msgstr "Etapa anterior"
 
 #. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_contract_preparation
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_interview_manager_process_leader
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_request_contract_documents
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_rrhh_interview
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_schedule_induction
-#: model:hr.recruitment.stage,legend_blocked:hr_recruitment_requisition.hr_recruitment_stage_signed_refused
-msgid "Bloqueado(a)"
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_boolean
+#, python-format
+msgid "Boolean"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__budget_post_domain
+msgid "Budget Post Domain"
 msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__budget_value
-#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__budget_value
 msgid "Budget Value"
 msgstr "Valor del presupuesto"
 
@@ -577,7 +494,9 @@ msgid "Budget amount"
 msgstr "Monto de presupuesto"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_contract_type__budget_post_ids
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__budget_post_id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__budget_post_id
 msgid "Budgetary Position"
 msgstr "Posición presupuestaria"
 
@@ -585,6 +504,16 @@ msgstr "Posición presupuestaria"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__button_cancel
 msgid "Button cancel"
 msgstr "Boton cancelar"
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+msgid "By Contract"
+msgstr "Por contrato"
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+msgid "By type"
+msgstr "Por tipo"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__ceo
@@ -610,6 +539,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__contract_management_line__state__cancelled
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__category_type
 msgid "Category Type"
 msgstr "Tipo de categoría"
@@ -630,6 +564,16 @@ msgid "Certifications"
 msgstr "Certificaciones"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model,name:hr_recruitment_requisition.model_contract_management_class_setting
+msgid "Change management Class settings for contracts"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model,name:hr_recruitment_requisition.model_contract_management_reason_setting
+msgid "Change management reason settings for contracts"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition__discipline_reason
 msgid "Choose a disciplinary reason"
 msgstr "Elija un motivo disciplinario"
@@ -638,6 +582,19 @@ msgstr "Elija un motivo disciplinario"
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_discipline_category__category_type
 msgid "Choose the category type disciplinary or action"
 msgstr "Elija la categoría tipo disciplinaria/acción"
+
+#. module: hr_recruitment_requisition
+#: model:ir.actions.act_window,name:hr_recruitment_requisition.contract_management_class_setting_act_window
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__class_id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__class_ids
+#: model:ir.ui.menu,name:hr_recruitment_requisition.contract_management_class_setting_menu
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_form_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_search_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_tree_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_reason_setting_form_view
+msgid "Class"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_recruitment_requisition_view_search
@@ -650,7 +607,9 @@ msgid "Coach"
 msgstr "Mentor"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__code
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__code
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_search_view
 msgid "Code"
 msgstr "Código"
 
@@ -667,14 +626,26 @@ msgid "Color Index"
 msgstr "Índice de Colores"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__actual_column_name
+msgid "Column to fill"
+msgstr "Columna a Llenar"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__company_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__company_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__company_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__company_id2
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__company_id3
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_type__company_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__company_id
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
 msgid "Company"
 msgstr "Compañía"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__company_int
+msgid "Company Int"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__computer_equipment
@@ -683,10 +654,21 @@ msgid "Computer Equipment"
 msgstr "Computadora"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__equipment_prioritization
+msgid "Computer equipment prioritization"
+msgstr "Priorización de equipos de computo"
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_requisition_state__state_type__confirm
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Confirm"
 msgstr "Confirmado"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__contract_id
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+msgid "Contract"
+msgstr "Priorización de equipo de computo"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__contract_addendum
@@ -704,11 +686,31 @@ msgid "Contract Domain"
 msgstr "Dominio de contrato"
 
 #. module: hr_recruitment_requisition
+#: model:ir.module.category,name:hr_recruitment_requisition.contract_management
+#: model:ir.ui.menu,name:hr_recruitment_requisition.contract_management_menu_category
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_tree_view
+msgid "Contract Management"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.actions.act_window,name:hr_recruitment_requisition.contract_management_line_act_window
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+msgid "Contract Management Line"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model,name:hr_recruitment_requisition.model_hr_contract_type
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__contract_type_id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__contract_type_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__contract_type_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__contract_type_id
 msgid "Contract Type"
 msgstr "Tipo de contrato"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__contract_type_domain
+msgid "Contract Type Domain"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__contract_wage_rise
@@ -726,14 +728,43 @@ msgid "Contractor company"
 msgstr "Empresa contratista"
 
 #. module: hr_recruitment_requisition
+#: model:ir.ui.menu,name:hr_recruitment_requisition.contract_management_line_menu
+msgid "Contrat Management Line"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+msgid "Control Panel"
+msgstr "Panel de control"
+
+#. module: hr_recruitment_requisition
+#. openerp-web
+#: code:addons/hr_recruitment_requisition/static/src/js/hr_contract_reference.js:0
+#, python-format
+msgid "Create \"<strong>%s</strong>\""
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "Create Employee"
 msgstr "Crear empleado"
 
 #. module: hr_recruitment_requisition
+#. openerp-web
+#: code:addons/hr_recruitment_requisition/static/src/js/hr_contract_reference.js:0
+#, python-format
+msgid "Create and Edit..."
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__create_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__create_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__create_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__create_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__create_uid
@@ -744,9 +775,13 @@ msgid "Created by"
 msgstr "Creado por"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__create_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__create_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__create_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__create_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__create_date
@@ -762,6 +797,8 @@ msgid ""
 "Cuando el jefe inmediato se encuentra ausente, debe aprobar el siguiente "
 "respondable"
 msgstr ""
+"Cuando el jefe inmediato se encuentra ausente, debe aprobar el siguiente "
+"responsable"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__currency_id
@@ -793,6 +830,16 @@ msgid "Current information"
 msgstr "Información actual"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__currently_company_id
+msgid "Currently Company"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__currently_currency_id
+msgid "Currently Currency"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "Currículum"
 msgstr ""
@@ -800,6 +847,20 @@ msgstr ""
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "Cédula de ciudadania"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_date
+#, python-format
+msgid "Date"
+msgstr "Fecha"
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_datetime
+#, python-format
+msgid "Datetime"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -811,6 +872,13 @@ msgstr "Define la planeación del recurso"
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__working_time__deliverables
 msgid "Defined by deliverables"
 msgstr "Definido por entregables"
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid ""
+"Delete operation not allowed. Only in draft state is allowed this operation"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__department_id
@@ -827,6 +895,11 @@ msgstr "Departamento"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__description
 msgid "Description"
 msgstr "Descripción"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__contract_duration_qty
+msgid "Desde"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__description
@@ -849,7 +922,6 @@ msgid "Disciplinary Category"
 msgstr "Categoría disciplinaria"
 
 #. module: hr_recruitment_requisition
-#: model:hr_recruitment_type,name:hr_recruitment_requisition.recruitment_type_disciplinary_process
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_type__recruitment_type__3
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Disciplinary Process"
@@ -878,9 +950,13 @@ msgid "Dismissal"
 msgstr "Despido"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__display_name
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__display_name
@@ -888,12 +964,12 @@ msgstr "Despido"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_type__display_name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__display_type
 msgid "Display Type"
-msgstr ""
+msgstr "Tipo de pantalla"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__time_off
@@ -916,6 +992,7 @@ msgid "Done"
 msgstr "Finalizado"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__contract_management_line__state__draft
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_requisition_state__state_type__draft
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Draft"
@@ -957,8 +1034,10 @@ msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model,name:hr_recruitment_requisition.model_hr_employee
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__employee_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__employee_id2
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__employee_ids
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Employee"
 msgstr "Empleado"
@@ -1009,118 +1088,13 @@ msgid "Employee's monthly gross wage."
 msgstr "Salario bruto mensual del empleado."
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_employee_update
-msgid ""
-"En Esta se debe realizar la actualización de la novedad del colaborador en "
-"el Módulo Empleados, creando un contrato con las nuevas condiciones.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_disciplinary_process
-msgid ""
-"En Esta etapa se revisa la solicitud radicada por parte de talento humano y "
-"se procede a definir el correctivo o si se rechaza la solicitud por falta de"
-" fundamentos.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_contract_preparation
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_interview_manager_process_leader
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_request_contract_documents
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_rrhh_interview
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_schedule_induction
-#: model:hr.recruitment.stage,legend_normal:hr_recruitment_requisition.hr_recruitment_stage_signed_refused
-msgid "En Progreso"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_sifa_registration
-msgid ""
-"En esta Etapa se realiza la contabilización y registro, para que "
-"la liquidación queda lista para su pago.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_send_liquidation
-msgid ""
-"En esta Etapa, el equipo de talento humano envía el soporte de liquidación "
-"al empleado vía correo electrónico.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_liquidation_payment
-msgid ""
-"En esta Etapa, según el cronograma de pagos, se transfiere el pago al "
-"empleado, se adjunta captura de pantalla del soporte de pago.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_archive_employee
-msgid ""
-"En esta Etapa talento humano deberá ingresar al módulo de empleados del ERP,"
-" para archivar el expediente del empleado y cancelar el contrato activo.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_sign_contract_addendum
-msgid ""
-"En esta etapa el documento \"Otro Si\" del contrato, pasa a la herramienta "
-"para la gestión de firmas.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_contract_addendum
-msgid ""
-"En esta etapa la información de la modificación se envía al área de Nómina "
-"para su actualización.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_generation_contract_addendum
-msgid ""
-"En esta etapa se realiza la elaboración del documento  \"Otro Si\" del "
-"contrato.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_presentation_disclaimers
-msgid ""
-"En esta etapa talento humano notifica al trabajador el correctivo que se "
-"aplicara  y se deja el registro de todas la gestiones realizadas segun el "
-"tipo de correctivo.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_liquidation_completion
-msgid ""
-"En esta etapa, el equipo de nómina realiza la liquidación y adjunta el "
-"formato de liquidación correspondiente<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_liquidation_approval
-msgid ""
-"En esta etapa, la liquidación realizada deberá ser revisada y aprobada por "
-"el Gerente Administrativo y Financiero.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_validation
-msgid ""
-"En esta etapa de validación, el responsable del area de planificación debe "
-"verificar si tiene el recurso disponible en la empresa.<br>"
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_confirm
-msgid ""
-"En la etapa de Revision se valida la solicitud por parte del proceso de "
-"talento humano, el cual es el encargado de verificar la información de la "
-"solicitud."
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__contract_duration_sel
+msgid "En"
 msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_applicant_get_refuse_reason__datetime_end
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__date_end
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__datetime_end
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__datetime_end
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__date_end
@@ -1143,19 +1117,6 @@ msgid "Entry date estimated"
 msgstr "Fecha de entrada estimada"
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_draft
-msgid ""
-"Esta Etapa se presenta al momento de realizar la solicitud y tambien puede "
-"estar una solicitud en este estado si se da el caso que se devuelve la "
-"solicitud para complementarla o corregirla."
-msgstr ""
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_hired
-msgid "Etapa de Cierre de la Solicitud"
-msgstr ""
-
-#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__expedition_date
 msgid "Expedition Date"
 msgstr "Fecha de expedición"
@@ -1166,9 +1127,17 @@ msgid "Explanation by Employee"
 msgstr "Descripción presunta falta disciplinaria"
 
 #. module: hr_recruitment_requisition
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_hired
-msgid "Finalizado"
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "False"
 msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__field_id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__field_id
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view_official
+msgid "Field"
+msgstr "Campo"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__fold
@@ -1226,6 +1195,7 @@ msgid "Get Refuse Reason"
 msgstr "Obtener razón del rechazo"
 
 #. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.disciplinary_search_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_view_search_bis_extend
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_recruitment_requisition_view_search
@@ -1257,6 +1227,16 @@ msgid "Has Message"
 msgstr "Tiene un mensaje"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__contract_duration_qty_end
+msgid "Hasta"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__equipment_prioritization__high_
+msgid "High"
+msgstr "Alta"
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition__priority__2
 msgid "High priority"
 msgstr "Alta prioridad"
@@ -1265,6 +1245,20 @@ msgstr "Alta prioridad"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__hired_stage
 msgid "Hired Stage"
 msgstr "Etapa contratada"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_stage__stage_type__hiring
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_requisition_state__state_type__hiring
+msgid "Hiring"
+msgstr "En contratación"
+
+#. module: hr_recruitment_requisition
+#: model:ir.actions.act_window,name:hr_recruitment_requisition.action_window_hr_hiring_times
+#: model:ir.model,name:hr_recruitment_requisition.model_hr_hiring_times
+#: model:ir.ui.menu,name:hr_recruitment_requisition.hr_hiring_times_menu
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_hiring_times_view_tree
+msgid "Hiring Times"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__negotiated_salary
@@ -1287,9 +1281,13 @@ msgid "Hr Recruitment Requisition"
 msgstr "Solicitud de Reclutamiento HR"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__id
@@ -1315,6 +1313,11 @@ msgstr "Icono"
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr "Icono para indicar una actividad de excepción."
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__identification
+msgid "Identification Number"
+msgstr "Número de identificación"
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
@@ -1410,9 +1413,15 @@ msgid "In progress"
 msgstr "En curso"
 
 #. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "In the column Value %s must be a number"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition__ceo
 msgid "Indica si el jefe principal de compañia, necesario para aprobaciones"
-msgstr ""
+msgstr "Indica si el jefe principal de compañía, necesario para aprobaciones"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_applicant__requires_approval
@@ -1423,15 +1432,65 @@ msgid "Indicates if this stage requires approval in the personnel request."
 msgstr "Indica si esta etapa requiere aprobación en la solicitud de personal."
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_applicant__signed_contract
+#: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_stage__signed_contract
+msgid ""
+"Indicates whether the contract has actually been signed and the process has "
+"ended."
+msgstr ""
+"Indica si realmente se ha firmado el contrato y ha finalizado el proceso."
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__child_all_count
 msgid "Indirect Subordinates Count"
 msgstr "Número de subordinados indirectos"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_boolean
+msgid "Is Boolean"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_char
+msgid "Is Char"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_date
+msgid "Is Date"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_datetime
+msgid "Is Datetime"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__message_is_follower
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__message_is_follower
 msgid "Is Follower"
 msgstr "Es un seguidor"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_monetary
+msgid "Is Monetary"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_relation
+msgid "Is Relation"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__is_selection
+msgid "Is Selection"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+msgid "Is it safe to change state?"
+msgstr "¿Esta seguro cambiar de estado?"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_applicant__manager_after_id
@@ -1441,7 +1500,7 @@ msgstr "Es un seguidor"
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__manager_after_id
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__manager_id
 msgid "Jefe inmediato respondable de su aprobación"
-msgstr ""
+msgstr "Jefe inmediato responsable de su aprobación"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition__manager_after_id
@@ -1482,7 +1541,6 @@ msgid "Labor conditions"
 msgstr "Condiciones laborales"
 
 #. module: hr_recruitment_requisition
-#: model:hr_recruitment_type,name:hr_recruitment_requisition.recruitment_type_labor_dismissal
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_type__recruitment_type__2
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Labor dismissal"
@@ -1499,9 +1557,13 @@ msgid "Last Activity Time"
 msgstr "Último tiempo de actividad"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard____last_update
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line____last_update
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard____last_update
@@ -1512,9 +1574,19 @@ msgid "Last Modified on"
 msgstr "Última modificación el"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__reversed_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__reversed_date
+msgid "Last Reverse date"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__write_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__write_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__write_uid
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__write_uid
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__write_uid
@@ -1525,9 +1597,13 @@ msgid "Last Updated by"
 msgstr "Actualizado por"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__write_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__write_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__write_date
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__write_date
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__write_date
@@ -1536,6 +1612,11 @@ msgstr "Actualizado por"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__write_date
 msgid "Last Updated on"
 msgstr "Ultima actualización"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__line_ids
+msgid "Line Change"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__os__linux
@@ -1548,14 +1629,14 @@ msgid "List the visible stages for this type of personnel request."
 msgstr "Enumere las etapas visibles para este tipo de solicitud de personal."
 
 #. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_contract_preparation
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_interview_manager_process_leader
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_request_contract_documents
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_rrhh_interview
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_schedule_induction
-#: model:hr.recruitment.stage,legend_done:hr_recruitment_requisition.hr_recruitment_stage_signed_refused
-msgid "Lista para la siguiente etapa"
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__log_count
+msgid "Log Count"
 msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__equipment_prioritization__low
+msgid "Low"
+msgstr "Baja"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition__priority__1
@@ -1565,7 +1646,7 @@ msgstr "Baja prioridad"
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__os__macos
 msgid "MacOS"
-msgstr ""
+msgstr "Mac OS"
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
@@ -1582,6 +1663,11 @@ msgstr "Dominio del correo"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__message_main_attachment_id
 msgid "Main Attachment"
 msgstr "Archivos adjuntos principales"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__management_id
+msgid "Management"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__parent_id
@@ -1614,6 +1700,12 @@ msgid "Match the stages with the types of personnel request."
 msgstr "Relacione las etapas con los tipos de solicitud de personal."
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__materity_licence
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__materity_licence
+msgid "Materity Licence"
+msgstr "Licencia de maternidad"
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__medium_id
 msgid "Medium"
 msgstr "Medio"
@@ -1636,12 +1728,13 @@ msgid "Mixed"
 msgstr "Híbrido"
 
 #. module: hr_recruitment_requisition
-#: model:hr_recruitment_type,name:hr_recruitment_requisition.recruitment_type_modifications_working_conditions
-msgid "Modifications of working conditions"
-msgstr "Modificación de condiciones laborales"
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__model_relation
+msgid "Model Relation"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__contract_duration_sel__month
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__month
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__month
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
@@ -1678,10 +1771,21 @@ msgid "My requests"
 msgstr "Mis solicitudes"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__name
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_reason_setting__name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_discipline_category__name
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__name
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_form_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_class_setting_search_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_reason_setting_form_view
 msgid "Name"
 msgstr "Nombre"
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "Name not found"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_stage__stage_type__new
@@ -1703,6 +1807,11 @@ msgstr "Nuevo tipo de contrato"
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "New Total Income"
 msgstr "Nuevo Total Ingresos"
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view_official
+msgid "New Update Information"
+msgstr "Nueva información de actualización"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__job_positions_after_text
@@ -1763,6 +1872,19 @@ msgid "No Document"
 msgstr "Sin documentos"
 
 #. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "No contract defined"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#. openerp-web
+#: code:addons/hr_recruitment_requisition/static/src/js/hr_contract_reference.js:0
+#, python-format
+msgid "No results to show..."
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_applicant_get_refuse_reason__no_hours
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__no_hours
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__no_hours
@@ -1780,6 +1902,18 @@ msgstr "Sin renovación"
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__recruited__not_recruited
 msgid "Not Recruited"
 msgstr "No reclutado"
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "Not found"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/hr_recruitment_requisition.py:0
+#, python-format
+msgid "Not is possible process the changes without changes"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_addendum__not_signed
@@ -1843,7 +1977,7 @@ msgstr "Número de mensajes sin leer"
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__os
 msgid "OS"
-msgstr ""
+msgstr "sistema operativo"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__observations
@@ -1883,6 +2017,15 @@ msgid "Overall Experience"
 msgstr "Experiencia General"
 
 #. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid ""
+"Please, contact to administrator\n"
+"\n"
+".Expected singleton: %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.actions.act_window,name:hr_recruitment_requisition.action_hr_applicant_to_so_pt
 msgid "Postulaciones"
 msgstr ""
@@ -1903,6 +2046,11 @@ msgid "Priority"
 msgstr "Prioridad"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__contract_management_line__state__processed
+msgid "Processed"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__professional_card
 msgid "Professional Card"
 msgstr "Tarjeta Profesional"
@@ -1914,9 +2062,30 @@ msgid "Profile Attachments"
 msgstr "Perfil Adjuntos"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__project/work_duration
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__project/work_duration
+msgid "Project/Work Duration"
+msgstr "Duración proyecto/labor"
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "Purchase Order Lines"
 msgstr "Líneas de orden de compra"
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_char
+#, python-format
+msgid "Quantity"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#. openerp-web
+#: code:addons/hr_recruitment_requisition/static/src/js/hr_contract_reference.js:0
+#, python-format
+msgid "Quick search: %s"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.actions.act_window,name:hr_recruitment_requisition.action_rrhh_ticket_to_so_pt
@@ -1953,17 +2122,25 @@ msgstr "Configuración RRHH Ticket"
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__rrhh_tickets_ids
 msgid "RRHH Ticktes"
-msgstr ""
+msgstr "Entradas RRHH"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__hr_requisition_id
 msgid "RRHH ticket"
-msgstr ""
+msgstr "billete RRHH"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__count_rrhh_ticket
 msgid "RRHH ticket count"
 msgstr "Cantidad RRHH Ticket"
+
+#. module: hr_recruitment_requisition
+#: model:ir.actions.act_window,name:hr_recruitment_requisition.contract_management_reason_setting_act_window
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__type_id
+#: model:ir.ui.menu,name:hr_recruitment_requisition.contract_management_reason_setting_menu
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_reason_setting_tree_view
+msgid "Reason"
+msgstr "Razón"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model,name:hr_recruitment_requisition.model_discipline_category
@@ -1982,7 +2159,6 @@ msgid "Recruited"
 msgstr "Contratado"
 
 #. module: hr_recruitment_requisition
-#: model:hr_recruitment_type,name:hr_recruitment_requisition.recruitment_type_recruitment
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_requisition_state__state_type__recruitment
 msgid "Recruitment"
 msgstr "Reclutamiento de personal"
@@ -2083,8 +2259,6 @@ msgid "Refuse Reason"
 msgstr ""
 
 #. module: hr_recruitment_requisition
-#: model:hr.recruitment.stage,name:hr_recruitment_requisition.hr_recruitment_stage_signed_refused
-#: model:hr_requisition_state,name:hr_recruitment_requisition.hr_requisition_state_refused
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_stage__stage_type__refused
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_requisition_state__state_type__refused
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_recruitment_requisition_view_search
@@ -2093,9 +2267,21 @@ msgid "Refused"
 msgstr "Rechazado"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_class_setting__relation_field_id
+msgid "Related field"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_employee__user_id
 msgid "Related user name for the resource to manage its access."
 msgstr "Usuario relacionado con el recurso para gestionar su acceso."
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_relation_id
+#, python-format
+msgid "Relation"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__remaining_leaves
@@ -2194,6 +2380,16 @@ msgid "Restore"
 msgstr "Restablecer"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__reverse_count
+msgid "Reverse Count"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__contract_management_line__state__reversed
+msgid "Reversed"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__message_has_sms_error
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__message_has_sms_error
 msgid "SMS Delivery error"
@@ -2210,6 +2406,13 @@ msgid "Salary/Honorarium"
 msgstr "Salario/Honorarios"
 
 #. module: hr_recruitment_requisition
+#. openerp-web
+#: code:addons/hr_recruitment_requisition/static/src/js/hr_contract_reference.js:0
+#, python-format
+msgid "Search More..."
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.disciplinary_search_view
 msgid "Search information"
 msgstr "Buscar información"
@@ -2218,6 +2421,11 @@ msgstr "Buscar información"
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__display_type__line_section
 msgid "Section"
 msgstr "Sección"
+
+#. module: hr_recruitment_requisition
+#: model:res.groups,name:hr_recruitment_requisition.group_logs
+msgid "See logs on contract management"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_employee__coach_id
@@ -2238,6 +2446,20 @@ msgstr ""
 "Si se queda en blanco, la aprobación la realiza un administrador o un aprobador (determinado en ajustes/usuarios)."
 
 #. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_selection_id
+#, python-format
+msgid "Selection"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "Selection value not found"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_hiring_times__sequence
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_line__sequence
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_requisition_state__sequence
 msgid "Sequence"
@@ -2264,6 +2486,12 @@ msgid "Signed"
 msgstr "Firmado"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__signed_contract
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_stage__signed_contract
+msgid "Signed Contract"
+msgstr "Contrato firmado"
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_type__requisition_type__single_requisition
 msgid "Single Requisition"
 msgstr "Solicitud única"
@@ -2280,6 +2508,7 @@ msgstr "Experiencia especifica"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_applicant_get_refuse_reason__stage_id
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__stage_control
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__stage_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__stage_id
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__state
@@ -2294,6 +2523,13 @@ msgstr "Etapa"
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__state_after
 msgid "Stage After"
 msgstr "Etapa después"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__state_control
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
+msgid "Stage Control"
+msgstr "Etapa de control"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__stage_domain
@@ -2328,6 +2564,9 @@ msgstr "Resultados de etapa"
 
 #. module: hr_recruitment_requisition
 #: code:addons/hr_recruitment_requisition/models/hr_applicant_extend.py:0
+#: code:addons/hr_recruitment_requisition/models/hr_applicant_extend.py:0
+#: code:addons/hr_recruitment_requisition/models/hr_recruitment_requisition.py:0
+#: code:addons/hr_recruitment_requisition/models/hr_recruitment_requisition.py:0
 #: code:addons/hr_recruitment_requisition/models/hr_recruitment_requisition.py:0
 #: code:addons/hr_recruitment_requisition/models/hr_recruitment_requisition.py:0
 #, python-format
@@ -2340,24 +2579,17 @@ msgid "Stage Type"
 msgstr "Tipo de etapa"
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_approval
-msgid ""
-"Stage in which the Vice President reviews, adjusts (if required) and "
-"approves the working conditions."
-msgstr ""
-"Etapa en la que el Vicepresidente revisa, ajusta (si es necesario) y aprueba"
-" las condiciones de trabajo."
-
-#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_type__state_id
 msgid "Stages"
 msgstr "Etapas"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_applicant_get_refuse_reason__datetime_start
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__date_start
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__date_start
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_log__datetime_start
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant_stage_transition_wizard__datetime_start
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__date_init
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__date_start
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition_stage_transition_wizard__datetime_start
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_stage_log__datetime_start
@@ -2370,6 +2602,12 @@ msgstr "Fecha de inicio"
 msgid "Start date of the contract (if it's a fixed-term contract)."
 msgstr ""
 "Fecha de inicio del contrato (si es un contrato de duración determinada)."
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__state
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.contract_management_line_search_view
+msgid "State"
+msgstr "Estado"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__state_blanket_order
@@ -2431,12 +2669,48 @@ msgstr "Asunto / Nombre del candidato"
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__supervisor
 msgid "Supervisor"
-msgstr ""
+msgstr "supervisor"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition_line__display_type
 msgid "Technical field for UX purpose."
 msgstr "Campo técnico con fines UX."
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column Boolean cannot be empty for this class %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column Date cannot be empty for this class %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column Datetime cannot be empty for this class %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column Monetary cannot be empty for this class %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column Selection cannot be empty for this class %s"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The column relation cannot be empty for this class %s"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_employee__employee_type
@@ -2452,38 +2726,53 @@ msgstr ""
 "tendrá un historial de contratos."
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_in_recruitment
-msgid ""
-"The recruitment stage is where the selection and hiring of requested "
-"personnel begins."
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The field on the class %s cannot be empty"
 msgstr ""
-"La etapa de reclutamiento es donde comienza la selección y contratación del "
-"personal solicitado."
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_requisition_state,description:hr_recruitment_requisition.hr_requisition_state_refused
-msgid ""
-"The rejected stage indicates that the request has been canceled by the "
-"applicant, or rejected by the approvers of some stage of the process."
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The field type %s does not exist in Odoo"
 msgstr ""
-"La etapa rechazada indica que la solicitud ha sido cancelada por el "
-"solicitante, o rechazada por los aprobadores de alguna etapa del proceso."
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_recruitment_type,description:hr_recruitment_requisition.recruitment_type_recruitment
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
 msgid ""
-"The type of recruitment: Staff Request allows you to recruit new staff."
+"The relation chosen has multiple companies. The company on contract "
+"management must be within the group of companies in the relation"
 msgstr ""
-"El tipo de orden: Solicitud de personal le permite contratar nuevo personal."
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_recruitment_type,description:hr_recruitment_requisition.recruitment_type_modifications_working_conditions
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
 msgid ""
-"The type of recruitment: modification of working conditions allows for "
-"promotions and transfers in the company."
+"The relation of field %s not belong to %s.The company relation cannot be "
+"different."
 msgstr ""
-"El tipo de orden: modificación de las condiciones laborales permite ascensos"
-" y traslados en la empresa."
+
+#. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "The start date of class %s cannot be empty"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.actions.act_window,help:hr_recruitment_requisition.contract_management_line_act_window
+msgid "There is no Contract management line."
+msgstr "No existe línea de gestión de contratos."
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.actions.act_window,help:hr_recruitment_requisition.contract_management_class_setting_act_window
+msgid "There is no examples click in create button to add new one."
+msgstr "No hay ejemplos, haga clic en el botón Crear para agregar uno nuevo."
+
+#. module: hr_recruitment_requisition
+#: model_terms:ir.actions.act_window,help:hr_recruitment_requisition.contract_management_reason_setting_act_window
+msgid "There is no reason. Click in create button to add new one."
+msgstr "No hay razón. Haga clic en el botón Crear para agregar uno nuevo."
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_employee__tz
@@ -2500,6 +2789,8 @@ msgid ""
 "This is a name that helps you keep track of your different campaign efforts,"
 " e.g. Fall_Drive, Christmas_Special"
 msgstr ""
+"Este es un nombre que le ayuda a realizar un seguimiento de los diferentes "
+"esfuerzos de su campaña, p. "
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_recruitment_requisition__medium_id
@@ -2556,6 +2847,11 @@ msgid "To Date"
 msgstr "Hasta la fecha"
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__contract_management_line__state__to_process
+msgid "To Process"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__tools
 msgid "Tools"
 msgstr "Herramientas Informaticas"
@@ -2608,6 +2904,13 @@ msgid "Transport Assistance"
 msgstr "Auxilio de Transporte"
 
 #. module: hr_recruitment_requisition
+#: code:addons/hr_recruitment_requisition/models/contract_management_line.py:0
+#, python-format
+msgid "True"
+msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__ttype
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_stage_transition_wizard_form
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_recruitment_requisition_stage_transition_wizard_form
@@ -2623,6 +2926,11 @@ msgid "Type of the exception activity on record."
 msgstr "Tipo de actividad de excepción registrada."
 
 #. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__ui_company_id
+msgid "Ui Company"
+msgstr ""
+
+#. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view
 msgid "Uncapped Manager"
 msgstr "Aprobador sin topes"
@@ -2635,6 +2943,7 @@ msgstr "Vicepresidente"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__contract_duration_sel__undefined
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__undefined
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__undefined
 msgid "Undefined"
 msgstr "Indefinido"
@@ -2663,6 +2972,7 @@ msgstr "Urgente"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__user_id
+#: model:res.groups,name:hr_recruitment_requisition.group_contract_management_user
 msgid "User"
 msgstr "Usuario"
 
@@ -2680,6 +2990,17 @@ msgstr ""
 #: model:res.groups,name:hr_recruitment_requisition.group_hr_recruitment_requisition_user
 msgid "User level 2: RRHH Ticket"
 msgstr ""
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__vacation_disability
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__vacation_disability
+msgid "Vacation/Disability"
+msgstr "Vacaciones/incapacidad"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_contract_management_line__type_monetary
+msgid "Value"
+msgstr "Valor"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__wage
@@ -2700,6 +3021,7 @@ msgstr "Historial de comunicaciones del sitio web"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__contract_duration_sel__weekly
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_hiring_times__contract_duration_sel__weekly
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_requisition_line__contract_duration_sel__weekly
 msgid "Weekly"
 msgstr "Semanas"
@@ -2720,7 +3042,7 @@ msgstr ""
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__os__windows
 msgid "Windows"
-msgstr ""
+msgstr "Ventanas"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__address_id
@@ -2730,7 +3052,7 @@ msgstr "Dirección laboral"
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__work_email
 msgid "Work Email"
-msgstr "Correo electrónico laboral"
+msgstr "Correo Electrónico Personal"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_employee__work_location_id
@@ -2792,9 +3114,9 @@ msgid "approval level"
 msgstr "nivel de aprobación"
 
 #. module: hr_recruitment_requisition
-#: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
-msgid "budget"
-msgstr "Presupuesto"
+#: model:ir.model,name:hr_recruitment_requisition.model_contract_management_line
+msgid "change management line for contracts"
+msgstr ""
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,help:hr_recruitment_requisition.field_hr_applicant__stage_type
@@ -2823,16 +3145,6 @@ msgid "e.g. Sales Manager 2 year experience"
 msgstr "e.g Gerente de Ventas Experiencia de 2 años"
 
 #. module: hr_recruitment_requisition
-#: model_terms:hr_recruitment_type,description:hr_recruitment_requisition.recruitment_type_disciplinary_process
-msgid "employee call process, through the tool."
-msgstr "llamados de atención, through the tool."
-
-#. module: hr_recruitment_requisition
-#: model_terms:hr_recruitment_type,description:hr_recruitment_requisition.recruitment_type_labor_dismissal
-msgid "employee termination process, through the tool."
-msgstr "proceso de desvinculación de empleados, a través de la herramienta."
-
-#. module: hr_recruitment_requisition
 #: model:ir.model,name:hr_recruitment_requisition.model_hr_applicant_stage_transition_wizard
 msgid "hr applicant Change Stage Wizard"
 msgstr "asistente de etapa de cambio de solicitante de recursos humanos"
@@ -2857,6 +3169,11 @@ msgstr "monto máximo que puedes aprobar."
 #: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_recruitment_type__recruitment_type__1
 msgid "modifications of working conditions"
 msgstr "Modificaciones de condiciones laborales"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields.selection,name:hr_recruitment_requisition.selection__hr_applicant__equipment_prioritization__not_required
+msgid "not required"
+msgstr "No requerido"
 
 #. module: hr_recruitment_requisition
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__observations
@@ -2899,9 +3216,13 @@ msgid ""
 msgstr "Responsable de la etapa que no tiene límite en el monto a aprobar."
 
 #. module: hr_recruitment_requisition
-#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__state_level
 #: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_recruitment_requisition__state_level
 msgid "state count"
+msgstr "Contador Estado"
+
+#. module: hr_recruitment_requisition
+#: model:ir.model.fields,field_description:hr_recruitment_requisition.field_hr_applicant__state_level
+msgid "state count next"
 msgstr ""
 
 #. module: hr_recruitment_requisition
@@ -2927,7 +3248,7 @@ msgstr "¿Desea confirmar la solicitud?"
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.recruitment_requisition_form_view
 msgid "¿Desea establecer a borrador?"
-msgstr ""
+msgstr "¿Desea establecer un borrador?"
 
 #. module: hr_recruitment_requisition
 #: model_terms:ir.ui.view,arch_db:hr_recruitment_requisition.hr_applicant_form_extend_view

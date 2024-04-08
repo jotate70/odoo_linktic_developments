@@ -13,6 +13,8 @@
                 <field name="hours" readonly="1"/>
                 <field name="account_analytic_code" readonly="1"/>
                 <field name="company_id" readonly="1"/>
+                <field name="report_task_id" readonly="1"/>
+                <field name="report_description" readonly="1"/>
             </tree>
         </field>
     </record>
@@ -28,6 +30,8 @@
                 <field name="hours" readonly="1"/>
                 <field name="account_analytic_code" readonly="1"/>
                 <field name="company_id" readonly="1"/>
+                <field name="report_task_id" readonly="1"/>
+                <field name="report_description" readonly="1"/>
             </tree>
         </field>
     </record>

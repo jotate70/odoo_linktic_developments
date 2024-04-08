@@ -39,4 +39,5 @@
           <t t-out="0"/>
         </div>
     </template>
+
 </odoo>

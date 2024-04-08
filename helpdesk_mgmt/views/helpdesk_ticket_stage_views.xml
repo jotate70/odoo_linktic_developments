@@ -59,6 +59,7 @@
                                 attrs="{'invisible': [('closed', '=', False)]}"
                             />
                             <field name="unattended" />
+                            <field name="stage_type" />
                         </group>
                     </group>
                     <field name="description" widget="html" />
@@ -74,6 +75,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="mail_template_id" />
+                <field name="stage_type" />
             </tree>
         </field>
     </record>

@@ -20,7 +20,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='job_id']" position="after">
                 <field name="struct_id" required="1"/>
-<!--                <field name="type_id" required="1"/>-->
+                <field name="type_id" required="1"/>
             </xpath>
             <xpath expr="//field[@name='job_id']" position="before">
                 <field name="company_id" groups="base.group_multi_company"/>
@@ -121,11 +121,5 @@
         <field name="name">Contract Advantage Templates</field>
         <field name="res_model">hr.contract.advantage.template</field>
     </record>
-
-    <menuitem
-        id="hr_contract_advantage_template_menu_action"
-        action="hr_contract_advantage_template_action"
-        parent="menu_hr_payroll_configuration"
-        sequence="50"/>
 
 </odoo>

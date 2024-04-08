@@ -1,0 +1,77 @@
+<odoo>
+  <data>
+
+      <record id="res_partner_form_extend" model="ir.ui.view">
+          <field name="name">res_partner_form_extend</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <!--            campos -->
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="attrs">{"required": [["company_type","=",'person']], 'readonly': [("type", "=", "contact"),("parent_id", "!=", False)]}</attribute>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="res_partner_property_form_inherit_extend" model="ir.ui.view">
+          <field name="name">res_partner_property_form_inherit_extend</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <!--            campos -->
+                <xpath expr="//field[@name='acc_number']" position="after">
+                    <field name="type_bank_account" optional="show" required="1"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="l10n_co_res_partner_constraints_1" model="ir.ui.view">
+          <field name="name">l10n_co_res_partner_constraints_1</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_latam_base.view_partner_latam_form"/>
+            <field name="arch" type="xml">
+                <!--            campos -->
+                <xpath expr="//field[@name='vat']" position="attributes">}
+                    <attribute name="attrs">{"required": [["is_company","=",True]]}</attribute>
+                </xpath>
+            </field>
+      </record>
+
+      <!-- Se hereda formulario contactos  -->
+      <record id="l10n_co_res_partner_constraints_2" model="ir.ui.view">
+          <field name="name">l10n_co_res_partner_constraints_2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_co_edi_jorels.res_partner_form_view_inherit_l10n_co_edi_jorels"/>
+            <field name="arch" type="xml">
+                <!--            attributes       -->
+                <xpath expr="//field[@name='type_regime_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["is_company","=",True]]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type_liability_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["is_company","=",True]]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='municipality_id']" position="attributes">
+                    <attribute name="attrs">{"required": [["is_company","=",True]]}</attribute>
+                </xpath>
+            </field>
+      </record>
+  </data>
+</odoo>

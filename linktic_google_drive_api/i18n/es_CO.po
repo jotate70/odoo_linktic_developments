@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_google_drive_api
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-21 18:30+0000\n"
+"PO-Revision-Date: 2023-04-21 18:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_google_drive_api
+#: model:ir.actions.server,name:linktic_google_drive_api.helpdesk_ticket_auto_close_cron_ir_actions_server
+#: model:ir.cron,cron_name:linktic_google_drive_api.helpdesk_ticket_auto_close_cron
+#: model:ir.cron,name:linktic_google_drive_api.helpdesk_ticket_auto_close_cron
+msgid "Convert Drive Rep into ir.attachments"
+msgstr "Transforma Archivos en un folder de Google drive en Adjuntos de un registro"
+
+#. module: linktic_google_drive_api
+#: model:ir.model.fields,field_description:linktic_google_drive_api.field_hr_employee__converted_to_attachments
+msgid "Converted to Attachments"
+msgstr "Convertido a Adjuntos"
+
+#. module: linktic_google_drive_api
+#: model:ir.model.fields,field_description:linktic_google_drive_api.field_hr_employee__document_repository
+msgid "Documents Repository"
+msgstr "Repositorio Documental Drive"
+
+#. module: linktic_google_drive_api
+#: model:ir.model,name:linktic_google_drive_api.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_google_drive_api
+#: model:ir.model,name:linktic_google_drive_api.model_linktic_google_drive_config
+msgid "class used to connect to drive and all drives scopes, processes"
+msgstr "Clase utilizada para conectar con google drive y con todos los scopes y procesos"

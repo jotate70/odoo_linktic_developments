@@ -4,6 +4,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import safe_eval
 
+from odoo.addons import decimal_precision as dp
 
 class HrPayrollStructure(models.Model):
     """
@@ -21,7 +22,8 @@ class HrPayrollStructure(models.Model):
 
     name = fields.Char(required=True)
     code = fields.Char(string='Reference', required=True)
-    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company', required=True,
+        copy=False, default=lambda self: self.env['res.company']._company_default_get())
     note = fields.Text(string='Description')
     parent_id = fields.Many2one('hr.payroll.structure', string='Parent', default=_get_parent)
     children_ids = fields.One2many('hr.payroll.structure', 'parent_id', string='Children', copy=True)
@@ -29,16 +31,19 @@ class HrPayrollStructure(models.Model):
 
     @api.constrains('parent_id')
     def _check_parent_id(self):
+
         if not self._check_recursion():
             raise ValidationError(_('You cannot create a recursive salary structure.'))
 
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
+
         self.ensure_one()
         default = dict(default or {}, code=_("%s (copy)") % (self.code))
         return super(HrPayrollStructure, self).copy(default)
 
     def get_all_rules(self):
+
         """
         @return: returns a list of tuple (id, sequence) of rules that are maybe to apply
         """
@@ -48,6 +53,7 @@ class HrPayrollStructure(models.Model):
         return all_rules
 
     def _get_parent_structure(self):
+
         parent = self.mapped('parent_id')
         if parent:
             parent = parent._get_parent_structure()
@@ -58,7 +64,8 @@ class HrContributionRegister(models.Model):
     _name = 'hr.contribution.register'
     _description = 'Contribution Register'
 
-    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company',
+        default=lambda self: self.env['res.company']._company_default_get())
     partner_id = fields.Many2one('res.partner', string='Partner')
     name = fields.Char(required=True)
     register_line_ids = fields.One2many('hr.payslip.line', 'register_id',
@@ -76,10 +83,12 @@ class HrSalaryRuleCategory(models.Model):
         help="Linking a salary category to its parent is used only for the reporting purpose.")
     children_ids = fields.One2many('hr.salary.rule.category', 'parent_id', string='Children')
     note = fields.Text(string='Description')
-    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company',
+        default=lambda self: self.env['res.company']._company_default_get())
 
     @api.constrains('parent_id')
     def _check_parent_id(self):
+
         if not self._check_recursion():
             raise ValidationError(_('Error! You cannot create recursive hierarchy of Salary Rule Category.'))
 
@@ -106,7 +115,8 @@ class HrSalaryRule(models.Model):
     appears_on_payslip = fields.Boolean(string='Appears on Payslip', default=True,
         help="Used to display the salary rule on payslip.")
     parent_rule_id = fields.Many2one('hr.salary.rule', string='Parent Salary Rule', index=True)
-    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company',
+        default=lambda self: self.env['res.company']._company_default_get())
     condition_select = fields.Selection([
         ('none', 'Always True'),
         ('range', 'Range'),
@@ -139,8 +149,8 @@ class HrSalaryRule(models.Model):
         ('fix', 'Fixed Amount'),
         ('code', 'Python Code'),
     ], string='Amount Type', index=True, required=True, default='fix', help="The computation method for the rule amount.")
-    amount_fix = fields.Float(string='Fixed Amount')
-    amount_percentage = fields.Float(string='Percentage (%)',
+    amount_fix = fields.Float(string='Fixed Amount', digits=dp.get_precision('Payroll'))
+    amount_percentage = fields.Float(string='Percentage (%)', digits=dp.get_precision('Payroll Rate'),
         help='For example, enter 50.0 to apply a percentage of 50%')
     amount_python_compute = fields.Text(string='Python Code',
         default='''
@@ -180,6 +190,7 @@ class HrSalaryRule(models.Model):
 
     #TODO should add some checks on the type of result (should be float)
     def _compute_rule(self, localdict):
+
         """
         :param localdict: dictionary containing the environement in which to compute the rule
         :return: returns a tuple build as the base/amount computed, the quantity and the rate
@@ -202,16 +213,11 @@ class HrSalaryRule(models.Model):
             try:
                 safe_eval(self.amount_python_compute, localdict, mode='exec', nocopy=True)
                 return float(localdict['result']), 'result_qty' in localdict and localdict['result_qty'] or 1.0, 'result_rate' in localdict and localdict['result_rate'] or 100.0
-            except Exception as ex:
-                raise UserError(_(
-                        """
-                        Wrong python code defined for salary rule %s (%s).
-                        Here is the error received:
-                        %s
-                        """
-                    ) % (self.name, self.code, repr(ex)))
+            except:
+                raise UserError(_('Wrong python code defined for salary rule %s (%s).') % (self.name, self.code))
 
     def _satisfy_condition(self, localdict):
+
         """
         @param contract_id: id of hr.contract to be tested
         @return: returns True if the given rule match the condition for the given contract. Return False otherwise.
@@ -230,14 +236,8 @@ class HrSalaryRule(models.Model):
             try:
                 safe_eval(self.condition_python, localdict, mode='exec', nocopy=True)
                 return 'result' in localdict and localdict['result'] or False
-            except Exception as ex:
-                raise UserError(_(
-                        """
-                        Wrong python condition defined for salary rule %s (%s).
-                        Here is the error received:
-                        %s
-                        """
-                    ) % (self.name, self.code, repr(ex)))
+            except:
+                raise UserError(_('Wrong python condition defined for salary rule %s (%s).') % (self.name, self.code))
 
 
 class HrRuleInput(models.Model):

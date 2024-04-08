@@ -20,3 +20,4 @@ access_helpdesk_ticket_category_portal,helpdesk.ticket.category.portal,model_hel
 access_helpdesk_ticket_category_public,helpdesk.ticket.category.public,model_helpdesk_ticket_category,base.group_public,1,0,0,0
 access_helpdesk_user_contract,access.helpdesk.user.contract,hr_contract.model_hr_contract_type,helpdesk_mgmt.group_helpdesk_user_own,1,0,0,0
 access_helpdesk_user_recruitment_degree,access.helpdesk.user.recruitment.degree,hr_recruitment.model_hr_recruitment_degree,helpdesk_mgmt.group_helpdesk_user_own,1,0,0,0
+access_helpdesk_ticket_type,helpdesk.ticket.type,model_helpdesk_ticket_type,base.group_user,1,1,1,1

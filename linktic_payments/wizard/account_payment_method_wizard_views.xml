@@ -11,7 +11,8 @@
                         <group>
                             <group>
                                 <field name="account_move_ids" invisible="1"/>
-                                <field name="payment_method_line_id" options="{'no_open': True, 'no_create': True}"/>
+<!--                                <field name="payment_method_line_id" class="mr-3"/>-->
+                                <field name="payment_method_id" class="mr-3"/>
                             </group>
                             <group>
                             </group>

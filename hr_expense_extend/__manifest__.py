@@ -51,6 +51,7 @@
         'report/employee_travel_report.xml',
         'report/report_views.xml',
         'report/hr_expense_report_extend.xml',
+        'wizard/terms_and_conditions_wizard_view.xml',
     ],
 
     'installable': True,

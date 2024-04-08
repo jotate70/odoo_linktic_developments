@@ -7,9 +7,20 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="before">
+                <widget name="web_ribbon" title="RETIRO" bg_color="bg-warning"
+                        attrs="{'invisible': [('stage_employee', '!=', 'retirement')]}"/>
+            </xpath>
+
             <xpath expr="//field[@name='job_title']" position="attributes">
                 <attribute name="readonly">1</attribute>
                 <attribute name="force_save">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='job_title']" position="after">
+                <group>
+                    <field name="stage_employee"/>
+                </group>
             </xpath>
             <xpath expr="//field[@name='address_home_id']" position="after">
                 <field name="contact_neighborhood" class="o_address_street"/>
@@ -45,6 +56,7 @@
                 <field name="layoffs"/>
                 <field name="pension"/>
                 <field name="arl"/>
+                <field name="ccf"/>
                 <field name="arl_risk_id"/>
                 <field name="arl_contribution_percentage" widget="percentage" digits="[12, 5]"/>
             </xpath>
@@ -72,9 +84,122 @@
                 <field name="second_name"/>
                 <field name="second_last_name"/>
             </xpath>
-            <!--                        New views              -->
-            <xpath expr="//group[@name='managers']" position="inside">
-                <field name="hr_manager_id"/>
+
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='address_home_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='l10n_latam_identification_type_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='expedition_place_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='gender']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='birthday']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='rh']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='place_of_birth']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='country_of_birth']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='eps']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='layoffs']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='pension']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='arl']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='arl_risk_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='marital']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='emergency_phone']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='emergency_kinship']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='recruitment_degree_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='seniority']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_employee_view_search_linktic_hr" model="ir.ui.view">
+        <field name="name">hr.employee.search.linktic_hr</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <filter name="active_employee_filter" string="Active" domain="[('stage_employee', '=', 'active')]"/>
+                <filter name="retirement_employee_filter" string="Retirement" domain="[('stage_employee', '=', 'retirement')]"/>
             </xpath>
         </field>
     </record>

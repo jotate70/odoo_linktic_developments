@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- //////////////////////////////// Default staffing stages recruitment //////////////////////////////// -->
 
         <record id="hr_recruitment_stage_initial_review" model="hr.recruitment.stage">

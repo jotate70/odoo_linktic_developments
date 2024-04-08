@@ -6,6 +6,71 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     payment_check = fields.Boolean(string='Payment Check', tracking=True)
+    related_move_ids = fields.One2many(comodel_name='account.move', inverse_name='payment_id2',
+                                       string='Invoice Related', copy=True)
+
+    # ////////////////////////////////  New fields  ////////////////////////////////////////////////
+
+    batch_payment_id = fields.Many2one(comodel_name='account.batch.payment', compute="_compute_batch_payment_id",
+                                       ondelete='set null', store=True, readonly=False)
+    amount_signed = fields.Monetary(currency_field='currency_id', compute='_compute_amount_signed')
+
+    # ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @api.constrains('payment_method_line_id')
+    def _check_payment_method_line_id(self):
+        return
+
+    @api.depends('reconciled_bill_ids')
+    def _compute_related_move_ids(self):
+        for rec in self:
+            rec.write({'related_move_ids': [(6, 0, rec.reconciled_bill_ids.ids)] if rec.reconciled_bill_ids else False})
+
+    def _compute_stat_buttons_from_reconciliation(self):
+        res = super(AccountPayment, self)._compute_stat_buttons_from_reconciliation()
+        self.write({'related_move_ids': [(6, 0, self.reconciled_bill_ids.ids)] if self.reconciled_bill_ids else False})
+        return res
+
+    @api.depends('state')
+    def _compute_batch_payment_id(self):
+        for rec in self:
+            rec.batch_payment_id = rec.state == 'posted' and rec.batch_payment_id or None
+
+    @api.depends('payment_type', 'amount')
+    def _compute_amount_signed(self):
+        for rec in self:
+            if rec.payment_type == 'outbound':
+                rec.amount_signed = -rec.amount
+            else:
+                rec.amount_signed = rec.amount
+
+    @api.model
+    def action_create_batch_payment(self):
+        create_batch_payment = {
+            'journal_id': self[0].journal_id.id,
+            'payment_ids': [(4, payment.id, None) for payment in self],
+            'payment_method_id': self[0].payment_method_id.id,
+            'batch_type': self[0].payment_type,
+        }
+        batch_payment = self.env['account.batch.payment'].sudo().create(create_batch_payment)
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "account.batch.payment",
+            "views": [[False, "form"]],
+            "res_id": batch_payment.id,
+        }
+
+    def action_open_batch_payment(self):
+        self.ensure_one()
+        return {
+            'name': _("Batch Payment"),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.batch.payment',
+            'context': {'create': False},
+            'view_mode': 'form',
+            'res_id': self.batch_payment_id.id,
+        }
+    # ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @api.depends('journal_id', 'payment_type', 'payment_method_line_id')
     def _compute_outstanding_account_id(self):
@@ -21,7 +86,7 @@ class AccountPayment(models.Model):
     def _get_valid_liquidity_accounts(self):
         res = super(AccountPayment, self)._get_valid_liquidity_accounts()
         if self.journal_id.related_company:
-            res = res + (self.journal_id.loan_entry_account_id,)
+            res |= self.journal_id.loan_entry_account_id
         return res
 
     def _prepare_move_line_default_vals(self, write_off_line_vals=None):
@@ -32,7 +97,7 @@ class AccountPayment(models.Model):
             line_to_edit['partner_id'] = self.journal_id.related_company.partner_id.id
 
         return res
-
+    
     def _synchronize_from_moves(self, changed_fields):
         ''' Override to change the validation of same partner when there is involved a intercompany payment.
         Update the account.payment regarding its related account.move.
@@ -91,7 +156,7 @@ class AccountPayment(models.Model):
                     ))
 
                 if any(line.partner_id != all_lines[0].partner_id for line in
-                       all_lines) and not (pay.journal_id.related_company or pay.journal_id.transitional_exception):
+                       all_lines) and not pay.journal_id.related_company:
                     raise UserError(_(
                         "Journal Entry %s is not valid. In order to proceed, the journal items must "
                         "share the same partner.",
@@ -123,3 +188,6 @@ class AccountPayment(models.Model):
 
             move.write(move._cleanup_write_orm_values(move, move_vals_to_write))
             pay.write(move._cleanup_write_orm_values(pay, payment_vals_to_write))
+
+
+

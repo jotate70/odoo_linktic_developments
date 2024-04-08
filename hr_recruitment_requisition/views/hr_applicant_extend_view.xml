@@ -11,7 +11,7 @@
                               confirm="¿Desea regresar de etapa?"/>
                       <button name="open_stage_transition_wizard" string="Next Stage" type="object" class="btn-primary"
                               confirm="¿Desea finalizar etapa?"
-                              attrs="{'invisible': ['|',('stage_type','in',['done','refused']),('active', '=', False)]}"/>
+                              attrs="{'invisible': ['|', '|', ('stage_type','=','refused'), ('active', '=', False), ('signed_contract', '=', True)]}"/>
                       <button string="Create Employee" name="create_employee_from_applicant" type="object"
                               data-hotkey="v" class="oe_highlight o_create_employee"
                               attrs="{'invisible': ['|','|',('emp_id', '!=', False),('active', '=', False),('hired_stage', '=', False)]}"/>
@@ -42,6 +42,7 @@
                   <field name="state_level" invisible="1"/>
                   <field name="state_aprove" invisible="1"/>
                   <field name="hired_stage" invisible="1"/>
+                  <field name="signed_contract" invisible="1"/>
                   <field name="requires_approval" invisible="1"/>
                   <field name="stage_type" invisible="1"/>
                   <field name="hr_requisition_domain" invisible="1"/>
@@ -55,6 +56,9 @@
                       <span class="oe_read_only"> - </span>
                       <field name="vat" placeholder="Number" class="oe_inline"/>
                   </div>
+              </xpath>
+              <xpath expr="//field[@name='availability']" position="after">
+                  <field name="equipment_prioritization"/>
               </xpath>
               <xpath expr="//group" position="inside">
                   <group string="Currículum">
@@ -73,8 +77,9 @@
                       <field name="time_off_related" invisible="1"/>
                       <label for="manager_id" string="Approve By"/>
                       <div>
-                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"
-                                 attrs="{'readonly': [('stage_type', '!=', 'new')]}"/>
+<!--                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"-->
+<!--                                 attrs="{'readonly': [('stage_type', '!=', 'new')]}"/>-->
+                          <field name="manager_id" options="{'no_open': True, 'no_create': True}" placeholder="Type" class="oe_inline"/>
                           <span class="oe_read_only"> - </span>
                           <field name="time_off" placeholder="Number" class="oe_inline" style="color: green"
                                  attrs="{'invisible': ['|',('time_off_related', '=', True),('manager_id', '=', False)]}"/>
@@ -142,7 +147,7 @@
                           <field name="tools" placeholder="Otban/OSTicket..."/>
                           <field name="supervisor" options="{'no_open': True, 'no_create': True}"/>
                           <field name="contractor_company" options="{'no_open': True, 'no_create': True}"/>
-                          <field name="prepaid"/>
+                          <field name="prepaid" invisible="1"/>
                           <field name="observations"/>
                       </group>
                   </page>
@@ -157,6 +162,22 @@
                               <field name="stage_result" style="max-width: 200px"/>
                           </tree>
                       </field>
+                  </page>
+                  <page string="Control Panel" name="control_panel"
+                        groups="hr_recruitment_requisition.group_hr_recruitment_requisition_settings">
+                      <group>
+                          <label for="stage_control" string="Stage Control"/>
+                          <div>
+                              <field name="stage_control" options="{'no_create':true, 'no_open':true}"/>
+                              <span> - </span>
+                              <button name="control_stage_apply" string="Apply" type="object" class="btn-primary"
+                                      confirm="Is it safe to change state?"/>
+                          </div>
+                          <field name="stage_after" readonly="1" force_save="1" options="{'no_open':true}"/>
+                          <field name="state_level" readonly="1" force_save="1"/>
+                          <field name="state_aprove" readonly="1" force_save="1"/>
+                          <field name="requires_approval" readonly="1" force_save="1"/>
+                      </group>
                   </page>
               </xpath>
               <xpath expr="//field[@name='job_id']" position="attributes">

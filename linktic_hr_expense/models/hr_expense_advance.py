@@ -2,7 +2,6 @@ from odoo import fields, _, models, api
 from odoo.exceptions import ValidationError, UserError
 from odoo.osv import expression
 
-
 class HrExpenseAdvance(models.Model):
     _name = "hr.expense.advance"
     _description = "HR Expense Advance"
@@ -38,67 +37,88 @@ class HrExpenseAdvance(models.Model):
                    ('company_id', '=', employee.company_id.id)]
         return res
 
-    @api.model
-    def _default_journal_id(self):
-        """ The journal is determining the company of the accounting entries generated from expense. We need to force journal company and expense sheet company to be the same. """
-        default_company_id = self.default_get(['company_id'])['company_id']
-        journal = self.env['account.journal'].search(
-            [('type', '=', 'purchase'), ('company_id', '=', default_company_id)], limit=1)
-        return journal.id
-
-    name = fields.Char('Advance No.', required=True, copy=False, readonly=True, index=True,
+    activity_id = fields.Integer(string='id actividad')
+    state_aprove = fields.Integer(string='approval level')
+    count_approved = fields.Integer(string='Contador de aprovaciones')
+    parent_id = fields.Many2one(comodel_name='hr.employee', string='Jefe inmediato',
+                                related='employee_id.parent_id')
+    manager_id = fields.Many2one(comodel_name='res.users', string='Aprobador', store=True,
+                                 help='Responsable de aprobación')
+    name = fields.Char(string='Advance No.', required=True, copy=False, readonly=True, index=True,
                        default=lambda self: _('New'))
     date = fields.Date(default=fields.Date.context_today, string="Advance Date")
-    employee_id = fields.Many2one('hr.employee', compute='_compute_employee_id', string="Employee",
+    employee_id = fields.Many2one(comodel_name='hr.employee', compute='_compute_employee_id', string="Employee",
                                   store=True, required=True, readonly=False, tracking=True,
                                   default=_default_employee_id,
                                   domain=lambda self: self._get_employee_id_domain(),
                                   check_company=True)
-    total_amount = fields.Monetary("Total In Currency", currency_field='currency_id', tracking=True)
-    company_currency_id = fields.Many2one('res.currency', string="Report Company Currency",
+    total_amount = fields.Monetary(string="Total In Currency", currency_field='currency_id', tracking=True)
+    company_currency_id = fields.Many2one(comodel_name='res.currency', string="Report Company Currency",
                                           related='company_id.currency_id', readonly=True)
-    total_amount_company = fields.Monetary("Total", compute='_compute_total_amount_company', store=True,
+    total_amount_company = fields.Monetary(string="Total", compute='_compute_total_amount_company', store=True,
                                            currency_field='company_currency_id')
-    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
-    currency_id = fields.Many2one('res.currency', string='Currency', required=True,
+    company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True, default=lambda self: self.env.company)
+    currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.company.currency_id)
-    analytic_account_id = fields.Many2one('account.analytic.account', string='Analytic Account', check_company=True)
-    analytic_tag_ids = fields.Many2many('account.analytic.tag', string='Analytic Tags',
+    analytic_account_id = fields.Many2one(comodel_name='account.analytic.account', string='Analytic Account', check_company=True)
+    analytic_tag_ids = fields.Many2many(comodel_name='account.analytic.tag', string='Analytic Tags',
                                         states={'post': [('readonly', True)], 'done': [('readonly', True)]},
                                         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
-    account_id = fields.Many2one('account.account', related='company_id.hr_expense_advance_account')
-    description = fields.Text('Notes...', readonly=True,
+    account_id = fields.Many2one(comodel_name='account.account', related='company_id.hr_expense_advance_account')
+    description = fields.Text(string='Notes...', readonly=True,
                               states={'draft': [('readonly', False)], 'reported': [('readonly', False)],
                                       'refused': [('readonly', False)]})
-    attachment_number = fields.Integer('Number of Attachments', compute='_compute_attachment_number')
-    state = fields.Selection([
-        ('draft', 'To Submit'),
-        ('to_approve', 'Submitted'),
-        ('approved', 'Approved'),
-        ('to_pay', 'Waiting Legalization'),
-        ('done', 'Done'),
-        ('refused', 'Refused')
-    ], string='Status', copy=False, index=True, readonly=True, default='draft', help="Status of the advance.")
-    sheet_id = fields.One2many('hr.expense.sheet', 'payment_advance_id', string='Expense Report', copy=False)
-    sheet_count = fields.Integer('Sheet Count', compute='get_sheet_count')
-    is_refused = fields.Boolean("Explicitly Refused by manager or accountant", readonly=True, copy=False)
+    attachment_number = fields.Integer(string='Number of Attachments', compute='_compute_attachment_number')
+    state = fields.Selection(selection=[('draft', 'To Submit'),
+                                        ('to_approve', 'Submitted'),
+                                        ('approved', 'Approved'),
+                                        ('to_pay', 'Waiting Legalization'),
+                                        ('done', 'Done'),
+                                        ('refused', 'Refused')],
+                             string='Status', copy=False, index=True, readonly=True, default='draft', help="Status of the advance.")
+    sheet_id = fields.One2many(comodel_name='hr.expense.sheet', inverse_name='payment_advance_id', string='Expense Report', copy=False)
+    sheet_count = fields.Integer(string='Sheet Count', compute='get_sheet_count')
+    is_refused = fields.Boolean(string="Explicitly Refused by manager or accountant", readonly=True, copy=False)
 
-    is_editable = fields.Boolean("Is Editable By Current User", compute='_compute_is_editable')
-    same_currency = fields.Boolean("Is currency_id different from the company_currency_id",
+    is_editable = fields.Boolean(string="Is Editable By Current User", compute='_compute_is_editable')
+    same_currency = fields.Boolean(string="Is currency_id different from the company_currency_id",
                                    compute='_compute_same_currency')
 
     scheduled_payment_day = fields.Date(string='Scheduled Payment Date')
-    payment_journal_id = fields.Many2one('account.journal', string='Payment Bank',
+    payment_journal_id = fields.Many2one(comodel_name='account.journal', string='Payment Bank',
                                          domain="[('company_id', '=', company_id), ('type', 'in', ('bank', 'cash'))]")
     approved_manager = fields.Boolean(string='Approved Manager', default=False)
 
-    account_move_id = fields.Many2one('account.move', string="Account Move Generated")
-    journal_id = fields.Many2one('account.journal', string="Advance Journal", default=_default_journal_id,
+    account_move_id = fields.Many2one(comodel_name='account.move', string="Account Move Generated")
+    journal_id = fields.Many2one(comodel_name='account.journal', string="Advance Journal",
                                  domain="[('type', '=', 'purchase'), ('company_id', '=', company_id)]")
+
+    # change payment status from the bulk payment module
+    def _compute_onchange_state(self):
+        if self.state == 'approved' and self.account_move_id.payment_state == 'paid':
+            self.state = 'to_pay'
+
+    @api.onchange('employee_id')
+    def _compute_select_manager_id(self):
+        self.manager_id = self.employee_id.parent_id.user_id
+        self.journal_id = self.company_id.journal_expense_advance_id
+
+    # related approved manager in account move
+    @api.onchange('approved_manager')
+    def _compute_related_approved_manager_advance(self):
+        for rec in self:
+            rec.account_move_id.update({'scheduled_payment_day': rec.scheduled_payment_day,
+                                        'payment_journal_id': rec.payment_journal_id.id,
+                                        'payment_state': 'not_paid',
+                                        'approved_manager': rec.approved_manager,
+                                        'approved_date_payment': fields.datetime.now(),
+                                        # 'hr_expense_advance_related_id': self.ids,
+                                        })
 
     def get_sheet_count(self):
         for record in self:
             record.sheet_count = len(record.sheet_id.ids)
+
     @api.depends('currency_id', 'company_currency_id')
     def _compute_same_currency(self):
         for advance in self:
@@ -203,9 +223,9 @@ class HrExpenseAdvance(models.Model):
 
         deb_line = {
             'name': move_ref,
-            'account_id': employee_contact.property_account_receivable_id.id or employee_contact.parent_id.property_account_receivable_id,
-            'credit': 0.0,
+            'account_id': self.company_id.property_account_advance_id.id,
             'debit': self.total_amount,
+            'credit': 0.0,
             'analytic_account_id': self.analytic_account_id.id,
             'analytic_tag_ids': [(6, 0, self.analytic_tag_ids.ids)],
             'currency_id': self.company_currency_id != self.currency_id and self.company_currency_id.id or False,
@@ -253,18 +273,120 @@ class HrExpenseAdvance(models.Model):
         self.sheet_id.message_post_with_view('hr_expense.hr_expense_template_refuse_reason',
                                              values={'reason': reason, 'is_sheet': False, 'name': self.name})
 
+    # function that there are no advance payments in progress
+    def _validate_advance_in_progress(self):
+        for rec in self:
+            data = 0
+            validate = self.env['hr.expense.advance'].search([('employee_id', '=', rec.employee_id.ids), ('state', 'in', ['to_approve', 'approved', 'to_pay'])])
+            data = len(validate)
+            if data > 0:
+                raise ValidationError(message=("El empleado '%s' cuenta con un anticipo en curso, finalice el proceso de anticipo para continuar", self.employee_id.name))
+
+    def action_button_to_approve(self):
+        if self.state == 'draft':
+            self._validate_advance_in_progress()
+            self.button_to_approve()
+            self.manager_id = self.parent_id.user_id
+            self.count_approved += 1
+            self.state_aprove += 1
+            # Código que crea una nueva actividad
+            create_vals = {
+                'activity_type_id': 4,
+                'summary': 'Solicitud de viaje:',
+                'automated': True,
+                'note': 'Ha sido asignado para aprobar el siguiente anticipo',
+                'date_deadline': fields.datetime.now(),
+                'res_model_id': self.env['ir.model']._get(self._name).id,
+                'res_id': self.id,
+                'user_id': self.employee_id.parent_id.user_id.id,
+            }
+            new_activity = self.env['mail.activity'].create(create_vals)
+            # Escribe el id de la actividad en un campo
+            self.write({'activity_id': new_activity})
+        else:
+            raise UserError('Debe estar en estado "A enviar" para poder confirmar.')
+
+
     def button_to_approve(self):
         if self.name == _("New"):
             self.name = self.env["ir.sequence"].next_by_code("hr.expense.advance.sequence")
         return self.write({"state": "to_approve"})
 
     def button_draft(self):
+        self.state_aprove = 0
+        self.count_approved = 0
         return self.write({"state": "draft"})
+
+    def action_button_approve(self):
+        if self.state == 'to_approve':
+            if self.env.user in [self.manager_id]:
+                if self.manager_id == self.env.user and self.count_approved == 1:
+                    self.state_aprove += 1
+                    self.count_approved += 1
+                    self.manager_id = self.company_id.financial_manager_id
+                    #  Marca actividad como hecha de forma automatica
+                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity.action_feedback(feedback='Es Aprobado')
+                    # Código que crea una nueva actividad
+                    create_vals = {
+                        'activity_type_id': 4,
+                        'summary': 'Solicitud de viaje:',
+                        'automated': True,
+                        'note': 'Ha sido asignado para validar anticipo',
+                        'date_deadline': fields.datetime.now(),
+                        'res_model_id': self.env['ir.model']._get(self._name).id,
+                        'res_id': self.id,
+                        'user_id': self.company_id.financial_manager_id.id,
+                    }
+                    new_activity = self.env['mail.activity'].create(create_vals)
+                    # Escribe el id de la actividad en un campo
+                    self.write({'activity_id': new_activity})
+                elif self.manager_id == self.env.user and self.count_approved == 2:
+                    self.state_aprove += 1
+                    self.count_approved += 1
+                    self.write({'state': 'to_approve'})
+                    self.manager_id = self.company_id.general_manager_id
+                    #  Marca actividad como hecha de forma automatica
+                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity.action_feedback(feedback='Es Aprobado')
+                    # Código que crea una nueva actividad
+                    create_vals = {
+                        'activity_type_id': 4,
+                        'summary': 'Solicitud de viaje:',
+                        'automated': True,
+                        'note': 'Ha sido asignado para validar anticipo',
+                        'date_deadline': fields.datetime.now(),
+                        'res_model_id': self.env['ir.model']._get(self._name).id,
+                        'res_id': self.id,
+                        'user_id': self.company_id.general_manager_id.id,
+                    }
+                    new_activity = self.env['mail.activity'].create(create_vals)
+                    # Escribe el id de la actividad en un campo
+                    self.write({'activity_id': new_activity})
+                elif self.manager_id == self.env.user and self.count_approved == 3:
+                    #  Marca actividad como hecha de forma automatica
+                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity.action_feedback(feedback='Es Aprobado')
+                    self.manager_id = self.company_id.account_manager_id
+                    # Aprobación
+                    self.button_approve()
+                else:
+                    raise UserError('Ya aprobastes el anticipo.')
+            else:
+                raise UserError('El gerente responsable debe aprobar el anticpo.')
+        else:
+            raise UserError('Debe estar en estado "Esperando Aprobación" para poder Aprobar.')
 
     def button_approve(self):
         for record in self:
             new_move = self.env['account.move'].create(record._get_account_move_values())
+            new_move.action_post()
             record.account_move_id = new_move.id
+            new_move.update({'hr_expense_advance_related_id': record,
+                             'check_advance': True,
+                             'payment_state': 'not_paid',
+                             'partner_id': record.employee_id.user_id.partner_id.id,
+                             })
         return self.write({"state": "approved"})
 
     def action_register_payment(self):
@@ -315,3 +437,9 @@ class HrExpenseAdvance(models.Model):
 
     def button_reject(self):
         return self.write({"state": "refused"})
+
+    def compute_activity_approved_to_paid(self):
+        for rec in self:
+            #  Marca actividad como hecha de forma automatica
+            new_activity = rec.env['mail.activity'].search([('id', '=', rec.activity_id)], limit=1)
+            new_activity.action_feedback(feedback='Es Aprobado')

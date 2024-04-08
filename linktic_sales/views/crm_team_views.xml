@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="view_crm_team_goals_tree" model="ir.ui.view">
+        <field name="name">view.crm.team.goals.tree</field>
+        <field name="model">crm.team.goal</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Team Goals" editable="top" create="false" edit="false">
+                <field name="name" required="1"/>
+                <field name="date_start" required="1"/>
+                <field name="date_end" required="1"/>
+                <field name="sale_goal_amount" required="1" sum="Total Goals"/>
+                <field name="period_sales" sum="Total Sales"/>
+                <field name="goal_perc" widget="percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_crm_team_goals_tree_edit_create" model="ir.ui.view">
+        <field name="name">view.crm.team.goals.tree.edit.create</field>
+        <field name="model">crm.team.goal</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Team Goals" editable="top">
+                <field name="name" required="1"/>
+                <field name="date_start" required="1"/>
+                <field name="date_end" required="1"/>
+                <field name="sale_goal_amount" required="1" sum="Total Goals"/>
+                <field name="period_sales" sum="Total Sales"/>
+                <field name="goal_perc" widget="percentage"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_team_form_inherit_goals" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit.goals</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_team_goals" type="object" class="oe_stat_button"
+                        context="{'default_team_id': active_id}" icon="fa-tachometer">
+                    <field name="team_goals_count" string="Goals" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_team_form_inherit_remove_month_target" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit.remove.month.target</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sale.crm_team_salesteams_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='invoiced_target']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='invoiced_target']/parent::*" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_team_goals_search" model="ir.ui.view">
+        <field name="name">crm.team.goals.list.select</field>
+        <field name="model">crm.team.goal</field>
+        <field name="arch" type="xml">
+            <search string="Crm Team Goal Search">
+                <field name="name" string="Team Goal" />
+                <separator />
+                <field name="team_id" />
+                <field name="date_start" />
+                <separator />
+                <group expand="0" string="Group By...">
+                    <filter name="team_id_group" string="By Sales Team" icon="fa-user" domain="[]"
+                        context="{'group_by':'team_id'}"/>
+                    <filter name="date_start_group" string="Start Date" icon="fa-calendar" domain="[]"
+                        context="{'group_by':'date_start'}"/>
+                    <filter name="date_end_group" string="End Date" icon="fa-calendar" domain="[]"
+                        context="{'group_by':'date_end'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="crm_team_goals_action">
+        <field name="name">Sale Team Goals</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.team.goal</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_crm_team_goals_search"/>
+        <field name="context">{"search_default_team_id_group":1}</field>
+    </record>
+
+    <menuitem id="menu_crm_team_goals" name="Sale Team Goals" parent="sale.menu_sale_report"
+              action="crm_team_goals_action" sequence="20"/>
+
+</odoo>

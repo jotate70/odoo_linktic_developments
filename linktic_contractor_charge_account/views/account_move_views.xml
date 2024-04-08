@@ -18,7 +18,10 @@
             </xpath>
             <xpath expr="//div[@name='journal_div']" position="after">
                 <field name="hr_contractor_charge_account_id" readonly="True"
-                       attrs="{'invisible': [('hr_contractor_charge_account_id', '=', False)]}"/>
+                       attrs="{'invisible': ['|',('hr_contractor_charge_account_id', '=', False),('account_type', '=', 'bonus')]}"/>
+                <field name="bonuses_id" readonly="True"
+                        attrs="{'invisible': [('account_type', '!=','bonus')]}"/>
+                <field name="account_type" invisible="1"/>
             </xpath>
         </field>
     </record>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo noupdate="0">
+
+    <record id="initial_budget_post" model="account.budget.post">
+        <field name="name">INITIAL BUDGET</field>
+        <field name="company_id"></field>
+        <field name="account_ids" eval="[(6, 0, [ref('l10n_co.1_co_puc_413595')])]"/>
+    </record>
+
+    <function model="account.budget.post" name ="update_initial_budget_accounts"/>
+
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.filter.inherit</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="after">
+                    <field name="category"/>
+                </field>
+                <xpath expr="//filter[@name='group_by_move']" position="after">
+                    <filter string="Categories" name="group_by_categories" context="{'group_by': 'category'}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

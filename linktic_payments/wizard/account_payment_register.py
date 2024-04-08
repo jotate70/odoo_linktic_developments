@@ -55,6 +55,7 @@ class AccountPaymentRegister(models.TransientModel):
             'currency_id': related_company_currency != current_currency and current_currency.id or False,
             'amount_currency': related_company_currency != current_currency and - 1.0 * payment_value or 0.0,
             'partner_id': self.company_id.partner_id.id,
+            # 'partner_id': 41,
         }
         lines_list.append((0, 0, deb_line))
 
@@ -73,6 +74,7 @@ class AccountPaymentRegister(models.TransientModel):
             'currency_id': related_company_currency != current_currency and current_currency.id or False,
             'amount_currency': related_company_currency != current_currency and payment_value or 0.0,
             'partner_id': self.company_id.partner_id.id,
+            # 'partner_id': 41,
         }
         lines_list.append((0, 0, cred_line))
 

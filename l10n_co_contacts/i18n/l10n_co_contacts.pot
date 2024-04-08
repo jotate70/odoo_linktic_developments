@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_co_contacts
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20230724\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-17 05:47+0000\n"
+"PO-Revision-Date: 2024-01-17 05:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_co_contacts
+#: model:ir.actions.act_window,name:l10n_co_contacts.action_window_contact_settings
+#: model:ir.ui.menu,name:l10n_co_contacts.l10n_co_contacts_settings
+msgid "Ajustes"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model,name:l10n_co_contacts.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__cdt
+msgid "Certificates of deposit or CDT"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model,name:l10n_co_contacts.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model,name:l10n_co_contacts.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid "Contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_config_settings__check_email
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner__check_email
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_users__check_email
+msgid "Correo electrónico"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__current_account
+msgid "Current account"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid "Evitar registros duplicados"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__express_account
+msgid "Express account"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid ""
+"Marcar check de correo electronico para evitar duplicar registros en los "
+"contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid "Marcar check de móvil para evitar duplicar registros en los contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid ""
+"Marcar check de número de identificación para evitar duplicar registros en "
+"los contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid ""
+"Marcar check de sitio web para evitar duplicar registros en los contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model_terms:ir.ui.view,arch_db:l10n_co_contacts.res_config_contact_settings_view_form
+msgid ""
+"Marcar check de teléfono para evitar duplicar registros en los contactos"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_config_settings__check_mobile
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner__check_mobile
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_users__check_mobile
+msgid "Móvil"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_config_settings__check_vat
+msgid "Numero de identificación"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__pension_account
+msgid "Pension account"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__savings_account
+msgid "Savings account"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_config_settings__check_website
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner__check_website
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_users__check_website
+msgid "Sitio web"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_config_settings__check_phone
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner__check_phone
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_users__check_phone
+msgid "Teléfono"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_account_setup_bank_manual_config__type_bank_account
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner_bank__type_bank_account
+msgid "Type bank account"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_partner__check_vat
+#: model:ir.model.fields,field_description:l10n_co_contacts.field_res_users__check_vat
+msgid "Vat"
+msgstr ""
+
+#. module: l10n_co_contacts
+#: model:ir.model.fields.selection,name:l10n_co_contacts.selection__res_partner_bank__type_bank_account__payroll_account
+msgid "payroll account"
+msgstr ""

@@ -7,4 +7,14 @@
         <field name="prefix">CCC</field>
         <field name="padding">5</field>
     </record>
+    
+    <record id="seq_request_bonuses" model="ir.sequence">
+        <field name="name">Request Bonuses</field>
+        <field name="code">bonus.ifpv</field>
+        <field name="prefix">BN</field>
+        <field name="padding">5</field>
+        <field name="active">TRUE</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
 </odoo>

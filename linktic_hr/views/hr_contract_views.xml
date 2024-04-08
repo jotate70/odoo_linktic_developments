@@ -17,14 +17,21 @@
                     </div>
                 </group>
             </xpath>
+
+            <xpath expr="//field[@name='contract_type_id']" position="replace">
+                <field name="contract_type_id" required="1" options="{'no_create': True}"/>
+                <field name="contract_type_name" invisible="1"/>
+                <field name="time_line" attrs="{'invisible': [('contract_type_name', '!=', 'Prestación de Servicios por horas')]}" />
+            </xpath>
+
             <xpath expr="//div[@name='wage']" position="after">
                 <field name="welfare_aid"/>
                 <field name="food_aid"/>
-                <field name="total_aid" invisible="1"/>
                 <field name="transport_aid"/>
                 <field name="bearing_aid"/>
                 <field name="total_income"/>
             </xpath>
+
         </field>
     </record>
 

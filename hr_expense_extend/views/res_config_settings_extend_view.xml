@@ -47,6 +47,19 @@
                     </div>
                     <h2>Solicitudes de viajes y viáticos</h2>
                     <div class="row mt16 o_settings_container" name="tipoRadicado_setting_container" id="financial_manager_id">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div>
+                                <label for="journal_travel_id"/>
+                                <div class="text-muted">
+                                    Default travel journal per company.
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="journal_travel_id" class="o_light_label" options="{'no_open': True, 'no_create': True}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div>
                                 <label for="financial_manager_id"/>
@@ -84,6 +97,17 @@
                                 </div>
                                 <field name="job_title_general_manager_id" placeholder="Number" class="oe_inline" style="color: green"
                                            attrs="{'invisible': [('general_manager_id', '=', False)]}"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div>
+                                <label for="message_text"/>
+                                <div class="text-muted">
+                                    Terminos y condiciones.
+                                </div>
+                                <div>
+                                    <field name="message_text" placeholder="He leído y acepto los términos y condiciones de uso..." class="oe_inline"/>
+                                </div>
                             </div>
                         </div>
                     </div>

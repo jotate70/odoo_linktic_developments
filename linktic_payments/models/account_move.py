@@ -1,7 +1,6 @@
 from odoo import fields, _, models, api
 from odoo.exceptions import ValidationError
 
-
 class AccountMove(models.Model):
     _inherit = "account.move"
 
@@ -22,15 +21,89 @@ class AccountMove(models.Model):
     approved_date_payment = fields.Datetime(string='Approved Date Payment', tracking=True)
     payment_bank_related_id = fields.Many2one(comodel_name='account.journal', string='Payment Bank',
                                               related='payment_id.journal_id', tracking=True)
-    payment_check = fields.Boolean(string='Payment Check', related='payment_id.payment_check')
-    payment_date_related = fields.Date(string='Payment date', related='payment_id.date')
+    payment_check = fields.Boolean(string='Payment Check', related='payment_id2.payment_check')
+    payment_date_related = fields.Date(string='Payment date', related='payment_id2.date', store=True)
     payment_method_line_id = fields.Many2one(comodel_name='account.payment.method.line', string='Payment Method',
                                              store=True)
-
-    approved_vice_president_id = fields.Many2one(comodel_name='hr.employee', string='Approved vice-president',
+    approved_vice_president_id = fields.Many2one(comodel_name='res.users', string='Approved vice-president',
                                                  related='company_id.approved_vice_president_id')
-    approved_advisor_id = fields.Many2one(comodel_name='hr.employee', string='Approved advisor',
+    approved_advisor_id = fields.Many2one(comodel_name='res.users', string='Approved advisor_employee_id',
                                           related='company_id.approved_advisor_id')
+    active_user = fields.Boolean(string='Active User', compute='_compute_user_available')
+    active_user2 = fields.Boolean(string='Active User 2', compute='_compute_user_available_2')
+    analytic_account_ids = fields.Many2many(comodel_name='account.analytic.account',
+                                            relation='x_account_analytic_to_account_move_rel',
+                                            column1='account_move_id',
+                                            column2='account_analytic_id',
+                                            string='Account Analytic', compute_sudo=False,
+                                            compute='_compute_select_account_analytic',
+                                            search='_search_select_account_analytic')
+    analytic_account_ids2 = fields.Many2many(comodel_name='account.analytic.account',
+                                            relation='x_account_analytic_to_account_move_rel',
+                                            column1='account_move_id',
+                                            column2='account_analytic_id',
+                                            string='Account Analytic')
+    payment_id2 = fields.Many2one(comodel_name='account.payment', string="Payment")
+    analytic_account_name = fields.Char(string='Account Analytic Name')
+    date_payment = fields.Date(related='payment_id2.date', store=True)
+    purchase_type_journal = fields.Selection(selection=[('purchase', 'Purchase'),
+                                                        ('credit_card', 'Credit Card'),
+                                                        ('advance', 'Advance'),
+                                                        ('Equivalent Document', 'Equivalent Document'),
+                                                        ('others', 'Others')],
+                                             related='journal_id.purchase_type_journal',
+                                             string='Type Type Journal')
+
+    @api.onchange('invoice_payment_term_id')
+    def _compute_select_journal_credit(self):
+        if self.invoice_payment_term_id.term_type == 'credit_type':
+            data = self.env['account.journal'].search([('journal_credit', '=', True)], limit=1)
+            self.journal_id = data
+
+    @api.depends('invoice_line_ids')
+    def _compute_select_account_analytic(self):
+        for rec in self:
+            data = ""
+            if rec.invoice_line_ids:
+                vat = rec.mapped('invoice_line_ids').analytic_account_id
+                rec.analytic_account_ids = vat
+                rec.analytic_account_ids2 = vat
+                for rec2 in vat:
+                    if len(vat) > 1:
+                        data += rec2.name + ', '
+                    else:
+                        data += rec2.name
+                rec.analytic_account_name = data
+            else:
+                rec.analytic_account_name = False
+                rec.analytic_account_ids = False
+
+    def _search_select_account_analytic(self, operator, value):
+        value_1 = value.upper() or '' # Convierte a mayuscula
+        vat = []
+        name = self.env['account.analytic.account'].search([('name', '=', value_1)])
+        data = self.env['account.move'].search([('analytic_account_ids', 'in', name.ids)])
+        if data:
+            for rec in data:
+                vat.append(rec.id)
+        else:
+            vat = []
+        return [('id', 'in', vat)]
+
+    api.depends('approved_vice_president_id')
+    def _compute_user_available(self):
+        if self.approved_vice_president_id in self.env.user:
+            self.active_user = True
+        else:
+            self.active_user = False
+
+    api.depends('approved_vice_president_id')
+
+    def _compute_user_available_2(self):
+        if self.approved_advisor_id in self.env.user:
+            self.active_user2 = True
+        else:
+            self.active_user2 = False
 
     def action_form_account_move(self):
         """ Returns an action account move form."""
@@ -40,13 +113,14 @@ class AccountMove(models.Model):
             'view_mode': 'form',
             'res_model': 'account.move',
             'type': 'ir.actions.act_window',
-            'target': 'new',
+            'target': 'current',
             'res_id': self.id,
         }
 
-    def _compute_select_payment_method_line_id(self, vat):
+    def _compute_select_payment_method_line_id(self, vat, vat2):
         for rec in self:
             rec.write({'payment_method_line_id': vat})
+            rec.write({'payment_method_id': vat2})
 
     def action_select_payment_method_wizard(self):
         """ Returns an action opening payment method wizard."""
@@ -55,7 +129,7 @@ class AccountMove(models.Model):
             'account_move_ids': [(6, 0, moves.ids)],
         })
         return {
-            'name': _('Priority Payment'),
+            'name': _('Payment method'),
             'view_mode': 'form',
             'res_model': 'account.payment.method.wizard',
             'type': 'ir.actions.act_window',
@@ -100,6 +174,19 @@ class AccountMove(models.Model):
 
         return super(AccountMove, self).write(vals)
 
+    def action_form_account_payment(self):
+        """ Returns an action account move form."""
+        if self.payment_id:
+            return {
+                'name': _('Payment'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'account.payment',
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': self.payment_id.id,
+            }
+
     def action_register_payment(self):
         ''' Extend to check if payment schedule fields are configured in account move before displaying payment
         wizard'''
@@ -121,7 +208,7 @@ class AccountMove(models.Model):
                     raise ValidationError(
                         _(f"You must select a Payment Bank to register a payment in Bill ({bill.name})"))
 
-                if not bill.approved_manager:
+                if not bill.approved_manager and self.invoice_payment_term_id.term_type != 'credit_type':
                     raise ValidationError(
                         _(f"To register a payment in the Bill ({bill.name}) must be approved by manager"))
 
@@ -131,6 +218,8 @@ class AccountMove(models.Model):
 
         if all(item in ['in_invoice', 'in_refund', 'in_receipt'] for item in self.mapped('move_type')):
             res.get('context')['default_journal_id'] = last_journal.id
+
+        self.action_form_account_payment()
 
         return res
 
@@ -182,34 +271,27 @@ class AccountMove(models.Model):
 
     def action_register_approved_vice_president(self):
         moves = self.env['account.move'].browse(self._context.get('active_ids'))
-        if moves[0].approved_vice_president_id.user_id == self.env.user:
+        if moves[0].approved_vice_president_id == self.env.user:
             moves.approved_vice_president = True
         else:
             raise ValidationError("You are not responsible for approval")
 
     def action_register_approved_advisor(self):
         moves = self.env['account.move'].browse(self._context.get('active_ids'))
-        if moves[0].approved_advisor_id.user_id == self.env.user:
+        if moves[0].approved_advisor_id == self.env.user:
             moves.approved_advisor = True
         else:
             raise ValidationError("You are not responsible for approval")
 
-    @api.onchange('approved_vice_president_id')
-    def _compute_constrains_approved_vice_president_id(self):
-        for rec in self:
-            if rec.approved_vice_president_id.user_id != self.env.user:
-                raise ValidationError("You are not responsible for approval")
 
-    @api.onchange('approved_advisor_id')
-    def _compute_constrains_approved_advisor_id(self):
-        for rec in self:
-            if rec.approved_advisor_id.user_id != self.env.user:
-                raise ValidationError("You are not responsible for approval")
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
 
+    category_id = fields.Many2one(comodel_name='res.partner.category')
+    category = fields.Char(compute='_compute_category', store=True)
 
-
-
-
-
-
-
+    @api.depends('partner_id')
+    def _compute_category(self):
+        for record in self:
+            record.category = record.partner_id.category_id[0].name if record.partner_id.category_id else _(
+                'Not Applicable')

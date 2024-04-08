@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+
+      <record id="res_partner_bank_form_extend" model="ir.ui.view">
+          <field name="name">res_partner_bank_form_extend</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <!--            campos -->
+                <xpath expr="//field[@name='bank_id']" position="after">
+                    <field name="type_bank_account_id" required=""/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="res_partner_bank_tree_extend" model="ir.ui.view">
+          <field name="name">res_partner_bank_tree_extend</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+            <field name="arch" type="xml">
+                <!--            attributes       -->
+                <xpath expr="//field[@name='acc_number']" position="after">
+                    <field name="type_bank_account_id" optional="show"/>
+                </xpath>
+            </field>
+      </record>
+  </data>
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+
+      <record id="res_partner_property_form_extend" model="ir.ui.view">
+          <field name="name">res_partner_property_form_extend</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <!--            campos -->
+                <xpath expr="//field[@name='acc_number']" position="after">
+                    <field name="type_bank_account_id" required="1" options="{'no_create': True, 'no_edit' : True}"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="l10n_latam_identification_type_tree_extend" model="ir.ui.view">
+          <field name="name">l10n_latam_identification_type_tree_extend"</field>
+            <field name="model">l10n_latam.identification.type</field>
+            <field name="inherit_id" ref="l10n_latam_base.view_l10n_latam_identification_type_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree decoration-muted="(not active)" create="0" editable="bottom">
+                        <field name="name" readonly="1" force_save="1"/>
+                        <field name="code" />
+                        <field name="description" readonly="1" force_save="1"/>
+                        <field name="country_id" readonly="1" force_save="1"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </tree>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="res_bank_tree_extend" model="ir.ui.view">
+          <field name="name">res_bank_tree_extend"</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bic']" position="after">
+                    <field name="bank_code" required="1"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="res_bank_form_extend" model="ir.ui.view">
+          <field name="name">res_bank_form_extend"</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bic']" position="after">
+                    <field name="bank_code" required="1"/>
+                </xpath>
+            </field>
+      </record>
+
+  </data>
+</odoo>

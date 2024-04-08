@@ -2,6 +2,7 @@ from odoo import fields, _, models, api
 from odoo.exceptions import ValidationError
 from odoo.osv import expression
 
+
 class HrPayrollParameter(models.Model):
     _name = "hr.payroll.parameter"
     _description = "HR Parameter"
@@ -10,6 +11,10 @@ class HrPayrollParameter(models.Model):
     code = fields.Char('Code')
     company_ids = fields.Many2many('res.company', string="Companies")
     line_ids = fields.One2many('hr.payroll.parameter.line', 'parameter_id')
+
+    _sql_constraints = [
+        ('unique_code', 'unique(code)', 'The code must be unique.'),
+    ]
 
 
 class HrPayrollParameterLine(models.Model):
@@ -24,10 +29,9 @@ class HrPayrollParameterLine(models.Model):
 
     @api.constrains('date_start', 'date_end')
     def _check_line_date(self):
-        domains = [[('date_start', '<', line.date_end), ('date_end', '>=', line.date_start),
-                    ('parameter_id', '=', line.parameter_id.id), ('id', '!=', line.id)] for line in
-                   self.filtered('parameter_id')]
-        domain = expression.OR(domains)
+        for line in self:
+            domain = [('date_start', '<=', line.date_end), ('date_end', '>=', line.date_start),
+                      ('parameter_id', '=', line.parameter_id.id), ('id', '!=', line.id)]
 
-        if self.search_count(domain):
-            raise ValidationError(_("There are multiple lines value in which the date range overlaps"))
+            if line.env['hr.payroll.parameter.line'].search(domain):
+                raise ValidationError(_("There are multiple lines value in which the date range overlaps"))

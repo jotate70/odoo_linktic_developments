@@ -18,8 +18,8 @@ class HrThirdInfo(models.Model):
                                     string='Tipo de documento',
                                     help='Tipo de documento')
     supplier_vat = fields.Char(string='Nº identificación', help='Número de Documento')
-    analytic_account_id = fields.Many2one('account.analytic.account', string='Cuenta Analítica', check_company=True)
-    analytic_tag_ids = fields.Many2many('account.analytic.tag', string='Etiquetas analíticas',
+    analytic_account_id = fields.Many2one(comodel_name='account.analytic.account', string='Cuenta Analítica', check_company=True)
+    analytic_tag_ids = fields.Many2many(comodel_name='account.analytic.tag', string='Etiquetas analíticas',
                                         states={'post': [('readonly', True)], 'done': [('readonly', True)]},
                                         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
     unit_amount = fields.Float(string="Precio Unitario", store=True,
@@ -30,7 +30,7 @@ class HrThirdInfo(models.Model):
     quantity = fields.Float(string='Cantidad', readonly=True, default=1)
     amount_total = fields.Monetary(string='Costo', currency_field='currency_id', store=True)
     currency_id = fields.Many2one(comodel_name='res.currency', string='Moneda', default=lambda self: self.env.company.currency_id)
-    mode = fields.Selection([('analytic_account', 'Cuenta Analítica'),
+    mode = fields.Selection(selection=[('analytic_account', 'Cuenta Analítica'),
                              ('supplier', 'Proveedor'),
                              ('items', 'Items')], default="draft", string="Estado")
 

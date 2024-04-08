@@ -1,5 +1,6 @@
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError
+import json
 
 
 class HelpdeskTicket(models.Model):
@@ -19,7 +20,7 @@ class HelpdeskTicket(models.Model):
         return stage_ids
 
     number = fields.Char(string="Ticket number", default="/", readonly=True)
-    name = fields.Char(string="Title", required=True)
+    name = fields.Char(string="Title", required=True, default=".")
     description = fields.Html(required=True, sanitize_style=True)
     user_id = fields.Many2one(
         comodel_name="res.users",
@@ -29,7 +30,7 @@ class HelpdeskTicket(models.Model):
         domain="team_id and [('share', '=', False),('id', 'in', user_ids)] or [('share', '=', False)]",  # noqa: B950
     )
     user_ids = fields.Many2many(
-        comodel_name="res.users", related="team_id.user_ids", string="Users"
+        comodel_name="res.users", related="team_id.user_ids", string="Users",
     )
     stage_id = fields.Many2one(
         comodel_name="helpdesk.ticket.stage",
@@ -41,7 +42,7 @@ class HelpdeskTicket(models.Model):
         index=True,
         copy=False,
     )
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Contact")
+    partner_id = fields.Many2one(comodel_name="res.partner", string="Contact", tracking=True, default=lambda self: self.env.company.partner_id)
     partner_name = fields.Char()
     partner_email = fields.Char(string="Email")
 
@@ -66,10 +67,12 @@ class HelpdeskTicket(models.Model):
     category_id = fields.Many2one(
         comodel_name="helpdesk.ticket.category",
         string="Category",
+        tracking=True,
     )
     team_id = fields.Many2one(
         comodel_name="helpdesk.ticket.team",
         string="Team",
+        tracking=True,
     )
     priority = fields.Selection(
         selection=[
@@ -78,7 +81,7 @@ class HelpdeskTicket(models.Model):
             ("2", "High"),
             ("3", "Very High"),
         ],
-        default="1",
+        default="1", tracking=True,
     )
     attachment_ids = fields.One2many(
         comodel_name="ir.attachment",
@@ -94,7 +97,24 @@ class HelpdeskTicket(models.Model):
             ("blocked", "Blocked"),
         ],
     )
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(default=True, tracking=True)
+    domain_type = fields.Char(string='Domain Type', compute='_compute_type_domain')
+    type_id = fields.Many2one(comodel_name='helpdesk.ticket.type', string='Type', tracking=True)
+    stage_type = fields.Selection(selection=[('draft', 'draft'),
+                                             ('in_progress', 'In Progress'),
+                                             ('done', 'done'),
+                                             ('close', 'Close')],
+                                  string='Team Type',
+                                  related='stage_id.stage_type')
+
+    # function domain dynamic
+    @api.depends('team_id')
+    def _compute_type_domain(self):
+        for rec in self:
+            if rec.team_id:
+                rec.domain_type = json.dumps([('id', 'in', rec.team_id.helpdesk_type_id.ids)])
+            else:
+                rec.domain_type = json.dumps([])
 
     def name_get(self):
         res = []
@@ -272,3 +292,9 @@ class HelpdeskTicket(models.Model):
                 )
             )
         return res
+
+    # Select assigned to type
+    @api.onchange('type_id')
+    def _compute_select_user_id(self):
+        for rec in self:
+            rec.user_id = rec.type_id.user_id

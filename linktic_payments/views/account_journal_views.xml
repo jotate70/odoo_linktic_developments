@@ -21,6 +21,26 @@
                     </group>
                 </group>
             </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/field[@name='company_id']" position="after">
+                <field name="journal_credit" attrs="{'invisible': [('type', '!=', 'purchase')]}"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='type']" position="after">
+                <field name="purchase_type_journal" attrs="{'invisible': [('type', '!=', 'purchase')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ////////////////////////////////  NEW CODE  ///////////////////////////////////////////////////////   -->
+    <record id="account_batch_payment_journal_dashboard_kanban_view_extend" model="ir.ui.view">
+        <field name="name">account_batch_payment_journal_dashboard_kanban_view_extend</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-name='JournalManage']//div[hasclass('o_kanban_manage_new')]" position="inside">
+                <div t-if="journal_type == 'bank'">
+                    <a type="object" name="action_open_batch_payment">Batch Deposit</a>
+                </div>
+            </xpath>
         </field>
     </record>
 

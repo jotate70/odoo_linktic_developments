@@ -40,6 +40,11 @@ class HrRecruitmentRequisitionStageTransitionWizard(models.TransientModel):
                 self.env['hr_recruitment_stage_log'].create(create_vals)
                 employee = self.env['hr_recruitment_requisition'].search([('id','=',self.hr_recruitment_requisition_id.ids)], limit=1)
                 employee.write({'manager_after_id': self.manager_after_id.id})
+
+                # Apply changes in contract
+                if rec.state.apply_contract_changes:
+                    rec.action_process()
+
                 rec.compute_next_stage2()
 
     def do_action_cancel(self):

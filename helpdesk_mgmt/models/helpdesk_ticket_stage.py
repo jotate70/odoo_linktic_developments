@@ -35,6 +35,13 @@ class HelpdeskTicketStage(models.Model):
         string="Company",
         default=lambda self: self.env.company,
     )
+    stage_type = fields.Selection(selection=[('draft', 'draft'),
+                                             ('in_progress', 'In Progress'),
+                                             ('done', 'done'),
+                                             ('close', 'Close')],
+                                  default='in_progress',
+                                  string='Team Type',
+                                  required=1)
 
     @api.onchange("closed")
     def _onchange_closed(self):

@@ -1,11 +1,64 @@
 # -*- coding:utf-8 -*-
 
 import babel
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
 from dateutil.relativedelta import relativedelta
 from pytz import timezone
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
+
+
+def is_last_day_of_february(date_end: date) -> bool:
+    last_february_day_in_given_year = date_end + relativedelta(month=3, day=1) + timedelta(days=-1)
+    return date == last_february_day_in_given_year
+
+
+def days360(
+    date_a: date, date_b: date, preserve_excel_compatibility: bool = True
+) -> int:
+    """
+    This method uses the the US/NASD Method (30US/360) to calculate the days between two
+    dates.
+
+    NOTE: to use the reference calculation method 'preserve_excel_compatibility' must be
+    set to false.
+    The default is to preserve compatibility. This means results are comparable to those
+    obtained with Excel or Calc.
+    This is a bug in Microsoft Office which is preserved for reasons of backward
+    compatibility. Open Office Calc also choose to "implement" this bug to be MS-Excel
+    compatible [1].
+
+    [1] http://wiki.openoffice.org/wiki/Documentation/How_Tos/Calc:_Date_%26_Time_functions#Financial_date_systems
+    """
+    day_a = date_a.day
+    day_b = date_b.day
+
+    # Step 1 must be skipped to preserve Excel compatibility
+    # (1) If both date A and B fall on the last day of February, then date B will be
+    # changed to the 30th.
+    if (
+        not preserve_excel_compatibility
+        and is_last_day_of_february(date_a)
+        and is_last_day_of_february(date_b)
+    ):
+        day_b = 30
+
+    # (2) If date A falls on the 31st of a month or last day of February, then date A
+    # will be changed to the 30th.
+    if day_a == 31 or is_last_day_of_february(date_a):
+        day_a = 30
+
+    # (3) If date A falls on the 30th of a month after applying (2) above and date B
+    # falls on the 31st of a month, then date B will be changed to the 30th.
+    if day_a == (30) and day_b == (31):
+        day_b = 30
+
+    days = (
+        (date_b.year - date_a.year) * 360
+        + (date_b.month - date_a.month) * 30
+        + (day_b - day_a)
+    )
+    return days
 
 
 class HrPayslip(models.Model):
@@ -20,17 +73,12 @@ class HrPayslip(models.Model):
              'to the contract chosen. If you let empty the field contract, this field isn\'t '
              'mandatory anymore and thus the rules applied will be all the rules set on the '
              'structure of all contracts of the employee valid for the chosen period')
-    name = fields.Char(string='Payslip Name', readonly=True,
-        states={'draft': [('readonly', False)]})
-    number = fields.Char(string='Reference', readonly=True, copy=False,
-        states={'draft': [('readonly', False)]})
+    name = fields.Char(string='Payslip Name', readonly=True)
+    number = fields.Char(string='Reference', readonly=True, copy=False)
     employee_id = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True,
         states={'draft': [('readonly', False)]})
-    date_from = fields.Date(string='Date From', readonly=True, required=True,
-        default=lambda self: fields.Date.to_string(date.today().replace(day=1)), states={'draft': [('readonly', False)]})
-    date_to = fields.Date(string='Date To', readonly=True, required=True,
-        default=lambda self: fields.Date.to_string((datetime.now() + relativedelta(months=+1, day=1, days=-1)).date()),
-        states={'draft': [('readonly', False)]})
+    date_from = fields.Date(string='Date From', readonly=True, required=True)
+    date_to = fields.Date(string='Date To', readonly=True, required=True)
     # this is chaos: 4 states are defined, 3 are used ('verify' isn't) and 5 exist ('confirm' seems to have existed)
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -56,7 +104,7 @@ class HrPayslip(models.Model):
         states={'draft': [('readonly', False)]})
     note = fields.Text(string='Internal Note', readonly=True, states={'draft': [('readonly', False)]})
     contract_id = fields.Many2one('hr.contract', string='Contract', readonly=True,
-        states={'draft': [('readonly', False)]})
+        states={'draft': [('readonly', False)]}, required=True)
     details_by_salary_rule_category = fields.One2many('hr.payslip.line',
         compute='_compute_details_by_salary_rule_category', string='Details by Salary Rule Category')
     credit_note = fields.Boolean(string='Credit Note', readonly=True,
@@ -65,6 +113,20 @@ class HrPayslip(models.Model):
     payslip_run_id = fields.Many2one('hr.payslip.run', string='Payslip Batches', readonly=True,
         copy=False, states={'draft': [('readonly', False)]})
     payslip_count = fields.Integer(compute='_compute_payslip_count', string="Payslip Computation Details")
+    payroll_period_id = fields.Many2one('hr.payroll.period', string="Period", required=True)
+
+    @api.constrains('payroll_period_id', 'contract_id')
+    def _value_dates(self):
+        for record in self:
+            if record.payroll_period_id:
+                if record.contract_id.date_end and (record.contract_id.date_end < record.payroll_period_id.date_start):
+                    raise UserError(_("It is not possible to execute payroll for the employee %s, the end date of the "
+                                      "contract is less than the initial date of the payroll." % record.employee_id.name))
+
+    @api.onchange('payroll_period_id')
+    def calculated_dates(self):
+        self.date_from = self.payroll_period_id.date_start
+        self.date_to = self.payroll_period_id.date_end
 
     def _compute_details_by_salary_rule_category(self):
         for payslip in self:
@@ -80,7 +142,8 @@ class HrPayslip(models.Model):
             raise ValidationError(_("Payslip 'Date From' must be earlier 'Date To'."))
 
     def action_payslip_draft(self):
-        return self.write({'state': 'draft'})
+        self.write({'state': 'draft'})
+        return
 
     def action_payslip_done(self):
         self.compute_sheet()
@@ -89,7 +152,8 @@ class HrPayslip(models.Model):
     def action_payslip_cancel(self):
         # if self.filtered(lambda slip: slip.state == 'done'):
         #     raise UserError(_("Cannot cancel a payslip that is done."))
-        return self.write({'state': 'cancel'})
+        self.write({'state': 'cancel'})
+        return
 
     def refund_sheet(self):
         for payslip in self:
@@ -168,9 +232,14 @@ class HrPayslip(models.Model):
 
     def compute_sheet(self):
         for payslip in self:
-            number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
+            number = self.env['ir.sequence'].next_by_code('salary.slip') if not payslip.number or payslip.number == _("New") else payslip.number
             # delete old payslip lines
             payslip.line_ids.unlink()
+            payslip.worked_days_line_ids = [(2, x,) for x in payslip.worked_days_line_ids.ids]
+            payslip.write({
+                'worked_days_line_ids': [(0, 0, x) for x in payslip.onchange_employee_id(payslip.date_from, payslip.date_to, payslip.employee_id.id,
+                                             payslip.contract_id.id)['value']['worked_days_line_ids']]
+            })
             # set the list of contract for which the rules have to be applied
             # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
             contract_ids = payslip.contract_id.ids or \
@@ -179,7 +248,7 @@ class HrPayslip(models.Model):
                 raise ValidationError(_("No running contract found for the employee: %s or no contract in the given period" % payslip.employee_id.name))
             lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
             payslip.write({'line_ids': lines, 'number': number})
-        return True
+        return
 
     @api.model
     def get_worked_day_lines(self, contracts, date_from, date_to):
@@ -208,28 +277,63 @@ class HrPayslip(models.Model):
                     'number_of_hours': 0.0,
                     'contract_id': contract.id,
                 })
-                current_leave_struct['number_of_hours'] -= hours
+                current_leave_struct['number_of_hours'] += hours
                 work_hours = calendar.get_work_hours_count(
                     tz.localize(datetime.combine(day, time.min)),
                     tz.localize(datetime.combine(day, time.max)),
                     compute_leaves=False,
                 )
                 if work_hours:
-                    current_leave_struct['number_of_days'] -= hours / work_hours
+                    current_leave_struct['number_of_days'] += hours / work_hours
 
-            # compute worked days
-            work_data = contract.employee_id._get_work_days_data(
-                day_from,
-                day_to,
-                calendar=contract.resource_calendar_id,
-                compute_leaves=False,
-            )
+            # compute worked days ORIGINAL MODULE
+            # work_data = contract.employee_id._get_work_days_data(
+            #     day_from,
+            #     day_to,
+            #     calendar=contract.resource_calendar_id,
+            #     compute_leaves=False,
+            # )
+
+            # Rest days of all leaves
+            leave_days = sum(item['number_of_days'] for item in leaves.values() if 'number_of_days' in item)
+            leave_hours = sum(item['number_of_hours'] for item in leaves.values() if 'number_of_days' in item)
+            worked_days = days360(date_from, date_to + relativedelta(days=1))
+            worked_hours = contract.resource_calendar_id.hours_per_day * worked_days
+
+            if contract.date_start > date_from:
+                days = contract.date_start.day - 1
+                leave_days += days
+                income = {
+                    'name': _("Days of income"),
+                    'sequence': 2,
+                    'code': 'DIA_DE_INGRESO',
+                    'number_of_days': days,
+                    'number_of_hours': days * contract.resource_calendar_id.hours_per_day,
+                    'contract_id': contract.id,
+                }
+                res.append(income)
+
+            if contract.date_end and contract.date_end != date_to and days360(contract.date_end, date_to) - 1 > 0:
+                days = days360(contract.date_end, date_to) - 1
+                leave_days += days
+                retirement = {
+                    'name': _("Days of retirement"),
+                    'sequence': 3,
+                    'code': 'DIA_DE_RETIRO',
+                    'number_of_days': days,
+                    'number_of_hours': days * contract.resource_calendar_id.hours_per_day,
+                    'contract_id': contract.id,
+                }
+                res.append(retirement)
+
             attendances = {
-                'name': _("Normal Working Days paid at 100%"),
+                'name': _("Worked Days"),
                 'sequence': 1,
                 'code': 'WORK100',
-                'number_of_days': work_data['days'],
-                'number_of_hours': work_data['hours'],
+                # 'number_of_days': work_data['days'],
+                # 'number_of_hours': work_data['hours'],
+                'number_of_days': worked_days - leave_days,
+                'number_of_hours': worked_hours - leave_hours,
                 'contract_id': contract.id,
             }
 
@@ -242,9 +346,12 @@ class HrPayslip(models.Model):
         res = []
 
         structure_ids = contracts.get_all_structures()
-        rule_ids = self.env['hr.payroll.structure'].browse(structure_ids).get_all_rules()
-        sorted_rule_ids = [id for id, sequence in sorted(rule_ids, key=lambda x:x[1])]
-        inputs = self.env['hr.salary.rule'].browse(sorted_rule_ids).mapped('input_ids')
+        rule_ids = self.env['hr.payroll.structure'].browse(
+            structure_ids).get_all_rules()
+        sorted_rule_ids = [id for id, sequence in
+                           sorted(rule_ids, key=lambda x: x[1])]
+        inputs = self.env['hr.salary.rule'].browse(sorted_rule_ids).mapped(
+            'input_ids')
 
         for contract in contracts:
             for input in inputs:
@@ -283,7 +390,9 @@ class HrPayslip(models.Model):
                     FROM hr_payslip as hp, hr_payslip_input as pi
                     WHERE hp.employee_id = %s AND hp.state = 'done'
                     AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pi.payslip_id AND pi.code = %s""",
-                    (self.employee_id, from_date, to_date, code))
+                                    (
+                                        self.employee_id, from_date, to_date,
+                                        code))
                 return self.env.cr.fetchone()[0] or 0.0
 
         class WorkedDays(BrowsableObject):
@@ -335,12 +444,15 @@ class HrPayslip(models.Model):
 
         categories = BrowsableObject(payslip.employee_id.id, {}, self.env)
         inputs = InputLine(payslip.employee_id.id, inputs_dict, self.env)
-        worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict, self.env)
+        worked_days = WorkedDays(payslip.employee_id.id, worked_days_dict,
+                                 self.env)
         payslips = Payslips(payslip.employee_id.id, payslip, self.env)
         rules = BrowsableObject(payslip.employee_id.id, rules_dict, self.env)
 
-        baselocaldict = {'categories': categories, 'rules': rules, 'payslip': payslips, 'worked_days': worked_days, 'inputs': inputs}
-        #get the ids of the structures on the contracts and their parent id as well
+        baselocaldict = {'categories': categories, 'rules': rules,
+                         'payslip': payslips, 'worked_days': worked_days,
+                         'inputs': inputs, 'self': payslip}
+        # get the ids of the structures on the contracts and their parent id as well
         contracts = self.env['hr.contract'].browse(contract_ids)
         if len(contracts) == 1 and payslip.struct_id:
             structure_ids = list(set(payslip.struct_id._get_parent_structure().ids))
@@ -424,25 +536,21 @@ class HrPayslip(models.Model):
             return res
         ttyme = datetime.combine(fields.Date.from_string(date_from), time.min)
         employee = self.env['hr.employee'].browse(employee_id)
-        locale = self.env.context.get('lang') or 'en_US'
+        locale = self.env.context.get('lang') or 'es_CO'
         res['value'].update({
-            'name': _('Salary Slip of %s for %s') % (employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale))),
+            'name': _('Salary Slip of %s for %s') % (employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale)).capitalize()),
             'company_id': employee.company_id.id,
         })
 
-        if not self.env.context.get('contract'):
-            #fill with the first contract of the employee
-            contract_ids = self.get_contract(employee, date_from, date_to)
+        if contract_id:
+            #set the list of contract for which the input have to be filled
+            contract_ids = [contract_id]
         else:
-            if contract_id:
-                #set the list of contract for which the input have to be filled
-                contract_ids = [contract_id]
-            else:
-                #if we don't give the contract, then the input to fill should be for all current contracts of the employee
-                contract_ids = self.get_contract(employee, date_from, date_to)
-
+            #if we don't give the contract, then the input to fill should be for all current contracts of the employee
+            contract_ids = self.get_contract(employee, date_from, date_to)
         if not contract_ids:
-            return res
+            raise ValidationError(
+                _("No running contract found for the employee: %s or no contract in the given period" % employee.name))
         contract = self.env['hr.contract'].browse(contract_ids[0])
         res['value'].update({
             'contract_id': contract.id
@@ -455,7 +563,8 @@ class HrPayslip(models.Model):
         })
         #computation of the salary input
         contracts = self.env['hr.contract'].browse(contract_ids)
-        worked_days_line_ids = self.get_worked_day_lines(contracts, date_from, date_to)
+        worked_days_line_ids = self.get_worked_day_lines(contracts, date_from,
+                                                         date_to)
         input_line_ids = self.get_inputs(contracts, date_from, date_to)
         res['value'].update({
             'worked_days_line_ids': worked_days_line_ids,
@@ -475,13 +584,13 @@ class HrPayslip(models.Model):
 
         ttyme = datetime.combine(fields.Date.from_string(date_from), time.min)
         locale = self.env.context.get('lang') or 'en_US'
-        self.name = _('Salary Slip of %s for %s') % (employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale)))
+        self.name = _('Salary Slip of %s for %s') % (employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale)).capitalize())
         self.company_id = employee.company_id
 
         if not self.env.context.get('contract') or not self.contract_id:
             contract_ids = self.get_contract(employee, date_from, date_to)
             if not contract_ids:
-                return
+                raise ValidationError(_("No running contract found for the employee: %s or no contract in the given period" % employee.name))
             self.contract_id = self.env['hr.contract'].browse(contract_ids[0])
 
         if not self.contract_id.struct_id:
@@ -533,7 +642,9 @@ class HrPayslipLine(models.Model):
     rate = fields.Float(string='Rate (%)', default=100.0)
     amount = fields.Float()
     quantity = fields.Float(default=1.0)
-    total = fields.Float(compute='_compute_total', string='Total')
+    total = fields.Float(compute='_compute_total', string='Total', store=True)
+    date_from = fields.Date(string="Date From", related='slip_id.date_from', store=True)
+    date_to = fields.Date(string="Date To", related='slip_id.date_to', store=True)
 
     @api.depends('quantity', 'amount', 'rate')
     def _compute_total(self):
@@ -603,6 +714,15 @@ class HrPayslipRun(models.Model):
     credit_note = fields.Boolean(string='Credit Note', readonly=True,
                                  states={'draft': [('readonly', False)]},
                                  help="If its checked, indicates that all payslips generated from here are refund payslips.")
+    payroll_period_id = fields.Many2one('hr.payroll.period', string="Period", required=True)
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.company)
+
+    @api.onchange('payroll_period_id')
+    def _value_dates(self):
+        for record in self:
+            if record.payroll_period_id:
+                record.date_start = record.payroll_period_id.date_start
+                record.date_end = record.payroll_period_id.date_end
 
     def draft_payslip_run(self):
         return self.write({'state': 'draft'})

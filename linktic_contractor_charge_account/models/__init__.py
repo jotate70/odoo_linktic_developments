@@ -4,3 +4,8 @@ from . import res_config_settings
 from . import res_company
 from . import account_move
 from . import hr_employee
+from . import report_task
+from . import report_task_group
+from . import report_collection_accounts
+from . import request_for_bonuses
+from . import res_user_extend

@@ -1,5 +1,5 @@
 from odoo import api, fields, models, tools, _
-from odoo.exceptions import ValidationError, AccessError
+from odoo.exceptions import ValidationError, AccessError, UserError
 from odoo.osv import expression
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange
@@ -16,6 +16,7 @@ class ContractorChargeAccount(models.Model):
     name = fields.Char(string='Charge Account', default=lambda self: _("New"))
     date_start = fields.Date(string="Start Date")
     date_end = fields.Date(string="End Date")
+    days_field = fields.Integer(string='Days', compute='_compute_days')      # New Fields
     employee_id = fields.Many2one("hr.employee", string="Employee", ondelete="restrict")
     contract_id = fields.Many2one("hr.contract", string="Contract", ondelete="restrict",
                                   domain="[('employee_id', '=?', employee_id)]")
@@ -52,7 +53,39 @@ class ContractorChargeAccount(models.Model):
     invoice_count = fields.Integer(compute="_compute_invoice_count", string='Bill Count', default=0)
     invoice_state = fields.Char(string='Bill State', compute='get_invoice_state_label')
     is_my_contractor_charges = fields.Boolean(string='is_my_charges')
+    
+    type_of_contract = fields.Char(related='contract_id.contract_type_id.name')
+    hours_limit_contract = fields.Integer(related = 'contract_id.time_line', string="Monthly hour limit", store=True)
+    total_hours_recorded = fields.Integer(string="Total hours recorded", compute='_compute_total_hours_recorded')
+    active_web_ribbon = fields.Boolean(default=False)
+    
+    # field bonus
+    request_bonuses_id = fields.Many2one('request.bonuses', ondelete='cascade')
+    bonus_value = fields.Float(string="Bonus value")
+    bonus_card = fields.Binary(string="Bonus card")
+    bonus_card_name = fields.Char(string="Bonus card")
+    bonus_line_ids = fields.One2many(comodel_name="hr.contractor.charge.account.line",inverse_name="contractor_charge_account_id",string="Participation Information")
+    employee_company_id = fields.Many2one('res.company', string='Company',related='employee_id.company_id')
+    account_type = fields.Selection(selection=[('charge_account', 'Charge account'), ('bonus', 'Bonus')],default="charge_account")
+    analytic_account_ids = fields.Many2many(
+        comodel_name='account.analytic.account',
+        compute='_compute_analytic_accounts',
+        string='Analytic Accounts'
+    )
+    
+    journal_bonus_id = fields.Many2one('account.journal', string='Charge Account Journal',check_company=True,
+                                   related='employee_company_id.bonus_charge_default_journal_id')
+    
+    @api.onchange('employee_id')
+    def _select_compute_company(self):
+        for rec in self:
+            rec.company_id = rec.employee_id.company_id
 
+    @api.depends('bonus_line_ids.account_analytic_id')
+    def _compute_analytic_accounts(self):
+        for account in self:
+            account.analytic_account_ids = account.bonus_line_ids.mapped('account_analytic_id')
+    
     def _compute_demo(self):
         self.write({'journal_domain': self.journal_ids.ids})
 
@@ -137,15 +170,28 @@ class ContractorChargeAccount(models.Model):
         self.line_ids = line_val_list
 
         for line in self.line_ids:
+            # Hour compute honorarium
             if self.contract_id.payment_period == 'hour':
                 line.line_total = line.reported_hours * self.contract_id.total_income
+            # Month compute honorarium
             elif self.contract_id.payment_period == 'month':
-                total_hours = sum(self.line_ids.mapped('reported_hours'))
-                # worked_days = relativedelta(self.date_end, self.date_start).days
-                worked_days = len(set(reported_hours.mapped('date')))
-                month_days = monthrange(self.date_start.year, self.date_start.month)
-                line_percentage = line.reported_hours / total_hours
-                line.line_total = line_percentage * self.contract_id.total_income / month_days[1] * worked_days
+                try:
+                    total_hours = sum(self.line_ids.mapped('reported_hours'))
+                    # worked_days = relativedelta(self.date_end, self.date_start).days
+                    worked_days = len(set(reported_hours.mapped('date')))
+                    month_days = monthrange(self.date_start.year, self.date_start.month)
+                    line_percentage = line.reported_hours / total_hours
+                    # line.line_total = line_percentage * self.contract_id.total_income / month_days[1] * worked_days
+                    # //////////////////////////////////////// New Code ///////////////////////////////////////
+                    line.worked_days_field = worked_days
+                    if month_days[1] == 31 and worked_days == 31 or month_days[1] in [28, 29]:
+                        line.line_total = line_percentage * self.contract_id.total_income / month_days[1] * worked_days
+                    elif (self.date_end).day == 31:
+                        line.line_total = line_percentage * self.contract_id.total_income / 30 * (worked_days - 1)
+                    else:
+                        line.line_total = line_percentage * self.contract_id.total_income / 30 * worked_days
+                except:
+                    raise UserError(_("Sus horas no han sido actualizadas desde Ripor"))
 
         self.total_amount = sum(self.line_ids.mapped('line_total'))
 
@@ -158,7 +204,7 @@ class ContractorChargeAccount(models.Model):
                 raise ValidationError(_("Cannot send to approve a charge account without reported hours"))
 
             if any(not line.responsible_id for line in self.line_ids):
-                raise ValidationError(_("Cannot send to approve a charge account with no responsible assigned lines"))
+                raise UserError(_("Cannot send to approve a charge account with no responsible assigned lines. \n - Validate: Please activate all companies."))
 
             record.line_ids.state = 'to_approve'
             record.update({'state': 'to_approve'})
@@ -246,6 +292,51 @@ class ContractorChargeAccount(models.Model):
             new_activity = self.env['mail.activity'].search([('id', 'in', self.activity_ids.ids), ('user_id', '=', responsible_id.ids)], limit=1)
             new_activity.action_feedback(feedback='Es Aprobado')
 
+    @api.depends('date_start','date_end')
+    def _compute_days(self):
+        for rec in self:
+            if rec.date_start and rec.date_end:
+                rec.days_field = (rec.date_end - rec.date_start).days + 1
+            else:
+                rec.days_field = 0
+    
+    @api.depends('line_ids')
+    def _compute_total_hours_recorded(self):
+        self.total_hours_recorded = 0
+        for record in self.line_ids:
+            if record:
+                self.total_hours_recorded = self.total_hours_recorded + record.reported_hours
+                
+    # @api.constrains('hours_limit_contract','line_ids')
+    # def _compute_active_web_ribbon(self):
+    #     if self.type_of_contract == 'Prestación de Servicios por horas':
+    #         if self.total_hours_recorded > self.hours_limit_contract:
+    #             self.active_web_ribbon = True
+    #         elif self.total_hours_recorded == self.hours_limit_contract:
+    #             self.active_web_ribbon = False
+    #         else:
+    #             self.active_web_ribbon = False
+
+    @api.onchange('bonus_line_ids')
+    def onchange_total_percentage(self):
+        self.ensure_one()
+        percentage = 0
+        if self.bonus_line_ids:
+            for total in self.bonus_line_ids:
+                percentage = percentage + total.bonus_percentage
+                if percentage > 100:
+                    raise ValidationError(_('The total percentage has exceeded 100%'))
+                
+    @api.constrains('bonus_line_ids')
+    def total_percentage(self):
+        self.ensure_one()
+        percentage = 0
+        if self.bonus_line_ids:
+            for total in self.bonus_line_ids:
+                percentage = percentage + total.bonus_percentage
+            if percentage < 100:
+                raise ValidationError(_('The total percentage must be 100%'))
+
 class ContractorChargeAccountLine(models.Model):
     _name = 'hr.contractor.charge.account.line'
     _description = "Contractor Charge Account Line"
@@ -269,6 +360,21 @@ class ContractorChargeAccountLine(models.Model):
     responsible_id = fields.Many2one('res.users', string='Responsible', index=True)
     approval_date = fields.Date(string="Approval Date")
     is_line_approver = fields.Boolean(compute="get_approval_users")
+    worked_days_field = fields.Integer(string='Reported Days')
+    
+    #field bonuses
+    request_bonuses_id = fields.Many2one('request.bonuses', ondelete='cascade')
+    bonus_percentage = fields.Float(string="bonus percentage")
+    bonus_value = fields.Float(string="Bonus value",related='contractor_charge_account_id.bonus_value',store=True)
+    bonus = fields.Float(string="Bonus",compute="_compute_bonus")
+    
+    @api.depends('bonus_percentage', 'bonus_value')
+    def _compute_bonus(self):
+        for record in self:
+            record.ensure_one()
+            record.bonus = (record.bonus_percentage * record.bonus_value) / 100
+                
+    # employee_id = fields.Many2one("hr.employee", string="Employee", ondelete="restrict")
 
     def get_approval_users(self):
         for record in self:
@@ -328,4 +434,20 @@ class ContractorChargeAccountLine(models.Model):
             'quantity': 1,
             'price_unit': self.line_total,
             'analytic_account_id': self.account_analytic_id.id,
+        }
+
+
+    def _bonus_prepare_account_move_line(self):
+        self.ensure_one()
+        employee = self.env['hr.employee.public'].sudo().browse(self.contractor_charge_account_id.employee_id.id)
+        return {
+            'name': '%s: %s, %s' % (self.contractor_charge_account_id.name,
+                                    self.contractor_charge_account_id.employee_company_id.bonus_charge_product_id.name,
+                                    employee.sudo().job_id.name),
+            'product_id': self.contractor_charge_account_id.employee_company_id.bonus_charge_product_id.id,
+            'product_uom_id': self.contractor_charge_account_id.employee_company_id.bonus_charge_product_id.uom_po_id.id,
+            'quantity': 1,
+            'price_unit': self.bonus,
+            'analytic_account_id': self.account_analytic_id.id,
+            'account_id': self.contractor_charge_account_id.employee_company_id.bonus_account_default_id.id,
         }

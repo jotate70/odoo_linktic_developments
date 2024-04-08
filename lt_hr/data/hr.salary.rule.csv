@@ -1,0 +1,465 @@
+id,name,category_id,code,active,sequence,appears_on_payslip,condition_select,condition_python,amount_select,amount_python_compute,amount_percentage_base,quantity,amount_percentage,type_concept,earn_category,deduction_category
+rule_1,Basic Salary,CALCULOS,BASIC,TRUE,1,TRUE,none,result = contract.wage,code,result = contract.wage,,1,0,other,other_concepts,other_deductions
+rule_2,COSTO TOTAL,CALCULOS,COSTO_TOTAL,True,59,False,none,result = rules.NET > categories.NET * 0.10,code,result=categories.BASIC + categories.NO_SALARIAL + categories.PROVISIONES_PREST +categories.PROVISIONES_SSI + categories.LIQUIDACION,,1,0,other,other_concepts,other_deductions
+rule_3,Net Salary,NETO,NETO,True,47,True,none,result = rules.NET > categories.NET * 0.10,code,result=categories.BASIC + categories.NO_SALARIAL + categories.DED + categories.OTROS_DESEMBOLSOS + categories.LIQUIDACION,,1,0,other,other_concepts,other_deductions
+rule_7,UVT,CONSTANTES,UVT,True,19,False,none,result = self.get_parameter('UVT'),code,result = self.get_parameter('UVT'),,1,0,other,other_concepts,other_deductions
+rule_8,SALARIO MINIMO,CONSTANTES,SALARIOMINIMO,True,2,False,none,result = self.get_parameter('SMMLV'),code,result = self.get_parameter('SMMLV'),,1,0,other,other_concepts,other_deductions
+rule_9,DIA DE RETIRO,DIAS NOVEDADES,DIA_DE_RETIRO,True,3,True,python,result=inputs.DIA_DE_RETIRO.amount>0 if inputs.DIA_DE_INGRESO else False,code,result=inputs.DIA_DE_RETIRO.amount,,1,0,other,other_concepts,other_deductions
+rule_10,DIA DE INGRESO,DIAS NOVEDADES,DIA_DE_INGRESO,True,4,True,python,result=inputs.DIA_DE_INGRESO.amount>0 if inputs.DIA_DE_INGRESO else False,code,result=inputs.DIA_DE_INGRESO.amount,,1,0,other,other_concepts,other_deductions
+rule_11,DIAS INCAP GEN,DIAS NOVEDADES,DIAS_IGEN,True,5,True,python,result=inputs.DIAS_IGEN.amount>0 if inputs.DIAS_IGEN else False,code,result=inputs.DIAS_IGEN.amount,,1,0,other,other_concepts,other_deductions
+rule_12,DIAS INCAP LAB,DIAS NOVEDADES,DIAS_INCLAB,True,6,True,python,result=inputs.DIAS_INCLAB.amount>0 if inputs.DIAS_INCLAB else False,code,result=inputs.DIAS_INCLAB.amount,,1,0,other,other_concepts,other_deductions
+rule_13,DIAS VACACIONES,DIAS NOVEDADES,DIAS_VACACIONES,True,7,True,python,result=inputs.DIAS_VACACIONES.amount>0 if inputs.DIAS_VACACIONES else False,code,result=inputs.DIAS_VACACIONES.amount,,1,0,other,other_concepts,other_deductions
+rule_14,DIAS LICENCIA MAT,DIAS NOVEDADES,DIAS_LIC_MAT,True,8,True,python,result=inputs.DIAS_LIC_MAT.amount>0 if inputs.DIAS_LIC_MAT else False,code,"
+result=inputs.DIAS_LIC_MAT.amount",,1,0,other,other_concepts,other_deductions
+rule_15,DIAS LICENCIA REM,DIAS NOVEDADES,DIAS_LIC_REM,True,9,True,python,result=inputs.DIAS_LIC_REM.amount>0 if inputs.DIAS_LIC_REM else False,code,result=inputs.DIAS_LIC_REM.amount,,1,0,other,other_concepts,other_deductions
+rule_16,DIAS LICENCIA NO REM,DIAS NOVEDADES,DIAS_LIC_NO_REM,True,10,True,python,result=inputs.DIAS_LIC_NO_REM.amount>0 if inputs.DIAS_LIC_NO_REM else False,code,result=inputs.DIAS_LIC_NO_REM.amount,,1,0,other,other_concepts,other_deductions
+rule_17,DIAS AUSENCIA NO JUST,DIAS NOVEDADES,DIAS_AUSEN_NO_JUST,True,11,True,python,result=inputs.DIAS_AUSEN_NO_JUST.amount>0 if inputs.DIAS_AUSEN_NO_JUST else False,code,result=inputs.DIAS_AUSEN_NO_JUST.amount,,1,0,other,other_concepts,other_deductions
+rule_18,DIAS NOMINA,CALCULOS,DIAS_NOMINA,True,14,True,none,result = rules.NET > categories.NET * 0.10,code,"
+#dias_periodo=worked_days.WORK100.number_of_days
+#dias_periodo=30
+#dias_periodo=0
+#period=0
+#period = payslip.date_to - payslip.date_from
+#dias_periodo = int(period.days)+1
+#if dias_periodo > 30 and not payslip.quincenal:
+#    dias_periodo = 30
+#if dias_periodo > 15 and payslip.quincenal:
+#    dias_periodo = 15
+#if dias_periodo < 15 and payslip.quincenal and payslip.date_to.month == 2:
+#    dias_periodo = 15
+#ingreso=inputs.DIA_DE_INGRESO.amount
+#if ingreso>31:
+#    ingreso=31
+#retiro=inputs.DIA_DE_RETIRO.amount
+#if retiro > 30:
+#    retiro = 30
+#a=inputs.DIAS_AUSEN_NO_JUST.amount
+#e=inputs.DIAS_LIC_NO_REM.amount
+
+#result =dias_periodo -a-e
+#if ingreso>0:
+#    if payslip.quincenal and ingreso > 15:
+#        ingreso = ingreso - 15
+#    result= result- ingreso+1
+#if retiro>0:
+#    desc_dias_retirado = dias_periodo - retiro
+#    result=result-desc_dias_retirado
+result=30
+#        ",,1,0,other,other_concepts,other_deductions
+rule_19,DIAS SUELDO,CALCULOS,DIAS_SUELDO,True,12,False,none,result = rules.NET > categories.NET * 0.10,code,"
+#dias_periodo=worked_days.WORK100.number_of_days
+#dias_periodo=30
+#period = payslip.date_to - payslip.date_from
+#dias_periodo = int(period.days)+1
+#if dias_periodo > 30 and not payslip.quincenal:
+#    dias_periodo = 30
+#if dias_periodo > 15 and payslip.quincenal:
+#    dias_periodo = 15
+#if dias_periodo < 15 and payslip.quincenal and payslip.date_to.month == 2:
+#    dias_periodo = 15
+#ingreso=inputs.DIA_DE_INGRESO.amount
+#if ingreso>31:
+#    ingreso=31
+#retiro=inputs.DIA_DE_RETIRO.amount
+#if retiro > 30:
+#    retiro = 30
+#a=inputs.DIAS_AUSEN_NO_JUST.amount
+#b=inputs.DIAS_IGEN.amount
+#c=inputs.DIAS_INCLAB.amount
+#d=inputs.DIAS_LIC_REM.amount
+#e=inputs.DIAS_LIC_NO_REM.amount
+#f=inputs.DIAS_LIC_MAT.amount
+#g=inputs.DIAS_VACACIONES.amount
+
+#result =dias_periodo -a-b-c-d-e-f-g
+#if ingreso>0:
+#    if payslip.quincenal and ingreso > 15:
+#        ingreso = ingreso - 15
+#    result= result- ingreso+1
+#if retiro>0:
+#    desc_dias_retirado = dias_periodo - retiro
+#    result=result-desc_dias_retirado
+result=30
+
+#        ",,1,0,other,other_concepts,other_deductions
+rule_21,SALARIO NO PREST,NO SALARIAL,SALARIO_NOPREST,True,16,True,none,result=(contract.transport_aid + contract.bearing_aid)>0,code,result=(contract.transport_aid + contract.bearing_aid)*DIAS_NOMINA/30 or 0,,1,0,earn,bonuses_non_salary,other_deductions
+rule_22,SUELDO,BÁSICO,SUELDO,True,18,True,none,result = rules.NET > categories.NET * 0.10,code,result = DIAS_SUELDO* BASIC /30,,1,0,earn,basic,other_deductions
+rule_23,INCAPACIDAD GEN,BÁSICO,ING_IGEN,True,20,True,python,result=inputs.DIAS_IGEN.amount>0 if inputs.DIAS_IGEN else False,code,"salario_incap=BASIC * 2/3
+if inputs.DIAS_IGEN.amount >2:
+     if salario_incap < SALARIOMINIMO:
+          salario_incap=SALARIOMINIMO
+     result = (inputs.DIAS_IGEN.amount - 2) * salario_incap / 30
+else:
+     result = 0",,1,0,other,other_concepts,other_deductions
+rule_24,INCAPACIDAD LAB,BÁSICO,ING_INCLAB,True,21,True,python,result=inputs.DIAS_INCLAB.amount>0 if inputs.DIAS_INCLAB else False,code,result = inputs.DIAS_INCLAB.amount* BASIC/30,,1,0,other,other_concepts,other_deductions
+rule_25,VACACIONES,BÁSICO,ING_VACACIONES,True,23,True,python,result=inputs.DIAS_VACACIONES.amount>0 if inputs.DIAS_VACACIONES else False,code,result = inputs.DIAS_VACACIONES.amount* BASIC/30,,1,0,earn,vacation_compensated,other_deductions
+rule_26,LICENCIA REM,BÁSICO,ING_LIC_REM,True,25,True,python,result=inputs.DIAS_LIC_REM.amount>0 if inputs.DIAS_LIC_REM else False,code,result = inputs.DIAS_LIC_REM.amount* BASIC /30,,1,0,earn,licensings_permit_or_paid_licenses,other_deductions
+rule_27,LICENCIA MAT,BÁSICO,ING_LIC_MAT,True,27,True,python,result=inputs.DIAS_LIC_MAT.amount>0 if inputs.DIAS_LIC_MAT else False,code,result = inputs.DIAS_LIC_MAT.amount* BASIC /30,,1,0,earn,licensings_permit_or_paid_licenses,other_deductions
+rule_28,COMISIONES - INCENTIVOS,BÁSICO,COMISIONES,True,29,True,python,result=inputs.COMISIONES.amount>0 if inputs.COMISIONES else False,code,result = inputs.COMISIONES.amount or 0,,1,0,earn,commissions,other_deductions
+rule_29,H EXTRAS Y RECARGOS,BÁSICO,H_EXTRAS,True,32,True,python,result=inputs.HED.amount+inputs.HEN.amount+inputs.HEDF.amount+inputs.HENF.amount+inputs.HRN.amount+inputs.HRF.amount+inputs.HRFN.amount>0 if inputs.HRFN else False,code,"recargo_HED = 1.25
+recargo_HEN = 1.75
+recargo_HEDF = 2.00
+recargo_HENF = 2.50
+recargo_HRN = 0.35
+recargo_HRF = 0.75
+recargo_HRFN = 1.10
+salario_hora =BASIC/240
+total_HED =salario_hora* recargo_HED*inputs.HED.amount
+total_HEN = salario_hora*recargo_HEN*inputs.HEN.amount
+total_HEDF =salario_hora*recargo_HEDF*inputs.HEDF.amount
+total_HENF =salario_hora*recargo_HENF*inputs.HENF.amount
+total_HRN =salario_hora*recargo_HRN*inputs.HRN.amount
+total_HRF =salario_hora*recargo_HRF*inputs.HRF.amount
+total_HRFN = salario_hora*recargo_HRFN*inputs.HRFN.amount
+
+result =total_HED +total_HEN + total_HEDF +total_HENF +total_HRN+ total_HRF +total_HRFN",,1,0,earn,daily_surcharge_hours_sundays_holidays,other_deductions
+rule_30,PRIMA SEMESTRAL,NO SALARIAL,PRIMA_SEMESTRAL,True,31,True,none,result = rules.NET > categories.NET * 0.10,code,result = inputs.PAGO_PRIMA_SEMESTRAL.amount or 0,,1,0,earn,primas,other_deductions
+rule_31,BASE SALARIAL,BASE SALARIAL,BASE_SAL,True,34,False,none,result = rules.NET > categories.NET * 0.10,code,"sal_noprest=0
+if rules.SALARIO_NOPREST or rules.PAGO_NO_SALARIAL:
+ sal_noprest = SALARIO_NOPREST + PAGO_NO_SALARIAL
+base_mas_bene = categories.BASIC + sal_noprest
+base_40 = (base_mas_bene)*0.4
+if sal_noprest > base_40:
+   result = categories.BASIC + sal_noprest - base_40
+else:
+ result=categories.BASIC
+        ",,1,0,other,other_concepts,other_deductions
+rule_32,REEMBOLSO,NO SALARIAL,REEMBOLSO,True,17,True,python,result = inputs.REEMBOLSO.amount >0 if inputs.REEMBOLSO else False,code,result = inputs.REEMBOLSO.amount or 0,,1,0,earn,refund,other_deductions
+rule_33,PAGO NO SALARIAL,NO SALARIAL,PAGO_NO_SALARIAL,True,16,True,none,result=(contract.welfare_aid + contract.food_aid + contract.hra + contract.da + contract.travel_allowance + contract.meal_allowance + contract.medical_allowance + contract.other_allowance)>0,code,result=(contract.welfare_aid + contract.food_aid + contract.hra + contract.da + contract.travel_allowance + contract.meal_allowance + contract.medical_allowance + contract.other_allowance)*DIAS_NOMINA/30 or 0,,1,0,earn,bonuses_non_salary,other_deductions
+rule_34,AUXILIO TRANSP,NO SALARIAL,AUXTRANSPVIG,True,39,True,none,"
+auxilio_transp=contract.company_id.stm_value
+res=0
+if BASIC<=2*SALARIOMINIMO:
+   res=DIAS_SUELDO* auxilio_transp/30
+result=res>0 ",code,"
+auxilio_transp=self.get_parameter('AUXTRA')
+result=0
+if BASIC<=2*SALARIOMINIMO:
+   result=DIAS_SUELDO* auxilio_transp/30",,1,0,earn,transports_assistance,other_deductions
+rule_35,DESC SALUD 4%,DEDUCCIÓN,DESC_SALUD,True,41,True,none,result = rules.NET > categories.NET * 0.10,code,"
+#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = -1*base_aportes*0.04
+    else:
+        result = -1*base_aportes*0.7*0.04
+else:
+    if BASE_SAL>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =-1*base_aportes*0.04",,1,0,deduction,other_concepts,health,null,11
+rule_36,DESC PENSION 4%,DEDUCCIÓN,DESC_PENSION,True,42,True,none,result=contract.state=='open',code,"
+#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = -1*base_aportes*0.04
+    else:
+        result = -1*base_aportes*0.7*0.04
+else:
+    if BASE_SAL>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =-1*base_aportes*0.04
+        ",,1,0,deduction,other_concepts,pension_fund,null,12
+rule_37,FONDO SOLIDARIDAD,DEDUCCIÓN,FONDO_SOL,True,45,True,python,result=categories.BASIC>=4*SALARIOMINIMO ,code,"
+#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result=0
+if contract.integral_salary:
+    if BASE_SAL*0.7 >=20*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.02
+    elif BASE_SAL*0.7 >=19*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.018
+    elif BASE_SAL*0.7 >=18*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.016
+    elif BASE_SAL*0.7 >=17*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.014
+    elif BASE_SAL*0.7 >=16*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.012
+    elif BASE_SAL*0.7 >=4*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.7*0.01
+
+
+else:
+    if BASE_SAL >=20*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.02
+    elif BASE_SAL >=19*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.018
+    elif BASE_SAL >=18*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.016
+    elif BASE_SAL >=17*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.014
+    elif BASE_SAL >=16*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.012
+    elif BASE_SAL >=4*SALARIOMINIMO:
+        result=-1*BASE_SAL*0.01",,1,0,deduction,other_concepts,other_deductions,null,12
+rule_38,RETEFUENTE,DEDUCCIÓN,RETEFUENTE_CALC,True,44,True,python,"#ESTA REGLA SOLO SE CALCULA SI EL INPUT DE RETEFUENTE MANUAL EST? EN $0, DE MANERA QUE SEAN EXCLUYENTES
+result=(categories.BASIC + categories.NO_SALARIAL)*0.75 > 95*UVT",code,"
+#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+
+#-------DEFINIR INPUTS O CAMPO ORIGEN--------------------------
+incentivo_vivienda=0                                     #FILA 10 se crea en el contrato
+aportes_vol_pens_empleador=0                  #FILA 13 se crea en el contrato
+
+aportes_vol_pensi_obl=inputs.RTFNTE_AP_VOL_PENS_OBL.amount    #FILA 20
+otros_ing_no_rent=inputs.RTFNTE_OTR_ING_NO_RENT.amount             #FILA 21
+
+pago_int_vivienda=inputs.RTFNTE_PAGO_INT_VIVENDA.amount#FILA 26
+if pago_int_vivienda>100*UVT: pago_int_vivienda=100*UVT
+pagos_por_dependientes=inputs.RTFNTE_PAGOS_DEPENDIENTES.amount           #FILA 27
+if pagos_por_dependientes>32*UVT: pagos_por_dependientes=32*UVT
+pagos_med_prepagada=inputs.RTFNTE_PAGOS_MED_PREPAG.amount   #FILA 28
+if pagos_med_prepagada>16*UVT: pagos_med_prepagada=16*UVT
+aportes_pens_vol=inputs.RTFNTE_APORTES_PENS_VOLNT.amount      #FILA 33 lo debe limitar el contador con suma anual
+aportes_AFC=inputs.RTFNTE_APORTES_AFC.amount    #FILA 34 lo debe limitar el contado con suma anual
+otras_rentas_exentas=inputs.RTFNTE_OTRAS_RENTAS_EXENTAS.amount    #FILA 35
+#-----------------------------------------------------------------------------------------
+
+#------RETENCI?N RENTAS DE TRABAJO---------------------
+base_salarial=categories.BASIC
+bonificacion_no_sal=0
+if rules.SALARIO_NOPREST or rules.PAGO_NO_SALARIAL:
+ bonificacion_no_sal = PAGO_NO_SALARIAL + SALARIO_NOPREST
+#if rules.PAGO_NO_SALARIAL: bonificacion_no_sal= bonificacion_no_sal +PAGO_NO_SALARIAL
+ingresos_laborales=base_salarial + incentivo_vivienda + bonificacion_no_sal
+
+if aportes_vol_pensi_obl >ingresos_laborales*0.25: aportes_vol_pensi_obl =ingresos_laborales*0.25
+
+#----INGRESOS NO CONSTITUTIVOS DE RENTA----------
+total_ingresos_no_const=0
+if rules.DESC_SALUD: total_ingresos_no_const=total_ingresos_no_const -DESC_SALUD
+if rules.DESC_PENSION: total_ingresos_no_const=total_ingresos_no_const -DESC_PENSION
+if rules.FONDO_SOL: total_ingresos_no_const=total_ingresos_no_const -FONDO_SOL
+total_ingresos_no_const= total_ingresos_no_const +aportes_vol_pensi_obl + otros_ing_no_rent
+subtotal_1 =round(ingresos_laborales - total_ingresos_no_const,-3)
+
+#------DEDUCCIONES---------------------------------------------------
+total_deducciones =pago_int_vivienda + pagos_por_dependientes + pagos_med_prepagada
+subtotal_2 = subtotal_1 - total_deducciones
+
+#-------RENTAS EXENTAS-----------------------------------------------
+total_rentas_exentas=aportes_pens_vol + aportes_AFC + otras_rentas_exentas
+subtotal_3= subtotal_2 - total_rentas_exentas
+
+#--------RENTA DE TRABAJO EXENTA MAX 25%--------------
+renta_trab_exenta_25= round(subtotal_3*0.25,-3)
+if renta_trab_exenta_25>240*UVT: renta_trab_exenta_25=240*UVT
+subtotal_4=subtotal_3 - renta_trab_exenta_25
+
+#---------MINIMOS DEDUCCIONES -------------------------
+cifra_control_40 = round(subtotal_1*0.4,-3)
+deducciones_acum= total_deducciones + total_rentas_exentas + renta_trab_exenta_25
+max_deduc_420uvt= round(420*UVT,-3)
+
+#---------INGRESO LABORAL BASE PARA RETEFUENTE ------
+ing_base_refuente = subtotal_1 - min(cifra_control_40,deducciones_acum,max_deduc_420uvt)
+ingreso_gravado_uvt = ing_base_refuente / UVT
+
+#---------------------CALCULO RETEFUENTE------------------------------
+if ingreso_gravado_uvt < 95:
+ retefuente=0
+elif ingreso_gravado_uvt > 95 and ingreso_gravado_uvt <= 150:
+ retefuente=round((ingreso_gravado_uvt-95)*0.19*UVT,-3)
+elif ingreso_gravado_uvt > 150 and ingreso_gravado_uvt <= 360:
+ retefuente=round((ingreso_gravado_uvt-150)*0.28*UVT + 10*UVT,-3)
+elif ingreso_gravado_uvt > 360 and ingreso_gravado_uvt <= 640:
+ retefuente=round((ingreso_gravado_uvt-360)*0.33*UVT + 69*UVT,-3)
+elif ingreso_gravado_uvt > 640 and ingreso_gravado_uvt <= 945:
+ retefuente=round((ingreso_gravado_uvt-640)*0.35*UVT + 162*UVT,-3)
+elif ingreso_gravado_uvt > 945 and ingreso_gravado_uvt <= 2300:
+ retefuente=round((ingreso_gravado_uvt-945)*0.37*UVT + 268*UVT,-3)
+elif ingreso_gravado_uvt > 2300:
+ retefuente=round((ingreso_gravado_uvt-2300)*0.39*UVT + 773*UVT,-3)
+
+
+retefuente= -1*retefuente
+result=retefuente
+
+if inputs.RETEFUENTE_MAN.amount>0:
+ result=-1*inputs.RETEFUENTE_MAN.amount",,1,0,deduction,other_concepts,tax_lien
+rule_40,DESC PRESTAMO,DEDUCCIÓN,OTROS_PREST,True,46,True,python,result = inputs.DESC_PRESTAMO.amount >0 if inputs.DESC_PRESTAMO else False,code,"#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = -1*inputs.DESC_PRESTAMO.amount or 0",,1,0,deduction,other_concepts,advances
+rule_41,PROVISION EPS,PROVISIONES SSI,PROVISION_EPS,True,49,False,python,result=categories.BASIC>=10*SALARIOMINIMO,code,"
+base_aportes=categories.BASIC
+if base_aportes>25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+result =base_aportes*0.085
+        ",,1,0,other,other_concepts,other_deductions,null,11
+rule_42,PROVISION EPS APRENDIZ SENA,PROVISIONES SSI,PROVISION_EPS_APR_SENA,True,48,False,none,result = rules.NET > categories.NET * 0.10,code,"
+base_aportes=BASE_SAL
+if BASE_SAL>25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+if base_aportes<SALARIOMINIMO*DIAS_NOMINA/30:
+    base_aportes=SALARIOMINIMO*DIAS_NOMINA/30
+result =base_aportes*0.125
+        ",,1,0,other,other_concepts,other_deductions,null,11
+rule_43,PROVISION AFP,PROVISIONES SSI,PROVISION_AFP,True,50,False,python,result=contract.state=='open',code,"base_aportes=BASE_SAL
+if contract.integral_salary:
+    if BASE_SAL*0.7>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.12
+    else:
+        result = base_aportes*0.7*0.12
+else:
+    if BASE_SAL>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =base_aportes*0.12
+        ",,1,0,other,other_concepts,other_deductions,null,12
+rule_44,PROVISION ARL,PROVISIONES SSI,PROVISION_ARL,True,51,False,none,result = rules.NET > categories.NET * 0.10,code,"sal_noprest = SALARIO_NOPREST + PAGO_NO_SALARIAL
+base_mas_bene = SUELDO + sal_noprest
+base_40 = (base_mas_bene)*0.4
+base_aportes = SUELDO + (sal_noprest - base_40)
+if (sal_noprest -  base_40) < 0:
+  base_aportes = SUELDO
+if contract.integral_salary:
+   if base_aportes*0.7>25*SALARIOMINIMO:
+      base_aportes = 25*SALARIOMINIMO
+      result = base_aportes*employee.arl_contribution_percentage/100
+   else:
+      result = base_aportes*0.7*employee.arl_contribution_percentage/100
+else:
+    if base_aportes>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result = base_aportes*employee.arl_contribution_percentage/100
+        ",,1,0,other,other_concepts,other_deductions,null,13
+rule_45,PROVISION CCF,PROVISIONES SSI,PROVISION_CCF,True,52,False,none,result = rules.NET > categories.NET * 0.10,code,"#NO HAY APORTES EN INCAPACIDAD NI LICENCIA MATERNIDAD
+
+base_aportes=categories.BASIC
+if contract.integral_salary:
+    if base_aportes*0.7>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+        result = base_aportes*0.04
+    else:
+        result = base_aportes*0.7*0.04
+else:
+    if base_aportes>25*SALARIOMINIMO:
+        base_aportes=25*SALARIOMINIMO
+    result =base_aportes*0.04                ",,1,0,other,other_concepts,other_deductions,null,14
+rule_46,PROVISION SENA,PROVISIONES SSI,PROVISION_SENA,True,53,False,python,"
+base_aportes=SUELDO
+if rules.COMISIONES:
+ base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+ base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+ base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+ base_aportes= base_aportes + ING_VACACIONES
+result=base_aportes>=10*SALARIOMINIMO",code,"
+#NO APORTA EN INCAPACIDAD
+#APORTA EN VACACIONES, LICENCIA REM
+
+base_aportes=SUELDO
+if rules.COMISIONES:
+ base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+ base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+ base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+ base_aportes= base_aportes + ING_VACACIONES
+
+base_aportes=BASE_SAL
+if BASE_SAL>25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+
+result =base_aportes*0.02",,1,0,other,other_concepts,other_deductions,null,15
+rule_47,PROVISION ICBF,PROVISIONES SSI,PROVISION_ICBF,True,54,False,python,"
+base_aportes=SUELDO
+if rules.COMISIONES:
+ base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+ base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+ base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+ base_aportes= base_aportes + ING_VACACIONES
+result=base_aportes>=10*SALARIOMINIMO",code,"
+#NO APORTA EN INCAPACIDAD
+#APORTA EN VACACIONES, LICENCIA REM
+
+base_aportes=SUELDO
+if rules.COMISIONES:
+ base_aportes=base_aportes+ COMISIONES
+if rules.H_EXTRAS:
+ base_aportes=base_aportes + H_EXTRAS
+if rules.ING_LIC_REM:
+ base_aportes= base_aportes + ING_LIC_REM
+if rules.ING_VACACIONES:
+ base_aportes= base_aportes + ING_VACACIONES
+
+#base_aportes=BASE_SAL
+if base_aportes>25*SALARIOMINIMO:
+    base_aportes=25*SALARIOMINIMO
+
+
+result =base_aportes*0.03
+        ",,,0,other,other_concepts,other_deductions,null,16
+rule_48,PROVISION CESANT,PROVISIONES PREST,PROVISION_CESANT,True,55,False,python,result = contract.integral_salary != 1,code,"
+aux_transp=0
+if rules.AUXTRANSPVIG:
+    aux_transp=AUXTRANSPVIG
+result =(categories.BASIC+aux_transp)*30/360",,1,0,other,other_concepts,other_deductions
+rule_49,PROVISION INT CESANT,PROVISIONES PREST,PROVISION_INT_CESANT,True,56,False,python,result = contract.integral_salary != 1,code,"aux_transp=0
+if rules.AUXTRANSPVIG:
+    aux_transp=AUXTRANSPVIG
+result =0.12*(categories.BASIC+aux_transp)*30/360",,1,0,other,other_concepts,other_deductions
+rule_50,PROVISION VAC,PROVISIONES PREST,PROVISION_VAC,True,57,False,none,result = rules.NET > categories.NET * 0.10,code,"#NO COTIZA POR HORAS EXTRAS, COMISIONES
+base_vac=categories.BASIC
+if rules.H_EXTRAS:
+ base_vac=base_vac - H_EXTRAS
+if rules.COMISIONES:
+ base_vac=base_vac - COMISIONES
+
+result=base_vac*15/360
+
+#result =(BASIC*DIAS_NOMINA/30)*15/360",,1,0,other,other_concepts,other_deductions
+rule_51,PROVISION PRIMA,PROVISIONES PREST,PROVISION_PRIMA,True,58,False,python,result = contract.integral_salary != 1,code,"
+aux_transp=0
+if rules.AUXTRANSPVIG:
+    aux_transp=AUXTRANSPVIG
+result =(categories.BASIC+aux_transp)*15/180
+        ",,1,0,other,other_concepts,other_deductions
+rule_53,LIQ CESANTIAS,LIQUIDACION,LIQ_CESANTIAS,True,22,True,none,result=inputs.DIA_DE_RETIRO.amount>0 if inputs.DIA_DE_RETIRO else False,code,"#salario_prom_cesant = inputs.SALARIO_PROM_LIQ_CESANT.amount   Quitar de los inputs los dias y el salario promedio
+#dias_liq_cesant =  inputs.DIAS_LIQ_CESANT.amount
+#result = salario_prom_cesant*dias_liq_cesant/360
+result=inputs.CESANTIAS_ACUMULADAS.amount",,1,0,earn,layoffs,other_deductions
+rule_54,LIQ INT CESANT,LIQUIDACION,LIQ_INT_CESANT,True,24,True,none,result=inputs.DIA_DE_RETIRO.amount>0 if inputs.DIA_DE_RETIRO else False,code,"dias_liq_cesant =  inputs.DIAS_LIQ_CESANT.amount
+result = 0.12*LIQ_CESANTIAS*dias_liq_cesant/360",,1,0,earn,layoffs_interest,other_deductions
+rule_55,LIQ VACACIONES,LIQUIDACION,LIQ_VACACIONES,True,26,True,none,result=inputs.DIA_DE_RETIRO.amount>0 if inputs.DIA_DE_RETIRO else False,code,"vac= inputs.DIAS_LIQ_VAC.amount*15/360
+vac = vac - inputs.DIAS_LIQ_VAC_DISFRUT.amount
+valor = BASIC + inputs.COMISIONES_LIQ.amount
+result = valor*vac/30",,1,0,earn,vacation_compensated,other_deductions
+rule_56,LIQ PRIMA,LIQUIDACION,LIQ_PRIMA,True,28,True,none,result=inputs.DIA_DE_RETIRO.amount>0 if inputs.DIA_DE_RETIRO else False,code,"#dias_prima=inputs.DIAS_COT_PRIMA.amount
+#salario_prima = inputs.SALARIO_PROM_PRIMA.amount
+#result = salario_prima*dias_prima/360
+result = inputs.PRIMA_ACUMULADA.amount",,1,0,earn,primas,other_deductions
+rule_57,LIQ NETO A PAGAR,NETO LIQ,LIQ_NETO_A_PAGAR,True,30,True,none,result = rules.NET > categories.NET * 0.10,code,result = categories.LIQUIDACION,,1,0,earn,other_concepts,other_deductions
+rule_58,INTERESES CESANT NOMINA,OTROS DESEMBOLSOS,INTERESES_CESANTIAS_NOMINA,True,33,True,python,result = inputs.INT_CESANT_NOMINA.amount>0 if inputs.INT_CESANT_NOMINA else False,code,result = inputs.INT_CESANT_NOMINA.amount,,1,0,earn,layoffs_interest,other_deductions
+rule_59,DIAS COT VAC,BALANCE VACACIONES,DIAS_LIQ_VAC,True,35,False,none,result = rules.NET > categories.NET * 0.10,code,"dias_cot = DIAS_NOMINA
+if dias_cot > 30:
+ dias_cot=30
+result = dias_cot*15/360",,1,0,other,other_concepts,other_deductions
+rule_60,DIAS LIQ VAC,BALANCE VACACIONES,DIAS_LIQ_VAC,True,36,False,none,result = rules.NET > categories.NET * 0.10,code,"result=0
+if inputs.DIAS_LIQ_VAC.amount:
+ result= -1*inputs.DIAS_LIQ_VAC.amount",,1,0,other,other_concepts,other_deductions
+rule_61,DIAS DISFRUT VAC,BALANCE VACACIONES,DIAS_DISFRUT_VAC,True,37,True,none,result = rules.NET > categories.NET * 0.10,code,"result=0
+if rules.DIAS_VACACIONES:
+ result = -1*DIAS_VACACIONES or 0",,1,0,other,other_concepts,other_deductions
+rule_62,DESC PAGO AFC,DEDUCCIÓN,DESC_PAGO_AFC,True,38,True,python,result = inputs.RTFNTE_APORTES_AFC.amount>0 if inputs.RTFNTE_APORTES_AFC else False,code,"#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = -1*inputs.RTFNTE_APORTES_AFC.amount or 0
+                   ",,1,0,deduction,other_concepts,afc
+rule_64,ANTICIPO CESANTIAS,OTROS DESEMBOLSOS,ANTICIPO_CESANT,True,40,True,python,result = inputs.ANTIC_CESANTIAS.amount > 0 if inputs.ANTIC_CESANTIAS else False,code,result = inputs.ANTIC_CESANTIAS.amount,,1,0,earn,layoffs,other_deductions
+rule_65,PRESTAMO A TRABAJADOR,OTROS DESEMBOLSOS,PRESTAMO,True,43,True,python,result=inputs.PRESTAMO_A_TRABAJADOR.amount>0 if inputs.PRESTAMO_A_TRABAJADOR else False,code,result = inputs.PRESTAMO_A_TRABAJADOR.amount or 0,,1,0,earn,advances,other_deductions
+rule_66,AUXILIO RODAMIENTO,NO SALARIAL,AUX_RODAMIENTO,True,13,True,none,result=contract.bearing_aid>0,code,result=contract.bearing_aid*DIAS_SUELDO/30,,1,0,earn,transports_assistance,other_deductions
+rule_67,LIQ INDEM,LIQUIDACION,LIQ_INDEM,True,45,True,python,result=inputs.INDEM_LIQ.amount>0 if inputs.INDEM_LIQ else False,code,result=inputs.INDEM_LIQ.amount,,1,0,earn,other_concepts,other_deductions
+rule_68,DESC LIBRANZA,DEDUCCIÓN,DESC_LIBR,True,46,True,python,result = inputs.DESC_LIBR.amount >0 if inputs.DESC_LIBR else False,code,"#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = -1*inputs.DESC_LIBR.amount or 0",,1,0,deduction,other_concepts,advances
+rule_69,DESC FACTURA,DEDUCCIÓN,DESC_FACT,True,46,True,python,result = inputs.DESC_FACT.amount >0 if inputs.DESC_FACT else False,code,"#COMO EL RESULTADO ES NEGATIVO EN CONTABILIDAD SE RELACIONA UNA CUENTA DEBITO PARA QUE SE REGISTRE POSITIVO EN EL CREDITO
+result = -1*inputs.DESC_FACT.amount or 0",,1,0,deduction,other_concepts,advances
+rule_70,INCAPACIDAD GEN PRIMEROS 2 DIAS,BÁSICO,ING_IGEN_DOS_DIAS,True,20,True,python,result=inputs.DIAS_IGEN.amount>0 if inputs.DIAS_IGEN else False,code,"salario_incap=BASIC
+if inputs.DIAS_IGEN.amount >= 2:
+   result = 2 * salario_incap / 30
+elif inputs.DIAS_IGEN.amount != 0 and inputs.DIAS_IGEN.amount < 2:
+   result = inputs.DIAS_IGEN.amount * salario_incap / 30",,1,0,other,other_concepts,other_deductions

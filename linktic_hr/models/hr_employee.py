@@ -1,5 +1,5 @@
 from odoo import fields, _, models, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 
@@ -22,6 +22,9 @@ class HrEmployee(models.Model):
     def _get_pension_domain(self):
         return [('category_id', 'in', [self.env.ref('linktic_hr.res_partner_cat_pension').id])]
 
+    def _get_ccf_domain(self):
+        return [('category_id', 'in', [self.env.ref('linktic_hr.res_partner_cat_ccf').id])]
+
     expedition_place_id = fields.Char(string='Expedition Place', groups="hr_attendance.group_hr_attendance_kiosk")
     age = fields.Integer(string="Age", compute="compute_employee_age")
     rh = fields.Selection(
@@ -35,6 +38,7 @@ class HrEmployee(models.Model):
         , string="Seniority", groups="hr.group_hr_user")
     eps = fields.Many2one('res.partner', 'EPS', groups="hr.group_hr_user", tracking=True, domain=_get_eps_domain)
     arl = fields.Many2one('res.partner', 'ARL', groups="hr.group_hr_user", tracking=True, domain=_get_arl_domain)
+    ccf = fields.Many2one('res.partner', 'CCF', groups="hr.group_hr_user", tracking=True, domain=_get_ccf_domain)
     layoffs = fields.Many2one('res.partner', 'Layoffs', groups="hr.group_hr_user", tracking=True,
                               domain=_get_layoffs_domain)
     pension = fields.Many2one('res.partner', 'Pension', groups="hr.group_hr_user", tracking=True,
@@ -95,10 +99,9 @@ class HrEmployee(models.Model):
 
     # Fields changed to let all the employees create their certificate
     identification_id = fields.Char(groups="hr_attendance.group_hr_attendance_kiosk")
-
-    # Fields New
-    hr_manager_id = fields.Many2one(comodel_name='hr.employee', string='HHRR Manager', related='company_id.hr_manager_id')
-
+    
+    stage_employee = fields.Selection(selection=[('active','Activo 🟢'), ('retirement','En proceso de retiro 🟡')],string="Estado",default='active')
+    
     def get_spreadsheet_integration_dates(self):
         for employee in self:
             employee.label_birthday = employee.birthday.strftime("%d/%m/%Y") if employee.birthday else False
@@ -156,7 +159,16 @@ class HrEmployee(models.Model):
             if record.job_id:
                 record.job_title = record.job_id.name
 
-
+    @api.constrains('active')
+    def _update_stage_employee(self):
+        self.stage_employee = 'active' if self.active else ''
+    
+    @api.constrains('stage_employee')
+    def _update_active(self):
+        if self.stage_employee == 'active':
+            self.active = True
+          
+            
 class HrEmployeeArlRisk(models.Model):
     _name = "hr.employee.arl.risk"
     _description = "HR Employee ARL Risk"

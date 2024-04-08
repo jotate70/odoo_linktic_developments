@@ -29,6 +29,10 @@
                     <button name="button_request_approval" string="Approval Request" type="object"
                             attrs="{'invisible': [('state', '!=', 'draft')]}"
                             confirm="¿Desea solicitar aprobación?"/>
+                    <!-- <button name="button_request_approval" string="Approve by administrator" type="object"
+                    attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    confirm="¿Desea solicitar aprobación?"
+                    groups="linktic_contractor_charge_account.group_contractor_charge_manager"/> -->
                     <button name="button_budget_approval" string="Approve Document" type="object"
                             attrs="{'invisible': [('state', '!=', 'budget_approval')]}"
                             confirm="¿Desea aprobar documentos?"
@@ -44,6 +48,7 @@
                            clickable="0"/>
                 </header>
                 <sheet>
+                    <!-- <widget name="web_ribbon" title="Hour Limit Exceeded" bg_color="bg-warning" attrs="{'invisible': [('active_web_ribbon', '=', False)]}"/> -->
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="open_charge_account_bill"
                                 class="oe_stat_button"
@@ -69,6 +74,10 @@
                             <field name="journal_ids" widget="many2many_tags" invisible="1"/>
                             <field name="journal_id" options="{'no_create':True, 'no_open': True}" required="True"/>
                             <field name="company_id" options="{'no_create':True, 'no_open': True}"/>
+                            <field name="hours_limit_contract" attrs="{'invisible': [('type_of_contract', '!=', 'Prestación de Servicios por horas')]}"/>
+                            <field name="type_of_contract" invisible="1"/>
+                            <!-- <field name="total_hours_recorded" invisible="1"/>
+                            <field name="active_web_ribbon" invisible="1"/> -->
                             <button name="populate_line_hours" string="Update Hours" type="object"
                                     confirm="¿Desea Actualizar horas?"
                                     help="Recalculates all hours reported"
@@ -88,6 +97,9 @@
                                 <field name="date_end" widget="daterange" required="1"
                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
                                        options="{'related_start_date': 'date_start'}"/>
+                                <span> = </span>
+                                <field name="days_field" nolabel="1" class="oe_inline"/>
+                                <span> Días </span>
                             </div>
                             <field name="charge_account_attachment" filename="charge_account_att_name"
                                    attrs="{'readonly': [('state', '!=', 'draft')]}"/>
@@ -110,6 +122,7 @@
                                     <field name="state" attrs="{'readonly': [('is_line_approver', '=', False)]}"/>
                                     <field name="account_analytic_id" readonly="1"/>
                                     <field name="reported_hours" readonly="1"/>
+                                    <field name="worked_days_field" readonly="1"/>
                                     <field name="line_total" readonly="1"/>
                                     <field name="responsible_id" widget="many2one_avatar_user" readonly="1"/>
                                     <field name="approval_date" readonly="1" force_save="1"/>
@@ -165,6 +178,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.contractor.charge.account</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('account_type','=','charge_account')]</field>
         <field name="context">{}</field>
         <field name="search_view_id" ref="view_contractor_charge_account_search" />
         <field name="help" type="html">
@@ -183,7 +197,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.contractor.charge.account</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('employee_id.user_id.id', '=', uid)]</field>
+        <field name="domain">[('employee_id.user_id.id', '=', uid),('account_type','=','charge_account')]</field>
         <field name="context">{'default_is_my_contractor_charges': True}</field>
         <field name="search_view_id" ref="view_contractor_charge_account_search" />
         <field name="help" type="html">

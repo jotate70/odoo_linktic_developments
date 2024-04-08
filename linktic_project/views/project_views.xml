@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="project.open_view_project_all" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="project.view_project"/>
+    </record>
+
+    <record id="project_project_form_linktic_fields" model="ir.ui.view">
+        <field name="name">project.project.form.linktic.fields</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(project.project_share_wizard_action)d']" position="before">
+                <button name="generate_policy" string="Generate Policy" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="percentage_done" widget="progressbar"/>
+                <field name="project_size"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="sponsor" widget="many2one_avatar_user"/>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="replace">
+                <group name="attributes">
+                    <group>
+                        <label for="contract_start_date" string="Contract Dates"/>
+                        <div name="contract_dates" class="o_row">
+                            <field name="contract_start_date" widget="daterange" options='{"related_end_date": "contract_end_date"}'/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('contract_start_date', '=', False), ('contract_end_date', '=', False)]}"/>
+                            <field name="contract_end_date" widget="daterange" options='{"related_start_date": "contract_start_date"}'/>
+                        </div>
+                        <field name="project_duration"/>
+                        <field name="project_type"/>
+                    </group>
+                    <group>
+                        <field name="methodology_id"/>
+                        <field name="sector"/>
+                    </group>
+                </group>
+                <group name="description">
+                    <field name="document_repository" widget="url"/>
+                    <field name="description"/>
+                    <field name="project_object"/>
+                    <field name="scope"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button name="open_policies" type="object" class="oe_stat_button" icon="fa-file-text"
+                        attrs="{'invisible': [('policy_count', '=', 0)]}"
+                        context="{'default_project_id': id}">
+                    <div class="o_stat_info">
+                        <field name="policy_count" class="o_stat_value" widget="statinfo" string="Policies"/>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="project_task_form_inherited_linktic_task_percentage" model="ir.ui.view">
+        <field name="name">project.task.form.inherited.linktic.task.percentage</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+        <field name="arch" type="xml">
+            <!--       NEW CODE     -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                 <label for="date_start" string="Planned Date"/>
+                 <div name="date_start" class="o_row">
+                     <field name="date_start" widget="daterange" options='{"related_end_date": "date_end"}'/>
+                     <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                     <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow" attrs="{'invisible': [('date_start', '=', False), ('date_end', '=', False)]}"/>
+                     <field name="date_end" widget="daterange" options='{"related_start_date": "contract_start_date"}'/>
+                 </div>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='project_id']" position="attributes">
+                <attribute name="attrs">{"invisible": [["parent_id","!=",False]]}</attribute>
+                <attribute name="required">1</attribute>
+            </xpath>
+            <!--    /////////////////////        -->
+            <xpath expr="//field[@name='progress']" position="after">
+                <field name="percentage_value" widget="percentage"/>
+                <field name="parent_task_percentage" widget="percentage" invisible="True"/>
+                <field name="child_ids_count" invisible="True"/>
+                <field name="timesheet_ids_count" invisible="True"/>
+            </xpath>
+            <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="after">
+                <field name="percentage_done" widget="percentage"/>
+            </xpath>
+            <xpath expr="//field[@name='timesheet_ids']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('analytic_account_active', '=', False),('child_ids_count', '>', 0)]}</attribute>
+            </xpath>
+            <xpath expr="//page[@name='sub_tasks_page']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('allow_subtasks', '=', False),('timesheet_ids_count', '>', 0)]}</attribute>
+            </xpath>
+            <xpath expr="//page[@id='timesheets_tab']" position="attributes">
+                <attribute name="string">Advances</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

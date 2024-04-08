@@ -5,9 +5,9 @@
         <record id="mail_template_payslip" model="mail.template">
             <field name="name">Payslip Template</field>
             <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
-            <field name="email_from">{{ (user.email_formatted)}}</field>
-            <field name="email_to">{{ object.employee_id.work_email }}</field>
-            <field name="subject">Payslip: {{ object.number }}</field>
+            <field name="email_from">{{object.company_id.partner_id.email}}</field>
+            <field name="email_to">{{object.employee_id.work_email}}</field>
+            <field name="subject">Payslip: {{object.number}}</field>
             <field name="auto_delete" eval="True"/>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
@@ -17,11 +17,11 @@
                     <br/>
                     Best Regards,
                     <br/>
-                    <t t-out="user.name"/>
+                    <t t-out="object.company_id.name"/>
                     <br/>
                 </div>
             </field>
-            <field name="report_template" ref="om_hr_payroll.payslip_details_report"/>
+            <field name="report_template" ref="om_hr_payroll.action_report_payslip"/>
             <field name="report_name">{{ (object.number or '').replace('/','_') }}</field>
         </record>
 

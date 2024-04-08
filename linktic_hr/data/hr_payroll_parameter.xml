@@ -3,8 +3,8 @@
     <data noupdate="0">
 
         <record id="hr_payroll_parameter_SMLV" model="hr.payroll.parameter">
-            <field name="name">SMLV</field>
-            <field name="code">SMLV</field>
+            <field name="name">SALARIO MINIMO</field>
+            <field name="code">SMMLV</field>
         </record>
 
         <record id="hr_payroll_parameter_SMLV_value" model="hr.payroll.parameter.line">
@@ -14,9 +14,16 @@
             <field name="parameter_id" eval="hr_payroll_parameter_SMLV"/>
         </record>
 
+        <record id="hr_payroll_parameter_SMLV_value_2024" model="hr.payroll.parameter.line">
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="value">1300000</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_SMLV"/>
+        </record>
+
         <record id="hr_payroll_parameter_transport_aid" model="hr.payroll.parameter">
-            <field name="name">Transport Aid</field>
-            <field name="code">Trans</field>
+            <field name="name">AUXILIO DE TRANSPORTE</field>
+            <field name="code">AUXTRA</field>
         </record>
 
         <record id="hr_payroll_parameter_transport_value" model="hr.payroll.parameter.line">
@@ -24,6 +31,32 @@
             <field name="date_end">2023-12-31</field>
             <field name="value">140606</field>
             <field name="parameter_id" eval="hr_payroll_parameter_transport_aid"/>
+        </record>
+
+        <record id="hr_payroll_parameter_transport_value_2024" model="hr.payroll.parameter.line">
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="value">162000</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_transport_aid"/>
+        </record>
+
+        <record id="hr_payroll_parameter_uvt" model="hr.payroll.parameter">
+            <field name="name">UNIDAD DE VALOR TRIBUTARIO</field>
+            <field name="code">UVT</field>
+        </record>
+
+        <record id="hr_payroll_parameter_uvt_value_2023" model="hr.payroll.parameter.line">
+            <field name="date_start">2023-01-01</field>
+            <field name="date_end">2023-12-31</field>
+            <field name="value">42412</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_uvt"/>
+        </record>
+
+        <record id="hr_payroll_parameter_uvt_value_2024" model="hr.payroll.parameter.line">
+            <field name="date_start">2024-01-01</field>
+            <field name="date_end">2024-12-31</field>
+            <field name="value">47065</field>
+            <field name="parameter_id" eval="hr_payroll_parameter_uvt"/>
         </record>
 
     </data>

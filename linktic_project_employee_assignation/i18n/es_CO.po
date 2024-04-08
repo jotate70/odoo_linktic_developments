@@ -1,0 +1,114 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* linktic_project_employee_assignation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-24 20:01+0000\n"
+"PO-Revision-Date: 2023-03-24 20:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model,name:linktic_project_employee_assignation.model_hr_employee
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: linktic_project_employee_assignation
+#: model_terms:ir.ui.view,arch_db:linktic_project_employee_assignation.hr_employee_form_employee_assignation
+#: model_terms:ir.ui.view,arch_db:linktic_project_employee_assignation.project_project_form_employee_assignation
+msgid "Employee Assignation"
+msgstr "Asignación Empleado"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_project__employee_assignation_ids
+msgid "Employee Assignations"
+msgstr "Asignación de Empleados"
+
+#. module: linktic_project_employee_assignation
+#: model_terms:ir.ui.view,arch_db:linktic_project_employee_assignation.project_project_form_employee_assignation
+msgid "Employees"
+msgstr "Empleados"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__date_end
+msgid "End Date"
+msgstr "Fecha Final"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__id
+msgid "ID"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__occupation_perc
+msgid "Occupation %"
+msgstr "% Ocupación"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model,name:linktic_project_employee_assignation.model_project_project
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__project_id
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_hr_employee__project_assignation_ids
+msgid "Project Assignations"
+msgstr "Asignación Proyectos"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model,name:linktic_project_employee_assignation.model_project_employee_assignation
+msgid "Project Employee Assignation"
+msgstr "Asignacion Empleados Proyectos"
+
+#. module: linktic_project_employee_assignation
+#: model_terms:ir.ui.view,arch_db:linktic_project_employee_assignation.hr_employee_form_employee_assignation
+msgid "Projects"
+msgstr "Proyectos"
+
+#. module: linktic_project_employee_assignation
+#: model:ir.model.fields,field_description:linktic_project_employee_assignation.field_project_employee_assignation__date_start
+msgid "Start Date"
+msgstr "Fecha Inicial"

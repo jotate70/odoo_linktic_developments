@@ -13,9 +13,9 @@
                 <xpath expr="//button[@special='cancel']" position="attributes">
                     <attribute name="invisible">[('from_expense_advance', '=', False)]</attribute>
                 </xpath>
-                <xpath expr="//button[@special='cancel']" position="after">
-                    <button string="Cancel" class="btn btn-secondary" type="object" name="cancel_expense_advance_button"/>
-                </xpath>
+<!--                <xpath expr="//button[@special='cancel']" position="after">-->
+<!--                    <button string="Cancel" class="btn btn-secondary" type="object" name="cancel_expense_advance_button"/>-->
+<!--                </xpath>-->
             </field>
         </record>
 

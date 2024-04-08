@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_employee_view_form_inherit_drive_fields" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.drive.fields</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='coach_id']" position="after">
+                <field name="document_repository" attrs="{'invisible' : [('converted_to_attachments', '=', True)]}" widget="url"/>
+                <field name="converted_to_attachments" readonly="1" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

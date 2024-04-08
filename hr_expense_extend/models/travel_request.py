@@ -23,17 +23,16 @@ class My_travel_request(models.Model):
     account_analytic_id = fields.Many2one(comodel_name='account.analytic.account', required=True, string="Cuenta Analítica")
     hr_travel_info_ids = fields.One2many(comodel_name='hr_travel_info', inverse_name='travel_request_id')
     hr_hotel_info_ids = fields.One2many(comodel_name='hr_hotel_info', inverse_name='travel_request_id')
-    priority = fields.Selection(
-        [('0', 'All'),
-         ('1', 'Low priority'),
-         ('2', 'High priority'),
-         ('3', 'Urgent')], string='Prioridad', default='0', index=True)
-    name = fields.Char(string="Name", readonly=True)
-    employee_id = fields.Many2one(comodel_name='hr.employee', string="Empleado", required=True, default=lambda self: self.env.user.employee_id.id)
+    priority = fields.Selection(selection=[('0', 'All'),
+                                           ('1', 'Low priority'),
+                                           ('2', 'High priority'),
+                                           ('3', 'Urgent')],
+                                string='Prioridad', default='0', index=True)
+    name = fields.Char(string="Name", store=True, required=True, copy=True, default="New")
+    employee_id = fields.Many2one(comodel_name='hr.employee', string="Empleado", required=True, default=lambda self: self.env.user.employee_id)
     currency_id = fields.Many2one(comodel_name='res.currency', string="Currency", required=True,
                                   default=lambda self: self.env.user.company_id.currency_id.id, readonly=True)
-
-    request_by = fields.Many2one(comodel_name='hr.employee', string="Solicitado por", default=lambda self: self.env.user.employee_id.id)
+    request_by = fields.Many2one(comodel_name='res.users', string="Solicitado por", default=lambda self: self.env.user.id)
     confirm_by = fields.Many2one(comodel_name='res.users', string="Confirmado por")
     approve_by = fields.Many2one(comodel_name='res.users', string="Aprobado por")
 
@@ -47,8 +46,9 @@ class My_travel_request(models.Model):
                                             string="legalización de reembolso")
     count_sheet_own = fields.Integer(string='Count own', compute='_compute_count_sheet_own')
     #
-    travel_mode_id = fields.Selection([('0', 'Nacional'),
-                                       ('1', 'Internacional')], default='0', index=True, string='Tipo de viaje')
+    travel_mode_id = fields.Selection(selection=[('0', 'Nacional'),
+                                                 ('1', 'Internacional')],
+                                      default='0', index=True, string='Tipo de viaje')
     return_mode_id = fields.Many2one(comodel_name='travel.mode', string="Modo de viaje de regreso")
 
     phone_no = fields.Char(string='Número de contacto')
@@ -64,29 +64,29 @@ class My_travel_request(models.Model):
     advance_payment_ids = fields.One2many(comodel_name='hr.expense', inverse_name='travel_id', string="Reporte de gastos")
     expense_ids = fields.One2many(comodel_name='hr.expense', inverse_name='travel_expence_id', string="Gastos")
 
-    state = fields.Selection([('draft', 'Borrador'),
-                              ('confirmed', 'Confirmado'),
-                              ('on_aprobation', 'En aprobación'),
-                              ('approved', 'Anticipo Aprobado'),
-                              ('paid_advance', 'Legalización'),
-                              ('submitted', 'Gastos Reportados'),
-                              ('done', 'Hecho'),
-                              ('rejected', 'Rechazado'),
-                              ],
+    state = fields.Selection(selection=[('draft', 'Borrador'),
+                                        ('confirmed', 'Confirmado'),
+                                        ('on_aprobation', 'En aprobación'),
+                                        ('approved', 'Anticipo Aprobado'),
+                                        ('paid_advance', 'Legalización'),
+                                        ('submitted', 'Gastos Reportados'),
+                                        ('done', 'Hecho'),
+                                        ('rejected', 'Rechazado'),
+                                        ],
                              default="draft", string="Estado")
 
     # extras fields
     activity_id = fields.Integer(string='id actividad')
-    manager_id = fields.Many2one(comodel_name='hr.employee', string='Gerente responsable', store=True,
-                                 help='Responsable de aprobación')
+    manager_id = fields.Many2one(comodel_name='res.users', string='Gerente responsable', store=True,
+                                 help='Responsable de aprobación',
+                                 default=lambda self: self.employee_id.parent_id.user_id)
     time_off = fields.Char(string='Disponibilidad', compute='_compute_number_of_days')
     time_off_related = fields.Boolean(string='Ausencia', related='manager_id.is_absent')
     state_aprove = fields.Integer(string='approval level')
-    gender = fields.Selection([
-        ('male', 'Masculino'),
-        ('female', 'Femenino'),
-        ('other', 'Otros')
-    ], groups="hr.group_hr_user", tracking=True, string='Género')
+    gender = fields.Selection(selection=[('male', 'Masculino'),
+                                         ('female', 'Femenino'),
+                                         ('other', 'Otros')],
+                              groups="hr.group_hr_user", tracking=True, string='Género')
     visa_country_id = fields.Many2one(comodel_name='res.country', string="País de la visa")
     visa_no = fields.Char(string='Número de visa', groups="hr.group_hr_user", tracking=True)
     visa_expire = fields.Date(string='Fecha de vencimiento de la visa', groups="hr.group_hr_user",
@@ -97,23 +97,23 @@ class My_travel_request(models.Model):
                                     tracking=True)
     emergency_phone = fields.Char(string="Teléfono de emergencia", groups="hr.group_hr_user",
                                   tracking=True)
-    financial_manager_id = fields.Many2one(comodel_name='hr.employee', string='Responsable Financiero', related='company_id.financial_manager_id')
+    financial_manager_id = fields.Many2one(comodel_name='res.users', string='Responsable Financiero', related='company_id.financial_manager_id')
     birthday = fields.Date(string='Fecha de nacimiento')
     # Aditional fields
-    general_manager_id = fields.Many2one(comodel_name='hr.employee', string='Vicepresidente', related='company_id.general_manager_id')
-    account_manager_id = fields.Many2one(comodel_name='hr.employee', string='Responsable Contable', related='company_id.account_manager_id')
+    general_manager_id = fields.Many2one(comodel_name='res.users', string='Vicepresidente', related='company_id.general_manager_id')
+    account_manager_id = fields.Many2one(comodel_name='res.users', string='Responsable Contable', related='company_id.account_manager_id')
     purchase_request_ids = fields.One2many(comodel_name='purchase.request',
                                            inverse_name='travel_request_id',
                                            string='Requisiciones')
     count_purchase_request = fields.Integer(string='Count Purchase Request', compute='_compute_count_purchase_request')
     expense_advance_ids = fields.One2many(comodel_name='hr.expense.advance', inverse_name='travel_request_id', string="Anticipos")
-    job_type = fields.Selection([('president', 'Presidente'),
-                                 ('vice_president', 'Vicepresidente'),
-                                 ('director', 'Director'),
-                                 ('department_manager', 'Gerente Procesos'),
-                                 ('project_manager', 'Gerente Proyectos'),
-                                 ('operational_staff', 'Personal Operativo')],
-                                string='Tipo de cargo', related='manager_id.job_id.job_type')
+    job_type = fields.Selection(selection=[('president', 'Presidente'),
+                                           ('vice_president', 'Vicepresidente'),
+                                           ('director', 'Director'),
+                                           ('department_manager', 'Gerente Procesos'),
+                                           ('project_manager', 'Gerente Proyectos'),
+                                           ('operational_staff', 'Personal Operativo')],
+                                string='Tipo de cargo', related='manager_id.employee_id.job_id.job_type')
     count_approved = fields.Integer(string='Contador de aprovaciones')
     general_budget_domain = fields.Char(string='Domain budget position', compute='_compute_account_analytic_domain')
     general_budget_id = fields.Many2one(comodel_name='account.budget.post', string='Budgetary Position',
@@ -123,6 +123,16 @@ class My_travel_request(models.Model):
                                                  domain="[('general_budget_id', '=?', general_budget_id), ('analytic_account_id', '=?', account_analytic_id)]")
     segregation_balance = fields.Monetary(string="Balance", compute="get_segregation_balance", store=True, readonly=True)
     observations = fields.Html(string='Información de viaje')
+    message_text = fields.Text(string='Terminos y Condiciones', compute='get_partner')
+    parent_id = fields.Many2one(comodel_name='res.users', string='Jefe inmediato',
+                                related='employee_id.parent_id.user_id')
+    journal_travel_id = fields.Many2one(comodel_name='account.journal', string='Diario viaticos por defecto',
+                                        domain="[('type', '=', 'purchase'), ('company_id', '=', company_id)]",
+                                        default=lambda self: self.env.company.journal_travel_id)
+
+    def get_partner(self):
+        self.message_text = self.env['ir.config_parameter'].sudo().get_param('hr_expense.message_text')
+        return self.message_text
 
     # Compute state done
     @api.depends('expence_sheet_advance_ids')
@@ -145,10 +155,10 @@ class My_travel_request(models.Model):
                 vat = rec.env['crossovered.budget.lines.segregation'].search([('analytic_account_id', 'in', rec.account_analytic_id.ids)])
                 rec.general_budget_domain = json.dumps([('id', 'in', list(set(vat.general_budget_id.ids)))])
             else:
-                rec.general_budget_domain = json.dumps([()])
+                rec.general_budget_domain = json.dumps([])
 
     def compute_expense_advance_paid(self):
-        if self.state == 'approved' and self.account_manager_id == self.env.user.employee_id:
+        if self.state == 'approved' and self.account_manager_id == self.env.user:
             c = 0
             for rec in self.expense_advance_ids:
                 if rec.state != 'to_pay':
@@ -242,7 +252,6 @@ class My_travel_request(models.Model):
     def create(self, vals):
         seq = self.env['ir.sequence'].next_by_code('travel.request') or '/'
         vals['name'] = seq
-        vals['request_by'] = vals['employee_id']
         vals['req_date'] = fields.datetime.now()
         return super(My_travel_request, self).create(vals)
 
@@ -262,17 +271,7 @@ class My_travel_request(models.Model):
     @api.onchange('employee_id')
     def onchange_employee(self):
         if self.employee_id and self.state in ['draft']:
-            self.manager_id = self.financial_manager_id
-            self.identification_id = self.employee_id.identification_id
-            self.passport_id = self.employee_id.passport_id
-            self.gender = self.employee_id.gender
-            self.visa_country_id = self.employee_id.visa_country_id
-            self.visa_no = self.employee_id.visa_no
-            self.visa_expire = self.employee_id.visa_expire
-            self.permit_no = self.employee_id.permit_no
-            self.emergency_contact = self.employee_id.emergency_contact
-            self.emergency_phone = self.employee_id.emergency_phone
-            self.birthday = self.employee_id.birthday
+            self.manager_id = self.employee_id.parent_id.user_id
             return
 
     def action_expence_sheet(self):
@@ -295,6 +294,20 @@ class My_travel_request(models.Model):
             'domain': [('id', 'in', self.advance_payment_ids.ids)],
         }
 
+    def action_confirm_2(self):
+        new_wizard = self.env['terms_conditions_transition_wizard'].create({
+            'travel_request_id': self.id,
+            'message_text': self.message_text,
+        })
+        return {
+            'name': _('Stage Transition'),
+            'view_mode': 'form',
+            'res_model': 'terms_conditions_transition_wizard',
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': new_wizard.id,
+        }
+
     def action_confirm(self):
         if self.state == 'draft':
             self._raise_financial_manager_supplier()
@@ -312,7 +325,7 @@ class My_travel_request(models.Model):
                     'date_deadline': fields.datetime.now(),
                     'res_model_id': self.env['ir.model']._get(self._name).id,
                     'res_id': self.id,
-                    'user_id': self.financial_manager_id.user_id.id,
+                    'user_id': self.employee_id.parent_id.user_id.id,
                 }
                 new_activity = self.env['mail.activity'].create(create_vals)
                 # Escribe el id de la actividad en un campo
@@ -321,6 +334,7 @@ class My_travel_request(models.Model):
                 c = self.state_aprove + 1
                 self.write({'state_aprove': c})
                 self.confirm_by = self.env.user
+                self.count_approved += 1
             else:
                 raise UserError('No se han agregado viajes a su solicitud')
         else:
@@ -329,11 +343,32 @@ class My_travel_request(models.Model):
     # Approve acción
     def button_action_on_aprobation(self):
         if self.hr_travel_info_ids:
-            if self.env.user in [self.financial_manager_id.user_id, self.general_manager_id.user_id]:
-                if self.financial_manager_id == self.env.user.employee_id and self.count_approved == 0:
+            if self.env.user in [self.parent_id, self.financial_manager_id, self.general_manager_id]:
+                if self.manager_id == self.env.user and self.count_approved == 1:
                     self.state_aprove += 1
                     self.count_approved += 1
+                    self.manager_id = self.financial_manager_id
                     self.write({'state': 'on_aprobation'})
+                    #  Marca actividad como hecha de forma automatica
+                    new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
+                    new_activity.action_feedback(feedback='Es Aprobado')
+                    # Código que crea una nueva actividad
+                    create_vals = {
+                        'activity_type_id': 4,
+                        'summary': 'Solicitud de viaje:',
+                        'automated': True,
+                        'note': 'Ha sido asignado para validar anticipo para solitud de viaje',
+                        'date_deadline': fields.datetime.now(),
+                        'res_model_id': self.env['ir.model']._get(self._name).id,
+                        'res_id': self.id,
+                        'user_id': self.financial_manager_id.id,
+                    }
+                    new_activity = self.env['mail.activity'].create(create_vals)
+                    # Escribe el id de la actividad en un campo
+                    self.write({'activity_id': new_activity})
+                elif self.manager_id == self.env.user and self.count_approved == 2:
+                    self.state_aprove += 1
+                    self.count_approved += 1
                     self.manager_id = self.general_manager_id
                     #  Marca actividad como hecha de forma automatica
                     new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
@@ -347,14 +382,15 @@ class My_travel_request(models.Model):
                         'date_deadline': fields.datetime.now(),
                         'res_model_id': self.env['ir.model']._get(self._name).id,
                         'res_id': self.id,
-                        'user_id': self.general_manager_id.user_id.id,
+                        'user_id': self.general_manager_id.id,
                     }
                     new_activity = self.env['mail.activity'].create(create_vals)
                     # Escribe el id de la actividad en un campo
                     self.write({'activity_id': new_activity})
-                elif self.general_manager_id == self.env.user.employee_id and self.count_approved == 1:
+                elif self.manager_id == self.env.user and self.count_approved == 3:
                     self.action_approve()
-                    self.expense_advance_ids.sudo().button_approve()      # Aprobar anticipo
+                    for rec in self.expense_advance_ids:
+                        rec.sudo().button_approve()      # Aprobar anticipo
                     self.manager_id = self.account_manager_id
                     #  Marca actividad como hecha de forma automatica
                     new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
@@ -368,7 +404,7 @@ class My_travel_request(models.Model):
                         'date_deadline': fields.datetime.now(),
                         'res_model_id': self.env['ir.model']._get(self._name).id,
                         'res_id': self.id,
-                        'user_id': self.account_manager_id.user_id.id,
+                        'user_id': self.account_manager_id.id,
                     }
                     new_activity = self.env['mail.activity'].create(create_vals)
                     # Escribe el id de la actividad en un campo
@@ -419,7 +455,7 @@ class My_travel_request(models.Model):
                     raise UserError('Ya existen informes de gastos relacionados.')
                 else:
                     for rec in self.expense_advance_ids:
-                        self.action_create_expense(rec.employee_id.id, rec.id)
+                        self.action_create_expense(rec.employee_id.id, rec.company_id, rec.payment_journal_id, rec.id)
                         self.write({'state': 'submitted'})
                         #  Marca actividad como hecha de forma automatica
                         new_activity = self.env['mail.activity'].search([('id', '=', self.activity_id)], limit=1)
@@ -433,7 +469,7 @@ class My_travel_request(models.Model):
         else:
             raise UserError('No se han reportado gastos para esta solcitud de viaje.')
 
-    def action_create_expense(self, employee, payment_advance):
+    def action_create_expense(self, employee, company, payment_journal, payment_advance):
         id_lst = []
         id_lst2 = []
         if self.expense_ids:
@@ -452,9 +488,9 @@ class My_travel_request(models.Model):
                 if line2.employee_id.id == employee:
                     id_lst2.append(line2.id)
             res2 = self.env['hr.expense.sheet'].create(
-                {'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee,
-                 'travel_expense': True, 'payment_mode': 'company_account', 'payment_advance_id': payment_advance,
-                 'expense_line_ids': [(6, 0, id_lst2)]})
+                {'name': self.env['ir.sequence'].next_by_code('expense.ifpv') or 'New', 'employee_id': employee, 'company_id': company.id,
+                 'travel_expense': True, 'payment_mode': 'company_account', 'payment_advance_id': payment_advance, 'journal_id': company.journal_id.id,
+                 'bank_journal_id': payment_journal.id, 'expense_line_ids': [(6, 0, id_lst2)]})
             # self.expence_sheet_company_id = res2.id
             self.write({'expence_sheet_advance_ids': [(4, res2.id)]})
 

@@ -1,7 +1,6 @@
 from odoo import fields, _, models, api
 from odoo.exceptions import ValidationError
 
-
 class ContractorReportedHours(models.Model):
     _name = "hr.contractor.reported.hours"
     _description = "Contractor Reported Hours"
@@ -11,9 +10,11 @@ class ContractorReportedHours(models.Model):
     employee_identification = fields.Char(string='Employee Identification')
     hours = fields.Integer(string="Hours")
     account_analytic_code = fields.Char(string="Cost Center")
-    company_id = fields.Many2one('res.company', string='Company', required=True,
+    company_id = fields.Many2one(comodel_name='res.company', string='Company', required=True,
                                  default=lambda self: self.env.company)
-    user_id = fields.Many2one('res.users', string='User', store=True, compute="_get_employee_user")
+    user_id = fields.Many2one(comodel_name='res.users', string='User', store=True, compute="_get_employee_user")
+    report_task_id = fields.Many2one(comodel_name='linktic.report.task', string='Report Task')
+    report_description = fields.Text(string='Description')
 
     @api.depends('employee_identification')
     def _get_employee_user(self):

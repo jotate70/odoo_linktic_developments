@@ -21,10 +21,10 @@
                                 <group>
                                     <field name="line_ids" mode="tree" nolabel="1">
                                         <tree string="Parameter Value" editable="bottom">
-                                            <field name="date_start"/>
-                                            <field name="date_end"/>
+                                            <field name="date_start" required="1"/>
+                                            <field name="date_end" required="1"/>
                                             <field name="no_smlv"/>
-                                            <field name="value"/>
+                                            <field name="value" required="1"/>
                                         </tree>
                                     </field>
                                 </group>

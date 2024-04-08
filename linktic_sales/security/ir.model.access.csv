@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_team_goal,crm.team.goal,model_crm_team_goal,base.group_user,1,1,1,1
+access_sale_order_assign_policy_wizard,sale.order.assign.policy.wizard,model_sale_order_assign_policy_wizard,base.group_user,1,1,1,1
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_assign_policy_wizard_form">
+        <field name="name">sale.order.assign.policy.wizard.form</field>
+        <field name="model">sale.order.assign.policy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Policy Purchase">
+                <group>
+                    <field name="sale_order_id" required="1" invisible="1"/>
+                    <field name="policy_purchase_order_id" required="1" options="{'no_create': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="do_action" string="Process" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

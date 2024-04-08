@@ -3,8 +3,9 @@
 from odoo import api, fields, models
 
 
-class LeaveType(models.Model):
-    _inherit = 'hr.leave.type'
+class HolidaysType(models.Model):
+    _inherit = "hr.leave.type"
+    _description = "Time Off Type"
 
     code = fields.Char(string='Code')
 
